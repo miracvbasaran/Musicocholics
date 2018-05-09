@@ -2,12 +2,12 @@
 
 	include("session.php");
 
-    $uid = mysqli_real_escape_string($db,$_GET['login_id']);
+    $uid = mysqli_real_escape_string($db,$_POST['login_id']);
     $query = "SELECT * FROM user WHERE user_id = '$uid' ";
     $result = mysqli_query($db, $query);
     $user_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
-    $user_id = $_GET['other_id'];
+    $user_id = $_POST['other_id'];
 
     if ( isset($_POST['sendmessage_button']) ) {
     	if ( isset($_POST['text_message']) ) {

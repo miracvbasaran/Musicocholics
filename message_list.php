@@ -2,7 +2,7 @@
 
 	include("session.php");
 
-    $uid = mysqli_real_escape_string($db,$_GET['login_id']);
+    $uid = mysqli_real_escape_string($db,$_POST['login_id']);
     $query = "SELECT * FROM user WHERE user_id = '$uid' ";
     $result = mysqli_query($db, $query);
     $user_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
@@ -46,19 +46,34 @@
 		</nav>
 
 		<div class="container">
+
 			<p> <input id='Submit' name='sendmessage_button' value='Submit' type='button' value='SEND MESSAGE'> </p>
-			<p> MESSAGES <br> <br>
-				<?php
-					$query = "SELECT U.fullname , M.message FROM User U , SENDS_MESSAGE M WHERE M.receiver_id = '$uid' AND M.sender_id = U.user_id ORDER BY M.date DESC";
-					$result = mysqli_query($db, $query);
-					$query2 = "SELECT COUNT(*) FROM User U , SENDS_MESSAGE M WHERE M.receiver_id = '$uid' AND M.sender_id = U.user_id";
-					$result2 = mysqli_query($db, $query2);
-					printf( "Total messages: %d\n" , $result2 );
-					while ($row = mysqli_fetch_array($result, MYSQL_NUM)) {
-						printf( "%s\n%s\n" , $row[0] , $row[1] );
-					}
-				?>
-			</p>
+			
+			<h3> MESSAGES </h3> <br>
+			
+			<table>
+			    <thead>
+			        <tr>
+						<td>User Fullname</td>
+			            <td>Message</td>
+			        </tr>
+			    </thead>
+			    <tbody>
+					<?php
+						$query = "SELECT U.fullname , M.message FROM User U , SENDS_MESSAGE M WHERE M.receiver_id = '$uid' AND M.sender_id = U.user_id ORDER BY M.date DESC";
+						$result = mysqli_query($db, $query);
+						$query2 = "SELECT COUNT(*) FROM User U , SENDS_MESSAGE M WHERE M.receiver_id = '$uid' AND M.sender_id = U.user_id";
+						$result2 = mysqli_query($db, $query2);
+			            while ($row = mysqli_fetch_array($result, MYSQL_NUM)) { ?>
+			                <tr>
+			                    <td><?php echo $row[0]?></td>
+			                    <td><?php echo $row[1]?></td>
+			                </tr>
+			            <?php }
+			        ?>
+			    </tbody>
+			</table>
+
 		</div>
 
 		<div> 	

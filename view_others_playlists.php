@@ -2,12 +2,12 @@
 
 	include("session.php");
 
-    $uid = mysqli_real_escape_string($db,$_GET['login_id']);
+    $uid = mysqli_real_escape_string($db,$_POST['login_id']);
     $query1 = "SELECT * FROM user WHERE user_id = '$uid' ";
     $result1 = mysqli_query($db, $query1);
     $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
 
-    $user_id = $_GET['other_id'];
+    $user_id = $_POST['other_id'];
 
 ?>
 

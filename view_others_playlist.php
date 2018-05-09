@@ -2,33 +2,33 @@
 
 	include("session.php");
 
-    $uid = mysqli_real_escape_string($db,$_GET['login_id']);
+    $uid = mysqli_real_escape_string($db,$_POST['login_id']);
     $query1 = "SELECT * FROM user WHERE user_id = '$uid' ";
     $result1 = mysqli_query($db, $query1);
     $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
 
-    $pid = $_GET['playlist_id'];
+    $pid = $_POST['playlist_id'];
     $query2 = "SELECT * FROM playlist WHERE playlist_id = '$pid' "
     $result2 = mysqli_query($db, $query2);
     $playlist_array = mysqli_fetch_array($result2, MYSQLI_ASSOC);
 
-    $user_id = $_GET['other_id'];
+    $user_id = $_POST['other_id'];
 
     $pname = $playlist_array['playlist_name'];
 
     if ( isset($_POST['followplaylist_button']) ) {
-    	$queryF = "INSERT INTO VALUES($uid , $pid , $rate)";
+    	$queryF = "INSERT INTO Follows VALUES($uid , $pid)";
     	$resultF = mysqli_query($db, $queryF);
     }
 
     /* There is no space for comment now */
     if ( isset($_POST['commentplaylist_button']) ) {
-    	$queryComment = "INSERT INTO VALUES($uid , $pid , getdate() , $comment)";
+    	$queryComment = "INSERT INTO Comments VALUES($uid , $pid , getdate() , $comment)";
     	$resultComment = mysqli_query($db, $queryComment);
     }
 
     if ( isset($_POST['collaborateplaylist_button']) ) {
-    	$queryCollaborate = "INSERT INTO VALUES($uid , $pid)";
+    	$queryCollaborate = "INSERT INTO Collaborates VALUES($uid , $pid)";
     	$resultCollaborate = mysqli_query($db, $queryCollaborate);
     }
 
@@ -82,25 +82,51 @@
 
 			<p> <input id='Submit' name='collaborateplaylist_button' value='Submit' type='button' value='COLLABORATE PLAYLIST'> </p>
 
-			<p>
-				<?php
-					$queryT = "SELECT T.track_name , T.duration , T.price FROM Added A , Track T WHERE A.playlist_id = '$pid' AND T.track_id = A.track_id"
-					$resultT = mysqli_query($db, $queryT);
-					while( $row = mysql_fetch_array($resultT, MYSQL_NUM) ) {
-						printf("%s %d: %lf\n", $row[0] , $row[1] ,$row[2]);  
-					}
-				?>
-			</p>
+			<table>
+			    <thead>
+			        <tr>
+						<td>Name</td>
+			            <td>Duration</td>
+			            <td>Price</td>
+			        </tr>
+			    </thead>
+			    <tbody>
+					<?php
+						$queryT = "SELECT T.track_name , T.duration , T.price FROM Added A , Track T WHERE A.playlist_id = '$pid' AND T.track_id = A.track_id"
+						$resultT = mysqli_query($db, $queryT);
+			            while($row = mysql_fetch_array($resultsT, MYSQL_NUM)) { ?>
+			                <tr>
+			                    <td><?php echo $row[0]?></td>
+			                    <td><?php echo $row[1]?></td>
+			                    <td><?php echo $row[2]?></td>
+			                </tr>
+			            <?php }
+			        ?>
+			    </tbody>
+			</table>
 
-			<p>
-				<?php
-					$queryC = "SELECT U.usernane , C.date , C.comment FROM Comments C , User U WHERE C.playlist_id = '$pid' AND U.user_id = '$user_id' ORDER BY C.date DESC"
-					$resultC = mysqli_query($db, $queryC);
-					while( $row = mysql_fetch_array($resultC, MYSQL_NUM) ) {
-						printf("%s (%s): %s\n", $row[0] , $row[1] ,$row[2]);  
-					}
-				?>
-			</p>
+			<table>
+			    <thead>
+			        <tr>
+						<td>Username</td>
+			            <td>Date</td>
+			            <td>Comment</td>
+			        </tr>
+			    </thead>
+			    <tbody>
+					<?php
+						$queryC = "SELECT U.usernane , C.date , C.comment FROM Comments C WHERE C.playlist_id = '$pid' ORDER BY C.date DESC"
+						$resultC = mysqli_query($db, $queryC);
+			            while($row = mysql_fetch_array($resultsC, MYSQL_NUM)) { ?>
+			                <tr>
+			                    <td><?php echo $row[0]?></td>
+			                    <td><?php echo $row[1]?></td>
+			                    <td><?php echo $row[2]?></td>
+			                </tr>
+			            <?php }
+			        ?>
+			    </tbody>
+			</table>
 
 			<p> <input id='Submit' name='commentplaylist_button' value='Submit' type='button' value='COMMENT PLAYLIST'> </p>
 
