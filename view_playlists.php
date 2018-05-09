@@ -3,12 +3,12 @@
 	include("session.php");
 
     $uid = mysqli_real_escape_string($db,$_GET['login_id']);
-    $query = "SELECT * FROM user WHERE user_id = '$uid' ";
-    $result = mysqli_query($db, $query);
-    $user_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
+    $query1 = "SELECT * FROM user WHERE user_id = '$uid' ";
+    $result1 = mysqli_query($db, $query1);
+    $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
 
-    if (isset($_POST['sendmessage_button'])) {
-    	header("location: send_message.php?");
+	if (isset($_POST['addplaylist_button'])) {
+    	
     }
 
 ?>
@@ -46,19 +46,31 @@
 		</nav>
 
 		<div class="container">
-			<p> <input id='Submit' name='sendmessage_button' value='Submit' type='button' value='SEND MESSAGE'> </p>
-			<p> MESSAGES <br> <br>
+
+			<h3> Your Playlists: </h3> <br>
+			<p>
 				<?php
-					$query = "SELECT U.fullname , M.message FROM User U , SENDS_MESSAGE M WHERE M.receiver_id = '$uid' AND M.sender_id = U.user_id ORDER BY M.date DESC";
-					$result = mysqli_query($db, $query);
-					$query2 = "SELECT COUNT(*) FROM User U , SENDS_MESSAGE M WHERE M.receiver_id = '$uid' AND M.sender_id = U.user_id";
-					$result2 = mysqli_query($db, $query2);
-					printf( "Total messages: %d\n" , $result2 );
-					while ($row = mysqli_fetch_array($result, MYSQL_NUM)) {
-						printf( "%s\n%s\n" , $row[0] , $row[1] );
+					$queryOP = "SELECT P.playlist_name FROM Playlist P WHERE P.creator_id = '$uid' "
+					$resultOP = mysqli_query($db, $queryOP);
+					while( $row = mysql_fetch_array($resultOP, MYSQL_NUM) ) {
+						printf("%s\n", $row[0]);  
 					}
 				?>
 			</p>
+
+			<p> <input id='Submit' name='addplaylist_button' value='Submit' type='button' value='ADD PLAYLIST'> </p>
+
+			<h3> Your Followed Playlists: </h3> <br>
+			<p>
+				<?php
+					$queryFP = "SELECT P.playlist_name FROM Playlist P , Follows F WHERE F.user_id = '$uid' AND F.playlist_id = P.playlist_id"
+					$resultFP = mysqli_query($db, $queryFP);
+					while( $row = mysql_fetch_array($resultFP, MYSQL_NUM) ) {
+						printf("%s\n", $row[0]);  
+					}
+				?>
+			</p>
+
 		</div>
 
 		<div> 	

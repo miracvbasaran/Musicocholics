@@ -7,8 +7,14 @@
     $result = mysqli_query($db, $query);
     $user_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
-    if (isset($_POST['sendmessage_button'])) {
-    	header("location: send_message.php?");
+    $user_id = $_GET['other_id'];
+
+    if ( isset($_POST['sendmessage_button']) ) {
+    	if ( isset($_POST['text_message']) ) {
+    		$query = "INSERT INTO SENDS_MESSAGE VALUES ($uid, $other_id, date(Y/m/d), $text_message";
+    		$result = mysqli_query($db, $query);
+    		header("location: message_list.php?");
+    	}
     }
 
 ?>
@@ -45,20 +51,12 @@
 			</div>
 		</nav>
 
+		<form method="post" action="">
+			Text Message: <input type="text" name="text_message" value= <?php echo $text_message;?> autofocus> <br>
+		</form>
+
 		<div class="container">
 			<p> <input id='Submit' name='sendmessage_button' value='Submit' type='button' value='SEND MESSAGE'> </p>
-			<p> MESSAGES <br> <br>
-				<?php
-					$query = "SELECT U.fullname , M.message FROM User U , SENDS_MESSAGE M WHERE M.receiver_id = '$uid' AND M.sender_id = U.user_id ORDER BY M.date DESC";
-					$result = mysqli_query($db, $query);
-					$query2 = "SELECT COUNT(*) FROM User U , SENDS_MESSAGE M WHERE M.receiver_id = '$uid' AND M.sender_id = U.user_id";
-					$result2 = mysqli_query($db, $query2);
-					printf( "Total messages: %d\n" , $result2 );
-					while ($row = mysqli_fetch_array($result, MYSQL_NUM)) {
-						printf( "%s\n%s\n" , $row[0] , $row[1] );
-					}
-				?>
-			</p>
 		</div>
 
 		<div> 	
