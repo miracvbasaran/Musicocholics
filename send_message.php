@@ -3,17 +3,26 @@
 	include("session.php");
 
     $uid = mysqli_real_escape_string($db,$_POST['login_id']);
-    $query = "SELECT * FROM user WHERE user_id = '$uid' ";
+    $query = "SELECT * FROM user U WHERE U.user_id = '$uid' ";
     $result = mysqli_query($db, $query);
     $user_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
-    $user_id = $_POST['other_id'];
+    if( $other_id != '' )
+    	$user_id = $_POST['other_id'];
 
     if ( isset($_POST['sendmessage_button']) ) {
-    	if ( isset($_POST['text_message']) ) {
-    		$query = "INSERT INTO SENDS_MESSAGE VALUES ($uid, $other_id, date(Y/m/d), $text_message";
-    		$result = mysqli_query($db, $query);
-    		header("location: message_list.php?");
+    	if ( isset($_POST['receiver']) ) {
+    		if ( isset($_POST['text_message']) ) {
+    			$query = "INSERT INTO SENDS_MESSAGE VALUES ('$uid', '$user_id', getdate(), '$text_message' ";
+    			$result = mysqli_query($db, $query);
+    			header("location: message_list.php?");
+    		}
+    		else {
+    			echo '<div class="alert alert-danger" role="alert"> Receiver is not entered. </div>';
+    		}
+    	}
+    	else {
+			echo '<div class="alert alert-danger" role="alert"> Message is not entered. </div>';
     	}
     }
 
@@ -46,13 +55,17 @@
 		    	</ul>
 		    	<ul class="nav navbar-nav navbar-right">
 		      		<li><a href="change_general_information.php"><span class="glyphicon glyphicon-user"></span> Settings</a></li>
-		      		<li><a href="homepage.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+		      		<li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
 		    	</ul>
 			</div>
 		</nav>
 
 		<form method="post" action="">
-			Text Message: <input type="text" name="text_message" value= <?php echo $text_message;?> autofocus> <br>
+			Receiver: <input type="text" name="receiver" value= <?php echo "\"".$user_id."\"";?> autofocus> <br>
+		</form>
+
+		<form method="post" action="">
+			Text Message: <input type="text" name="text_message" value= <?php echo "\"".$text_message."\"";?> autofocus> <br>
 		</form>
 
 		<div class="container">

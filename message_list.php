@@ -8,7 +8,7 @@
     $user_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
     if (isset($_POST['sendmessage_button'])) {
-    	header("location: send_message.php?");
+    	header("location: send_message.php?other_id='' ");
     }
 
 ?>
@@ -40,7 +40,7 @@
 		    	</ul>
 		    	<ul class="nav navbar-nav navbar-right">
 		      		<li><a href="change_general_information.php"><span class="glyphicon glyphicon-user"></span> Settings</a></li>
-		      		<li><a href="homepage.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+		      		<li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
 		    	</ul>
 			</div>
 		</nav>
@@ -80,9 +80,9 @@
 			<footer>
 				<?php
 					$query = "SELECT L1.track_id FROM listens L1 WHERE L1.user_id = '$uid' AND 
-						date = SELECT max(L2.date) FROM listens L2 WHERE L2.user_id = '$uid'";
+						date = SELECT max(L2.date) FROM listens L2 WHERE L2.user_id = '$uid' ";
 					$result = mysqli_query($db, $query);
-					$query2 = "SELECT track_name,duration FROM track WHERE track_id = $result";
+					$query2 = "SELECT track_name,duration FROM track WHERE track_id = '$result' ";
 					$result2 = mysqli_query($db, $query2);
 					$track_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
 				    $track_name = $track_array['track_name'];

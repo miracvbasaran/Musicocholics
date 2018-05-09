@@ -17,18 +17,19 @@
     $pname = $playlist_array['playlist_name'];
 
     if ( isset($_POST['followplaylist_button']) ) {
-    	$queryF = "INSERT INTO Follows VALUES($uid , $pid)";
+    	$queryF = "INSERT INTO Follows VALUES('$uid' , '$pid')";
     	$resultF = mysqli_query($db, $queryF);
     }
 
-    /* There is no space for comment now */
     if ( isset($_POST['commentplaylist_button']) ) {
-    	$queryComment = "INSERT INTO Comments VALUES($uid , $pid , getdate() , $comment)";
-    	$resultComment = mysqli_query($db, $queryComment);
+    	if( isset($_POST['comment_text']) ) {
+    		$queryComment = "INSERT INTO Comments VALUES('$uid' , '$pid' , getdate() , '$comment_text')";
+    		$resultComment = mysqli_query($db, $queryComment);
+    	}
     }
 
     if ( isset($_POST['collaborateplaylist_button']) ) {
-    	$queryCollaborate = "INSERT INTO Collaborates VALUES($uid , $pid)";
+    	$queryCollaborate = "INSERT INTO Collaborates VALUES('$uid' , '$pid')";
     	$resultCollaborate = mysqli_query($db, $queryCollaborate);
     }
 
@@ -61,7 +62,7 @@
 		    	</ul>
 		    	<ul class="nav navbar-nav navbar-right">
 		      		<li><a href="change_general_information.php"><span class="glyphicon glyphicon-user"></span> Settings</a></li>
-		      		<li><a href="homepage.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+		      		<li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
 		    	</ul>
 			</div>
 		</nav>
@@ -128,6 +129,10 @@
 			    </tbody>
 			</table>
 
+			<form method="post" action="">
+				Comment: <input type="text" name="comment_text" value= <?php echo "\"".$comment_text."\"" ?> autofocus> <br>
+			</form>
+
 			<p> <input id='Submit' name='commentplaylist_button' value='Submit' type='button' value='COMMENT PLAYLIST'> </p>
 
 		</div>
@@ -136,9 +141,9 @@
 			<footer>
 				<?php
 					$query = "SELECT L1.track_id FROM listens L1 WHERE L1.user_id = '$uid' AND 
-						date = SELECT max(L2.date) FROM listens L2 WHERE L2.user_id = '$uid'";
+						date = SELECT max(L2.date) FROM listens L2 WHERE L2.user_id = '$uid' ";
 					$result = mysqli_query($db, $query);
-					$query2 = "SELECT track_name,duration FROM track WHERE track_id = $result";
+					$query2 = "SELECT track_name,duration FROM track WHERE track_id = '$result' ";
 					$result2 = mysqli_query($db, $query2);
 					$track_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
 				    $track_name = $track_array['track_name'];
