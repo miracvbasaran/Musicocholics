@@ -109,23 +109,5 @@
  </div>
 </div>  
 
-
-<div>   
-<footer>
-  <?php
-  $query = "SELECT L1.track_id FROM listens L1 WHERE L1.user_id = '$uid' AND 
-  date = SELECT max(L2.date) FROM listens L2 WHERE L2.user_id = '$uid'";
-  $result = mysqli_query($db, $query);
-  $query2 = "SELECT track_name,duration FROM track WHERE track_id = $result";
-  $result2 = mysqli_query($db, $query2);
-  $track_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
-    $track_name = $track_array['track_name'];
-    $duration = $track_array['duration'];
-  echo $track_name;
-  echo $duration;
-  ?>
-
-</footer>
-</div>
 </body>
 </html>

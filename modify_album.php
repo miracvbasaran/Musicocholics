@@ -1,16 +1,35 @@
 <?php
 	include("session.php");
+    function delete_track($track_id){
+      $query4 = "DELETE FROM Track WHERE track_id = {$track_id}";
+      $result4 = mysqli_query($db, $query4);
+      $query4 = "DELETE FROM Track_Belongs_To_Artist WHERE track_id = {$track_id}";
+      $result4 = mysqli_query($db, $query4);
+      $query4 = "DELETE FROM Added WHERE track_id = {$track_id}";
+      $result4 = mysqli_query($db, $query4);
+      $query4 = "DELETE FROM Buys WHERE track_id = {$track_id}";
+      $result4 = mysqli_query($db, $query4);
+      $query4 = "DELETE FROM Gift WHERE track_id = {$track_id}";
+      $result4 = mysqli_query($db, $query4);
+      $query4 = "DELETE FROM Listens WHERE track_id = {$track_id}";
+      $result4 = mysqli_query($db, $query4);
+      $query4 = "DELETE FROM Track WHERE track_id = {$track_id}";
+      $result4 = mysqli_query($db, $query4);
+      header("Refresh:0");
+    }
     $uid = mysqli_real_escape_string($db,$_GET['user_id']);
     $query = "SELECT admin_id FROM admin WHERE user_id = '$uid' ";
     $result = mysqli_query($db, $query);
 
-    $artist_id = $_GET['artist_id'];
-    $query2 = "SELECT * FROM Artist WHERE artist_id = '$artist_id' ";
+    $album_id = $_GET['album_id'];
+    $query2 = "SELECT * FROM Album WHERE album_id = '$album_id' ";
     $result2 = mysqli_query($db, $query2);
-    $artist_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
-    $artist_name = $artist_array('artist_name');
-    $description = $artist_array('description');
-    $picture = $artist_array('picture');
+    $album_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
+    $album_name = $album_array('album_name');
+    $picture = $album_array('picture');
+    $album_type = $album_array('album_type');
+    $published_date = $album_array('published_date');
+    $publisher_id = $album_array('publisher_id');
     
 
     if(isset($_POST['apply']))
@@ -31,18 +50,9 @@
           $result = mysqli_query($db, $query);
       }
     }
-    if(isset($_POST['delete_album_button'])){
-      $query4 = "DELETE FROM Album WHERE album_id = {$album_id}";
-      $result4 = mysqli_query($db, $query4);
-      $query4 = "DELETE FROM Album_Belongs_To_Artist WHERE album_id = {$album_id}";
-      $result4 = mysqli_query($db, $query4);
-      $query4 = "DELETE FROM Track_Belongs_To_Artist WHERE album_id = {$album_id}";
-      $result4 = mysqli_query($db, $query4);
-      header('Location: ' . $_SERVER['HTTP_REFERER']);
-    }
-    if(isset($_POST['add_album']))
+    if(isset($_POST['add_track']))
     {
-      $new_album_name = $_POST['new_album_name']
+      $new_track_name = $_POST['new_track_name']
       $new_album_type = $_POST['new_album_type']
       $new_album_publish_date = $_POST['new_album_publish_date']
       $query = "INSERT INTO Album(album_name, album_type, published_date) VALUES({$new_album_name}, {$new_album_type}, {$new_album_publish_date})";
@@ -63,7 +73,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Musicholics - Modify Artist</title>
+  <title>Musicholics - Modify Album</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -95,7 +105,7 @@
  </form>
 
 <form method="post" action="">
-  <div class="container" align = "center"><h3><input type="text" name="name" value= <?php echo $artist_name ?> autofocus></h3></div>
+  <div class="container" align = "center"><h3><input type="text" name="name" value= <?php echo $album_name ?> autofocus></h3></div>
   <br>
   <input type="text" name="description" value= <?php echo "\"".$description."\"" ?> autofocus> <br>
   City:  <input type="text" name="city" value= <?php echo "\"".$city."\"" ?> autofocus>

@@ -4,6 +4,7 @@
     $query = "SELECT * FROM user WHERE user_id = {$uid} ";
     $result = mysqli_query($db, $query);
     $user_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
+    $membership_type = $user_array['membership_type'];
 
 
     $track_id = $_GET['track_id'];
@@ -34,8 +35,26 @@
     if(isset($_POST['play_track_button']))
     {
       $insertion_date = date("Y-m-d H:i:s");
-      $query4 = "INSERT INTO listens ($user_id, $track_id, $insertion_date)";
-      $result4 = mysqli_query($db, $query4);
+      if($membership_type === "Normal"){
+        $flag = TRUE;
+        $query = "SELECT count(*) AS num_listens FROM Listens WHERE user_id = {$user_id} AND DATE(Listens.date) = " . date(Y-m-d);
+        $result = mysqli_query($db, $query);
+        $result_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
+        $num_listens = $result_array['num_listens'];
+
+        if($num_listens > 20){
+          $flag = FALSE;
+          
+        }
+      }
+      if($flag === TRUE){
+        $query4 = "INSERT INTO Listens ($user_id, $track_id, $insertion_date)";
+        $result4 = mysqli_query($db, $query4);
+      }
+      else{
+        echo "Biz bu sorunun cevabını 15 Temmuz'da verdik!";
+      }
+      
     }
     
 ?>
