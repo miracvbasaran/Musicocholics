@@ -1,6 +1,6 @@
 <?php
 	include("session.php");
-    $uid = mysqli_real_escape_string($db,$_GET['login_id']);
+    $uid = mysqli_real_escape_string($db,$_POST['login_id']);
     $query = "SELECT * FROM user WHERE user_id = '$uid' ";
     $result = mysqli_query($db, $query);
     $user_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
@@ -11,9 +11,9 @@
     $person_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
 
    
-	$username = $person_array['username'];
-	$fullname = $person_array['fullname'];
-	$email = $person_array['email'];
+	  $username = $person_array['username'];
+	  $fullname = $person_array['fullname'];
+  	$email = $person_array['email'];
 
     $user_id = $user_array['user_id'];
     $country = $user_array['country'];
@@ -22,8 +22,8 @@
     $birthday = $user_array['birthday'];
     $gender = $user_array['gender'];
     $budget = $user_array['budget'];
-	$password = $user_array['password'];
-	$picture = $user_array['picture'];
+	  $password = $user_array['password'];
+	  $picture = $user_array['picture'];
     $membership_type = $user_array['membership_type'];
 
 ?>
@@ -54,7 +54,7 @@
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="change_general_information.php"><span class="glyphicon glyphicon-user"></span> Settings</a></li>
-      <li><a href="homepage.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+      <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
     </ul>
   </div>
 </nav>
@@ -78,15 +78,15 @@
 
  </div>
 
-<a href="view_playlists.php" class="btn btn-success" role="button">VIEW PLAYLISTS</a>
 
+POSTS<br><br>
 <div class="container">
 <?php
 	$query = "SELECT U.username , P.date, P.post FROM posts P, User U WHERE P.reciver_id = '$uid' AND P.writer_id = U.user_id ORDER BY date DESC";
 	$result = mysqli_query($db, $query);
 	
 	while ($row = mysql_fetch_array($result, MYSQL_NUM)) {
-    	printf("%s (%s) : %s ", $row[0] , $row[1] ,$row[2]);  
+      echo " <div >  <div align="left" > {$row[0]} ( {$row[1]} ) <br> </div> <div align="right" > {$row[2]}  <br> </div> </div>"; 
 	}
 
 ?>
@@ -98,12 +98,12 @@
 	$query = "SELECT L1.track_id FROM listens L1 WHERE L1.user_id = '$uid' AND 
 	date = (SELECT max(L2.date) FROM listens L2 WHERE L2.user_id = '$uid') ";
 	$result = mysqli_query($db, $query);
-	$query2 = "SELECT track_name,duration FROM track WHERE track_id = $result";
+	$query2 = "SELECT track_name,duration FROM track WHERE track_id = '$result' ";
 	$result2 = mysqli_query($db, $query2);
 	$track_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
 
-    $track_name = $track_array['track_name'];
-    $duration = $track_array['duration'];
+  $track_name = $track_array['track_name'];
+  $duration = $track_array['duration'];
 	echo $track_name;
 	echo $duration;
 	?>

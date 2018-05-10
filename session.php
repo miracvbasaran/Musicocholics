@@ -10,9 +10,9 @@
    
    $login_session = $row['username'];
    $login_id = $row['person_id'];
-    $fullname = $row['fullname'];
-    $email = $row['email'];
-    $password = $row['password'];
+   $fullname = $row['fullname'];
+   $email = $row['email'];
+   $password = $row['password'];
    $_SESSION["login_id"] = $login_id;
    
    if(!isset($_SESSION['login_user'])){

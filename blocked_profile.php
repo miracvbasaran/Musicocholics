@@ -6,28 +6,30 @@
     $user_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
 
-    $nonfriend_id = $_GET['other_id'];
-    $query2 = "SELECT * FROM person WHERE person_id = '$nonfriend_id' ";
+    $blocked_id = $_GET['other_id'];
+    $query2 = "SELECT * FROM person WHERE person_id = '$blocked_id' ";
     $result2 = mysqli_query($db, $query2);
-    $nonfriend_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
-    $username_non = $nonfriend_array['username'];
-    $fullname_non = $nonfriend_array['fullname'];
+    $blocked_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
 
+    $username_b = $blocked_array['username'];
+    $fullname_b = $blocked_array['fullname'];
 
-    $query4 = "SELECT country, picture FROM user WHERE user_id = '$nonfriend_id' ";
-    $result4 = mysqli_query($db, $query4);
-    $nonfriend_array_u = mysqli_fetch_array($result4,MYSQLI_ASSOC);
-    $country_non = $nonfriend_array_u['country'];
-    $picture_non = $nonfriend_array_u['picture'];
+    $query3 = "SELECT picture FROM user WHERE user_id = '$blocked_id' ";
+    $picture_b = mysqli_query($db, $query3);
+    
 
-
-    if(isset($_POST['add_friend_button']))
+    //$query3 = "SELECT count(*) as $count_b FROM blocks WHERE blocked_id = '$blocked_id'
+    //AND blocker_id = $uid ";
+    //$result3 = mysqli_query($db, $query3);
+    
+    if(isset($_POST['unblock_button']))
     {
-
-      $query3 = "INSERT INTO friendship VALUES ($uid, $nonfriend_id) ";
-      $result3 = mysqli_query($db, $query3);
-      header("location: friend_profile.php?other_id={$friend_id} ");
+      $query3 = "DELETE FROM blocks WHERE ('$uid' = blocker_id AND '$blocked_id' = blocked_id ) ";
+      header("location: nonfriend_profile.php?other_id={$blocked_id}");
     }
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -46,7 +48,7 @@
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <ul class="nav navbar-nav">
-     
+   
       
       <li><a href="own_profile.php">Profile</a></li>
       <li><a href="view_playlists.php">Playlist</a></li>
@@ -65,14 +67,24 @@
 <div class="container">
 
   
-  <h3>This is, </h3> <?php echo $fullname_non;?>
+  <h3>This is, </h3> <?php echo $username_b;?>
   	<p> 
+   
+     <div align="left" class="col-md-6 col-md-offset-3"><img class="img-circle img-responsive" src="assets/img/ <?php echo $picture_b; ?>" width="200" height="200"></div>
 
-      <div align="left" class="col-md-6 col-md-offset-3"><img class="img-circle img-responsive" src="assets/img/ <?php echo $picture_non; ?>" width="200" height="200"></div>
 
-       <class="btn btn-info" role="button" name=add_friend_button value="ADD AS A FRIEND" >
+    <?php 
+        if($result3 == 1 ){
+          printf("You blocked %s", $username_b);
+
+          echo "<input id='Submit' name='unblock_button' value='Submit' type='button'>";
+        }
+        else{
+          printf("You are blocked from %s", $username_b);
+        }
+        ?>
     </p>
-
+  
 
 </div>
 <div> 	

@@ -1,6 +1,6 @@
 <?php
 	include("session.php");
-    $uid = mysqli_real_escape_string($db,$_GET['login_id']);
+    $uid = mysqli_real_escape_string($db,$_POST['login_id']);
     $query = "SELECT budget FROM user WHERE user_id = '$uid' ";
     $result = mysqli_query($db, $query);
     $user_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
@@ -10,7 +10,7 @@
     $budget = $user_array['budget'];
 
 
-    $track_id = mysqli_real_escape_string($db,$_GET['get_track_id']);
+    $track_id = mysqli_real_escape_string($db,$_POST['track_id']);
     $query3 = "SELECT * FROM track WHERE track_id = '$track_id' ";
     $result3 = mysqli_query($db, $query3);
     $track_array = mysqli_fetch_array($result3,MYSQLI_ASSOC);
@@ -34,35 +34,39 @@
             $gifted_id = $gifted_array['user_id'];
 
             if(mysql_num_rows($result) > 0){
-                $query = " INSERT INTO gift VALUES($uid, $gifted_id, $track_id )";
+                $query = " INSERT INTO gift VALUES('$uid', '$gifted_id', '$track_id' )";
                 $result = mysqli_query($db, $query);
 
                 $newbudget = $budget-$price;
               
-                $query = "UPDATE user SET budget = $newbudget WHERE user_id = '$uid' ";
+                $query = "UPDATE user SET budget = '$newbudget' WHERE user_id = '$uid' ";
                 $result = mysqli_query($db, $query);
 
-                $query = "INSERT INTO buys VALUES($gifted_id, $track_id )";
+                $query = "INSERT INTO buys VALUES('$gifted_id', '$track_id' )";
                 $result = mysqli_query($db, $query);
+                $user_exist = 1;
 
-                echo '<div class="alert alert-success" role="alert">You purchased $track_name as a gift successfully. </div>';
-
+                echo ' <script type="text/javascript"> alert("You purchased {$track_name} as a gift successfully!"); </script>';
+                
                 header("location: search_result_screen.php?");
 
             }
             else{
-              echo '<div class="alert alert-error" role="alert">There is no such user. </div>';
+              echo ' <script type="text/javascript"> alert("There is no such user."); </script>';
             }
-
-            
+                     
           }
           else{
-            echo '<div class="alert alert-error" role="alert">Your need to submit the username of user that you buy a gift. </div>';
+             echo ' <script type="text/javascript"> alert("You need to give name the user that will receive the gift!"); </script>';
+  
           }
+          
         }
         else{
-          echo '<div class="alert alert-error" role="alert">Your budget is not sufficient. </div>';
-        }
+          echo ' <script type="text/javascript"> alert("Your budget is not sufficient!"); </script>';
+          
+          
+        }   
     }
         
     if( isset( ($_POST['cancel']) )){
@@ -97,7 +101,7 @@
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="change_general_information.php"><span class="glyphicon glyphicon-user"></span> Settings</a></li>
-      <li><a href="homepage.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+      <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
     </ul>
   </div>
 </nav>
@@ -127,7 +131,7 @@ Your budget: $<?php echo $budget; ?> <br>
 	$query = "SELECT L1.track_id FROM listens L1 WHERE L1.user_id = '$uid' AND 
 	date = (SELECT max(L2.date) FROM listens L2 WHERE L2.user_id = '$uid') ";
 	$result = mysqli_query($db, $query);
-	$query2 = "SELECT track_name,duration FROM track WHERE track_id = $result";
+	$query2 = "SELECT track_name,duration FROM track WHERE track_id = '$result' ";
 	$result2 = mysqli_query($db, $query2);
 	$track_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
 

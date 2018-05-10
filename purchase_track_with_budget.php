@@ -19,8 +19,8 @@
     $membership_type = $user_array['membership_type'];
 
 
-    $track_id = mysqli_real_escape_string($db,$_GET['get_track_id']);
-    $query3 = "SELECT * FROM track WHERE track_id = '$track_id' ";
+    $track_id = mysqli_real_escape_string($db,$_GET['track_id']);
+    $query3 = " SELECT * FROM track WHERE track_id = '$track_id' ";
     $result3 = mysqli_query($db, $query3);
     $track_array = mysqli_fetch_array($result3,MYSQLI_ASSOC);
 
@@ -36,15 +36,15 @@
           $query = "UPDATE user SET budget = $newbudget WHERE user_id = '$uid' ";
           $result = mysqli_query($db, $query);
 
-          $query = "INSERT INTO buys VALUES( $uid, $track_id ) ";
+          $query = "INSERT INTO buys VALUES( '$uid', '$track_id' ) ";
           $result = mysqli_query($db, $query);
 
-          echo '<div class="alert alert-success" role="alert">You purchased $track_name successfully. </div>';
+          echo ' <script type="text/javascript"> alert("You purchased {$track_name} successfully."); </script>';
 
           header("location: search_result_screen.php?");
         }
         else{
-          echo '<div class="alert alert-error" role="alert">Your budget is not sufficient. </div>';
+          echo ' <script type="text/javascript"> alert("Your budget is not sufficient."); </script>';
         }
     }
         
@@ -80,7 +80,7 @@
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="change_general_information.php"><span class="glyphicon glyphicon-user"></span> Settings</a></li>
-      <li><a href="homepage.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+      <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
     </ul>
   </div>
 </nav>
@@ -107,7 +107,7 @@ Your budget: $<?php echo $budget; ?> <br>
 	$query = "SELECT L1.track_id FROM listens L1 WHERE L1.user_id = '$uid' AND 
 	date = (SELECT max(L2.date) FROM listens L2 WHERE L2.user_id = '$uid') ";
 	$result = mysqli_query($db, $query);
-	$query2 = "SELECT track_name,duration FROM track WHERE track_id = $result";
+	$query2 = "SELECT track_name,duration FROM track WHERE track_id = '$result' ";
 	$result2 = mysqli_query($db, $query2);
 	$track_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
 

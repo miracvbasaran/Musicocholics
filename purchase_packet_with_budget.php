@@ -1,11 +1,11 @@
 <?php
-	include("session.php");
-    $uid = mysqli_real_escape_string($db,$_GET['login_id']);
+	  include("session.php");
+    $uid = mysqli_real_escape_string($db,$_POST'login_id']);
     $query = "SELECT budget FROM user WHERE user_id = '$uid' ";
     $result = mysqli_query($db, $query);
     $user_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
-    $premium_fee = 10;
-    $artist_fee = 5;
+    $premium_fee = 9.99;
+    $artist_fee = 4.99;
    
     $query2 = "SELECT * FROM person WHERE person_id = '$uid' ";
     $result2 = mysqli_query($db, $query2);
@@ -38,16 +38,17 @@
           $query = "UPDATE user SET membership_type = $membership_type WHERE user_id = '$uid' ";
           $result = mysqli_query($db, $query);
 
-          echo '<div class="alert alert-success" role="alert">You are upgraded to premium. </div>';
+          echo ' <script type="text/javascript"> alert("You are upgraded to premium."); </script>';
 
           header("location: change_general_information.php?");
         }
         else{
-          echo '<div class="alert alert-error" role="alert">Your budget is not sufficient. </div>';
+          echo ' <script type="text/javascript"> alert("Your budget is not sufficient. "); </script>';
+         
         }
     }
     else{
-      echo '<div class="alert alert-error" role="alert">You have already premium account. </div>';
+      echo ' <script type="text/javascript"> alert("You have already premium account."); </script>';
     }
         
     if(isset( ($_POST['up_artist']) ) && ($membership_type != "artist" || $membership_type != "premium-artist") ){
@@ -70,16 +71,17 @@
 
           $result = mysqli_query($db, $query);
 
-          echo '<div class="alert alert-success" role="alert">You are upgraded to artist. </div>';
+          echo ' <script type="text/javascript"> alert("You are upgraded to artist. "); </script>';
 
           header("location: change_general_information.php?");
         }
         else{
-          echo '<div class="alert alert-error" role="alert">Your budget is not sufficient. </div>';
+          echo ' <script type="text/javascript"> alert("Your budget is not sufficient."); </script>';
         }
     }
      else{
-      echo '<div class="alert alert-error" role="alert">You have already artist account. </div>';
+      echo ' <script type="text/javascript"> alert("You have already artist account."); </script>';
+      
     }
 
     if( isset( ($_POST['cancel']) )){
@@ -114,7 +116,7 @@
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="change_general_information.php"><span class="glyphicon glyphicon-user"></span> Settings</a></li>
-      <li><a href="homepage.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+      <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
     </ul>
   </div>
 </nav>
@@ -123,7 +125,7 @@
 UPRADE TO PREMIUM
 </h>
 <h2>
-Premium membership fee: $9.99 <br>
+Premium membership fee: <?php echo $premium_fee; ?> <br>
 
 </h2>
 <form method="post" action="">
@@ -137,7 +139,7 @@ Premium membership fee: $9.99 <br>
 UPRADE TO ARTIST
 </h>
 <h2>
-Artist membership fee: $4.99 <br>
+Artist membership fee: <?php echo $artist_fee; ?> <br>
 
 </h2>
 <form method="post" action="">
@@ -154,7 +156,7 @@ Your budget: $<?php echo $budget; ?> <br>
 	$query = "SELECT L1.track_id FROM listens L1 WHERE L1.user_id = '$uid' AND 
 	date = (SELECT max(L2.date) FROM listens L2 WHERE L2.user_id = '$uid') ";
 	$result = mysqli_query($db, $query);
-	$query2 = "SELECT track_name,duration FROM track WHERE track_id = $result";
+	$query2 = "SELECT track_name,duration FROM track WHERE track_id = '$result' ";
 	$result2 = mysqli_query($db, $query2);
 	$track_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
 

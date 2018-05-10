@@ -28,11 +28,12 @@
     $set = 0;
     if(isset( ($_POST['apply']) ) ){
       if(isset( ($_POST['old_pass']) )  ){
-          $query = "SELECT password FROM Person WHERE person_id = $uid' ";
+          $query = "SELECT password FROM Person WHERE person_id = '$uid' ";
           $result = mysqli_query($db, $query);
           if($_POST['old_pass']) != $password )
         {
-          echo '<div class="alert alert-danger" role="alert"> Old password value is not matched.</div>';
+          echo ' <script type="text/javascript"> alert("Old password value is not matched."); </script>';
+        
         }  
 
       }
@@ -41,7 +42,8 @@
 
       }
       else{
-        echo '<div class="alert alert-danger" role="alert"> You need to enter new password.</div>';
+        echo ' <script type="text/javascript"> alert("You need to enter new password."); </script>';
+       
       }
       if(isset( ($_POST['new_pass_2']) )   ){
           if (  ($_POST['new_pass_2']) == $newpass ){
@@ -51,16 +53,18 @@
               $set = 1;
           }
           else{
-
-            echo '<div class="alert alert-danger" role="alert"> Reentered password is not matched.</div>';
+            echo ' <script type="text/javascript"> alert("Passwords are not matched."); </script>';
+            
 
           }
        else{
-        echo '<div class="alert alert-danger" role="alert"> You need to enter new password again.</div>';
+        echo ' <script type="text/javascript"> alert("You need to enter new password again."); </script>';
+       
        } 
 
        if($set == 1){
-        echo '<div class="alert alert-success" role="alert"> Password has changed successfully.</div>';
+        echo ' <script type="text/javascript"> alert("Password has changed successfully."); </script>';
+       
           header("location: change_general_information.php?");
        }
       
@@ -94,7 +98,7 @@
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="change_general_information.php"><span class="glyphicon glyphicon-user"></span> Settings</a></li>
-      <li><a href="homepage.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+      <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
     </ul>
   </div>
 </nav>
@@ -116,12 +120,12 @@
 	$query = "SELECT L1.track_id FROM listens L1 WHERE L1.user_id = '$uid' AND 
 	date = (SELECT max(L2.date) FROM listens L2 WHERE L2.user_id = '$uid') ";
 	$result = mysqli_query($db, $query);
-	$query2 = "SELECT track_name,duration FROM track WHERE track_id = $result";
+	$query2 = "SELECT track_name,duration FROM track WHERE track_id = '$result' ";
 	$result2 = mysqli_query($db, $query2);
 	$track_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
 
-    $track_name = $track_array['track_name'];
-    $duration = $track_array['duration'];
+  $track_name = $track_array['track_name'];
+  $duration = $track_array['duration'];
 	echo $track_name;
 	echo $duration;
 	?>

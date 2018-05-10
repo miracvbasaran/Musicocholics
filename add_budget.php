@@ -1,5 +1,5 @@
 <?php
-	include("session.php");
+	  include("session.php");
     $uid = mysqli_real_escape_string($db,$_GET['login_id']);
     $query = "SELECT budget FROM user WHERE user_id = '$uid' ";
     $result = mysqli_query($db, $query);
@@ -27,12 +27,12 @@
           $query = "UPDATE user SET budget = $newbudget WHERE user_id = '$uid' ";
           $result = mysqli_query($db, $query);
 
-          echo '<div class="alert alert-success" role="alert">Amount is added to budget succesfully. </div>';
-
+          echo ' <script type="text/javascript"> alert("Amount is added to budget succesfully."); </script>';
+          
           header("location: change_general_information.php?");
       }
       else{
-        echo '<div class="alert alert-error" role="alert">You missed to enter some credit card information or the amount. </div>';
+        echo ' <script type="text/javascript"> alert("You missed to enter some credit card information or the amount."); </script>';
       }
     
     }
@@ -69,7 +69,7 @@
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="change_general_information.php"><span class="glyphicon glyphicon-user"></span> Settings</a></li>
-      <li><a href="homepage.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+      <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
     </ul>
   </div>
 </nav>
@@ -125,12 +125,12 @@
 	$query = "SELECT L1.track_id FROM listens L1 WHERE L1.user_id = '$uid' AND 
 	date = (SELECT max(L2.date) FROM listens L2 WHERE L2.user_id = '$uid') ";
 	$result = mysqli_query($db, $query);
-	$query2 = "SELECT track_name,duration FROM track WHERE track_id = $result";
+	$query2 = "SELECT track_name,duration FROM track WHERE track_id = '$result' ";
 	$result2 = mysqli_query($db, $query2);
 	$track_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
 
-    $track_name = $track_array['track_name'];
-    $duration = $track_array['duration'];
+  $track_name = $track_array['track_name'];
+  $duration = $track_array['duration'];
 	echo $track_name;
 	echo $duration;
 	?>

@@ -2,7 +2,7 @@
 
 <?php
 	include("session.php");
-    $uid = mysqli_real_escape_string($db,$_GET['user_id']);
+    $uid = mysqli_real_escape_string($db,$_POST['login_id']);
     $query = "SELECT admin_id FROM admin WHERE user_id = '$uid' ";
     $result = mysqli_query($db, $query);
 
@@ -30,7 +30,7 @@
 
     if(isset($_POST['ban_button']))
     {
-      header("location: admin_panel.php?");
+      
 
       $query4 = "DELETE FROM user WHERE $view_id = user_id  ";
       $result4 = mysqli_query($db, $query4);
@@ -40,6 +40,10 @@
 
       $query5 = "INSERT INTO bans VALUES( $admin_id,$view_id )";
       $result5 = mysqli_query($db, $query5);
+
+
+      header("location: admin_panel.php?");
+
     }
 
 ?>
@@ -65,7 +69,7 @@
     </ul>
     <ul class="nav navbar-nav navbar-right">
       
-      <li><a href="homepage.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+      <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
     </ul>
   </div>
 </nav>
@@ -86,8 +90,14 @@
   	<p>	Membership type: <?php echo $membership_type_v;?> </p>
    
     <p> 
-    <input id='Submit' name='ban_button' value='Submit' type='button' value='BAN'>
+    <input id='Submit' name='ban_button' value='Submit' type='button' value='BAN' onclick="popMessage()">
     </p>
+
+    <script>
+    function popMessage(){
+        alert("User is banned succesfully!");     
+    }   
+  </script>
 
  </div>
 
