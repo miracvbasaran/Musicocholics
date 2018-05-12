@@ -88,7 +88,7 @@
       <li><a href="view_tracks.php">Tracks</a></li>
   <li><a href="friends_list.php">Friends</a></li>
   <li><a href="message_list.php">Messages</a></li>
-  <li><a href="search_result_screen.php">Search</a></li>
+  <li><a href="search.php">Search</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="change_general_information.php"><span class="glyphicon glyphicon-user"></span>Settings</a></li>
@@ -135,13 +135,15 @@
 <footer>
   <?php
   $query = "SELECT L1.track_id FROM listens L1 WHERE L1.user_id = '$uid' AND 
-  date = SELECT max(L2.date) FROM listens L2 WHERE L2.user_id = '$uid'";
+  date = (SELECT max(L2.date) FROM listens L2 WHERE L2.user_id = '$uid') ";
   $result = mysqli_query($db, $query);
-  $query2 = "SELECT track_name,duration FROM track WHERE track_id = $result";
+  $row = mysqli_fetch_array($result, MYSQLI_NUM);
+  $query2 = "SELECT track_name,duration FROM track WHERE track_id = '$row[0]' ";
   $result2 = mysqli_query($db, $query2);
   $track_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
-    $track_name = $track_array['track_name'];
-    $duration = $track_array['duration'];
+
+  $track_name = $track_array['track_name'];
+  $duration = $track_array['duration'];
   echo $track_name;
   echo $duration;
   ?>
