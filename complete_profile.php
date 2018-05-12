@@ -30,13 +30,6 @@
 
     if(isset($_POST['ban_button']))
     {
-      
-
-      $query4 = "DELETE FROM user WHERE $view_id = user_id  ";
-      $result4 = mysqli_query($db, $query4);
-
-      $query6 = "DELETE FROM person WHERE $view_id = person_id  ";
-      $result6 = mysqli_query($db, $query6);
 
       $query5 = "INSERT INTO bans VALUES( $admin_id,$view_id )";
       $result5 = mysqli_query($db, $query5);
