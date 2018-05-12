@@ -32,11 +32,11 @@ BEGIN
 END
 $$
 
-CREATE PROCEDURE DeleteAlbumFromArtist(IN albumId INT, IN artistId)
+CREATE PROCEDURE DeleteAlbumFromArtist(IN albumId INT, IN artistId INT)
 BEGIN
 	DECLARE numElements INT;
 	DELETE FROM Album_Belongs_To_Artist WHERE album_id = albumId AND artist_id = artistId;
-	SET numElements = SELECT COUNT(*) FROM Album_Belongs_To_Artist WHERE album_id = albumId;
+	SET numElements =( SELECT COUNT(*) FROM Album_Belongs_To_Artist WHERE album_id = albumId);
 	IF numElements = 0 THEN CALL DeleteAlbum(albumId);
 	END IF;
 END
