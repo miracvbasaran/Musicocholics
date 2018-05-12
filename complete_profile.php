@@ -35,7 +35,7 @@
       $result5 = mysqli_query($db, $query5);
 
 
-      header("location: admin_panel.php?");
+      header("location: admin.php?");
 
     }
 
