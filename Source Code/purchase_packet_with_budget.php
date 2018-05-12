@@ -93,7 +93,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Musicholics - My Profile</title>
+  <title>Musicholics - Purchase Packet With Budget</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -122,7 +122,7 @@
 </nav>
 
 <h> 
-UPRADE TO PREMIUM
+UPGRADE TO PREMIUM
 </h>
 <h2>
 Premium membership fee: <?php echo $premium_fee; ?> <br>
@@ -130,25 +130,25 @@ Premium membership fee: <?php echo $premium_fee; ?> <br>
 </h2>
 <form method="post" action="">
 
-  <input type="submit" name="up_premium" value="UPGRADE PREMIUM"  > 
+  <input type="submit" name="up_premium" value="Upgrade To Premium"  > 
 
 
 </form> 
 
 <h> 
-UPRADE TO ARTIST
+UPGRADE TO ARTIST
 </h>
 <h2>
 Artist membership fee: <?php echo $artist_fee; ?> <br>
 
 </h2>
 <form method="post" action="">
-  <input type="submit" name="up_artist" value="UPGRADE ARTIST"  > 
+  <input type="submit" name="up_artist" value="Upgrade To Artist"  > 
  
 </form> 
 
 Your budget: $<?php echo $budget; ?> <br>
- <input type="reset" name=cancel value= "CANCEL">
+ <input type="reset" name=cancel value= "Cancel">
 
 <div > 	
 <footer>

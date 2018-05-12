@@ -57,7 +57,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Musicholics - My Profile</title>
+  <title>Musicholics - Purchase Track With Budget</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -95,8 +95,8 @@ Your budget: $<?php echo $budget; ?> <br>
 </h>
 
 <form method="post" action="">
-  <input type="submit" name="purchase" value="PURCHASE"  > 
-  <input type="reset" name=cancel value= "CANCEL">
+  <input type="submit" name="purchase" value="Purchase"  > 
+  <input type="reset" name=cancel value= "Cancel">
 </form> 
 
  
