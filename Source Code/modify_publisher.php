@@ -6,9 +6,9 @@
     $query2 = "SELECT * FROM Publisher WHERE publisher_id = {$publisher_id} ";
     $result2 = mysqli_query($db, $query2);
     $publisher_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
-    $publisher_name = $publisher_array('publisher_name');
-    $country = $publisher_array('country');
-    $city = $publisher_array('city');
+    $publisher_name = $publisher_array['publisher_name'];
+    $country = $publisher_array['country'];
+    $city = $publisher_array['city'];
     
 
     if(isset($_POST['apply']))
@@ -32,7 +32,7 @@
     }
 
     if(isset($_POST['delete_albums'])){
-      if(!empty($_POST['check_list']){
+      if(!empty($_POST['check_list'])){
         foreach($_POST['check_list'] as $selected_album_id){
             $selected_album_id = intval($selected_album_id);
             $query = "CALL DeleteAlbum({$selected_album_id})";

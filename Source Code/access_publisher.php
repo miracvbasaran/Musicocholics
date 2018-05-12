@@ -6,9 +6,9 @@
     $query2 = "SELECT * FROM Publisher WHERE publisher_id = {$publisher_id} ";
     $result2 = mysqli_query($db, $query2);
     $publisher_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
-    $publisher_name = $publisher_array('publisher_name');
-    $country = $publisher_array('country');
-    $city = $publisher_array('city');
+    $publisher_name = $publisher_array['publisher_name'];
+    $country = $publisher_array['country'];
+    $city = $publisher_array['city'];
 
     if(isset($_POST['modify_publisher_button']))
     {

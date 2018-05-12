@@ -44,13 +44,13 @@
           $result = mysqli_query($db, $query);
       }
       if(isset( ($_POST['published_date']) )  ){
-          $published_date = $_POST['published_date']
+          $published_date = $_POST['published_date'];
           $query = "UPDATE Album SET published_date = {$published_date} WHERE album_id = ${album_id} ";
           $result = mysqli_query($db, $query);
       }
     }
     if(isset($_POST['delete_tracks'])){
-      if(!empty($_POST['check_list']){
+      if(!empty($_POST['check_list'])){
         foreach($_POST['check_list'] as $selected_track_id){
             $selected_track_id = intval($selected_track_id);
             $query4 = "CALL DeleteTrack({$selected_track_id})";

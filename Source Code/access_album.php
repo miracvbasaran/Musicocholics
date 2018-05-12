@@ -82,7 +82,7 @@
 <div class = "container">
 <div class="container" align = "left">
   <h3>Album <?php echo $album_name;?></h3> by Artist <?php
-   $query_art = "SELECT Max(artist_name) FROM Artist WHERE artist_id IN (SELECT artist_id FROM Album_Belongs_To_Artist A WHERE album_id = '$album_id')";
+   $query_art = "SELECT Max(artist_name) as artist_name FROM Artist WHERE artist_id IN (SELECT artist_id FROM Album_Belongs_To_Artist A WHERE album_id = '$album_id')";
    $result_art = mysqli_query($db, $query_art);
    $artist_array = mysqli_fetch_array($result_art,MYSQLI_ASSOC);
    $artist_name = $artist_array['artist_name'];
@@ -90,9 +90,9 @@
 </div>
 <div class "container" align = "right">
   <form method="post" action="">
-       <input id='Submit' name='modify_album_button' value='Submit' type='button' value='Modify Album'>
+       <input id='Submit' name='modify_album_button' type='Submit' type='button' value='Modify Album'>
 
-       <input id='Submit' name='delete_album_button' value='Submit' type='button' value='Delete Album'>
+       <input id='Submit' name='delete_album_button' type='Submit' type='button' value='Delete Album'>
   </form>
 </div>
 </div>
@@ -110,7 +110,7 @@
   $query_tracks = "SELECT track_id, track_name, duration, price FROM Track T WHERE T.album_id = '$album_id' ORDER BY date_of_addition";
   $result = mysqli_query($db, $query_tracks);
   
-  while ($row = mysql_fetch_array($result, MYSQL_NUM)) {
+  while ($row = mysqli_fetch_array($result, MYSQL_NUM)) {
       echo "<a href = view_track.php?track_id = ".$row[0]."><tr>";
       echo "<td>" . $row[1] . "</td>";
       echo "<td>" . $row[2] . "</td>";
