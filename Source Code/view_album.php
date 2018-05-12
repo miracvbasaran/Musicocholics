@@ -1,21 +1,32 @@
 <?php
 	include("session.php");
     $uid = mysqli_real_escape_string($db,$_GET['login_id']);
-    $query = "SELECT * FROM user WHERE user_id = '$uid' ";
+    $query = "SELECT * FROM user WHERE user_id = {]}$uid} ";
     $result = mysqli_query($db, $query);
     $user_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
 
     $album_id = $_GET['album_id'];
-    $query2 = "SELECT * FROM Album WHERE album_id = '$album_id' ";
+    $query2 = "SELECT * FROM Album WHERE album_id = {$album_id} ";
     $result2 = mysqli_query($db, $query2);
     $album_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
     $album_name = $album_array['album_name'];
     $picture = $album_array['picture'];
     $album_type = $album_array['album_type'];
-    $published_date = $album_array['publisher_id'];
+    $published_date = $album_array['published_date'];
+    $publisher_id =$album_array['publisher_id'];
 
+    $query = "SELECT artist_id FROM Album_Belongs_To_Artist WHERE album_id = {$album_id}";
+    $result = mysqli_query($db, $query);
+    $artist_ids = array();
+    while($artist_array = mysqli_fetch_array($result,MYSQLI_ASSOC)){
+        $artist_ids[] = artist_array['artist_id'];
+    }
 
+    $query = "SELECT * FROM Publisher WHERE publisher_id = {$publisher_id} ";
+    $result = mysqli_query($db, $query);
+    $publisher_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
+    $publisher_name = $publisher_array['publisher_name'];
     
 ?>
 
@@ -63,6 +74,10 @@
    $artist_array = mysqli_fetch_array($result_art,MYSQLI_ASSOC);
    $artist_name = $artist_array['artist_name'];
    echo $artist_name;?>
+   <br>
+   <h2>
+    From Publisher <?php echo "<a href = view_publisher.php?publisher_id = {$publisher_id}> {$publisher_name}</a>"; ?>
+   </h2>
 </div>
 
 
