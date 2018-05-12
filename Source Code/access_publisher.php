@@ -14,6 +14,12 @@
     {
       header("location: modify_track.php?publisher_id=".$publisher_id);
     }
+    if(isset($_POST['delete_publisher_button']))
+    {
+      $query = "CALL DeletePublisher({$publisher_id})";
+      $result = mysqli_query($db, $query);
+      header('Location: ' . $_SERVER['HTTP_REFERER']);
+    }
 
 ?>
 
