@@ -24,7 +24,7 @@
           $result = mysqli_query($db, $query);
       }
       if(isset( ($_POST['publisher_name']) )  ){
-          $publisher_name = $_POST['publisher_name']
+          $publisher_name = $_POST['publisher_name'];
           $query = "UPDATE Publisher SET publisher_name = {$publisher_name} WHERE publisher_id = {$publisher_id} ";
           $result = mysqli_query($db, $query);
       }
@@ -119,7 +119,7 @@
       echo "<td>" . $row[1] . "</td>";
       echo "<td>" . $row[2] . "</td></a>";
       echo "<td> <input type = \"checkbox\" name = \"check_list[]\" value = \"{$a_id}\"></td>";
-      echo "</tr>" 
+      echo "</tr>";
   }
   ?>
 </table>

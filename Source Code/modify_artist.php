@@ -26,8 +26,9 @@
           $result = mysqli_query($db, $query);
       }
     }
-    if(isset($_POST['delete_albums'])){
-      if(!empty($_POST['check_list']){
+    if(isset($_POST['delete_albums']))
+    {
+      if(!empty($_POST['check_list'])){
         foreach($_POST['check_list'] as $selected_album_id){
             $selected_album_id = intval($selected_album_id);
             $query = "CALL DeleteAlbumFromArtist({$selected_album_id}, {$artist_id})";

@@ -88,9 +88,9 @@
  
 </div>
   <p> <form method="post" action="">
-       <input id='Submit' name='modify_track_button' value='Submit' type='button' value='Modify Track'>
+       <input id='Submit' name='modify_track_button' type='Submit' type='button' value='Modify Track'>
 
-       <input id='Submit' name='delete_track_button' value='Submit' type='button' value='Delete Track'>
+       <input id='Submit' name='delete_track_button' type='Submit' type='button' value='Delete Track'>
        </form>
     </p>
  </div>

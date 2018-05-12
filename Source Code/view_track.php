@@ -28,7 +28,7 @@
     $query2 = "SELECT * FROM Album WHERE album_id = {$album_id} ";
     $result2 = mysqli_query($db, $query2);
     $album_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
-    $album_name = $track_array['album_name'];
+    $album_name = $album_array['album_name'];
     if(isset($_POST['purchase_track_button']))
     {
       header("location: purchase_track_with_budget.php?track_id=".$track_id);

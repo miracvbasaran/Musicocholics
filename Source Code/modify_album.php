@@ -26,7 +26,7 @@
         $a_id = $artist_ids[$i];
         $query = "SELECT artist_name FROM Artist WHERE artist_id = {$a_id}";
         $result = mysqli_query($db, $query);
-        $artist_array = mysqli_fetch_array($result,MYSQLI_ASSOC)
+        $artist_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
         $artist_names[] = $artist_array['artist_name'];
     }
     

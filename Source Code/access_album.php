@@ -115,7 +115,7 @@
       echo "<td>" . $row[1] . "</td>";
       echo "<td>" . $row[2] . "</td>";
       echo "<td>" . $row[3] . "</td>";
-      echo "</tr></a>" 
+      echo "</tr></a>";
   }
   ?>
 </table>
