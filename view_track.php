@@ -54,8 +54,8 @@
       else{
         echo "Biz bu sorunun cevabını 15 Temmuz'da verdik!";
       }
-      
-    }
+      header("Refresh:0");
+  }
     
 ?>
 
