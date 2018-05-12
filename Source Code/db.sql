@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `User` (
 
 
 INSERT INTO `Person` (`username`, `fullname`, `password`, `email`) VALUES
-('mkaya', 'Metehan Kaya', 'mkaya12345', 'm.kaya@ug.bilkent.edu.tr'),
+('m', 'Metehan Kaya', 'm', 'm.kaya@ug.bilkent.edu.tr'),
 ('mvbasaran', 'Mirac Vuslat Basaran', 'mvbasaran12345', 'mv.basaran@ug.bilkent.edu.tr'),
 ('ecakir', 'Ezgi Cakir', 'ecakir12345', 'e.cakir@ug.bilkent.edu.tr'),
 ('eayaz', 'Esra Ayaz', 'eayaz12345', 'e.ayaz@ug.bilkent.edu.tr'),
