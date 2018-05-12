@@ -1,29 +1,14 @@
 <?php
 	include("session.php");
     $uid = mysqli_real_escape_string($db,$_GET['user_id']);
-    $query = "SELECT * FROM user WHERE user_id = '$uid' ";
+    $query = "SELECT * FROM Admin WHERE user_id = '$uid' ";
     $result = mysqli_query($db, $query);
-  $user_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
+    $admin_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
-     $query2 = "SELECT * FROM person WHERE person_id = '$uid' ";
+    $query2 = "SELECT * FROM person WHERE person_id = '$uid' ";
     $result2 = mysqli_query($db, $query2);
     $person_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
 
-   
-
-    $user_id = $user_array['user_id'];
-    $country = $user_array['country'];
-    $language = $user_array['language'];
-    $date_of_registration = $user_array['date_of_registration'];
-    $birthday = $user_array['birthday'];
-    $gender = $user_array['gender'];
-    $budget = $user_array['budget'];
-	 $username = $person_array['username'];
-	 $fullname = $person_array['fullname'];
-	 $password = $user_array['password'];
-	 $email = $person_array['email'];
-    $picture = $user_array['picture'];
-    $membership_type = $user_array['membership_type'];
 
     $set = 0;
     if(isset( ($_POST['apply']) ) ){
@@ -75,7 +60,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Musicholics - My Profile</title>
+  <title>Musicholics - Change Password</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -89,15 +74,15 @@
   <div class="container-fluid">
     <ul class="nav navbar-nav">
       
-      <li><a href="own_profile.php">Profile</a></li>
-      <li><a href="wiev_playlists.php">Playlist</a></li>
-      <li><a href="view_tracks.php">Tracks</a></li>
-	<li><a href="friends_list.php">Friends</a></li>
-	<li><a href="message_list.php">Messages</a></li>
-	<li><a href="search_result_screen.php">Search</a></li>
+          <li class="active"><a href="#">Home</a></li>
+          <li><a href="search_admin.php">Search</a></li>
+          <li><a href="add_track.php">Add Track</a></li>
+          <li><a href="add_album.php">Add Album</a></li>
+          <li><a href="add_artist.php">Add Artist</a></li>
+          <li><a href="add_publisher.php">Add Publisher</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="change_general_information.php"><span class="glyphicon glyphicon-user"></span> Settings</a></li>
+      <li><a href="change_password.php"><span class="glyphicon glyphicon-user"></span> Change Password</a></li>
       <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
     </ul>
   </div>
@@ -109,28 +94,10 @@
   New password: <input type="psw" name="new_pass_1" value="" autofocus><br>
   Reenter new password  <input type="psw" name="new_pass_2" value=""  autofocus><br>
 
-  <input type="submit" name="apply" value="APPLY" > 
+  <input type="submit" name="apply" value="Apply" > 
 
 </form> 
 
 
-<div> 	
-<footer>
-	<?php
-	$query = "SELECT L1.track_id FROM listens L1 WHERE L1.user_id = '$uid' AND 
-	date = (SELECT max(L2.date) FROM listens L2 WHERE L2.user_id = '$uid') ";
-	$result = mysqli_query($db, $query);
-	$query2 = "SELECT track_name,duration FROM track WHERE track_id = '$result' ";
-	$result2 = mysqli_query($db, $query2);
-	$track_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
-
-  $track_name = $track_array['track_name'];
-  $duration = $track_array['duration'];
-	echo $track_name;
-	echo $duration;
-	?>
-
-</footer>
-</div>
 </body>
 </html>
