@@ -102,7 +102,7 @@
 </p>
 <div class="container">
 <?php
-	$query = "SELECT U.username , P.date, P.post FROM posts P, User U WHERE P.reciver_id = '$view_id' AND P.writer_id = U.user_id ORDER BY date DESC";
+	$query = "SELECT U.username , P.date, P.post FROM posts P, User U WHERE P.receiver_id = {$view_id} AND P.writer_id = U.user_id ORDER BY date DESC";
 	$result = mysqli_query($db, $query);
 	
 	while ($row = mysql_fetch_array($result, MYSQL_NUM)) {
