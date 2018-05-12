@@ -73,8 +73,8 @@ $password = $person_array['password'];
   	<p>	Language: <?php echo $language;?></p><br>
   	<p>	Birthday: <?php echo $birthday;?></p><br>
   	<p>	Budget: <?php echo $budget;?> $ </p><br>
-  	<p>	Date of registration: <?php echo $date_of_registration;?> $ </p><br>
-  	<p>	Membership type: <?php echo $membership_type;?> $ </p><br>
+  	<p>	Date of registration: <?php echo $date_of_registration;?>  </p><br>
+  	<p>	Membership type: <?php echo $membership_type;?>  </p><br>
 
  </div>
 
