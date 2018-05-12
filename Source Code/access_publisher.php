@@ -44,7 +44,7 @@
 </nav>
 
    <div align="left" class="col-md-6 col-md-offset-3"><img class="img-circle img-responsive" src="assets/img/ <?php echo $picture_v; ?>" width="200" height="200"></div>
-
+<div class = "container">
 <div class="container" align = "left">
   <h3>Publisher <?php echo $publisher_name;?></h3> 
   <p>Country: <?php echo $country ?>
@@ -59,6 +59,29 @@
        </form>
     </p>
  </div>
+</div>
+<div class = "container"> 
 
+<table style="width:100%">
+  <tr>
+    <th>Album Name</th>
+    <th>Album Type</th> 
+    <th>Publish Date</th>
+  </tr>
+  <?php
+  $query_album = "SELECT album_name, album_type, published_date, album_id FROM Album WHERE Album.publisher_id = {$publisher_id} ORDER BY published_date";
+  $result = mysqli_query($db, $query_album);
+  
+  while ($row = mysql_fetch_array($result, MYSQL_NUM)) {
+      $a_id = $row[3];
+      echo "<a href = \"view_album.php?album_id = {$a_id}\"<tr>";
+      echo "<td>" . $row[0] . "</td>";
+      echo "<td>" . $row[1] . "</td>";
+      echo "<td>" . $row[2] . "</td>";
+      echo "</tr></a>" 
+  }
+  ?>
+</table>
+</div>
 </body>
 </html>

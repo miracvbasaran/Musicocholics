@@ -170,7 +170,7 @@
 <form method="post" action="">
   <h3>Add Track</h3>
   <input type="text" name="new_track_name" value= "Track Name" autofocus>
-  <input type="text" name="new_track_price" value= "Price" ?> autofocus>
+  <input type="text" name="new_track_price" value= "Price" autofocus>
 
   <input type="submit" name="add_track" value="Add Track"  > 
 

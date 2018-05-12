@@ -38,20 +38,28 @@
     }
     if(isset($_POST['add_album']))
     {
-      $new_album_name = $_POST['new_album_name']
-      $new_album_type = $_POST['new_album_type']
-      $new_album_publish_date = $_POST['new_album_publish_date']
-      $query = "INSERT INTO Album(album_name, album_type, published_date) VALUES({$new_album_name}, {$new_album_type}, {$new_album_publish_date})";
-      if(mysqli_query($db, $query) === TRUE){
-          $query = "SELECT LAST_INSERT_ID()"
+      $new_album_name = $_POST['new_album_name'];
+      $new_album_type = $_POST['new_album_type'];
+      $new_album_publish_date = $_POST['new_album_publish_date'];
+      $new_album_publisher = $_POST['new_album_publisher'];
+
+      $query = "SELECT publisher_id FROM Publisher WHERE publisher_name = {$new_album_publisher}";
+      $result = mysqli_query($db, $query);
+      $index_array = mysqli_fetch_array($result, MYSQLI_NUM);
+      if($index_array == FALSE){
+        echo "ERROR MESSAGE: There is no such Publisher";
+      }
+      else{
+        $publisher_id = $index_array[0];
+
+        $query = "INSERT INTO Album(album_name, album_type, published_date, publisher_id) VALUES({$new_album_name}, {$new_album_type}, {$new_album_publish_date}, {$publisher_id})";
+        mysqli_query($db, $query);
+          $query = "SELECT MAX(album_id) FROM Album";
           $result = mysqli_query($db, $query);
           $index_array = mysqli_fetch_array($result, MYSQLI_NUM);
           $album_id = $index_array[0];
           header("location: modify_album.php?album_id=".$album_id);
-      }
-      else{
-        echo "ERROR MESSAGE";
-      }
+
       
     }
 ?>
@@ -138,6 +146,7 @@
 <form method="post" action="">
   <h3>Add Album</h3>
   <input type="text" name="new_album_name" value= "Album Name" autofocus>
+  <input type = "text" name"new_album_publisher" value "Publisher Name" autofocus>
   <select name="new_album_type">
     <option value="Album">Album</option>
     <option value="Single">Single</option>
