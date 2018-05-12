@@ -109,7 +109,7 @@
   <input type="text" name="description" value= <?php echo "\"".$description."\"" ?> autofocus> <br>
   
 
-  <input type="submit" name="apply" value="APPLY"  > 
+  <input type="submit" name="apply" value="Apply"  > 
 
  </form> 
 
@@ -129,14 +129,14 @@
                     A.artist_id = '$artist_id$') ORDER BY published_date";
   $result = mysqli_query($db, $query_album);
   
-  while ($row = mysql_fetch_array($result, MYSQL_NUM)) {
+  while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
       $a_id = $row[3];
       echo "<a href = \"view_album.php?album_id = {$a_id}\"><tr>";
       echo "<td>" . $row[0] . "</td>";
       echo "<td>" . $row[1] . "</td>";
       echo "<td>" . $row[2] . "</td></a>";
       echo "<td> <input type = \"checkbox\" name = \"check_list[]\" value = \"{$a_id}\"></td>";
-      echo "</tr>" 
+      echo "</tr>";
   }
   ?>
 </table>

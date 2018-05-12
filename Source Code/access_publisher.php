@@ -64,9 +64,9 @@
  </div>
  <div class = "container" align = "right">
     <form method="post" action="">
-       <input id='Submit' name='modify_publisher_button' value='Submit' type='button' value='Modify Publisher'>
+       <input id='Submit' name='modify_publisher_button' type='Submit' type='button' value='Modify Publisher'>
 
-       <input id='Submit' name='delete_publisher_button' value='Submit' type='button' value='Delete Publisher'>
+       <input id='Submit' name='delete_publisher_button' type='Submit' type='button' value='Delete Publisher'>
        </form>
     </p>
  </div>
@@ -83,7 +83,7 @@
   $query_album = "SELECT album_name, album_type, published_date, album_id FROM Album WHERE Album.publisher_id = {$publisher_id} ORDER BY published_date";
   $result = mysqli_query($db, $query_album);
   
-  while ($row = mysql_fetch_array($result, MYSQL_NUM)) {
+  while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
       $a_id = $row[3];
       echo "<a href = \"view_album.php?album_id = {$a_id}\"<tr>";
       echo "<td>" . $row[0] . "</td>";

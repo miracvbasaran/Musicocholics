@@ -108,11 +108,10 @@
     <th></th>
   </tr>
   <?php
-  $query_album = "SELECT album_name, album_type, published_date, album_id FROM Album WHERE Album.album_id = IN (SELECT album_id FROM Album_Belongs_To_Artist A WHERE 
-                    A.artist_id = '$artist_id$') ORDER BY published_date";
+  $query_album = "SELECT album_name, album_type, published_date, album_id FROM Album WHERE publisher_id = {$publisher_id} ORDER BY published_date";
   $result = mysqli_query($db, $query_album);
   
-  while ($row = mysql_fetch_array($result, MYSQL_NUM)) {
+  while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
       $a_id = $row[3];
       echo "<a href = \"view_album.php?album_id = {$a_id}\"><tr>";
       echo "<td>" . $row[0] . "</td>";

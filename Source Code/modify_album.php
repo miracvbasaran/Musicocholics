@@ -61,8 +61,8 @@
     }
     if(isset($_POST['add_track']))
     {
-      $new_track_name = $_POST['new_track_name']
-      $new_track_price = $_POST['new_track_price']
+      $new_track_name = $_POST['new_track_name'];
+      $new_track_price = $_POST['new_track_price'];
       $insertion_date = date(Y-m-d);
       $query = "INSERT INTO Track(album_name, album_type, published_date) VALUES({$new_album_name}, {$new_album_type}, {$new_album_publish_date})";
       if(mysqli_query($db, $query) === TRUE){
@@ -153,7 +153,7 @@
   $query_album = "SELECT track_name, duration, price, track_id FROM Track WHERE Track.album_id = ${album_id} ORDER BY date_of_addition";
   $result = mysqli_query($db, $query_album);
   
-  while ($row = mysql_fetch_array($result, MYSQL_NUM)) {
+  while ($row = mysql_fetch_array($result, MYSQLI_NUM)) {
       $t_id = $row[3];
       echo "<a href = \"view_track.ph?track_id = {$t_id}\"><tr>";
       echo "<td>" . $row[0] . "</td>";

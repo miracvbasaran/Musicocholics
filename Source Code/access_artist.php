@@ -67,9 +67,9 @@
 </div>
 <div class = "container" align = "right">
   <form method="post" action="">
-       <input id='Submit' name='modify_artist_button' value='Submit' type='button' value='Modify Artist'>
+       <input id='Submit' name='modify_artist_button' type='Submit' type='button' value='Modify Artist'>
 
-       <input id='Submit' name='delete_artist_button' value='Submit' type='button' value='Delete Artist'>
+       <input id='Submit' name='delete_artist_button' type='Submit' type='button' value='Delete Artist'>
   </form>
  </div>
 </div>
@@ -88,7 +88,7 @@
                     A.artist_id = '$artist_id$') ORDER BY published_date";
   $result = mysqli_query($db, $query_album);
   
-  while ($row = mysql_fetch_array($result, MYSQL_NUM)) {
+  while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
       echo "<tr>";
       echo "<td>" . $row[0] . "</td>";
       echo "<td>" . $row[1] . "</td>";
