@@ -93,17 +93,22 @@
 <body>
 
 <nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <ul class="nav navbar-nav">
-     
-	   <li><a href="search_result_screen.php">Search</a></li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-      
-      <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span>Logout</a></li>
-    </ul>
-  </div>
-</nav>
+      <div class="container-fluid">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">Home</a></li>
+          <li><a href="search_admin.php">Search</a></li>
+          <li><a href="add_track.php">Add Track</a></li>
+          <li><a href="add_album.php">Add Album</a></li>
+          <li><a href="add_artist.php">Add Artist</a></li>
+          <li><a href="add_publisher.php">Add Publisher</a></li>
+        </ul>
+        
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="change_password.php"><span class="glyphicon glyphicon-user"></span> Change Password</a></li>
+          <li><a href="homepage.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+        </ul>
+      </div>
+    </nav>
 
    <div align="left" class="col-md-6 col-md-offset-3"><img class="img-circle img-responsive" src="assets/img/ <?php echo $picture_v; ?>" width="200" height="200"></div>
 
