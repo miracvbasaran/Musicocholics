@@ -38,8 +38,6 @@
       $result4 = mysqli_query($db, $query4);
       $query4 = "DELETE FROM Listens WHERE track_id = {$track_id}";
       $result4 = mysqli_query($db, $query4);
-      $query4 = "DELETE FROM Track WHERE track_id = {$track_id}";
-      $result4 = mysqli_query($db, $query4);
       header('Location: ' . $_SERVER['HTTP_REFERER']);
     }
     

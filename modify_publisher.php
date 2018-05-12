@@ -28,6 +28,7 @@
           $query = "UPDATE Publisher SET publisher_name = {$publisher_name} WHERE publisher_id = {$publisher_id} ";
           $result = mysqli_query($db, $query);
       }
+      header("Refresh: 0");
     }
 ?>
 

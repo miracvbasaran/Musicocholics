@@ -13,8 +13,6 @@
       $result4 = mysqli_query($db, $query4);
       $query4 = "DELETE FROM Listens WHERE track_id = {$track_id}";
       $result4 = mysqli_query($db, $query4);
-      $query4 = "DELETE FROM Track WHERE track_id = {$track_id}";
-      $result4 = mysqli_query($db, $query4);
     }
     $uid = mysqli_real_escape_string($db,$_GET['login_id']);
     $query = "SELECT * FROM user WHERE user_id = '$uid' ";
