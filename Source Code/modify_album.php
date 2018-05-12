@@ -73,7 +73,7 @@
           header("location: modify_album.php?album_id=".$album_id);
       }
       else{
-        echo "ERROR MESSAGE";
+        echo ' <script type="text/javascript"> alert("Could not add track to album."); </script>';
       }
       
     }

@@ -47,7 +47,7 @@
         $result_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
         $num_listens = $result_array['num_listens'];
 
-        if($num_listens > 20){
+        if($num_listens > 10){
           $flag = FALSE;
           
         }
@@ -57,7 +57,7 @@
         $result4 = mysqli_query($db, $query4);
       }
       else{
-        echo "Biz bu sorunun cevabını 15 Temmuz'da verdik!";
+        echo " <script type=\"text/javascript\"> alert(\"Biz bu sorunun cevabını 15 Temmuz'da verdik!.\"); </script>";
       }
       header("Refresh:0");
   }

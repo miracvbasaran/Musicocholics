@@ -47,18 +47,22 @@
       $result = mysqli_query($db, $query);
       $index_array = mysqli_fetch_array($result, MYSQLI_NUM);
       if($index_array == FALSE){
-        echo "ERROR MESSAGE: There is no such Publisher";
+        echo ' <script type="text/javascript"> alert("There is no such Publisher."); </script>';
       }
       else{
         $publisher_id = $index_array[0];
 
         $query = "INSERT INTO Album(album_name, album_type, published_date, publisher_id) VALUES({$new_album_name}, {$new_album_type}, {$new_album_publish_date}, {$publisher_id})";
-        mysqli_query($db, $query);
+        if(mysqli_query($db, $query) == TRUE){
           $query = "SELECT MAX(album_id) FROM Album";
           $result = mysqli_query($db, $query);
           $index_array = mysqli_fetch_array($result, MYSQLI_NUM);
           $album_id = $index_array[0];
           header("location: modify_album.php?album_id=".$album_id);
+        }
+        else{
+          echo ' <script type="text/javascript"> alert("Could not add album to artist."); </script>';
+        }
 
       
     }
