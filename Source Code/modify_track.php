@@ -122,7 +122,7 @@
   Track Name: <input type="text" name="track_name" value= <?php echo $track_name ?> autofocus><br>
   Recording Type: <select name="recording_type">
     <option value="Live">Live</option>
-    <option value="Studio">USA</option>
+    <option value="Studio">Studio</option>
   </select> <br>
   Duration: <input type="text" name="duration" value= <?php echo $duration ?> autofocus><br>
   Danceability: <input type="text" name="danceability" value= <?php echo $danceability ?> autofocus><br>
@@ -132,7 +132,7 @@
   Balance: <input type="text" name="balance" value= <?php echo $balance ?> autofocus><br>
   Loudness: <input type="text" name="loudness" value= <?php echo $loudness ?> autofocus><br>
   Price: <input type="text" name="price" value= <?php echo $price ?> autofocus><br>
-  Date of Addition: <input type="text" name="date_of_addition" value= <?php echo $date_of_addition ?> autofocus><br>
+  Date of Addition: <input type="date" name="date_of_addition" value= <?php echo $date_of_addition ?> autofocus><br>
   Language: <select name="language">
     <option value="Turkish">Turkish</option>
     <option value="English">English</option>

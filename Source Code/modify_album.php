@@ -119,6 +119,9 @@
     <?php
       for ($i=0; $i < $artist_names.count(); $i++) { 
         echo $artist_names[$i];
+        if($artist_names.count() != 1 && $i < $artist_names.count() - 1){
+          echo ", ";
+        }
       }
     ?>
 </h3></div>
