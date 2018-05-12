@@ -149,11 +149,11 @@
   $result = mysqli_query($db, $query_album);
   
   while ($row = mysql_fetch_array($result, MYSQL_NUM)) {
-      echo "<tr>";
+      $t_id = $row[3];
+      echo "<a href = view_track.ph?track_id = {$t_id}<tr>";
       echo "<td>" . $row[0] . "</td>";
       echo "<td>" . $row[1] . "</td>";
-      echo "<td>" . $row[2] . "</td>";
-      $t_id = $row[3];
+      echo "<td>" . $row[2] . "</td></a>";
       echo "<td> <input type = \"checkbox\" name = \"check_list[]\" value = \"{$t_id}\"></td>";
       echo "</tr>" 
   }

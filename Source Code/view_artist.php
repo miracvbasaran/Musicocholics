@@ -66,16 +66,17 @@
     <th>Publish Date</th>
   </tr>
   <?php
-  $query_album = "SELECT album_name, album_type, published_date FROM Album WHERE Album.album_id = IN (SELECT album_id FROM Album_Belongs_To_Artist A WHERE 
+  $query_album = "SELECT album_name, album_type, published_date, album_id FROM Album WHERE Album.album_id = IN (SELECT album_id FROM Album_Belongs_To_Artist A WHERE 
                     A.artist_id = '$artist_id$') ORDER BY published_date";
   $result = mysqli_query($db, $query_album);
   
   while ($row = mysql_fetch_array($result, MYSQL_NUM)) {
-      echo "<tr>";
+      $a_id = $row[3];
+      echo "<a href = view_album.php?album_id = {$a_id}<tr>";
       echo "<td>" . $row[0] . "</td>";
       echo "<td>" . $row[1] . "</td>";
       echo "<td>" . $row[2] . "</td>";
-      echo "</tr>" 
+      echo "</tr></a>" 
   }
   ?>
 </table>
