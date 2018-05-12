@@ -65,7 +65,7 @@
 <div class="container">
   <h3>Hello, </h3> <?php echo $fullname; ?>
 	<br>
-  	<p>Username: <?php echo $username;?> </p><br>
+  	<p> Username: <?php echo $username;?> </p><br>
   	<p>	Fullname: <?php echo $fullname;?></p><br>
   	<p>	E-mail address: <?php echo $email;?></p><br>
   	<p>	Country: <?php echo $country;?></p><br>
