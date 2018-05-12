@@ -139,7 +139,7 @@
     <option value="German">German</option>
   </select> <br>
   
-  <input type="submit" name="apply" value="APPLY"  > 
+  <input type="submit" name="apply" value="Apply"  > 
 
 </form> 
 

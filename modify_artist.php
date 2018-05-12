@@ -15,30 +15,34 @@
 
     if(isset($_POST['apply']))
     {
-      if(isset( ($_POST['country']) )  ){
-        $country = $_POST['country'];
-          $query = "UPDATE Publisher SET country = {$country} WHERE publisher_id = {$publisher_id} ";
+      if(isset( ($_POST['artist_name']) )  ){
+          $artist_name = $_POST['artist_name'];
+          $query = "UPDATE Artist SET artist_name = {$artist_name} WHERE artist_id = {$artist_id} ";
           $result = mysqli_query($db, $query);
       }
-      if(isset( ($_POST['city']) )  ){
-          $country = $_POST['city'];
-          $query = "UPDATE Publisher SET city = {$city} WHERE publisher_id = {$publisher_id} ";
-          $result = mysqli_query($db, $query);
-      }
-      if(isset( ($_POST['publisher_name']) )  ){
-          $publisher_name = $_POST['publisher_name']
-          $query = "UPDATE Publisher SET publisher_name = {$publisher_name} WHERE publisher_id = ${publisher_id} ";
+      if(isset( ($_POST['description']) )  ){
+          $description = $_POST['description'];
+          $query = "UPDATE Artist SET description = {$description} WHERE artist_id = {$artist_id} ";
           $result = mysqli_query($db, $query);
       }
     }
-    if(isset($_POST['delete_album_button'])){
-      $query4 = "DELETE FROM Album WHERE album_id = {$album_id}";
-      $result4 = mysqli_query($db, $query4);
-      $query4 = "DELETE FROM Album_Belongs_To_Artist WHERE album_id = {$album_id}";
-      $result4 = mysqli_query($db, $query4);
-      $query4 = "DELETE FROM Track_Belongs_To_Artist WHERE album_id = {$album_id}";
-      $result4 = mysqli_query($db, $query4);
-      header('Location: ' . $_SERVER['HTTP_REFERER']);
+    if(isset($_POST['delete_albums'])){
+      if(!empty($_POST['check_list']){
+        foreach($_POST['check_list'] as $selected_album_id){
+            $selected_album_id = intval($selected_album_id);
+            $query = "DELETE FROM Album_Belongs_To_Artist WHERE album_id = {$selected_album_id} AND artist_id = {$artist_id}";
+            $result = mysqli_query($db, $query);
+            $query = "SELECT count(*) as num_entries FROM Album_Belongs_To_Artist WHERE album_id = {$selected_album_id}";
+            $result = mysqli_query($db, $query);
+            $temp_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
+            $num_entries = $temp_array['num_entries'];
+            if($num_entries === 0){
+                $query = "DELETE FROM Album WHERE album_id = {$selected_album_id}";
+                $result = mysqli_query($db, $query);
+            }
+        }
+      }
+      header("Refresh:0");
     }
     if(isset($_POST['add_album']))
     {
@@ -98,7 +102,6 @@
   <div class="container" align = "center"><h3><input type="text" name="name" value= <?php echo $artist_name ?> autofocus></h3></div>
   <br>
   <input type="text" name="description" value= <?php echo "\"".$description."\"" ?> autofocus> <br>
-  City:  <input type="text" name="city" value= <?php echo "\"".$city."\"" ?> autofocus>
   
 
   <input type="submit" name="apply" value="APPLY"  > 
@@ -106,15 +109,47 @@
  </form> 
 
  </div>
+
  <div class="container">
-  <form action="" method="post" enctype="multipart/form-data">
-    <input class="btn btn-primary btn-sm" type="file" name="photo" id="photo" accept="image/*"> <button class="btn btn-success btn-sm" type="submit" name="uploadpic">Update</button>
- </form>
+  <form method="post" action="">
+  <table style="width:100%">
+  <tr>
+    <th>Album Name</th>
+    <th>Album Type</th> 
+    <th>Publish Date</th>
+    <th></th>
+  </tr>
+  <?php
+  $query_album = "SELECT album_name, album_type, published_date, album_id FROM Album WHERE Album.album_id = IN (SELECT album_id FROM Album_Belongs_To_Artist A WHERE 
+                    A.artist_id = '$artist_id$') ORDER BY published_date";
+  $result = mysqli_query($db, $query_album);
+  
+  while ($row = mysql_fetch_array($result, MYSQL_NUM)) {
+      echo "<tr>";
+      echo "<td>" . $row[0] . "</td>";
+      echo "<td>" . $row[1] . "</td>";
+      echo "<td>" . $row[2] . "</td>";
+      $a_id = $row[3];
+      echo "<td> <input type = \"checkbox\" name = \"check_list[]\" value = \"{$a_id}\"></td>";
+      echo "</tr>" 
+  }
+  ?>
+</table>
+
+<input type="submit" name="delete_albums" value="Delete"/>
+</form>
+
+</div>
+
+ <div class="container">
 
 <form method="post" action="">
   <h3>Add Album</h3>
   <input type="text" name="new_album_name" value= "Album Name" autofocus>
-  <input type="text" name="new_album_type" value= <?php echo "\"".$city."\"" ?> autofocus>
+  <select name="new_album_type">
+    <option value="Album">Album</option>
+    <option value="Single">Single</option>
+  </select>
   <input type="text" name="new_album_publish_date" value= "Publish Date" autofocus>
   
 

@@ -19,7 +19,7 @@
           $result = mysqli_query($db, $query);
       }
       if(isset( ($_POST['city']) )  ){
-          $country = $_POST['city'];
+          $city = $_POST['city'];
           $query = "UPDATE Publisher SET city = {$city} WHERE publisher_id = {$publisher_id} ";
           $result = mysqli_query($db, $query);
       }
@@ -71,11 +71,12 @@
     <option value="USA">USA</option>
     <option value="England">England</option>
     <option value="Germany">Germany</option>
+    <option value="Germany">Ireland</option>
   </select> <br>
   City:  <input type="text" name="city" value= <?php echo $city ?> autofocus>
   
 
-  <input type="submit" name="apply" value="APPLY"  > 
+  <input type="submit" name="apply" value="Apply"  > 
 
 </form> 
 

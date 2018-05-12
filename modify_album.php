@@ -1,28 +1,11 @@
 <?php
 	include("session.php");
-    function delete_track($track_id){
-      $query4 = "DELETE FROM Track WHERE track_id = {$track_id}";
-      $result4 = mysqli_query($db, $query4);
-      $query4 = "DELETE FROM Track_Belongs_To_Artist WHERE track_id = {$track_id}";
-      $result4 = mysqli_query($db, $query4);
-      $query4 = "DELETE FROM Added WHERE track_id = {$track_id}";
-      $result4 = mysqli_query($db, $query4);
-      $query4 = "DELETE FROM Buys WHERE track_id = {$track_id}";
-      $result4 = mysqli_query($db, $query4);
-      $query4 = "DELETE FROM Gift WHERE track_id = {$track_id}";
-      $result4 = mysqli_query($db, $query4);
-      $query4 = "DELETE FROM Listens WHERE track_id = {$track_id}";
-      $result4 = mysqli_query($db, $query4);
-      $query4 = "DELETE FROM Track WHERE track_id = {$track_id}";
-      $result4 = mysqli_query($db, $query4);
-      header("Refresh:0");
-    }
     $uid = mysqli_real_escape_string($db,$_GET['user_id']);
-    $query = "SELECT admin_id FROM admin WHERE user_id = '$uid' ";
+    $query = "SELECT admin_id FROM admin WHERE user_id = {$uid} ";
     $result = mysqli_query($db, $query);
 
     $album_id = $_GET['album_id'];
-    $query2 = "SELECT * FROM Album WHERE album_id = '$album_id' ";
+    $query2 = "SELECT * FROM Album WHERE album_id = {$album_id} ";
     $result2 = mysqli_query($db, $query2);
     $album_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
     $album_name = $album_array('album_name');
@@ -30,32 +13,66 @@
     $album_type = $album_array('album_type');
     $published_date = $album_array('published_date');
     $publisher_id = $album_array('publisher_id');
+
+    $query = "SELECT artist_id FROM Album_Belongs_To_Artist WHERE album_id = {$album_id}";
+    $result = mysqli_query($db, $query);
+    $artist_ids = array();
+    while($artist_array = mysqli_fetch_array($result,MYSQLI_ASSOC)){
+        $artist_ids[] = artist_array['artist_id'];
+    }
+
+    $artist_names = array();
+    for($i = 0; $i < artist_ids.count(); $i++){
+        $a_id = $artist_ids[$i];
+        $query = "SELECT artist_name FROM Artist WHERE artist_id = {$a_id}";
+        $result = mysqli_query($db, $query);
+        $artist_array = mysqli_fetch_array($result,MYSQLI_ASSOC)
+        $artist_names[] = $artist_array['artist_name'];
+    }
     
 
     if(isset($_POST['apply']))
     {
-      if(isset( ($_POST['country']) )  ){
-        $country = $_POST['country'];
-          $query = "UPDATE Publisher SET country = {$country} WHERE publisher_id = {$publisher_id} ";
+      if(isset( ($_POST['album_name']) )  ){
+         $album_name = $_POST['album_name'];
+          $query = "UPDATE Album SET album_name = {$album_name} WHERE album_id = {$album_id} ";
           $result = mysqli_query($db, $query);
       }
-      if(isset( ($_POST['city']) )  ){
-          $country = $_POST['city'];
-          $query = "UPDATE Publisher SET city = {$city} WHERE publisher_id = {$publisher_id} ";
+      if(isset( ($_POST['album_type']) )  ){
+          $album_type = $_POST['album_type'];
+          $query = "UPDATE Album SET album_type = {$album_type} WHERE album_id = {$album_id} ";
           $result = mysqli_query($db, $query);
       }
-      if(isset( ($_POST['publisher_name']) )  ){
-          $publisher_name = $_POST['publisher_name']
-          $query = "UPDATE Publisher SET publisher_name = {$publisher_name} WHERE publisher_id = ${publisher_id} ";
+      if(isset( ($_POST['published_date']) )  ){
+          $published_date = $_POST['published_date']
+          $query = "UPDATE Album SET published_date = {$published_date} WHERE album_id = ${album_id} ";
           $result = mysqli_query($db, $query);
       }
+    }
+    if(isset($_POST['delete_tracks'])){
+      if(!empty($_POST['check_list']){
+        foreach($_POST['check_list'] as $selected_track_id){
+            $selected_track_id = intval($selected_track_id);
+            $query4 = "DELETE FROM Track WHERE selected_track_id = {$selected_track_id}";
+            $result4 = mysqli_query($db, $query4);
+            $query4 = "DELETE FROM Added WHERE selected_track_id = {$selected_track_id}";
+            $result4 = mysqli_query($db, $query4);
+            $query4 = "DELETE FROM Buys WHERE selected_track_id = {$selected_track_id}";
+            $result4 = mysqli_query($db, $query4);
+            $query4 = "DELETE FROM Gift WHERE selected_track_id = {$selected_track_id}";
+            $result4 = mysqli_query($db, $query4);
+            $query4 = "DELETE FROM Listens WHERE selected_track_id = {$selected_track_id}";
+            $result4 = mysqli_query($db, $query4);
+        }
+      }
+      header("Refresh:0");
     }
     if(isset($_POST['add_track']))
     {
       $new_track_name = $_POST['new_track_name']
-      $new_album_type = $_POST['new_album_type']
-      $new_album_publish_date = $_POST['new_album_publish_date']
-      $query = "INSERT INTO Album(album_name, album_type, published_date) VALUES({$new_album_name}, {$new_album_type}, {$new_album_publish_date})";
+      $new_track_price = $_POST['new_track_price']
+      $insertion_date = date(Y-m-d);
+      $query = "INSERT INTO Track(album_name, album_type, published_date) VALUES({$new_album_name}, {$new_album_type}, {$new_album_publish_date})";
       if(mysqli_query($db, $query) === TRUE){
           $query = "SELECT LAST_INSERT_ID()"
           $result = mysqli_query($db, $query);
@@ -105,30 +122,62 @@
  </form>
 
 <form method="post" action="">
-  <div class="container" align = "center"><h3><input type="text" name="name" value= <?php echo $album_name ?> autofocus></h3></div>
-  <br>
-  <input type="text" name="description" value= <?php echo "\"".$description."\"" ?> autofocus> <br>
-  City:  <input type="text" name="city" value= <?php echo "\"".$city."\"" ?> autofocus>
-  
+  <div class="container" align = "center"><h3><input type="text" name="album_name" value= <?php echo $album_name ?> autofocus> by 
 
-  <input type="submit" name="apply" value="APPLY"  > 
+    <?php
+      for ($i=0; $i < $artist_names.count(); $i++) { 
+        echo $artist_names[$i];
+      }
+    ?>
+</h3></div>
+  <br>
+  Album Type:
+  <select name="album_type">
+    <option value="Album">Album</option>
+    <option value="Single">Single</option>
+  </select>
+  <input type="text" name="published_date" value= <?php echo $published_date ?> autofocus>
+  <input type="submit" name="apply" value="Apply"  > 
 
  </form> 
+<div class="container">
+  <form method="post" action="">
+  <table style="width:100%">
+  <tr>
+    <th>Song Name</th>
+    <th>Length</th> 
+    <th>Price</th>
+    <th></th>
+  </tr>
+  <?php
+  $query_album = "SELECT track_name, duration, price, track_id FROM Track WHERE Track.album_id = ${album_id} ORDER BY date_of_addition";
+  $result = mysqli_query($db, $query_album);
+  
+  while ($row = mysql_fetch_array($result, MYSQL_NUM)) {
+      echo "<tr>";
+      echo "<td>" . $row[0] . "</td>";
+      echo "<td>" . $row[1] . "</td>";
+      echo "<td>" . $row[2] . "</td>";
+      $t_id = $row[3];
+      echo "<td> <input type = \"checkbox\" name = \"check_list[]\" value = \"{$t_id}\"></td>";
+      echo "</tr>" 
+  }
+  ?>
+</table>
 
+<input type="submit" name="delete_tracks" value="Delete"/>
+</form>
+
+</div>
  </div>
  <div class="container">
-  <form action="" method="post" enctype="multipart/form-data">
-    <input class="btn btn-primary btn-sm" type="file" name="photo" id="photo" accept="image/*"> <button class="btn btn-success btn-sm" type="submit" name="uploadpic">Update</button>
- </form>
 
 <form method="post" action="">
-  <h3>Add Album</h3>
-  <input type="text" name="new_album_name" value= "Album Name" autofocus>
-  <input type="text" name="new_album_type" value= <?php echo "\"".$city."\"" ?> autofocus>
-  <input type="text" name="new_album_publish_date" value= "Publish Date" autofocus>
-  
+  <h3>Add Track</h3>
+  <input type="text" name="new_track_name" value= "Track Name" autofocus>
+  <input type="text" name="new_track_price" value= "Price" ?> autofocus>
 
-  <input type="submit" name="apply" value="add_album"  > 
+  <input type="submit" name="add_track" value="Add Track"  > 
 
  </form> 
  </div>

@@ -49,7 +49,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Musicholics - Acousticness Track</title>
+  <title>Musicholics - Access Track</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -62,17 +62,11 @@
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
-      
-      <li><a href="own_profile.php">Profile</a></li>
-      <li><a href="view_playlists.php">Playlist</a></li>
-      <li><a href="view_tracks.php">Tracks</a></li>
-  <li><a href="friends_list.php">Friends</a></li>
-  <li><a href="message_list.php">Messages</a></li>
-  <li><a href="search_result_screen.php">Search</a></li>
+     
+     <li><a href="search_result_screen.php">Search</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="change_general_information.php"><span class="glyphicon glyphicon-user"></span>Settings</a></li>
+      
       <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span>Logout</a></li>
     </ul>
   </div>
@@ -100,11 +94,11 @@
 
  
 </div>
-  <p> 
-       <input id='Submit' name='modify_track_button' value='Submit' type='button' value='MODIFY TRACK'>
+  <p> <form method="post" action="">
+       <input id='Submit' name='modify_track_button' value='Submit' type='button' value='Modify Track'>
 
-       <input id='Submit' name='delete_track_button' value='Submit' type='button' value='DELETE TRACK'>
-       
+       <input id='Submit' name='delete_track_button' value='Submit' type='button' value='Delete Track'>
+       </form>
     </p>
  </div>
 </div>  

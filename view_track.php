@@ -114,13 +114,13 @@
 
  
 </div>
-  <p> 
+  <p> <form method="post" action="">
        <input id='Submit' name='purchase_track_button' value='Submit' type='button' value='PURCHASE TRACK'>
 
        <input id='Submit' name='gift_button' value='Submit' type='button' value='GIFT'>
 
        <input id='Submit' name='play_track_button' value='Submit' type='button' value='PLAY TRACK'>
-       
+       </form>
     </p>
  </div>
 </div>  
