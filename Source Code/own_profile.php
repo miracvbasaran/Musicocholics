@@ -86,7 +86,7 @@ POSTS<br><br>
 	$result = mysqli_query($db, $query);
 	$writer_names = array();
 	while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
-      $query1 = "SELECT U.username FROM User U WHERE U.user_id = '$row[0]' ";
+      $query1 = "SELECT P.username FROM Person P WHERE P.person_id = {$row[0]} ";
 		$result1 = mysqli_query($db, $query1);
 		$writer_names[] = mysqli_fetch_array($result1, MYSQLI_ASSOC)['username'];
 	}
@@ -105,7 +105,8 @@ POSTS<br><br>
 	$query = "SELECT L1.track_id FROM listens L1 WHERE L1.user_id = '$uid' AND 
 	date = (SELECT max(L2.date) FROM listens L2 WHERE L2.user_id = '$uid') ";
 	$result = mysqli_query($db, $query);
-	$query2 = "SELECT track_name,duration FROM track WHERE track_id = '$result' ";
+	$row = mysqli_fetch_array($result, MYSQLI_NUM);
+	$query2 = "SELECT track_name,duration FROM track WHERE track_id = '$row[0]' ";
 	$result2 = mysqli_query($db, $query2);
 	$track_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
 
