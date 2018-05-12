@@ -61,7 +61,7 @@
   <div class="container-fluid">
     <ul class="nav navbar-nav">
      
-     <li><a href="search_result_screen.php">Search</a></li>
+     <li><a href="search_admin.php">Search</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       

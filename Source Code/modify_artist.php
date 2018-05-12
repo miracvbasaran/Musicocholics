@@ -43,7 +43,7 @@
       $new_album_publish_date = $_POST['new_album_publish_date'];
       $new_album_publisher = $_POST['new_album_publisher'];
 
-      $query = "SELECT publisher_id FROM Publisher WHERE publisher_name = {$new_album_publisher}";
+      $query = "SELECT publisher_id FROM Publisher WHERE publisher_name = '{$new_album_publisher}'";
       $result = mysqli_query($db, $query);
       $index_array = mysqli_fetch_array($result, MYSQLI_NUM);
       if($index_array == FALSE){
