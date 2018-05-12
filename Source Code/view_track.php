@@ -35,7 +35,7 @@
     }
     if(isset($_POST['gift_button']))
     {
-      
+      header("location: gift_track.php?track_id=".$track_id);
     }
     if(isset($_POST['play_track_button']))
     {
@@ -120,11 +120,11 @@
  
 </div>
   <p> <form method="post" action="">
-       <input id='Submit' name='purchase_track_button' value='Submit' type='button' value='PURCHASE TRACK'>
+       <input id='Submit' name='purchase_track_button' value='Submit' type='button' value='Purchase Track'>
 
-       <input id='Submit' name='gift_button' value='Submit' type='button' value='GIFT'>
+       <input id='Submit' name='gift_button' value='Submit' type='button' value='Gift'>
 
-       <input id='Submit' name='play_track_button' value='Submit' type='button' value='PLAY TRACK'>
+       <input id='Submit' name='play_track_button' value='Submit' type='button' value='Play Track'>
        </form>
     </p>
  </div>
