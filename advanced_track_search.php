@@ -33,7 +33,7 @@ include("connection.php");
 			<form action = "#" method = "post" onsubmit = "return check()">
 				<font color="white">
 					<br/><br/><br/><br/>MUSICHOLICS<br/><br/>Advanced Track Search<br/><br/><br/><br/>
-					<input type = "text" name = "search_key" placeholder = "Album Name"> <br/><br/>
+					<input type = "text" name = "search_key" placeholder = "Track Name"> <br/><br/>
 					<input type = "radio" name="match" value="matches"/> Exactly matches &nbsp; &nbsp;
 					<input type = "radio" name="match" value="contains"/> Contains &nbsp; &nbsp;
 					<input type = "radio" name="match" value="starts_with"/> Starts with
@@ -71,7 +71,7 @@ include("connection.php");
 				var type = document.getElementById( "type").value;
 
 				if( search_key == "")
-					alert( "Please type an album name");
+					alert( "Please type an track name");
 				if( match = "")
 					alert( "Please one of \"Exactly matches\", \"Exactly Contains\", \"Starts with\"" );
 				if( from_date = "")
@@ -109,7 +109,7 @@ include("connection.php");
 																		AND published_date >= '$min_duration' 
 																		AND published_date <= '$max_duration';");
 				while( $row = $query->fetch_assoc()){ 
-					echo( "<tr> <td><a href='album.php?album_id=".$row['album_id']."'>.$row['album_id'].</a></td> </tr>");
+					echo( "<tr> <td><a href='album.php?track_id=".$row['track_id']."'>.$row['track_id'].</a></td> </tr>");
 				}
 			}
 			else if( $match == "contains"){
@@ -120,7 +120,7 @@ include("connection.php");
 																		AND published_date >= '$min_duration' 
 																		AND published_date <= '$max_duration';");
 				while( $row = $query->fetch_assoc()){ 
-					echo( "<tr> <td><a href='album.php?album_id=".$row['album_id']."'>.$row['album_id'].</a></td> </tr>");
+					echo( "<tr> <td><a href='album.php?track_id=".$row['track_id']."'>.$row['track_id'].</a></td> </tr>");
 				}
 			}
 			else if( $match == "starts_with"){
@@ -131,7 +131,7 @@ include("connection.php");
 																		AND published_date >= '$min_duration' 
 																		AND published_date <= '$max_duration';");
 				while( $row = $query->fetch_assoc()){ 
-					echo( "<tr> <td><a href='album.php?album_id=".$row['album_id']."'>.$row['album_id'].</a></td> </tr>");
+					echo( "<tr> <td><a href='album.php?track_id=".$row['track_id']."'>.$row['track_id'].</a></td> </tr>");
 				}
 			}
 			
