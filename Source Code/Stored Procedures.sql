@@ -63,4 +63,25 @@ BEGIN
 END
 $$
 
+CREATE PROCEDURE DeletePublisher(IN publisherId INT)
+BEGIN
+	DECLARE done INT DEFAULT FALSE;
+	DECLARE i INT;
+	DECLARE cur_albums CURSOR FOR SELECT album_id FROM Album WHERE publisher_id = publisherId;
+	DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+
+	OPEN cur_albums;
+	album_loop: LOOP
+		FETCH cur_albums INTO i;
+		IF done THEN
+			LEAVE album_loop;
+		END IF;
+		CALL DeleteAlbum(i);
+	END LOOP;
+	CLOSE cur_albums;
+
+	DELETE FROM Publisher WHERE publisher_id = publisherId;
+END
+$$
+
 DELIMITER ;
