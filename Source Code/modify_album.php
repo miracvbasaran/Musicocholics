@@ -150,7 +150,7 @@
   
   while ($row = mysql_fetch_array($result, MYSQL_NUM)) {
       $t_id = $row[3];
-      echo "<a href = view_track.ph?track_id = {$t_id}<tr>";
+      echo "<a href = \"view_track.ph?track_id = {$t_id}\"><tr>";
       echo "<td>" . $row[0] . "</td>";
       echo "<td>" . $row[1] . "</td>";
       echo "<td>" . $row[2] . "</td></a>";

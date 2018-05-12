@@ -24,6 +24,11 @@
     $price = $track_array['price'];
     $date_of_addition = $track_array['date_of_addition'];
     $album_id = $track_array['album_id'];
+
+    $query2 = "SELECT * FROM Album WHERE album_id = {$album_id} ";
+    $result2 = mysqli_query($db, $query2);
+    $album_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
+    $album_name = $track_array['album_name'];
     if(isset($_POST['purchase_track_button']))
     {
       header("location: purchase_track_with_budget.php?track_id=".$track_id);
@@ -97,7 +102,7 @@
   <div align="left" class="col-md-6 col-md-offset-3"></div>
 
 <div class="container">
-  <h3><?php echo $track_name;?></h3> 
+  <h3><?php echo $track_name;?></h3> <h2> in Album <?php echo "<a href= \"view_album.php?album_id = {$album_id}\">{$album_name}</a>" ?></h2>
     <p>Recording Type: <?php echo $recording_type;?> </p>
     <p> Duration: <?php echo $duration;?></p>
     <p> Danceability: <?php echo $danceability;?></p>

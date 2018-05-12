@@ -118,7 +118,7 @@
   
   while ($row = mysql_fetch_array($result, MYSQL_NUM)) {
       $a_id = $row[3];
-      echo "<a href = view_album.php?album_id = {$a_id}<tr>";
+      echo "<a href = \"view_album.php?album_id = {$a_id}\"><tr>";
       echo "<td>" . $row[0] . "</td>";
       echo "<td>" . $row[1] . "</td>";
       echo "<td>" . $row[2] . "</td></a>";
