@@ -1,6 +1,6 @@
 <?php
 	include("session.php");
-    $uid = mysqli_real_escape_string($db,$_POST['login_id']);
+    $uid = mysqli_real_escape_string($db,$_SESSION['login_id']);
     $query = "SELECT * FROM user WHERE user_id = '$uid' ";
     $result = mysqli_query($db, $query);
     $user_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
@@ -14,7 +14,7 @@
 	  $username = $person_array['username'];
 	  $fullname = $person_array['fullname'];
   	$email = $person_array['email'];
-
+$password = $person_array['password'];
     $user_id = $user_array['user_id'];
     $country = $user_array['country'];
     $language = $user_array['language'];
@@ -22,7 +22,7 @@
     $birthday = $user_array['birthday'];
     $gender = $user_array['gender'];
     $budget = $user_array['budget'];
-	  $password = $user_array['password'];
+	  
 	  $picture = $user_array['picture'];
     $membership_type = $user_array['membership_type'];
 
@@ -82,11 +82,18 @@
 POSTS<br><br>
 <div class="container">
 <?php
-	$query = "SELECT U.username , P.date, P.post FROM posts P, User U WHERE P.reciver_id = '$uid' AND P.writer_id = U.user_id ORDER BY date DESC";
+	$query = "SELECT P.writer_id , P.date, P.post FROM posts P WHERE P.receiver_id = '$uid' ORDER BY date DESC";
 	$result = mysqli_query($db, $query);
-	
-	while ($row = mysql_fetch_array($result, MYSQL_NUM)) {
-      echo " <div >  <div align="left" > {$row[0]} ( {$row[1]} ) <br> </div> <div align="right" > {$row[2]}  <br> </div> </div>"; 
+	$writer_names = array();
+	while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
+      $query1 = "SELECT U.username FROM User U WHERE U.user_id = '$row[0]' ";
+		$result1 = mysqli_query($db, $query1);
+		$writer_names[] = mysqli_fetch_array($result1, MYSQLI_ASSOC)['username'];
+	}
+	$i=0;
+	while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
+      echo " <div >  <div align=\"left\" > {$writer_names[$i]} ( {$row[1]} ) <br> </div> <div align=\"right\" > {$row[2]}  <br> </div> </div>"; 
+      $i = $i + 1;
 	}
 
 ?>

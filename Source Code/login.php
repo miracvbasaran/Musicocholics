@@ -1,6 +1,8 @@
 <?php 
 //include("session.php");
+
 include("connection.php");
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -67,11 +69,15 @@ include("connection.php");
 					
 						if( mysqli_num_rows( mysqli_query( $db, "SELECT * FROM User WHERE user_id = '$person_id'")) == 1){ //person is a user
 							//$_SESSION['member_type'] = "user";
+						
+							$_SESSION['login_user'] = $username;
 							header( "Location: own_profile.php");
 							exit();
 						}
 						else if( mysqli_num_rows( mysqli_query( $db, "SELECT * FROM Admin WHERE admin_id = '$person_id'")) == 1){ //person is an admin
 							//$_SESSION['member_type'] = "admin";
+							
+							$_SESSION['login_user'] = $username;
 							header( "Location: admin.php");
 							exit();
 						}
