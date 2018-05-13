@@ -1,7 +1,7 @@
 <?php
 	  include("session.php");
     $uid = mysqli_real_escape_string($db,$_SESSION['login_id']);
-    $query = "SELECT budget FROM user WHERE user_id = '$uid' ";
+    $query = "SELECT * FROM user WHERE user_id = '$uid' ";
     $result = mysqli_query($db, $query);
     $user_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
     $premium_fee = 9.99;
@@ -19,73 +19,78 @@
     $budget = $user_array['budget'];
     $membership_type = $user_array['membership_type'];
 
-    if(isset( ($_POST['up_premium']) ) && ($membership_type != "premium" || $membership_type != "premium-artist") ){
+    if( isset( ($_POST['up_premium']) )){
+        if(   (strcmp($membership_type , "premium")!=0) && ( strcmp($membership_type ,"premium-artist") !=0 ) ) {
         
-        if($budget >= $premium_fee){
+            if($budget >= $premium_fee){
 
-          $newbudget = $budget-$premium_fee;
-          
-          $query = "UPDATE user SET budget = $newbudget WHERE user_id = '$uid' ";
-          $result = mysqli_query($db, $query);
+              $newbudget = $budget-$premium_fee;
+              
+              $query = "UPDATE user SET budget = '$newbudget' WHERE user_id = '$uid' ";
+              $result = mysqli_query($db, $query);
 
-          if( $membership_type == "artist" ){
-            $membership_type = "premium-artist";
-          }
-          if( $membership_type == "normal"){
-            $membership_type = "premium";
-          }
+              if( strcmp($membership_type,"artist") == 0 ){
+                $membership_type = "premium-artist";
+              }
+              if( strcmp($membership_type,"normal") == 0){
+                $membership_type = "premium";
+              }
 
-          $query = "UPDATE user SET membership_type = $membership_type WHERE user_id = '$uid' ";
-          $result = mysqli_query($db, $query);
+              $query = "UPDATE user SET membership_type = '$membership_type' WHERE user_id = '$uid' ";
+              $result = mysqli_query($db, $query);
+              
+              echo ' <script type="text/javascript"> alert("You are upgraded to premium."); </script>';
+               
 
-          echo ' <script type="text/javascript"> alert("You are upgraded to premium."); </script>';
-
-          header("location: change_general_information.php?");
+              header("location: change_general_information.php?");
+            }
+            else{
+              echo ' <script type="text/javascript"> alert("Your budget is not sufficient. "); </script>';
+             
+            }
         }
         else{
-          echo ' <script type="text/javascript"> alert("Your budget is not sufficient. "); </script>';
-         
+          echo ' <script type="text/javascript"> alert("You have already premium account."); </script>';
         }
     }
-    else{
-      echo ' <script type="text/javascript"> alert("You have already premium account."); </script>';
-    }
+    
         
-    if(isset( ($_POST['up_artist']) ) && ($membership_type != "artist" || $membership_type != "premium-artist") ){
+    if(isset( ($_POST['up_artist']) ) ){
+
+      if ( ( strcmp($membership_type , "artist")!=0) && ( strcmp($membership_type , "premium-artist")!=0 ) ) {
         
-        if($budget >= $artist_fee){
+          if($budget >= $artist_fee){
 
-          $newbudget = $budget-$artist_fee;
-          
-          $query = "UPDATE user SET budget = $newbudget WHERE user_id = '$uid' ";
-          $result = mysqli_query($db, $query);
+            $newbudget = $budget-$artist_fee;
+            
+            $query = "UPDATE user SET budget = '$newbudget' WHERE user_id = '$uid' ";
+            $result = mysqli_query($db, $query);
 
-          if( $membership_type == "premium" ){
-            $membership_type = "premium-artist";
+            if( strcmp($membership_type, "premium")==0 ){
+              $membership_type = "premium-artist";
+            }
+            if( strcmp($membership_type, "normal")==0 ){
+              $membership_type = "artist";
+            }
+
+            $query = "UPDATE user SET membership_type = '$membership_type' WHERE user_id = '$uid' ";
+
+            $result = mysqli_query($db, $query);
+
+            
+            echo ' <script type="text/javascript"> alert("You are upgraded to artist. "); </script>';
+        
+            
+            header("location: change_general_information.php?");
           }
-          if( $membership_type == "normal"){
-            $membership_type = "artist";
+          else{
+            echo ' <script type="text/javascript"> alert("Your budget is not sufficient."); </script>';
           }
-
-          $query = "UPDATE user SET membership_type = $membership_type WHERE user_id = '$uid' ";
-
-          $result = mysqli_query($db, $query);
-
-          echo ' <script type="text/javascript"> alert("You are upgraded to artist. "); </script>';
-
-          header("location: change_general_information.php?");
         }
         else{
-          echo ' <script type="text/javascript"> alert("Your budget is not sufficient."); </script>';
-        }
-    }
-     else{
-      echo ' <script type="text/javascript"> alert("You have already artist account."); </script>';
+            echo ' <script type="text/javascript"> alert("You have already artist account."); </script>';
       
-    }
-
-    if( isset( ($_POST['cancel']) )){
-      header("location: change_general_information.php?");
+        }
     }
 
 ?>
@@ -147,8 +152,8 @@ Artist membership fee: <?php echo $artist_fee; ?> <br>
  
 </form> 
 
-Your budget: $<?php echo $budget; ?> <br>
- <input type="reset" name=cancel value= "Cancel">
+Your budget: $ <?php echo $budget; ?> <br>
+Your current membership type : <?php echo $membership_type; ?> <br>
 
 <div>
   <footer>
