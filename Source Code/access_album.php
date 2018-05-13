@@ -82,7 +82,7 @@
       </div>
     </nav>
 
-<div class="container">
+<div class="container" align = "center">
     
   <div align="center" class="col-md-6 col-md-offset-3"><img class="img-circle img-responsive" src="assets/img/ <?php echo $picture; ?>" width="200" height="200"></div>
 </div> 
@@ -100,7 +100,7 @@
     ?>
    <br>
    <h2>
-    From Publisher <?php echo "<a href = \"view_publisher.php?publisher_id = {$publisher_id}\"> {$publisher_name}</a>"; ?>
+    From Publisher <?php echo "<a href = \"access_publisher.php?publisher_id = {$publisher_id}\"> {$publisher_name}</a>"; ?>
    </h2>
 </div>
 <div class "container" align = "right">
@@ -126,11 +126,11 @@
   $result = mysqli_query($db, $query_tracks);
   
   while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
-      echo "<a href = \"view_track.php?track_id = ".$row[0]."\"><tr>";
+      echo "<tr>";
       echo "<td>" . $row[1] . "</td>";
       echo "<td>" . $row[2] . "</td>";
       echo "<td>" . $row[3] . "</td>";
-      echo "</tr></a>";
+      echo "</tr>";
   }
   ?>
 </table>
