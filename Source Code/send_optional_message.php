@@ -18,8 +18,8 @@
           }
           else {
             $receiver_id = $receiver_array['person_id'];
-            $date = new DateTime();
-            $query3 = "INSERT INTO sends_message(sender_id, receiver_id, date, message) VALUES({$uid}, {$receiver_id}, '$date->getTimestamp()', '$text_message')";
+            $date = date('Y-m-d G:i:s');
+            $query3 = "INSERT INTO sends_message(sender_id, receiver_id, date, message) VALUES({$uid}, {$receiver_id}, '$date', '$text_message')";
             $result3 = mysqli_query($db, $query3);
             header("location: message_list.php");
           }
