@@ -57,7 +57,7 @@ include("connection.php");
 			if( $filter == "track" || $filter == "all"){ //TRACK
 				$query = "SELECT * FROM Track WHERE track_name LIKE '%$search_key%'";
 				while( $row = $query->fetch_assoc()){ //printing every track with that track name
-					echo( "<tr> <td><a href='track.php?album_id=".$row['track_id']."'>.$row['track_id'].</a></td> </tr>");
+					echo( "<tr> <td><a href='track.php?track_id=".$row['track_id']."'>.$row['track_id'].</a></td> </tr>");
 				}
 			}
 			else if( $filter == "album" || $filter == "all"){ //ALBUM
@@ -69,7 +69,7 @@ include("connection.php");
 			else if( $filter == "artist" || $filter == "all"){ //ARTIST
 				$query = "SELECT * FROM Artist WHERE artist_name LIKE '%$search_key%'";
 				while( $row = $query->fetch_assoc()){ //printing every artist with that artist name
-					echo( "<tr><td><a href='artist.php?album_id=".$row['artist_id']."'>.$row['artist_id'].</a></td></tr>");
+					echo( "<tr><td><a href='artist.php?artist_id=".$row['artist_id']."'>.$row['artist_id'].</a></td></tr>");
 				}
 			}
 			else if( $filter == "playlist" || $filter == "all"){ //PLAYLIST
@@ -86,7 +86,7 @@ include("connection.php");
 					//printing friends
 					$fquery = mysqli_query( $db, "SELECT * FROM Friendship WHERE user1_id = '$id' OR user2_id = '$id');");
 					while( $frow = $fquery->fetch_assoc()){ //for each friend
-						echo( "<tr><td><a href='friend_profile.php?friend_id=".$row['person_id']."'>.$row['person_id'].</a></td></tr>");
+						echo( "<tr><td><a href='friend_profile.php?friend_id=".$frow['person_id']."'>.$frow['person_id'].</a></td></tr>");
 					}
 				
 					//not printing own profile
@@ -94,14 +94,14 @@ include("connection.php");
 					if( $query['person_id'] != id){
 						$nfquery = mysqli_query( $db, "SELECT * FROM Friendship WHERE user1_id != '$id' AND user2_id != '$id');");
 						while( $nfrow = $nfquery->fetch_assoc()){ //for each friend
-							echo( "<tr><td><a href='nonfriend_profile.php?nonfriend_id=".$row['person_id']."'>.$row['person_id'].</a></td></tr>");
+							echo( "<tr><td><a href='nonfriend_profile.php?nonfriend_id=".$nfrow['person_id']."'>.$nfrow['person_id'].</a></td></tr>");
 						}
 					}
 				
 					//printing blocked people ?????
 					$bquery = mysqli_query( $db, "SELECT * FROM Blocks WHERE blocked_id = '$id');");
 					while( $brow = $bquery->fetch_assoc()){ //for each friend
-						echo( "<tr><td><a href='blocked_profile.php?blocked_id=".$row['person_id']."'>.$row['person_id'].</a></td></tr>");
+						echo( "<tr><td><a href='blocked_profile.php?blocked_id=".$brow['person_id']."'>.$brow['person_id'].</a></td></tr>");
 					}
 				}
 			}
