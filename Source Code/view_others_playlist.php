@@ -5,7 +5,7 @@
     $result1 = mysqli_query($db, $query1);
     $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
 
-    $playlist_id = $_POST['playlist_id'];
+    $playlist_id = $_GET['playlist_id'];
     $query2 = "SELECT * FROM playlist WHERE playlist_id = {$playlist_id}";
     $result2 = mysqli_query($db, $query2);
     $playlist_array =  mysqli_fetch_array($result2, MYSQLI_ASSOC);
