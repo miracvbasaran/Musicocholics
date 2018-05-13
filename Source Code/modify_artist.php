@@ -54,7 +54,7 @@
       $result = mysqli_query($db, $query);
       $index_array = mysqli_fetch_array($result, MYSQLI_NUM);
       if($index_array == FALSE){
-        echo " <script type=\"text/javascript\"> alert(\"There is no such Publisher.\"); </script>";
+        echo ' <script type="text/javascript"> alert("There is no such publisher"); </script>';
       }
       else{
         $publisher_id = $index_array[0];
@@ -69,7 +69,7 @@
           header("location: modify_album.php?album_id=".$album_id);
         }
         else{
-          echo "<script type=\"text/javascript\"> alert(\"Could not add album to artist.\"); </script>";
+          echo ' <script type="text/javascript"> alert("Could not add album to artist."); </script>';
         }
 
       

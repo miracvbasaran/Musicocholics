@@ -165,7 +165,7 @@
     <option value="German">German</option>
   </select> <br></div>
   
-  <div class="container" align = "right"><input type="submit" name="apply" value="Apply" class = "btn btn-success"> </div>
+  <div class="container" align = "right"><input style="text-align:right;" type="submit" name="apply" value="Apply" class = "btn btn-success"> </div>
 
 </form> 
 

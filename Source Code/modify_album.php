@@ -70,7 +70,7 @@
       $new_track_name = $_POST['new_track_name'];
       $new_track_price = $_POST['new_track_price'];
       $insertion_date = date(Y-m-d);
-      $query = "INSERT INTO Track(album_name, album_type, date_of_addition) VALUES('{$new_track_name}', '{$new_track_price}', '{$insertion_date}')";
+      $query = "INSERT INTO Track(track_name, price, date_of_addition) VALUES('{$new_track_name}', '{$new_track_price}', '{$insertion_date}')";
       if(mysqli_query($db, $query) === TRUE){
           $query = "SELECT LAST_INSERT_ID()";
           $result = mysqli_query($db, $query);
@@ -181,10 +181,10 @@
 
 <form method="post" action="">
   <h3>Add Track</h3>
-  <input type="text" name="new_track_name" value= "Track Name" autofocus>
-  <input type="number" step="0.01" name="new_track_price" value= "Price" autofocus>
+  <div class="col-xs-3"><input type="text" name="new_track_name" value= "Track Name" autofocus></div>
+  <div class="col-xs-3"><input type="number" step="0.01" name="new_track_price" value= "Price" style="text-align:right;" autofocus> $</div>
 
-  <input type="submit" name="add_track" value="Add Track"  class = "btn btn-success"> 
+  <div class="col-xs-3"><input type="submit" name="add_track" value="Add Track"  class = "btn btn-success"> </div>
 
  </form> 
  </div>
