@@ -2,7 +2,7 @@
 	include("session.php");
     $uid = mysqli_real_escape_string($db,$_SESSION['login_id']);
 
-    $track_id = $_POST['track_id'];
+    $track_id = $_GET['track_id'];
     $query2 = "SELECT * FROM track WHERE track_id = {$track_id} ";
     $result2 = mysqli_query($db, $query2);
     $track_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);

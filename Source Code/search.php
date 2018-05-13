@@ -1,9 +1,7 @@
 <?php 
 include("session.php");
-	$uid = mysqli_real_escape_string($db,$_SESSION['login_id']);
-    $query = "SELECT * FROM user WHERE user_id = '$uid' ";
-    $result = mysqli_query($db, $query);
-    $user_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
+include("connection.php");
+$uid = mysqli_real_escape_string($db,$_SESSION['login_id']);
 ?>
 
 <!DOCTYPE html>
@@ -37,16 +35,25 @@ include("session.php");
 			<form action = "#" method = "post">
 				<font color="white">
 					<br/><br/><br/><br/>MUSICHOLICS<br/><br/>Search<br/><br/><br/><br/>
-					<input type = "text" name = "search_key" placeholder = "Search.."> 
+					
 					<font color="black">
+						<input type = "text" name = "search_key" placeholder = "Search.."> 
 						<input id = "" value = "Search" name = "search" type = "submit"> </button> <br/><br/>
 					</font>
-					<input type="radio" name="filter" value="all"/>All &nbsp; &nbsp;
-					<input type="radio" name="filter" value="track"/>Track &nbsp; &nbsp;
-					<input type="radio" name="filter" value="album"/>Song &nbsp; &nbsp;
-					<input type="radio" name="filter" value="artist"/>Artist &nbsp; &nbsp;
-					<input type="radio" name="filter" value="playlist"/>Playlist &nbsp; &nbsp;
-					<input type="radio" name="filter" value="user"/>User<br/>
+					<input type="radio" name="filter" value="all"/> All &nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+					<input type="radio" name="filter" value="track"/> Track &nbsp;&nbsp;
+					<tr><td><a href='advanced_track_search.php'> Advanced Track Search</a></td></tr><br/>
+					<input type="radio" name="filter" value="album"/> Album &nbsp;&nbsp;
+					<tr><td><a href='advanced_album_search.php'> Advanced Album Search</a></td></tr><br/>
+					<input type="radio" name="filter" value="artist"/> Artist &nbsp;&nbsp; 
+					<tr><td><a href='advanced_artist_search.php'> Advanced Artist Search</a></td></tr><br/>
+					<input type="radio" name="filter" value="playlist"/> Playlist &nbsp;&nbsp; 
+					<tr><td><a href='advanced_playlist_search.php'> Advanced Playlist Search</a></td></tr><br/>
+					<input type="radio" name="filter" value="user"/> User &nbsp;&nbsp; 
+					<tr><td><a href='advanced_user_search.php'> Advanced User Search</a></td></tr><br/><br/>
 				</font>
 			</form>
 		</div>
@@ -65,64 +72,68 @@ include("session.php");
 							echo( "<tr> <td><a href='track.php?track_id=".$row['track_id']."'>".$row['track_name']."</a></td> </tr><br/>");
 						}
 					}
-					else if( $filter == "album" || $filter == "all"){ //ALBUM
+					if( $filter == "album" || $filter == "all"){ //ALBUM
 						$query = mysqli_query( $db, "SELECT * FROM Album WHERE album_name LIKE '%$search_key%';");
 						while( $row = $query->fetch_assoc()){ //printing every album with that album name
 							echo( "<tr> <td><a href='album.php?album_id=".$row['album_id']."'>".$row['album_name']."</a></td> </tr><br/>");
 						}
 					}
-					else if( $filter == "artist" || $filter == "all"){ //ARTIST
+					if( $filter == "artist" || $filter == "all"){ //ARTIST
 						$query = mysqli_query( $db, "SELECT * FROM Artist WHERE artist_name LIKE '%$search_key%';");
 						while( $row = $query->fetch_assoc()){ //printing every artist with that artist name
 							echo( "<tr><td><a href='artist.php?artist_id=".$row['artist_id']."'>".$row['artist_name']."</a></td></tr><br/>");
 						}
 					}
-					else if( $filter == "playlist" || $filter == "all"){ //PLAYLIST
+					if( $filter == "playlist" || $filter == "all"){ //PLAYLIST
 						$query = mysqli_query( $db, "SELECT * FROM Playlist WHERE playlist_name LIKE '%$search_key%';");
 						while( $row = $query->fetch_assoc()){ //printing every playlist with that playlist name
 							echo( "<tr><td><a href='playlist.php?playlist_id=".$row['playlist_id']."'>".$row['playlist_name']."</a></td></tr><br/>");
 						}
 					}
-					else if( $filter == "user" || $filter == "all"){ //USER
-						$query = mysqli_query( $db, "SELECT * FROM Person NATURAL JOIN User WHERE username LIKE '%$search_key%';");
+					if( $filter == "user" || $filter == "all"){ //USER
+						$query = mysqli_query( $db, "SELECT * FROM Person, User WHERE (username LIKE '%$search_key%') AND user_id = person_id;");
+						//if( !query){
+						//	throw new Exception( "error at user query");
+						//}
 						while( $row = $query->fetch_assoc()){ //printing every user with that user name
 							$id = $row['person_id'];
-					
-							//printing friends
-							$fquery = mysqli_query( $db, "SELECT * FROM Friendship WHERE user1_id = '$id' OR user2_id = '$id');");
-							// if( !$fquery){
-		// 						throw new Exception("Database Error: $fquery");
-		// 					}
-							if( $fquery == TRUE){
+							if( $id != $uid){
+								
+								// //printing friends
+// 								$fquery = mysqli_query( $db, "SELECT * FROM Friendship WHERE (user1_id = '$uid' AND user2_id = '$id');");
+// 								while( $frow = $fquery->fetch_assoc()){ //for each friend
+// 									echo( "<tr><td><a href='friend_profile.php?friend_id=".$id."'>".$row['fullname']."</a></td></tr><br/>");
+// 								}
+// 								$fquery = mysqli_query( $db, "SELECT * FROM Friendship WHERE (user2_id = '$uid' AND user1_id = '$id');");
+// 								while( $frow = $fquery->fetch_assoc()){ //for each friend
+// 									echo( "<tr><td><a href='friend_profile.php?friend_id=".$id."'>".$row['fullname']."</a></td></tr><br/>");
+// 								}
+								
+								// //printing non-friends
+// 								$nfquery = mysqli_query( $db, "SELECT * FROM Friendship WHERE (user1_id = '$uid' OR user2_id = '$id') AND (user1_id = '$id' OR user2_id = '$uid');");
+// 								while( $nfrow = $nfquery->fetch_assoc()){ //for each friend
+// 									echo( "<tr><td><a href='nonfriend_profile.php?nonfriend_id=".$id."'>".$row['fullname']."</a></td></tr><br/>");
+// 								}
+								
+								
+								
+								//printing friends
+								$fquery = mysqli_query( $db, "SELECT * FROM Friendship WHERE (user1_id = '$uid' OR user2_id = '$uid') AND (user1_id = '$uid' OR user2_id = '$uid');");
+								// if( !$fquery){
+			// 						throw new Exception("Database Error: $fquery");
+			// 					}
 								while( $frow = $fquery->fetch_assoc()){ //for each friend
-								echo( "<tr><td><a href='nonfriend_profile.php?nonfriend_id=".$frow['person_id']."'>".$frow['person_id']."</a></td></tr><br/>");
+									echo( "<tr><td><a href='friend_profile.php?friend_id=".$id."'>".$row['fullname']."</a></td></tr><br/>");
 								}
-
+				
+								//not printing own profile
+								//printing non-friends
+								$nfquery = mysqli_query( $db, "SELECT * FROM Friendship WHERE user1_id != '$id' AND user2_id != '$id';");
+								while( $nfrow = $nfquery->fetch_assoc()){ //for each friend
+										echo( "<tr><td><a href='nonfriend_profile.php?nonfriend_id=".$id."'>".$row['fullname']."</a></td></tr><br/>");
+}
 							}
 							
-				
-							//not printing own profile
-							//printing non-friends
-							while( $row = $query->fetch_assoc()){
-								if( $row['person_id'] != $id){
-									$nfquery = mysqli_query( $db, "SELECT * FROM Friendship WHERE user1_id != '$id' AND user2_id != '$id');");
-									if($nfquery == TRUE){
-										while( $nfrow = $nfquery->fetch_assoc()){ //for each friend
-										echo( "<tr><td><a href='nonfriend_profile.php?nonfriend_id=".$nfrow['person_id']."'>".$nfrow['person_id']."</a></td></tr><br/>");
-										}
-
-									}
-									
-								}
-							}
-				
-							//printing blocked people ?????
-							$bquery = mysqli_query( $db, "SELECT * FROM Blocks WHERE blocked_id = '$id');");
-							if($bquery == TRUE){
-								while( $brow = $bquery->fetch_assoc()){ //for each friend
-									echo( "<tr><td><a href='blocked_profile.php?blocked_id=".$brow['person_id']."'>".$brow['person_id']."</a></td></tr><br/>");
-								}
-							}
 						}
 					}
 				}

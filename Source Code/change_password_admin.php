@@ -15,7 +15,7 @@
       if(isset( ($_POST['old_pass']) )  ){
           $query = "SELECT password FROM Person WHERE person_id = '$uid' ";
           $result = mysqli_query($db, $query);
-          if($_POST['old_pass']) != $password )
+          if($_POST['old_pass'] != $password )
         {
           echo ' <script type="text/javascript"> alert("Old password value is not matched."); </script>';
         
