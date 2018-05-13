@@ -2,7 +2,7 @@
 
 	include("session.php");
 
-    $uid = mysqli_real_escape_string($db,$_POST['login_id']);
+    $uid = mysqli_real_escape_string($db,$_SESSION['login_id']);
     $query = "SELECT * FROM user U WHERE U.user_id = '$uid' ";
     $result = mysqli_query($db, $query);
     $user_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
@@ -47,11 +47,11 @@
 		    	<ul class="nav navbar-nav">
 		      		<li class="active"><a href="#">Home</a></li>      
 		      		<li><a href="own_profile.php">Profile</a></li>
-		      		<li><a href="view_playlists.php">Playlist</a></li>
+		      		<li><a href="view_own_playlists.php">Playlist</a></li>
 		      		<li><a href="view_tracks.php">Tracks</a></li>
 					<li><a href="friends_list.php">Friends</a></li>
 					<li><a href="message_list.php">Messages</a></li>
-					<li><a href="search_result_screen.php">Search</a></li>
+					<li><a href="search.php">Search</a></li>
 		    	</ul>
 		    	<ul class="nav navbar-nav navbar-right">
 		      		<li><a href="change_general_information.php"><span class="glyphicon glyphicon-user"></span> Settings</a></li>

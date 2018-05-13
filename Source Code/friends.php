@@ -19,11 +19,11 @@ include("connection.php");
 		<div class="container-fluid">
 			<ul class="nav navbar-nav">
 				<li><a href="own_profile.php">Profile</a></li>
-				<li><a href="view_playlists.php">Playlist</a></li>
+				<li><a href="view_own_playlists.php">Playlist</a></li>
 				<li><a href="view_tracks.php">Tracks</a></li>
 				<li class="active"><a href="#">Friends</a></li>
 				<li><a href="message_list.php">Messages</a></li>
-				<li><a href="search_result_screen.php">Search</a></li>
+				<li><a href="search.php">Search</a></li>
 				<li><a href="change_general_information.php">Settings</a></li>
 				<li><a href="logout.php">Logout</a></li>
 			</ul>

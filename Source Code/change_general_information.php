@@ -111,11 +111,11 @@
     <ul class="nav navbar-nav">
       
       <li><a href="own_profile.php">Profile</a></li>
-      <li><a href="wiev_playlists.php">Playlist</a></li>
+      <li><a href="view_own_playlists.php">Playlist</a></li>
       <li><a href="view_tracks.php">Tracks</a></li>
 	   <li><a href="friends.php">Friends</a></li>
 	   <li><a href="message_list.php">Messages</a></li>
-	   <li><a href="search_result_screen.php">Search</a></li>
+	   <li><a href="search.php">Search</a></li>
     </ul>
     
     <ul class="nav navbar-nav navbar-right">
