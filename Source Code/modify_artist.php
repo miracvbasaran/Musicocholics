@@ -53,7 +53,7 @@
       $result = mysqli_query($db, $query);
       $index_array = mysqli_fetch_array($result, MYSQLI_NUM);
       if($index_array == FALSE){
-        echo ' <script type="text/javascript"> alert("There is no such Publisher."); </script>';
+        echo " <script type=\"text/javascript\"> alert(\"There is no such Publisher.\"); </script>";
       }
       else{
         $publisher_id = $index_array[0];
@@ -67,7 +67,7 @@
           header("location: modify_album.php?album_id=".$album_id);
         }
         else{
-          echo ' <script type="text/javascript"> alert("Could not add album to artist."); </script>';
+          echo "<script type=\"text/javascript\"> alert(\"Could not add album to artist.\"); </script>";
         }
 
       
@@ -114,9 +114,9 @@
  </form>
 
 <form method="post" action="">
-  <div class="container" align = "center"><h3><input type="text" name="name" value= <?php echo $artist_name ?> autofocus></h3></div>
+  <div class="container" align = "center"><h3><input type="text" name="name" value= <?php echo "'".$artist_name."'"; ?> autofocus></h3></div>
   <br>
-  <input type="text" name="description" value= <?php echo "\"".$description."\"" ?> autofocus> <br>
+  <input type="text" name="description" value= <?php echo "".$description."'"; ?> autofocus> <br>
   
 
   <input type="submit" name="apply" value="Apply"  class = "btn btn-default"> 

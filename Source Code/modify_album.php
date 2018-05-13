@@ -136,14 +136,14 @@
       }
     ?>
 </h3></div>
-  <br>
-  Album Type:
+  <br><div class="form-group row" align = "center">
+  Album Type:<div class="col-xs-3">
   <select name="album_type">
     <option value="Album">Album</option>
     <option value="Single">Single</option>
-  </select>
-  <input type="text" name="published_date" value= <?php echo $published_date ?> autofocus>
-  <input type="submit" name="apply" value="Apply"  class = "btn btn-default"> 
+  </select></div>
+  Date: <div class="col-xs-3"><input type="text" name="published_date" value= <?php echo $published_date ?> autofocus></div>
+  <input type="submit" name="apply" value="Apply"  class = "btn btn-default"> </div>
 
  </form> 
 <div class="container">
@@ -171,7 +171,7 @@
   ?>
 </table>
 
-<input type="submit" name="delete_tracks" value="Delete" class = "btn btn-default">
+<div class = "container" align = "right"><input type="submit" name="delete_tracks" value="Delete Tracks" class = "btn btn-default"></div>
 </form>
 
 </div>
