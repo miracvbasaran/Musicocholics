@@ -9,11 +9,15 @@
     $artist_id = $_GET['artist_id'];
     $query2 = "SELECT * FROM Artist WHERE artist_id = {$artist_id} ";
     $result2 = mysqli_query($db, $query2);
-    $artist_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
-    $artist_name = $artist_array['artist_name'];
-    $description = $artist_array['description'];
-    $picture = $artist_array['picture'];  
-    
+    if($result2 === FALSE){
+      echo " <script type=\"text/javascript\"> alert(\"There is no artist to show!\"); </script>";
+    }
+    else{
+      $artist_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
+      $artist_name = $artist_array['artist_name'];
+      $description = $artist_array['description'];
+      $picture = $artist_array['picture']; 
+    }
 ?>
 
 
@@ -70,7 +74,7 @@
   
   while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
       $a_id = $row[3];
-      echo "<a href = \"view_album.php?album_id = {$a_id}\"><tr>";
+      echo "<a href = \"view_album.php?album_id={$a_id}\"><tr>";
       echo "<td>" . $row[0] . "</td>";
       echo "<td>" . $row[1] . "</td>";
       echo "<td>" . $row[2] . "</td>";
