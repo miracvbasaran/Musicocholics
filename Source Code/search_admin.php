@@ -59,7 +59,6 @@ include("session.php");
 	
 				if( isset( $_POST['search'])){
 					$search_key = mysqli_real_escape_string( $db, $_POST['search_key']);
-					$filter = mysqli_real_escape_string( $db, $_POST['filter']);
 					//echo( "<tr> <td>".$search_key."</td> </tr><br/>");
 					//echo( "<tr> <td>".$filter."</td> </tr><br/>");
 		
