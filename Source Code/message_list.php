@@ -2,7 +2,7 @@
 
 	include("session.php");
 
-    $uid = mysqli_real_escape_string($db,$_POST['login_id']);
+    $uid = mysqli_real_escape_string($db,$_SESSION['login_id']);
     $query = "SELECT * FROM user WHERE user_id = '$uid' ";
     $result = mysqli_query($db, $query);
     $user_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
@@ -64,12 +64,14 @@
 						$result = mysqli_query($db, $query);
 						$query2 = "SELECT COUNT(*) FROM User U , SENDS_MESSAGE M WHERE M.receiver_id = '$uid' AND M.sender_id = U.user_id";
 						$result2 = mysqli_query($db, $query2);
-			            while ($row = mysqli_fetch_array($result, MYSQL_NUM)) { ?>
+						if($result2 == FALSE){
+			            while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) { ?>
 			                <tr>
 			                    <td><?php echo $row[0]?></td>
 			                    <td><?php echo $row[1]?></td>
 			                </tr>
 			            <?php }
+			        }
 			        ?>
 			    </tbody>
 			</table>
