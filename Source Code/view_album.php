@@ -20,11 +20,11 @@
     $result = mysqli_query($db, $query);
     $artist_ids = array();
     while($artist_array = mysqli_fetch_array($result,MYSQLI_ASSOC)){
-        $artist_ids[] = artist_array['artist_id'];
+        $artist_ids[] = $artist_array['artist_id'];
     }
 
     $artist_names = array();
-    for($i = 0; $i < artist_ids.count(); $i++){
+    for($i = 0; $i < count($artist_ids); $i++){
         $a_id = $artist_ids[$i];
         $query = "SELECT artist_name FROM Artist WHERE artist_id = {$a_id}";
         $result = mysqli_query($db, $query);
@@ -79,9 +79,9 @@
 <div class="container">
   <h3>Album <?php echo $album_name;?></h3> by Artist 
   <?php
-      for ($i=0; $i < $artist_names.count(); $i++) { 
+      for ($i=0; $i < count($artist_names); $i++) { 
         $art_id = artist_ids[$i];
-        echo "<a href = view_artist.ph?artist_id = {$art_id}>" . $artist_names[$i] . "</a>";
+        echo "<a href = \"<view_artist.ph?artist_id = {$art_id}\">" . $artist_names[$i] . "</a>";
         if($artist_names.count() != 1 && $i < $artist_names.count() - 1){
           echo ", ";
         }
@@ -89,7 +89,7 @@
     ?>
    <br>
    <h2>
-    From Publisher <?php echo "<a href = view_publisher.php?publisher_id = {$publisher_id}> {$publisher_name}</a>"; ?>
+    From Publisher <?php echo "<a href = \"view_publisher.php?publisher_id = {$publisher_id}\"> {$publisher_name}</a>"; ?>
    </h2>
 </div>
 

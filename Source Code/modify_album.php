@@ -160,7 +160,7 @@
       echo "<td>" . $row[1] . "</td>";
       echo "<td>" . $row[2] . "</td></a>";
       echo "<td> <input type = \"checkbox\" name = \"check_list[]\" value = \"{$t_id}\"></td>";
-      echo "</tr>"İ
+      echo "</tr>";
   }
   ?>
 </table>

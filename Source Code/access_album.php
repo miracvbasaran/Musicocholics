@@ -111,7 +111,7 @@
   $result = mysqli_query($db, $query_tracks);
   
   while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
-      echo "<a href = view_track.php?track_id = ".$row[0]."><tr>";
+      echo "<a href = \"view_track.php?track_id = ".$row[0]."\"><tr>";
       echo "<td>" . $row[1] . "</td>";
       echo "<td>" . $row[2] . "</td>";
       echo "<td>" . $row[3] . "</td>";

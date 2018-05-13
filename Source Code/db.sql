@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `album` (
 `album_name` VARCHAR(45) NOT NULL,
 `picture` VARCHAR(1024),
 `album_type` VARCHAR(40) ,
-`publisher_date` DATE NOT NULL,
+`published_date` DATE NOT NULL,
 `publisher_id` INT NOT NULL,
 PRIMARY KEY(`album_id`),
 FOREIGN KEY(`publisher_id`) REFERENCES `publisher`(`publisher_id`) ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
