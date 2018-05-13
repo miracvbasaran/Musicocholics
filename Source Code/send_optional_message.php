@@ -17,7 +17,7 @@
     				echo ' <script type="text/javascript"> alert("There is no such Person."); </script>';
     			}
     			else {
-    				$receiver_id = $receiver_array['receiver_id'];
+    				$receiver_id = $receiver_array['person_id'];
     				$date = new DateTime();
     				$query3 = "INSERT INTO send_message(sender_id, receiver_id, date, message) VALUES({$uid}, {$receiver_id}, {$date->getTimestamp()}, {$text_message})";
     				header("location: message_list.php");
