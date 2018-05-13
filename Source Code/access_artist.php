@@ -77,7 +77,7 @@
 
     
 <div class="container">
-  <table style="width:100%">
+  <table class = "table table-hover" style="width:100%">
   <tr>
     <th>Album Name</th>
     <th>Album Type</th> 

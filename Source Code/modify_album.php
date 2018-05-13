@@ -66,7 +66,7 @@
       $insertion_date = date(Y-m-d);
       $query = "INSERT INTO Track(album_name, album_type, published_date) VALUES({$new_album_name}, {$new_album_type}, {$new_album_publish_date})";
       if(mysqli_query($db, $query) === TRUE){
-          $query = "SELECT LAST_INSERT_ID()"
+          $query = "SELECT MAX(album_id) FROM Album";
           $result = mysqli_query($db, $query);
           $index_array = mysqli_fetch_array($result, MYSQLI_NUM);
           $album_id = $index_array[0];
@@ -142,7 +142,7 @@
  </form> 
 <div class="container">
   <form method="post" action="">
-  <table style="width:100%">
+  <table class = "table table-hover" style="width:100%">
   <tr>
     <th>Song Name</th>
     <th>Length</th> 
@@ -153,14 +153,14 @@
   $query_album = "SELECT track_name, duration, price, track_id FROM Track WHERE Track.album_id = ${album_id} ORDER BY date_of_addition";
   $result = mysqli_query($db, $query_album);
   
-  while ($row = mysql_fetch_array($result, MYSQLI_NUM)) {
+  while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
       $t_id = $row[3];
       echo "<a href = \"view_track.ph?track_id = {$t_id}\"><tr>";
       echo "<td>" . $row[0] . "</td>";
       echo "<td>" . $row[1] . "</td>";
       echo "<td>" . $row[2] . "</td></a>";
       echo "<td> <input type = \"checkbox\" name = \"check_list[]\" value = \"{$t_id}\"></td>";
-      echo "</tr>" 
+      echo "</tr>"İ
   }
   ?>
 </table>

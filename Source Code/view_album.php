@@ -97,7 +97,7 @@
 </div> 
 
 <div class="container">
-  <table style="width:100%">
+  <table class = "table table-hover" style="width:100%">
   <tr>
     <th>Song Name</th>
     <th>Length</th> 
@@ -107,12 +107,12 @@
   $query_tracks = "SELECT track_id, track_name, duration, price FROM Track T WHERE T.album_id = '$album_id' ORDER BY date_of_addition";
   $result = mysqli_query($db, $query_tracks);
   
-  while ($row = mysql_fetch_array($result, MYSQL_NUM)) {
+  while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
       echo "<a href = \"view_track.php?track_id = ".$row[0]."\"><tr>";
       echo "<td>" . $row[1] . "</td>";
       echo "<td>" . $row[2] . "</td>";
       echo "<td>" . $row[3] . "</td>";
-      echo "</tr></a>" 
+      echo "</tr></a>" ;
   }
   ?>
 </table>

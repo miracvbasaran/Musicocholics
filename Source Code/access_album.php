@@ -100,7 +100,7 @@
 
 
 <div class="container">
-  <table style="width:100%">
+  <table class = "table table-hover" style="width:100%">
   <tr>
     <th>Song Name</th>
     <th>Length</th> 
