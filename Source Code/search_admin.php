@@ -50,7 +50,7 @@ include("session.php");
 					<input type="checkbox" name="filter_playlist" value="playlist"/> Playlist &nbsp;&nbsp; 
 					<tr><td><a href='advanced_playlist_search.php'> Advanced Playlist Search</a></td></tr><br/>
 					<input type="checkbox" name="filter_user" value="user"/> User &nbsp;&nbsp; 
-					<tr><td><a href='advanced_user_search.php'> Advanced User Search</a></td></tr><br/><br/>
+					<tr><td><a href='advanced_user_search_admin.php'> Advanced User Search</a></td></tr><br/><br/>
 				</font>
 			</form>
 		</div>
