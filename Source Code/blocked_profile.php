@@ -16,18 +16,6 @@
 
     $query3 = "SELECT picture FROM user WHERE user_id = '$blocked_id' ";
     $picture_b = mysqli_query($db, $query3);
-    
-
-    //$query3 = "SELECT count(*) as $count_b FROM blocks WHERE blocked_id = '$blocked_id'
-    //AND blocker_id = $uid ";
-    //$result3 = mysqli_query($db, $query3);
-    
-    if(isset($_POST['unblock_button']))
-    {
-      $query3 = "DELETE FROM blocks WHERE ('$uid' = blocker_id AND '$blocked_id' = blocked_id ) ";
-      header("location: nonfriend_profile.php?other_id={$blocked_id}");
-    }
-
 
 
 ?>
@@ -66,26 +54,32 @@
 <div class="container">
 
   
-  <h3>This is, </h3> <?php echo $username_b;?>
-  	<p> 
-   
+  <h3>This is <?php echo $username_b;?> </h3> 
+  	
+
      <div align="left" class="col-md-6 col-md-offset-3"><img class="img-circle img-responsive" src="assets/img/ <?php echo $picture_b; ?>" width="200" height="200"></div>
+
+   
+
+    <div class = "container" align = "right">  
+    <form method="post" action="">
+
+       <input id='Submit' name='unblock_button' type='Submit' class="btn btn-default" value='UNBLOCK'>
+
+    </form>
+    </div>
 
 
     <?php 
-        if($result3 == 1 ){
-          printf("You blocked %s", $username_b);
 
-          echo "<input id='Submit' name='unblock_button' value='Submit' type='button'>";
-        }
-        else{
-          printf("You are blocked from %s", $username_b);
-        }
-        ?>
-    </p>
-  
-
+      if(isset($_POST['unblock_button']))
+      {
+          $query3 = "DELETE FROM blocks WHERE ('$uid' = blocker_id AND '$blocked_id' = blocked_id ) ";
+          header("location: nonfriend_profile.php?other_id=".$blocked_id);
+      }
+    ?>
 </div>
+
 <div> 	
 <footer>
   <?php
