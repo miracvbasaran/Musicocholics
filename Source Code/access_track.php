@@ -48,11 +48,11 @@
       $query4 = "CALL DeleteTrack({$track_id})";
       $result4 = mysqli_query($db, $query4);
       if($result4){
-        echo "<script type=\"text/javascript\"> alert(\"Track could not be deleted!\"); </script>";
-      }
-      else{
         echo "<script type=\"text/javascript\"> alert(\"Track succesfully deleted!\"); </script>";
         header("Location: admin.php");
+      }
+      else{
+        echo "<script type=\"text/javascript\"> alert(\"Track could not be deleted!\"); </script>";
       }
       
     }

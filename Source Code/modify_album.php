@@ -118,18 +118,15 @@
     </nav>
 
    <div align="center" class="col-md-6 col-md-offset-3"><img class="img-circle img-responsive" src="assets/img/ <?php echo $picture_v; ?>" width="200" height="200"></div>
-<div align = "center">
+<div class = "container" align = "center">
 <form action="" method="post" enctype="multipart/form-data">
     <input align = "center" class="btn btn-primary btn-sm" type="file" name="photo" id="photo" accept="image/*"> <button class="btn btn-success btn-sm" type="submit" name="uploadpic">Update</button>
  </form></div>
-<div class="container">
-
-
-
-<form method="post" action="">
-  <div class = "container" align = "center"><div class="col-xs-5" align = "center"><h3><input type="text" class = "form-control" name="album_name" value= <?php echo $album_name; ?> autofocus> by 
-
+<div class = "container" align = "center">
+  <h3>
 <?php
+      echo $album_name;
+      echo "<small>";
       for ($i=0; $i < count($artist_names); $i++) { 
         $art_id = $artist_ids[$i];
         echo "<a href = \"access_artist.php?artist_id={$art_id}\">" . $artist_names[$i] . "</a>";
@@ -138,18 +135,26 @@
         }
       }
     ?>
-</h3></div></div>
-  <br><div align = "center">
+</small>
+</h3>
+</div>
+
+
+<form method="post" action="">
+  <div class = "container" align = "center"><div class = "col-xs-4" align = "center" ><input type="text" class = "form-control" name="album_name" default= <?php echo $album_name; ?> value= <?php echo $album_name; ?> autofocus> by 
+
+</div></div>
+  <br><div class = "container" align = "center">
   <div class="col-xs-3">Album Type: 
   <select class = "form-control" name="album_type">
     <option value="Album">Album</option>
     <option value="Single">Single</option>
   </select></div>
  <div class="col-xs-3">Date: <input type="date" class = "form-control" name="published_date" value= <?php echo $published_date ?> autofocus></div>
-  <input type="submit" name="apply" value="Apply"  class = "btn btn-success"> </div>
+  <div class="col-xs-3"><br><input type="submit" name="apply" value="Apply"  class = "btn btn-success"> </div>
 
- </form> 
-<div class="container">
+ </form> </div>
+<div class="container" align = "center">
   <form method="post" action="">
   <table class = "table table-hover" style="width:100%">
   <tr>

@@ -31,7 +31,7 @@
           $query = "UPDATE Artist SET description = '{$description}' WHERE artist_id = {$artist_id};";
           $result = mysqli_query($db, $query);
       }
-      header("location: modify_artist.php?artist_id=".$artist_id);
+      header("location: access_artist.php?artist_id=".$artist_id);
     }
     if(isset($_POST['delete_albums']))
     {
@@ -109,19 +109,18 @@
       </div>
     </nav>
 
-   <div align="center" class="col-md-6 col-md-offset-3"><img class="img-circle img-responsive" src="assets/img/ <?php echo $picture_v; ?>" width="200" height="200"></div>
-<div class = "center"><form action="" method="post" enctype="multipart/form-data">
+   <div align="center" class="container"><img class="img-circle img-responsive" src="assets/img/ <?php echo $picture_v; ?>" width="200" height="200"></div>
+<div class = "container" align = "center"><form action="" method="post" enctype="multipart/form-data">
     <input class="btn btn-primary btn-sm" type="file" name="photo" id="photo" accept="image/*"> <button class="btn btn-success btn-sm" type="submit" name="uploadpic">Update</button>
  </form></div>
-<div class="container">
 
 
 
 <form method="post" action=""><div class="container" align = "center">
-   <div class="form-group"><div class = "container" align = "center"><div class="col-xs-4"><input type="text" class = "form-control" name="name" value= <?php echo "'".$artist_name."'"; ?> autofocus>
-  <br></div></div></div>
+   <div class="form-group"><div class="col-xs-4"><input type="text" class = "form-control" name="artist_name" default = <?php echo "'".$artist_name."'"; ?> value= <?php echo "'".$artist_name."'"; ?> autofocus>
+  <br></div>
   <div class="col-xs-4"><input type="text" class = "form-control" name="description" value= <?php echo "'".$description."'"; ?> autofocus> <br></div>
-  <div class="container"><input type="submit" name="apply" value="Apply"  class = "btn btn-success"> </div>
+  <div class="col-xs-4"><input type="submit" name="apply" value="Apply"  class = "btn btn-success"> </div></div>
 </div>
  </form> 
 
