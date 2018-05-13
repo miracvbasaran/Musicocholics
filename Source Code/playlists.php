@@ -2,7 +2,7 @@
 
 	include("session.php");
 
-    $uid = mysqli_real_escape_string($db,$_POST['login_id']);
+    $uid = mysqli_real_escape_string($db,$_SESSION['login_id']);
     $query1 = "SELECT * FROM user WHERE user_id = '$uid' ";
     $result1 = mysqli_query($db, $query1);
     $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
@@ -50,22 +50,24 @@
 			<h3> Your Playlists: </h3> <br>
 			<p>
 				<?php
-					$queryOP = "SELECT P.playlist_name FROM Playlist P WHERE P.creator_id = '$uid' "
+					$queryOP = "SELECT P.playlist_name FROM Playlist P WHERE P.creator_id = '$uid' ";
 					$resultOP = mysqli_query($db, $queryOP);
-					while( $row = mysql_fetch_array($resultOP, MYSQL_NUM) ) {
-						printf("%s\n", $row[0]);  
+					if($resultOP != FALSE){
+						while( $row = mysqli_fetch_array($resultOP, MYSQLI_NUM) ) {
+							printf("%s\n", $row[0]);  
+						}
 					}
 				?>
 			</p>
 
-			<p> <input id='Submit' name='addplaylist_button' value='Submit' type='button' value='ADD PLAYLIST'> </p>
+			<p> <input id='Submit' name='addplaylist_button'  type='button' value='ADD PLAYLIST'> </p>
 
 			<h3> Your Followed Playlists: </h3> <br>
 			<p>
 				<?php
-					$queryFP = "SELECT P.playlist_name FROM Playlist P , Follows F WHERE F.user_id = '$uid' AND F.playlist_id = P.playlist_id"
+					$queryFP = "SELECT P.playlist_name FROM Playlist P , Follows F WHERE F.user_id = '$uid' AND F.playlist_id = P.playlist_id";
 					$resultFP = mysqli_query($db, $queryFP);
-					while( $row = mysql_fetch_array($resultFP, MYSQL_NUM) ) {
+					while( $row = mysqli_fetch_array($resultFP, MYSQLI_NUM) ) {
 						printf("%s\n", $row[0]);  
 					}
 				?>
