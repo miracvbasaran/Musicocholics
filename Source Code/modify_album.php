@@ -126,9 +126,10 @@
 <form method="post" action="">
   <div class="container" align = "center"><h3><input type="text" name="album_name" value= <?php echo $album_name; ?> autofocus> by 
 
-    <?php
+<?php
       for ($i=0; $i < count($artist_names); $i++) { 
-        echo $artist_names[$i];
+        $art_id = $artist_ids[$i];
+        echo "<a href = \"access_artist.ph?artist_id={$art_id}\">" . $artist_names[$i] . "</a>";
         if(count($artist_names) != 1 && $i < count($artist_names) - 1){
           echo ", ";
         }
@@ -160,7 +161,7 @@
   
   while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
       $t_id = $row[3];
-      echo "<a href = \"view_track.ph?track_id = {$t_id}\"><tr>";
+      echo "<a href = \"view_track.ph?track_id={$t_id}\"><tr>";
       echo "<td>" . $row[0] . "</td>";
       echo "<td>" . $row[1] . "</td>";
       echo "<td>" . $row[2] . "</td></a>";

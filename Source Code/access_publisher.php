@@ -5,10 +5,15 @@
     $publisher_id = $_GET['publisher_id'];
     $query2 = "SELECT * FROM Publisher WHERE publisher_id = {$publisher_id} ";
     $result2 = mysqli_query($db, $query2);
-    $publisher_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
-    $publisher_name = $publisher_array['publisher_name'];
-    $country = $publisher_array['country'];
-    $city = $publisher_array['city'];
+    if($result2 === FALSE){
+      echo "<script type=\"text/javascript\"> alert(\"There is no publisher to show!\"); </script>";
+    }
+    else{
+      $publisher_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
+      $publisher_name = $publisher_array['publisher_name'];
+      $country = $publisher_array['country'];
+      $city = $publisher_array['city'];
+    }
 
     if(isset($_POST['modify_publisher_button']))
     {
@@ -39,7 +44,7 @@
 <nav class="navbar navbar-inverse">
       <div class="container-fluid">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="#">Home</a></li>
+          <li class="active"><a href="admin.php">Home</a></li>
           <li><a href="search_admin.php">Search</a></li>
           <li><a href="add_track.php">Add Track</a></li>
           <li><a href="add_album.php">Add Album</a></li>
@@ -85,7 +90,7 @@
   
   while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
       $a_id = $row[3];
-      echo "<a href = \"view_album.php?album_id = {$a_id}\"<tr>";
+      echo "<a href = \"view_album.php?album_id={$a_id}\"<tr>";
       echo "<td>" . $row[0] . "</td>";
       echo "<td>" . $row[1] . "</td>";
       echo "<td>" . $row[2] . "</td>";

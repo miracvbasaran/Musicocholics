@@ -5,20 +5,36 @@
     $track_id = $_GET['track_id'];
     $query2 = "SELECT * FROM track WHERE track_id = {$track_id} ";
     $result2 = mysqli_query($db, $query2);
-    $track_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
-    $track_name = $track_array['track_name'];
-    $recording_type = $track_array['recording_type'];
-    $duration = $track_array['duration'];
-    $danceability = $track_array['danceability'];
-    $acousticness = $track_array['acousticness'];
-    $instrumentalness = $track_array['instrumentalness'];
-    $speechness = $track_array['speechness'];
-    $balance = $track_array['balance'];
-    $loudness = $track_array['loudness'];
-    $language = $track_array['language'];
-    $price = $track_array['price'];
-    $date_of_addition = $track_array['date_of_addition'];
-    $album_id = $track_array['album_id'];
+    if($result2 === FALSE){
+      echo "<script type=\"text/javascript\"> alert(\"There is no track to show!\"); </script>";
+    }
+    else{
+      $track_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
+      $track_name = $track_array['track_name'];
+      $recording_type = $track_array['recording_type'];
+      $duration = $track_array['duration'];
+      $danceability = $track_array['danceability'];
+      $acousticness = $track_array['acousticness'];
+      $instrumentalness = $track_array['instrumentalness'];
+      $speechness = $track_array['speechness'];
+      $balance = $track_array['balance'];
+      $loudness = $track_array['loudness'];
+      $language = $track_array['language'];
+      $price = $track_array['price'];
+      $date_of_addition = $track_array['date_of_addition'];
+      $album_id = $track_array['album_id'];
+
+      $query2 = "SELECT * FROM Album WHERE album_id = {$album_id} ";
+      $result2 = mysqli_query($db, $query2);
+      if($result2 === FALSE){
+        echo "<script type=\"text/javascript\"> alert(\"The track does not belong to an album!\"); </script>";
+      }
+      else{
+        $album_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
+        $album_name = $album_array['album_name'];
+      }
+    }
+
     
     $query2 = "SELECT * FROM Album WHERE album_id = {$album_id} ";
     $result2 = mysqli_query($db, $query2);
@@ -127,7 +143,8 @@
 
 
 <form method="post" action="">
-  Track Name: <input type="text" name="track_name" class = "form-control" value= <?php echo $track_name; ?> autofocus><br>
+  Track Name: <input type="text" name="track_name" class = "form-control" value= <?php echo $track_name; ?> autofocus> in Album <?php echo "<a href= \"access_album.php?album_id={$album_id}\">{$album_name}</a>" ?><br>
+
   Recording Type: <select class = "form-control" name="recording_type">
     <option value="Live">Live</option>
     <option value="Studio">Studio</option>
