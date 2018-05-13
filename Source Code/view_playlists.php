@@ -5,8 +5,27 @@
     $result1 = mysqli_query($db, $query1);
     $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
 
-    $other_user_id = $_POST['other_id'];
-
+    if(isset($_POST['create_playlist'])) {
+    	if(isset($_POST['playlist_name'])) {
+    		if(isset($_POST['playlist_description'])) {
+    			$playlist_name = $_POST['playlist_name'];
+    			$playlist_description = $_POST['playlist_description'];
+    			$date = new DateTime();
+    			$query_insert = "INSERT INTO Playlist(playlist_name, description, date) VALUES({$playlist_name}, {$playlist_description}, {$date->getTimestamp(})";
+    			$result_insert = mysqli_query($db, $query_insert);
+         		$query5 = "SELECT MAX(playlist_id) FROM Playlist";
+         		$result5 = mysqli_query($db, $query5);
+         		$index_array = mysqli_fetch_array($result5, MYSQLI_NUM);
+        	  	header("location: view_own_playlist.php?playlist_id=".$index_array[0]);
+    		}
+    		else {
+    			echo ' <script type="text/javascript"> alert("Description is not entered."); </script>';
+    		}
+    	}
+    	else {
+			echo ' <script type="text/javascript"> alert("Playlist name is not entered."); </script>';
+    	}
+    }
 ?>
 
 <!DOCTYPE html>
@@ -43,6 +62,19 @@
 
 	<div class="container">
 		<h3> Playlists </h3> <br>
+		<div align="right" class="container"></div>
+		<p>
+			<form method="post" action="">
+				<input id='Submit' name='create_playlist' type='Submit' value='Create Playlist' class="btn btn-default">
+			</form>
+		</p>
+	</div>
+
+	<div class="container">
+		<form method="post" action="">
+			<input type="text" name="playlist_name" value= "New Playlist Name" autofocus>
+			<input type="text" name="playlist_description" value= "Description" autofocus>
+		</form>
 	</div>
 
 	<div class="container">
@@ -52,11 +84,11 @@
 	    		<th>Description</th> 
 	  		</tr>
 	  		<?php
-	  			$query_playlist = "SELECT P.playlist_id, P.playlist_name, P.description, P.date, FROM Playlist P WHERE P.creator_id = {$other_user_id} ORDER BY P.date";
+	  			$query_playlist = "SELECT P.playlist_id, P.playlist_name, P.description, P.date, FROM Playlist P WHERE P.creator_id = {$uid} ORDER BY P.date";
 	  			$result_playlist = mysqli_query($db, $query_playlist);
 	  			while ($row = mysqli_fetch_array($result_playlist, MYSQLI_NUM)) {
       				$p_id = $row[0];
-      				echo "<a href = \"view_others_playlist.php?playlist_id = {$p_id}\"<tr>";
+      				echo "<a href = \"view_own_playlist.php?playlist_id = {$p_id}\"<tr>";
 	      			echo "<td>" . $row[1] . "</td>";
 	      			echo "<td>" . $row[2] . "</td>";
 	      			echo "</tr></a>" ;

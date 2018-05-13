@@ -5,16 +5,31 @@
     $result1 = mysqli_query($db, $query1);
     $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
     
-    if(isset($_POST['send_optional_message'])) {
-    	header("location: send_optional_message.php?");
+	$receiver_username = $_POST['receiver_username'];
+
+    if(isset($_POST['send_message'])) {
+    	if(isset($_POST['text_message'])) {
+    		$text_message = $_POST['text_message'];
+    		$query2 = "SELECT receiver_id FROM person WHERE username = {$receiver_username}";
+    		$result2 = mysqli_query($db, $query2);
+    		$receiver_array = mysqli_fetch_array($result2, MYSQLI_ASSOC);
+    		$receiver_id = $receiver_array['receiver_id'];
+    		$date = new DateTime();
+    		$query3 = "INSERT INTO send_message(sender_id, receiver_id, date, message) VALUES({$uid}, {$receiver_id}, {$date->getTimestamp()}, {$text_message})";
+    		header("location: message_list.php?");
+    	}
+    	else {
+			echo ' <script type="text/javascript"> alert("Text message is not entered."); </script>';
+    	}
     }
+
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-	<title>Musicholics - Message List</title>
+	<title>Musicholics - Send Message</title>
   	<meta charset="utf-8">
   	<meta name="viewport" content="width=device-width, initial-scale=1">
   	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -42,46 +57,13 @@
 	  	</div>
 	</nav>
 
-	<div class="container">
-		<h3> Messages </h3> <br>
-		<div align="right" class="container"></div>
-		<p>
-			<form method="post" action="">
-				<input id='Submit' name='send_optional_message' type='Submit' value='Send Message' class="btn btn-default">
-			</form>
-		</p>
-	</div>
-
-	<div class="container">
-		<table class = "table table-hover" style="width:100%">
-	  		<tr>
-	    		<th>Name</th>
-	    		<th>Message</th> 
-	  		</tr>
-	  		<?php
-	  			$query_message = "SELECT P.person_id, P.fullname, M.message, FROM sends_message M , Person P WHERE P.person_id = M.sender_id AND M.receiver_id = {uid} ORDER BY M.date";
-	  			$result_message = mysqli_query($db, $query_message);
-	  			while ($row = mysqli_fetch_array($result_message, MYSQLI_NUM)) {
-      				$p_id = $row[0];
-      				$query_friend = "SELECT COUNT(*) as cntfriend FROM friendship F WHERE (F.user1_id={$uid} AND F.user2_id={$p_id}) OR (F.user2_id={$uid} AND F.user1_id={$p_id})";
-      				$result_friend = mysqli_query($db, $query_friend);
-      				$friend_array = mysqli_fetch_array($result_friend, MYSQLI_ASSOC);
-      				$cnt_friend = $friend_array['cntfriend'];
-      				if( $cnt_friend == 0 ) {
-      					echo "<a href = \"nonfriend_profile.php?p_id = {$p_id}\"<tr>";
-	      				echo "<td>" . $row[1] . "</td>";
-	      				echo "<td>" . $row[2] . "</td>";
-	      				echo "</tr></a>" ;
-	      			}
-	      			else {
-      					echo "<a href = \"friend_profile.php?p_id = {$p_id}\"<tr>";
-	      				echo "<td>" . $row[1] . "</td>";
-	      				echo "<td>" . $row[2] . "</td>";
-	      				echo "</tr></a>" ;
-	      			}
-	  			}
-	  		?>
-		</table>
+	<div class="container" align="center">
+		<h3> Send Message </h3> <br>
+		<h3> <?php echo $receiver_username;?> </h3> <br>
+		<form method="post" action="">
+			<input type="text" name="text_message" value= "Text Message" autofocus>
+			<input type="submit" name="send_message" value="Send Message" > 
+		</form>
 	</div>
 
 	<div>   
