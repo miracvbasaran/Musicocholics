@@ -1,12 +1,12 @@
 <?php
 	include("session.php");
-    $uid = mysqli_real_escape_string($db,$_GET['login_id']);
+    $uid = mysqli_real_escape_string($db,$_SESSION['login_id']);
     $query = "SELECT * FROM user WHERE user_id = '$uid' ";
     $result = mysqli_query($db, $query);
     $user_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
 
-    $artist_id = $_GET['artist_id'];
+    $artist_id = $_POST['artist_id'];
     $query2 = "SELECT * FROM Artist WHERE artist_id = '$artist_id' ";
     $result2 = mysqli_query($db, $query2);
     $artist_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);

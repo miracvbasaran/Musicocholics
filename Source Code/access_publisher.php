@@ -1,8 +1,8 @@
 <?php
 	include("session.php");
-    $uid = mysqli_real_escape_string($db,$_GET['login_id']);
+    $uid = mysqli_real_escape_string($db,$_SESSION['login_id']);
 
-    $publisher_id = $_GET['publisher_id'];
+    $publisher_id = $_POST['publisher_id'];
     $query2 = "SELECT * FROM Publisher WHERE publisher_id = {$publisher_id} ";
     $result2 = mysqli_query($db, $query2);
     $publisher_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);

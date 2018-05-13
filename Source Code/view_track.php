@@ -1,13 +1,13 @@
 <?php
 	include("session.php");
-    $uid = mysqli_real_escape_string($db,$_GET['login_id']);
+    $uid = mysqli_real_escape_string($db,$_SESSION['login_id']);
     $query = "SELECT * FROM user WHERE user_id = {$uid} ";
     $result = mysqli_query($db, $query);
     $user_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
     $membership_type = $user_array['membership_type'];
 
 
-    $track_id = $_GET['track_id'];
+    $track_id = $_POST['track_id'];
     $query2 = "SELECT * FROM track WHERE track_id = {$track_id} ";
     $result2 = mysqli_query($db, $query2);
     $track_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
@@ -120,9 +120,9 @@
  
 </div>
   <p> <form method="post" action="">
-       <input id='Submit' name='purchase_track_button' type='Submit' value='Purchase Track'>
+       <input id='Submit' name='purchase_track_button' type='Submit' value='Purchase Track' class="btn btn-default">
 
-       <input id='Submit' name='gift_button' type='Submit' value='Gift'>
+       <input id='Submit' name='gift_button' type='Submit' value='Gift Track' class="btn btn-default">
 
        <input id='Submit' name='play_track_button' type='Submit' value='Play Track' class="btn btn-default">
        </form>
