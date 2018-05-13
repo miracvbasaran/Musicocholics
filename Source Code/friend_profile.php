@@ -99,13 +99,11 @@
     <p> Language: <?php echo $language_f;?></p>
     <p> Birthday: <?php echo $birthday_f;?></p>
 
-<<<<<<< HEAD
 <div class="container" align="right" >
     <form method="post" action="">
-=======
+
 <div align="right" class="container">
  <a href='view_others_playlists.php?other_id=".$view_id."' class="btn btn-success" role="button">View Playlists</a>
->>>>>>> fedc1cc8dfa1d77245fd3379303d6014642586ab
 
        <input id='Submit' name='sendmessage_button' type='Submit' class="btn btn-warning" value='Send Message'>
 
