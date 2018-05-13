@@ -103,7 +103,7 @@
     <form method="post" action="">
 
 <div align="right" class="container">
- <a href='view_others_playlists.php?other_id=".$view_id."' class="btn btn-success" role="button">View Playlists</a>
+ <a href=<?php echo "'view_others_playlists.php?other_id={$view_id}'"; ?> class="btn btn-success" role="button">View Playlists</a>
 
        <input id='Submit' name='sendmessage_button' type='Submit' class="btn btn-warning" value='Send Message'>
 
