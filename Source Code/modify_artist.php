@@ -109,7 +109,7 @@
   <input type="text" name="description" value= <?php echo "\"".$description."\"" ?> autofocus> <br>
   
 
-  <input type="submit" name="apply" value="Apply"  > 
+  <input type="submit" name="apply" value="Apply"  class = "btn btn-default"> 
 
  </form> 
 
@@ -141,7 +141,7 @@
   ?>
 </table>
 
-<input type="submit" name="delete_albums" value="Delete"/>
+<input type="submit" name="delete_albums" value="Delete"/ class = "btn btn-default">
 </form>
 
 </div>
@@ -159,7 +159,7 @@
   <input type="text" name="new_album_publish_date" value= "Publish Date" autofocus>
   
 
-  <input type="submit" name="apply" value="add_album"  > 
+  <input type="submit" name="apply" value="add_album" class = "btn btn-default" > 
 
  </form> 
  </div>
