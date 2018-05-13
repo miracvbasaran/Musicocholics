@@ -136,7 +136,7 @@
       }
     ?>
 </h3></div>
-  <br><div class="form-group row" align = "center">
+  <br><div align = "center">
   Album Type:<div class="col-xs-3">
   <select name="album_type">
     <option value="Album">Album</option>
