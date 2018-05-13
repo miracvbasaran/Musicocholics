@@ -71,7 +71,7 @@
       $insertion_date = date(Y-m-d);
       $query = "INSERT INTO Track(album_name, album_type, date_of_addition) VALUES({$new_track_name}, {$new_track_price}, {$insertion_date})";
       if(mysqli_query($db, $query) === TRUE){
-          $query = "SELECT MAX(album_id) FROM Album";
+          $query = "SELECT LAST_INSERT_ID()";
           $result = mysqli_query($db, $query);
           $index_array = mysqli_fetch_array($result, MYSQLI_NUM);
           $album_id = $index_array[0];
