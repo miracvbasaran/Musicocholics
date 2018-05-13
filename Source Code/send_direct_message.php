@@ -10,7 +10,7 @@
     if(isset($_POST['send_message'])) {
       if(isset($_POST['text_message'])) {
         $text_message = $_POST['text_message'];
-        $query2 = "SELECT receiver_id FROM person WHERE username = {$receiver_username}";
+        $query2 = "SELECT receiver_id FROM person WHERE username = '$receiver_username'";
         $result2 = mysqli_query($db, $query2);
         $receiver_array = mysqli_fetch_array($result2, MYSQLI_ASSOC);
         $receiver_id = $receiver_array['receiver_id'];
