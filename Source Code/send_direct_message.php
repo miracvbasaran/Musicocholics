@@ -15,7 +15,8 @@
     		$receiver_array = mysqli_fetch_array($result2, MYSQLI_ASSOC);
     		$receiver_id = $receiver_array['receiver_id'];
     		$date = new DateTime();
-    		$query3 = "INSERT INTO send_message(sender_id, receiver_id, date, message) VALUES({$uid}, {$receiver_id}, {$date->getTimestamp()}, {$text_message})";
+    		$query3 = "INSERT INTO send_message(sender_id, receiver_id, date, message) VALUES({$uid}, {$receiver_id}, {$date->getTimestamp()}, '$text_message')";
+        $result3 = mysqli_query($db, $query3);
     		header("location: message_list.php");
     	}
     	else {
