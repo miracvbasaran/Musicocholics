@@ -113,9 +113,9 @@
 
 <div align="right" class="container">
   <p> <form method="post" action="">
-       <input id='Submit' name='modify_track_button' type='Submit' type='button' value='Modify Track' class = "btn btn-default">
+       <input id='Submit' name='modify_track_button' type='Submit' type='button' value='Modify Track' class = "btn btn-warning">
 
-       <input id='Submit' name='delete_track_button' type='Submit' type='button' value='Delete Track' class = "btn btn-default">
+       <input id='Submit' name='delete_track_button' type='Submit' type='button' value='Delete Track' class = "btn btn-danger">
        </form>
     </p>
  </div>

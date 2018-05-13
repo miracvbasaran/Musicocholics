@@ -53,6 +53,7 @@
           $query = "UPDATE Album SET published_date = '{$published_date}' WHERE album_id = ${album_id};";
           $result = mysqli_query($db, $query);
       }
+      header("location: access_album.php?album_id=".$album_id);
     }
     if(isset($_POST['delete_tracks'])){
       if(!empty($_POST['check_list'])){

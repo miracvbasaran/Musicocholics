@@ -145,8 +145,7 @@
 
 
 <form method="post" action="">
-  <div class="col-xs-3">Track Name: <input type="text" name="track_name" class = "form-control" value= <?php echo "$track_name"; ?> autofocus> </div><br>
-
+  <div class="col-xs-3">Track Name: <input type="text" name="track_name" class = "form-control" value= <?php echo "$track_name"; ?> autofocus><br></div>
   <div class="col-xs-3">Recording Type: <select class = "form-control" name="recording_type">
     <option value="Live">Live</option>
     <option value="Studio">Studio</option>
@@ -166,7 +165,7 @@
     <option value="German">German</option>
   </select> <br></div>
   
-  <div class="col-xs-3"><input type="submit" name="apply" value="Apply" class = "btn btn-default" align = "right"> </div>
+  <div class="col-xs-3" align = "right"><input type="submit" name="apply" value="Apply" class = "btn btn-success"> </div>
 
 </form> 
 

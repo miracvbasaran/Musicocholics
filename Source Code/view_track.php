@@ -129,11 +129,11 @@
 
 <div align="right" class="container">
        <form method="post" action="">
-       <input id='Submit' name='purchase_track_button' type='Submit' value='Purchase Track' class="btn btn-default">
+       <input id='Submit' name='purchase_track_button' type='Submit' value='Purchase Track' class="btn btn-info">
 
-       <input id='Submit' name='gift_button' type='Submit' value='Gift Track' class="btn btn-default">
+       <input id='Submit' name='gift_button' type='Submit' value='Gift Track' class="btn btn-warning">
 
-       <input id='Submit' name='play_track_button' type='Submit' value='Play Track' class="btn btn-default">
+       <input id='Submit' name='play_track_button' type='Submit' value='Play Track' class="btn btn-success">
        </form>
 </div>
 

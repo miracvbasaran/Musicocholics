@@ -7,6 +7,7 @@
     $result2 = mysqli_query($db, $query2);
     if($result2 === FALSE){
       echo "<script type=\"text/javascript\"> alert(\"There is no publisher to show!\"); </script>";
+      header("admin.php");
     }
     else{
       $publisher_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
@@ -33,7 +34,7 @@
           $query = "UPDATE Publisher SET publisher_name = '{$publisher_name}'' WHERE publisher_id = {$publisher_id};";
           $result = mysqli_query($db, $query);
       }
-      header("Refresh: 0");
+      header("location: access_publisher.php?publisher_id=".$publisher_id);
     }
 
     if(isset($_POST['delete_albums'])){
@@ -85,23 +86,24 @@
    <div align="center" class="col-md-6 col-md-offset-3"><img class="img-circle img-responsive" src="assets/img/ <?php echo $picture_v; ?>" width="200" height="200"></div>
 
 <div class="container" align = "center">
-  <h3>Publisher <?php echo $publisher_name;?></h3> 
+  <div class="container" align = "center">
+  <h2>Publisher <?php echo $publisher_name;?></h2> </div>
 
 
 <form method="post" action="">
-  Name: <input type="text" name="name" value= <?php echo $publisher_name ?> autofocus>
+  <div class="col-xs-3">Name: <input type="text" name="name" value= <?php echo $publisher_name ?> autofocus></div>
   <br>
-  Country: <select name="country">
+  <div class="col-xs-3">Country: <select name="country">
     <option value="Turkey">Turkey</option>
     <option value="USA">USA</option>
     <option value="England">England</option>
     <option value="Germany">Germany</option>
     <option value="Ireland">Ireland</option>
-  </select> <br>
-  City:  <input type="text" name="city" value= <?php echo $city ?> autofocus>
+  </select> <br></div>
+  <div class="col-xs-3">City:  <input type="text" name="city" value= <?php echo $city ?> autofocus></div>
   
 
-  <input type="submit" name="apply" value="Apply"  class = "btn btn-default"> 
+  <input type="submit" name="apply" value="Apply"  class = "btn btn-success"> 
 
 </form> 
 
@@ -131,7 +133,7 @@
   ?>
 </table>
 
-<input type="submit" name="delete_albums" value="Delete" class = "btn btn-default">
+<div class = "container" align = "right"><input type="submit" name="delete_albums" value="Delete" class = "btn btn-danger"></div>
 </form>
 
 </div>

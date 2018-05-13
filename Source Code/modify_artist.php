@@ -22,14 +22,15 @@
     {
       if(isset( ($_POST['artist_name']) )  ){
           $artist_name = $_POST['artist_name'];
-          $query = "UPDATE Artist SET artist_name = {$artist_name} WHERE artist_id = {$artist_id} ";
+          $query = "UPDATE Artist SET artist_name = '{$artist_name}' WHERE artist_id = {$artist_id};";
           $result = mysqli_query($db, $query);
       }
       if(isset( ($_POST['description']) )  ){
           $description = $_POST['description'];
-          $query = "UPDATE Artist SET description = {$description} WHERE artist_id = {$artist_id} ";
+          $query = "UPDATE Artist SET description = '{$description}' WHERE artist_id = {$artist_id};";
           $result = mysqli_query($db, $query);
       }
+      header("location: modify_artist.php?artist_id=".$artist_id);
     }
     if(isset($_POST['delete_albums']))
     {
@@ -71,6 +72,7 @@
         }
 
       
+      }
     }
 ?>
 
@@ -150,7 +152,7 @@
   ?>
 </table>
 
-<input type="submit" name="delete_albums" value="Delete" class = "btn btn-default">
+<input type="submit" name="delete_albums" value="Delete" class = "btn btn-danger">
 </form>
 
 </div>
@@ -168,7 +170,7 @@
   <input type="text" name="new_album_publish_date" value= "Publish Date" autofocus>
   
 
-  <input type="submit" name="apply" value="add_album" class = "btn btn-default" > 
+  <input type="submit" name="apply" value="add_album" class = "btn btn-success" > 
 
  </form> 
  </div>
