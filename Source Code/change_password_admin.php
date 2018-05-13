@@ -1,59 +1,52 @@
 <?php
 	include("session.php");
-    $uid = mysqli_real_escape_string($db,$_SESSION['user_id']);
+    $uid = mysqli_real_escape_string($db,$_SESSION['login_id']);
     $query = "SELECT * FROM Admin WHERE user_id = '$uid' ";
     $result = mysqli_query($db, $query);
-    $admin_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
+
 
     $query2 = "SELECT * FROM person WHERE person_id = '$uid' ";
     $result2 = mysqli_query($db, $query2);
     $person_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
 
+    $username = $person_array['username'];
+    $fullname = $person_array['fullname'];
+    $password = $person_array['password'];
+    $email = $person_array['email'];
 
-    $set = 0;
-    if(isset( ($_POST['apply']) ) ){
-      if(isset( ($_POST['old_pass']) )  ){
-          $query = "SELECT password FROM Person WHERE person_id = '$uid' ";
-          $result = mysqli_query($db, $query);
-          if($_POST['old_pass'] != $password )
-        {
+   if(isset( ($_POST['apply']) ) ){
+
+          $old_pass = $_POST['old_pass'];
+
+          if(  $old_pass != $password )  
+          {
           echo ' <script type="text/javascript"> alert("Old password value is not matched."); </script>';
-        
-        }  
+          }  
 
-      }
       if(isset( ($_POST['new_pass_1']) )  ){
           $newpass = ($_POST['new_pass_1']);
-
       }
       else{
-        echo ' <script type="text/javascript"> alert("You need to enter new password."); </script>';
-       
+        echo ' <script type="text/javascript"> alert("You need to enter new password."); </script>'; 
       }
-      if(isset( ($_POST['new_pass_2']) )   ){
-          if (  ($_POST['new_pass_2']) == $newpass ){
 
-              $query = "UPDATE person SET password = $newpass WHERE person_id = '$uid' ";
-              $result = mysqli_query($db, $query);
-              $set = 1;
+      if(isset( ($_POST['new_pass_2']) )   ){
+          if (  ($_POST['new_pass_2']) == $newpass   ){
+
+              $query1 = "UPDATE person SET password = '$newpass' WHERE person_id = '$uid'";
+              $result1 = mysqli_query($db, $query1);
+              echo ' <script type="text/javascript"> alert("Password has changed successfully."); </script>';
+              header("location: change_general_information.php");
           }
           else{
-            echo ' <script type="text/javascript"> alert("Passwords are not matched."); </script>';
-            
-
+            echo ' <script type="text/javascript"> alert("Passwords are not matched."); </script>';  
           }
-       else{
+      }   
+      else{
         echo ' <script type="text/javascript"> alert("You need to enter new password again."); </script>';
-       
-       } 
-
-       if($set == 1){
-        echo ' <script type="text/javascript"> alert("Password has changed successfully."); </script>';
-       
-          header("location: change_general_information.php?");
-       }
+      } 
       
-        }
+        
     }
 ?>
 
@@ -90,9 +83,11 @@
 
 <form method="post" action="">
   Old password: <input type="psw" name="old_pass" value= "" autofocus>
-  <br>
-  New password: <input type="psw" name="new_pass_1" value="" autofocus><br>
-  Reenter new password  <input type="psw" name="new_pass_2" value=""  autofocus><br>
+  <br><br><br>
+  New password: <input type="psw" name="new_pass_1" value="" autofocus>
+  <br><br><br>
+  Reenter new password  <input type="psw" name="new_pass_2" value=""  autofocus>
+  <br><br><br>
 
   <input type="submit" name="apply" value="Apply" > 
 
