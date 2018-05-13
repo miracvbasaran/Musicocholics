@@ -20,7 +20,7 @@
     				$receiver_id = $receiver_array['receiver_id'];
     				$date = new DateTime();
     				$query3 = "INSERT INTO send_message(sender_id, receiver_id, date, message) VALUES({$uid}, {$receiver_id}, {$date->getTimestamp()}, {$text_message})";
-    				header("location: message_list.php?");
+    				header("location: message_list.php");
     			}
     		}
     		else {
