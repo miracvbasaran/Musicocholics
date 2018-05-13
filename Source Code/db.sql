@@ -87,7 +87,7 @@ PRIMARY KEY(`album_id`),
 FOREIGN KEY(`publisher_id`) REFERENCES `publisher`(`publisher_id`) ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-INSERT INTO `album`(`album_name`, `picture`, `album_type`, `publisher_date`, `publisher_id`) VALUES 
+INSERT INTO `album`(`album_name`, `picture`, `album_type`, `published_date`, `publisher_id`) VALUES 
 ('Ahde Vefa', NULL, 'album', '2015-10-03', 2),
 ('Musaadenizle Cocuklar', NULL, 'album', '1995-10-03', 1),
 ('Takatalvi', NULL, 'album', '2010-12-23', 5),
