@@ -1,6 +1,16 @@
-<?php 
+<?php
+
 	include("session.php");
-	$uid = mysqli_real_escape_string($db,$_SESSION['login_id']);
+
+    $uid = mysqli_real_escape_string($db,$_SESSION['login_id']);
+    $query1 = "SELECT * FROM user WHERE user_id = '$uid' ";
+    $result1 = mysqli_query($db, $query1);
+    $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
+
+	if (isset($_POST['addplaylist_button'])) {
+    	
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -15,23 +25,21 @@
 </head>
 <body>
 
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <ul class="nav navbar-nav">
-      
-      <li><a href="own_profile.php">Profile</a></li>
-      <li><a href="view_playlists.php">Playlist</a></li>
-      <li><a href="view_tracks.php">Tracks</a></li>
-	<li><a href="friends.php">Friends</a></li>
-	<li><a href="message_list.php">Messages</a></li>
-	<li><a href="search.php">Search</a></li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <li><a href="change_general_information.php"><span class="glyphicon glyphicon-user"></span> Settings</a></li>
-      <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-    </ul>
-  </div>
-</nav>
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<ul class="nav navbar-nav">
+				<li><a href="own_profile.php">Profile</a></li>
+				<li><a href="playlists.php">Playlist</a></li>
+				<li><a href="view_tracks.php">Tracks</a></li>
+				<li><a href="friends.php">Friends</a></li>
+				<li><a href="message_list.php">Messages</a></li>
+				<li class="active"><a href="search.php">Search</a></li>
+			</ul>
+		    <ul class="nav navbar-nav navbar-right">
+				<li><a href="change_general_information.php"><span class="glyphicon glyphicon-user"></span> Settings</a></li>
+				<li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+		    </ul>
+		</div>
 
 	
 		<div align = "center">
@@ -43,16 +51,15 @@
 						<input type = "text" name = "search_key" placeholder = "Search.."> 
 						<input id = "" value = "Search" name = "search" type = "submit"> </button> <br/><br/>
 					</font>
-					<input type="radio" name="filter" value="all"/> All <br/>
-					<input type="radio" name="filter" value="track"/> Track 
+					<input type="checkbox" name="filter_track" value="track"/> Track &nbsp;&nbsp;
 					<tr><td><a href='advanced_track_search.php'> Advanced Track Search</a></td></tr><br/>
-					<input type="radio" name="filter" value="album"/> Album 
+					<input type="checkbox" name="filter_album" value="album"/> Album &nbsp;&nbsp;
 					<tr><td><a href='advanced_album_search.php'> Advanced Album Search</a></td></tr><br/>
-					<input type="radio" name="filter" value="artist"/> Artist 
+					<input type="checkbox" name="filter_artist" value="artist"/> Artist &nbsp;&nbsp; 
 					<tr><td><a href='advanced_artist_search.php'> Advanced Artist Search</a></td></tr><br/>
-					<input type="radio" name="filter" value="playlist"/> Playlist  
+					<input type="checkbox" name="filter_playlist" value="playlist"/> Playlist &nbsp;&nbsp; 
 					<tr><td><a href='advanced_playlist_search.php'> Advanced Playlist Search</a></td></tr><br/>
-					<input type="radio" name="filter" value="user"/> User 
+					<input type="checkbox" name="filter_user" value="user"/> User &nbsp;&nbsp; 
 					<tr><td><a href='advanced_user_search.php'> Advanced User Search</a></td></tr><br/><br/>
 				</font>
 			</form>
@@ -66,31 +73,31 @@
 					//echo( "<tr> <td>".$search_key."</td> </tr><br/>");
 					//echo( "<tr> <td>".$filter."</td> </tr><br/>");
 		
-					if( $filter == "track" || $filter == "all"){ //TRACK
+					if( isset( $_POST['filter_track'])){//TRACK
 						$query = mysqli_query( $db, "SELECT * FROM Track WHERE track_name LIKE '%$search_key%';");
 						while( $row = $query->fetch_assoc()){ //printing every track with that track name
-							echo( "<tr> <td><a href='view_track.php?track_id=".$row['track_id']."'>".$row['track_name']."</a></td> </tr><br/>");
+							echo( "<tr> <td><a href='track.php?track_id=".$row['track_id']."'>".$row['track_name']."</a></td> </tr><br/>");
 						}
 					}
-					if( $filter == "album" || $filter == "all"){ //ALBUM
+					if( isset( $_POST['filter_album'])){ //ALBUM
 						$query = mysqli_query( $db, "SELECT * FROM Album WHERE album_name LIKE '%$search_key%';");
 						while( $row = $query->fetch_assoc()){ //printing every album with that album name
-							echo( "<tr> <td><a href='view_album.php?album_id=".$row['album_id']."'>".$row['album_name']."</a></td> </tr><br/>");
+							echo( "<tr> <td><a href='album.php?album_id=".$row['album_id']."'>".$row['album_name']."</a></td> </tr><br/>");
 						}
 					}
-					if( $filter == "artist" || $filter == "all"){ //ARTIST
+					if( isset( $_POST['filter_artist'])){ //ARTIST
 						$query = mysqli_query( $db, "SELECT * FROM Artist WHERE artist_name LIKE '%$search_key%';");
 						while( $row = $query->fetch_assoc()){ //printing every artist with that artist name
-							echo( "<tr><td><a href='view_artist.php?artist_id=".$row['artist_id']."'>".$row['artist_name']."</a></td></tr><br/>");
+							echo( "<tr><td><a href='artist.php?artist_id=".$row['artist_id']."'>".$row['artist_name']."</a></td></tr><br/>");
 						}
 					}
-					if( $filter == "playlist" || $filter == "all"){ //PLAYLIST
+					if( isset( $_POST['filter_playlist'])){ //PLAYLIST
 						$query = mysqli_query( $db, "SELECT * FROM Playlist WHERE playlist_name LIKE '%$search_key%';");
 						while( $row = $query->fetch_assoc()){ //printing every playlist with that playlist name
-							echo( "<tr><td><a href='view_playlist.php?playlist_id=".$row['playlist_id']."'>".$row['playlist_name']."</a></td></tr><br/>");
+							echo( "<tr><td><a href='playlist.php?playlist_id=".$row['playlist_id']."'>".$row['playlist_name']."</a></td></tr><br/>");
 						}
 					}
-					if( $filter == "user" || $filter == "all"){ //USER
+					if( isset( $_POST['filter_user'])){ //USER
 						$query = mysqli_query( $db, "SELECT * FROM Person, User WHERE (username LIKE '%$search_key%') AND user_id = person_id;");
 						
 						$id_list = new SplDoublyLinkedList;
@@ -104,7 +111,7 @@
 								//printing friends
 								$fquery = mysqli_query( $db, "SELECT * FROM Friendship WHERE (user1_id = '$uid' OR user2_id = '$uid') AND (user1_id = '$id' OR user2_id = '$id');");
 								while( $frow = $fquery->fetch_assoc()){ //for each friend
-									echo( "<tr><td><a href='friend_profile.php?other_id=".$id."'>".$row['username']."</a></td></tr><br/>");
+									echo( "<tr><td><a href='friend_profile.php?friend_id=".$id."'>".$row['username']."</a></td></tr><br/>");
 									$id_list->push($id);
 								}
 								
@@ -129,7 +136,7 @@
 										
 								}
 								if( $id_count == $id_list->count()){ //not friend, not blocked -> non-friend
-									echo( "<tr><td><a href='nonfriend_profile.php?other_id=".$id."'>".$row['username']."</a></td></tr><br/>");
+									echo( "<tr><td><a href='nonfriend_profile.php?nonfriend_id=".$id."'>".$row['username']."</a></td></tr><br/>");
 								}
 								
 							}
@@ -141,7 +148,10 @@
 				?>
 	
 		<br/><br/><br/>
-
+		<div align = "center">
+			<tr><td><a href='logout.php'>Logout</a></td></tr>
+		</div>
+	</nav>
 
 	<div>
 	<footer>
