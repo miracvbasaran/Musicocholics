@@ -69,7 +69,7 @@
    <div align="center" class="col-md-6 col-md-offset-3"><img class="img-circle img-responsive" src="assets/img/ <?php echo $picture_v; ?>" width="200" height="200"></div>
 <div class = "container">
 <div class="container" align = "center">
-  <h3>Publisher <?php echo $publisher_name;?></h3> 
+  <h2><?php echo $publisher_name;?></h2> 
   <p>Country: <?php echo $country ?>
   <p>City:  <?php echo $city ?>
 
