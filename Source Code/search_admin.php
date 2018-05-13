@@ -37,70 +37,67 @@ include("session.php");
 				<font color="white">
 					<br/><br/><br/><br/>MUSICHOLICS<br/><br/>Search<br/><br/><br/><br/>
 					
-					
 					<font color="black">
 						<input type = "text" name = "search_key" placeholder = "Search.."> 
-						<input id = "" value = "Search" name = "search" type = "submit"> </button>
+						<input id = "" value = "Search" name = "search" type = "submit"> </button> <br/><br/>
 					</font>
-					<br/><br/>
-					<input type="radio" name="filter" value="all"/> All &nbsp; &nbsp;
-					<input type="radio" name="filter" value="track"/> Track &nbsp; &nbsp;
-					<input type="radio" name="filter" value="album"/> Song &nbsp; &nbsp;
-					<input type="radio" name="filter" value="artist"/> Artist &nbsp; &nbsp;
-					<input type="radio" name="filter" value="playlist"/> Playlist &nbsp; &nbsp;
-					<input type="radio" name="filter" value="user"/> User
-					<br>
+					<input type="checkbox" name="filter_track" value="track"/> Track &nbsp;&nbsp;
+					<tr><td><a href='advanced_track_search.php'> Advanced Track Search</a></td></tr><br/>
+					<input type="checkbox" name="filter_album" value="album"/> Album &nbsp;&nbsp;
+					<tr><td><a href='advanced_album_search.php'> Advanced Album Search</a></td></tr><br/>
+					<input type="checkbox" name="filter_artist" value="artist"/> Artist &nbsp;&nbsp; 
+					<tr><td><a href='advanced_artist_search.php'> Advanced Artist Search</a></td></tr><br/>
+					<input type="checkbox" name="filter_playlist" value="playlist"/> Playlist &nbsp;&nbsp; 
+					<tr><td><a href='advanced_playlist_search.php'> Advanced Playlist Search</a></td></tr><br/>
+					<input type="checkbox" name="filter_user" value="user"/> User &nbsp;&nbsp; 
+					<tr><td><a href='advanced_user_search.php'> Advanced User Search</a></td></tr><br/><br/>
 				</font>
 			</form>
 		</div>
 
-		<?php
+				<?php
 	
-		if( isset( $_POST['search'])){
-			$search_key = mysqli_real_escape_string( $db, $_POST['search_key']);
-			$filter = mysqli_real_escape_string( $db, $_POST['filter']);
-			//echo( "<tr> <td>".$search_key."</td> </tr><br/>");
-			//echo( "<tr> <td>".$filter."</td> </tr><br/>");
-
-			if( $filter == "track" || $filter == "all"){ //TRACK
-				$query = mysqli_query( $db, "SELECT * FROM Track WHERE track_name LIKE '%$search_key%';");
-				while( $row = $query->fetch_assoc()){ //printing every track with that track name
-					echo( "<tr> <td><a href='track.php?track_id=".$row['track_id']."'>".$row['track_name']."</a></td> </tr><br/>");
-				}
-			}
-			if( $filter == "album" || $filter == "all"){ //ALBUM
-				$query = mysqli_query( $db, "SELECT * FROM Album WHERE album_name LIKE '%$search_key%';");
-				while( $row = $query->fetch_assoc()){ //printing every album with that album name
-					echo( "<tr> <td><a href='album.php?album_id=".$row['album_id']."'>".$row['album_name']."</a></td> </tr><br/>");
-				}
-			}
-			if( $filter == "artist" || $filter == "all"){ //ARTIST
-				$query = mysqli_query( $db, "SELECT * FROM Artist WHERE artist_name LIKE '%$search_key%';");
-				while( $row = $query->fetch_assoc()){ //printing every artist with that artist name
-					echo( "<tr><td><a href='artist.php?artist_id=".$row['artist_id']."'>".$row['artist_name']."</a></td></tr><br/>");
-				}
-			}
-			if( $filter == "playlist" || $filter == "all"){ //PLAYLIST
-				$query = mysqli_query( $db, "SELECT * FROM Playlist WHERE playlist_name LIKE '%$search_key%';");
-				while( $row = $query->fetch_assoc()){ //printing every playlist with that playlist name
-					echo( "<tr><td><a href='playlist.php?playlist_id=".$row['playlist_id']."'>".$row['playlist_name']."</a></td></tr><br/>");
-				}
-			}
-		if( $filter == "user" || $filter == "all"){ //USER
-				$query = mysqli_query( $db, "SELECT * FROM Person, User WHERE username LIKE '%$search_key%' AND user_id = person_id;");
-				while( $row = $query->fetch_assoc()){ //printing every user with that user name
-					echo( "<tr><td><a href='complete_profile.php?view_id=".$row['person_id']."'>".$row['username']."</a></td></tr><br/>");
-					
-				}
-			}
-		}
+				if( isset( $_POST['search'])){
+					$search_key = mysqli_real_escape_string( $db, $_POST['search_key']);
+					$filter = mysqli_real_escape_string( $db, $_POST['filter']);
+					//echo( "<tr> <td>".$search_key."</td> </tr><br/>");
+					//echo( "<tr> <td>".$filter."</td> </tr><br/>");
 		
-		?>
+					if( isset( $_POST['filter_track'])){//TRACK
+						$query = mysqli_query( $db, "SELECT * FROM Track WHERE track_name LIKE '%$search_key%';");
+						while( $row = $query->fetch_assoc()){ //printing every track with that track name
+							echo( "<tr> <td><a href='track.php?track_id=".$row['track_id']."'>".$row['track_name']."</a></td> </tr><br/>");
+						}
+					}
+					if( isset( $_POST['filter_album'])){ //ALBUM
+						$query = mysqli_query( $db, "SELECT * FROM Album WHERE album_name LIKE '%$search_key%';");
+						while( $row = $query->fetch_assoc()){ //printing every album with that album name
+							echo( "<tr> <td><a href='album.php?album_id=".$row['album_id']."'>".$row['album_name']."</a></td> </tr><br/>");
+						}
+					}
+					if( isset( $_POST['filter_artist'])){ //ARTIST
+						$query = mysqli_query( $db, "SELECT * FROM Artist WHERE artist_name LIKE '%$search_key%';");
+						while( $row = $query->fetch_assoc()){ //printing every artist with that artist name
+							echo( "<tr><td><a href='artist.php?artist_id=".$row['artist_id']."'>".$row['artist_name']."</a></td></tr><br/>");
+						}
+					}
+					if( isset( $_POST['filter_playlist'])){ //PLAYLIST
+						$query = mysqli_query( $db, "SELECT * FROM Playlist WHERE playlist_name LIKE '%$search_key%';");
+						while( $row = $query->fetch_assoc()){ //printing every playlist with that playlist name
+							echo( "<tr><td><a href='playlist.php?playlist_id=".$row['playlist_id']."'>".$row['playlist_name']."</a></td></tr><br/>");
+						}
+					}
+					if( isset( $_POST['filter_user'])){ //USER
+						$query = mysqli_query( $db, "SELECT * FROM Person, User WHERE (username LIKE '%$search_key%') AND user_id = person_id;");
+						while( $row = $query->fetch_assoc()){ //printing every user with that user name
+							echo( "<tr><td><a href='complete_profile.php?view_id=".$row['user_id']."'>".$row['user_id']."</a></td></tr><br/>");
+						}
+					}
+				}
+		
+				?>
 	
 		<br/><br/><br/>
-		<div align = "center">
-			<tr><td><a href='logout.php'>Logout</a></td></tr>
-		</div>
 	</nav>
 </body>
 </html>
