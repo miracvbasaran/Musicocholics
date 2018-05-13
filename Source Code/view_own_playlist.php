@@ -1,12 +1,12 @@
 <?php
 	include("session.php");
     $uid = mysqli_real_escape_string($db, $_SESSION['login_id']);
-    $query1 = "SELECT * FROM person WHERE person_id = {$uid} ";
+    $query1 = "SELECT * FROM person WHERE person_id = {$uid}";
     $result1 = mysqli_query($db, $query1);
     $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
     $username = $user_array['username'];
 
-    $playlist_id = $_POST['playlist_id'];
+    $playlist_id = $_GET['playlist_id'];
     $query2 = "SELECT * FROM playlist WHERE playlist_id = {$playlist_id}";
     $result2 = mysqli_query($db, $query2);
     $playlist_array =  mysqli_fetch_array($result2, MYSQLI_ASSOC);
@@ -112,25 +112,27 @@
 	  		<?php
 	  			$query_comment = "SELECT P.person_id , P.username , C.comment , FROM person P , comments C WHERE P.person_id = C.person_id AND C.playlist_id = {$playlist_id}";
 	  			$result_comment  = mysqli_query($db, $query_comment);
-	  			while ($row = mysqli_fetch_array($result_comment, MYSQLI_NUM)) {
-      				$person_id = $row[0];
-      				$query_friend = "SELECT COUNT(*) as cntfriend FROM friendship F WHERE (F.user1_id={$uid} AND F.user2_id={$person_id}) OR (F.user2_id={$uid} AND F.user1_id={$person_id})";
-      				$result_friend = mysqli_query($db, $query_friend);
-      				$friend_array = mysqli_fetch_array($result_friend, MYSQLI_ASSOC);
-      				$cnt_friend = $friend_array['cntfriend'];
-      				if( $cnt_friend == 0 ) {
-      					echo "<a href = \"nonfriend_profile.php?p_id = {$p_id}\"<tr>";
-	      				echo "<td>" . $row[1] . "</td>";
-	      				echo "<td>" . $row[2] . "</td>";
-	      				echo "</tr></a>" ;
-	      			}
-	      			else {
-      					echo "<a href = \"friend_profile.php?p_id = {$p_id}\"<tr>";
-	      				echo "<td>" . $row[1] . "</td>";
-	      				echo "<td>" . $row[2] . "</td>";
-	      				echo "</tr></a>" ;
-	      			}
-	  			}
+	  			if( $result_comment == TRUE ) {
+		  			while ($row = mysqli_fetch_array($result_comment, MYSQLI_NUM)) {
+	      				$person_id = $row[0];
+	      				$query_friend = "SELECT COUNT(*) as cntfriend FROM friendship F WHERE (F.user1_id={$uid} AND F.user2_id={$person_id}) OR (F.user2_id={$uid} AND F.user1_id={$person_id})";
+	      				$result_friend = mysqli_query($db, $query_friend);
+	      				$friend_array = mysqli_fetch_array($result_friend, MYSQLI_ASSOC);
+	      				$cnt_friend = $friend_array['cntfriend'];
+	      				if( $cnt_friend == 0 ) {
+	      					echo "<a href = \"nonfriend_profile.php?p_id = {$p_id}\"<tr>";
+		      				echo "<td>" . $row[1] . "</td>";
+		      				echo "<td>" . $row[2] . "</td>";
+		      				echo "</tr></a>" ;
+		      			}
+		      			else {
+	      					echo "<a href = \"friend_profile.php?p_id = {$p_id}\"<tr>";
+		      				echo "<td>" . $row[1] . "</td>";
+		      				echo "<td>" . $row[2] . "</td>";
+		      				echo "</tr></a>" ;
+		      			}
+		  			}
+		  		}
 	  		?>
 		</table>
 	</div>

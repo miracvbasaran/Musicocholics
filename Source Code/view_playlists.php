@@ -6,17 +6,28 @@
     $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
 
     if(isset($_POST['create_playlist'])) {
-    	
-    			$playlist_name = $_POST['playlist_name'];
-    			$playlist_description = $_POST['playlist_description'];
-    			$date = new DateTime();
-    			$query_insert = "INSERT INTO Playlist(playlist_name, description, date) VALUES({$playlist_name}, {$playlist_description}, {$date->getTimestamp()}";
-    			$result_insert = mysqli_query($db, $query_insert);
-         		$query5 = "SELECT MAX(playlist_id) FROM Playlist";
-         		$result5 = mysqli_query($db, $query5);
-         		$index_array = mysqli_fetch_array($result5, MYSQLI_NUM);
-        	  	header("location: view_own_playlist.php?playlist_id=".$index_array[0]);
-    		}
+    	if(isset($_POST['playlist_name'])) {
+        if(isset($_POST['playlist_description'])) {
+          $playlist_name = $_POST['playlist_name'];
+          $playlist_description = $_POST['playlist_description'];
+          $empty_picture = '';
+          $date = date('Y-m-d');
+          $query_insert = "INSERT INTO Playlist(playlist_name, description, picture, creator_id, date) VALUES('$playlist_name', '$playlist_description', '$empty_picture', {$uid}, '$date')";
+          $result_insert = mysqli_query($db, $query_insert);
+          $query5 = "SELECT MAX(playlist_id) as new_id FROM Playlist";
+          $result5 = mysqli_query($db, $query5);
+          $index_array = mysqli_fetch_array($result5, MYSQLI_ASSOC);
+          $new_id = $index_array['new_id'];
+          header("location: view_own_playlist.php?playlist_id=".$new_id);
+        }
+        else {
+          echo ' <script type="text/javascript"> alert("Playlist description is not entered."); </script>';
+        }
+      }
+      else {
+        echo ' <script type="text/javascript"> alert("Playlist name is not entered."); </script>';
+      }
+    }
     		
 ?>
 
@@ -52,22 +63,14 @@
   </div>
 </nav>
 
-	<div class="container">
-		<h3> Playlists </h3> <br>
-		<div align="right" class="container"></div>
-		<p>
-			<form method="post" action="">
-				<input id='Submit' name='create_playlist' type='Submit' value='Create Playlist' class="btn btn-default">
-			</form>
-		</p>
-	</div>
-
-	<div class="container">
-		<form method="post" action="">
-			<input type="text" name="playlist_name" value= "New Playlist Name" autofocus>
-			<input type="text" name="playlist_description" value= "Description" autofocus>
-		</form>
-	</div>
+  <div class="container" align="center">
+    <h3> Playlists </h3> <br>
+    <form method="post" action="">
+      <input type="text" name="playlist_name" value= "Playlist Name" autofocus>
+      <input type="text" name="playlist_description" value= "Playlist Description" autofocus>
+      <input type="submit" name="create_playlist" value="Create Playlist" > 
+    </form>
+  </div>
 
 	<div class="container">
 		<table class = "table table-hover" style="width:100%">
@@ -76,7 +79,7 @@
 	    		<th>Description</th> 
 	  		</tr>
 	  		<?php
-	  			$query_playlist = "SELECT P.playlist_id, P.playlist_name, P.description, P.date FROM playlist P WHERE P.creator_id = {$uid} ORDER BY P.date";
+	  			$query_playlist = "SELECT P.playlist_id, P.playlist_name, P.description FROM playlist P WHERE P.creator_id = {$uid}";
 	  			$result_playlist = mysqli_query($db, $query_playlist);
 	  			while ($row = mysqli_fetch_array($result_playlist, MYSQLI_NUM)) {
       				$p_id = $row[0];
