@@ -139,16 +139,16 @@
    <div align="left" class="col-md-6 col-md-offset-3"><img class="img-circle img-responsive" src="assets/img/ <?php echo $picture_v; ?>" width="200" height="200"></div>
 
 <div class="container" align = "center">
-  <h3>Change Track Information</h3> 
+  <h2><?php echo $track_name;?><small>in <?php echo "<a href= \"access_album.php?album_id={$album_id}\">{$album_name}</a>" ?></small></h2>
 
 
 <form method="post" action="">
-  Track Name: <input type="text" name="track_name" class = "form-control" value= <?php echo $track_name; ?> autofocus> in Album <?php echo "<a href= \"access_album.php?album_id={$album_id}\">{$album_name}</a>" ?><br>
+  <div class="col-xs-4">Track Name: <input type="text" name="track_name" class = "form-control" value= <?php echo $track_name; ?> autofocus> </div><br>
 
-  Recording Type: <select class = "form-control" name="recording_type">
+  <div class="col-xs-3">Recording Type: <select class = "form-control" name="recording_type">
     <option value="Live">Live</option>
     <option value="Studio">Studio</option>
-  </select> <br>
+  </select> <br></div>
   <div class="col-xs-3">Duration: <input type="text" name="duration" class = "form-control" value= <?php echo "{$duration}"; ?> autofocus><br></div>
   <div class="col-xs-3">Danceability: <input type="text" name="danceability" class = "form-control" value= <?php echo "{$danceability}"; ?> autofocus><br></div>
   <div class="col-xs-3">Acousticness: <input type="text" name="acousticness" class = "form-control" value= <?php echo "{$acousticness}"; ?> autofocus><br></div>
