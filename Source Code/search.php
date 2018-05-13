@@ -141,10 +141,7 @@
 				?>
 	
 		<br/><br/><br/>
-		<div align = "center">
-			<tr><td><a href='logout.php'>Logout</a></td></tr>
-		</div>
-	</nav>
+
 
 	<div>
 	<footer>
