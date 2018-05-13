@@ -30,7 +30,7 @@
     	$resultD5 = mysqli_query($db, $queryD5);
     	$queryD6 = "DELETE FROM collaborates WHERE playlist_id = {$playlist_id} ";
     	$resultD6 = mysqli_query($db, $queryD6);
-    	header("location: view_own_playlists?");
+    	header("location: view_playlists");
     }
 
 ?>
