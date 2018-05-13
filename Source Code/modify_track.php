@@ -7,6 +7,7 @@
     $result2 = mysqli_query($db, $query2);
     if($result2 === FALSE){
       echo "<script type=\"text/javascript\"> alert(\"There is no track to show!\"); </script>";
+      header("Location: admin.php");
     }
     else{
       $track_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
@@ -28,6 +29,7 @@
       $result2 = mysqli_query($db, $query2);
       if($result2 === FALSE){
         echo "<script type=\"text/javascript\"> alert(\"The track does not belong to an album!\"); </script>";
+        header("Location: admin.php");
       }
       else{
         $album_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
@@ -44,27 +46,27 @@
     {
       if(isset( ($_POST['track_name']) )  ){
           $track_name = $_POST['track_name'];
-          $query = "UPDATE Track SET track_name = '{$track_name}' WHERE track_id = {$track_id} ";
+          $query = "UPDATE Track SET track_name = '{$track_name}' WHERE track_id = {$track_id}; ";
           $result = mysqli_query($db, $query);
       }
       if(isset( ($_POST['recording_type']) )  ){
           $recording_type = $_POST['recording_type'];
-          $query = "UPDATE Track SET recording_type = '{$recording_type}' WHERE track_id = {$track_id} ";
+          $query = "UPDATE Track SET recording_type = '{$recording_type}' WHERE track_id = {$track_id}; ";
           $result = mysqli_query($db, $query);
       }
       if(isset( ($_POST['duration']) )  ){
           $duration = $_POST['duration'];
-          $query = "UPDATE Track SET duration = {$duration} WHERE track_id = {$track_id} ";
+          $query = "UPDATE Track SET duration = {$duration} WHERE track_id = {$track_id}; ";
           $result = mysqli_query($db, $query);
       }
       if(isset( ($_POST['danceability']) )  ){
           $danceability = $_POST['danceability'];
-          $query = "UPDATE Track SET danceability = {$danceability} WHERE track_id = {$track_id} ";
+          $query = "UPDATE Track SET danceability = {$danceability} WHERE track_id = {$track_id}; ";
           $result = mysqli_query($db, $query);
       }
       if(isset( ($_POST['acousticness']) )  ){
           $acousticness = $_POST['acousticness'];
-          $query = "UPDATE Track SET acousticness = {$acousticness} WHERE track_id = {$track_id} ";
+          $query = "UPDATE Track SET acousticness = {$acousticness} WHERE track_id = {$track_id}; ";
           $result = mysqli_query($db, $query);
       }
       if(isset( ($_POST['instrumentalness']) )  ){
@@ -139,11 +141,11 @@
    <div align="left" class="col-md-6 col-md-offset-3"><img class="img-circle img-responsive" src="assets/img/ <?php echo $picture_v; ?>" width="200" height="200"></div>
 
 <div class="container" align = "center">
-  <h2><?php echo $track_name;?><small>in <?php echo "<a href= \"access_album.php?album_id={$album_id}\">{$album_name}</a>" ?></small></h2>
+  <h2><?php echo $track_name;?><small> in <?php echo "<a href= \"access_album.php?album_id={$album_id}\">{$album_name}</a>" ?></small></h2>
 
 
 <form method="post" action="">
-  <div class="col-xs-4">Track Name: <input type="text" name="track_name" class = "form-control" value= <?php echo $track_name; ?> autofocus> </div><br>
+  <div class="col-xs-3">Track Name: <input type="text" name="track_name" class = "form-control" value= <?php echo $track_name; ?> autofocus> </div><br>
 
   <div class="col-xs-3">Recording Type: <select class = "form-control" name="recording_type">
     <option value="Live">Live</option>
@@ -164,7 +166,7 @@
     <option value="German">German</option>
   </select> <br></div>
   
-  <input type="submit" name="apply" value="Apply" class = "btn btn-default" > 
+  <div class="col-xs-3"><input type="submit" name="apply" value="Apply" class = "btn btn-default" > </div>
 
 </form> 
 

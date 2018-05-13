@@ -8,6 +8,7 @@
     $result2 = mysqli_query($db, $query2);
     if($result2 === FALSE){
       echo "<script type=\"text/javascript\"> alert(\"There is no track to show!\"); </script>";
+      header("Location: admin.php");
     }
     else{
       $track_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
@@ -29,6 +30,7 @@
       $result2 = mysqli_query($db, $query2);
       if($result2 === FALSE){
         echo "<script type=\"text/javascript\"> alert(\"The track does not belong to an album!\"); </script>";
+        header("Location: admin.php");
       }
       else{
         $album_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
@@ -45,7 +47,14 @@
     {
       $query4 = "CALL DeleteTrack({$track_id})";
       $result4 = mysqli_query($db, $query4);
-      header('Location: ' . $_SERVER['HTTP_REFERER']);
+      if(){
+        echo "<script type=\"text/javascript\"> alert(\"Track could not be deleted!\"); </script>";
+      }
+      else{
+        echo "<script type=\"text/javascript\"> alert(\"Track succesfully deleted!\"); </script>";
+        header("Location: admin.php");
+      }
+      
     }
     
 ?>

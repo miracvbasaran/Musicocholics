@@ -8,6 +8,7 @@
     $result2 = mysqli_query($db, $query2);
     if($result2 === FALSE){
       echo " <script type=\"text/javascript\"> alert(\"There is no artist to show!\"); </script>";
+      header("Location: admin.php");
     }
     else{
       $artist_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
@@ -24,7 +25,14 @@
     {
       $query = "CALL DeleteArtist({$artist_id})";
       $result = mysqli_query($db, $query);
-      header('Location: ' . $_SERVER['HTTP_REFERER']);
+      if($result === FALSE){
+        echo " <script type=\"text/javascript\"> alert(\"Could not delete artist!\"); </script>";
+      }
+      else{
+        echo " <script type=\"text/javascript\"> alert(\"Artist succesfully deleted!\"); </script>";
+        header("Location: admin.php");
+      }
+      
     }
 ?>
 
