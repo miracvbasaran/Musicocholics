@@ -14,7 +14,7 @@
 	  $username = $person_array['username'];
 	  $fullname = $person_array['fullname'];
   	$email = $person_array['email'];
-$password = $person_array['password'];
+    $password = $person_array['password'];
     $user_id = $user_array['user_id'];
     $country = $user_array['country'];
     $language = $user_array['language'];
