@@ -17,13 +17,20 @@
 
     if(isset($_POST['modify_publisher_button']))
     {
-      header("location: modify_track.php?publisher_id=".$publisher_id);
+      header("location: modify_publisher.php?publisher_id=".$publisher_id);
     }
     if(isset($_POST['delete_publisher_button']))
     {
       $query = "CALL DeletePublisher({$publisher_id})";
       $result = mysqli_query($db, $query);
-      header('Location: ' . $_SERVER['HTTP_REFERER']);
+      if($result === FALSE){
+        echo "<script type=\"text/javascript\"> alert(\"Publisher could not be deleted.\"); </script>";
+      }
+      else{
+        echo "<script type=\"text/javascript\"> alert(\"Publisher deleted succesfully.\"); </script>";
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+      }
+      
     }
 
 ?>
