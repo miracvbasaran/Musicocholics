@@ -14,7 +14,7 @@
 
     if(isset($_POST['modify_artist_button']))
     {
-      header("location: modify_track.php?artist_id=".$artist_id);
+      header("location: modify_artist.php?artist_id=".$artist_id);
     }
     if(isset($_POST['delete_artist_button']))
     {
@@ -85,7 +85,7 @@
   </tr>
   <?php
   $query_album = "SELECT album_name, album_type, published_date FROM Album WHERE Album.album_id = IN (SELECT album_id FROM Album_Belongs_To_Artist A WHERE 
-                    A.artist_id = '$artist_id$') ORDER BY published_date";
+                    A.artist_id = '$artist_id') ORDER BY published_date";
   $result = mysqli_query($db, $query_album);
   
   while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {

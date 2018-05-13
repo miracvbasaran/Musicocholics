@@ -120,11 +120,11 @@
  
 </div>
   <p> <form method="post" action="">
-       <input id='Submit' name='purchase_track_button' value='Submit' type='button' value='Purchase Track'>
+       <input id='Submit' name='purchase_track_button' type='Submit' value='Purchase Track'>
 
-       <input id='Submit' name='gift_button' value='Submit' type='button' value='Gift'>
+       <input id='Submit' name='gift_button' type='Submit' value='Gift'>
 
-       <input id='Submit' name='play_track_button' value='Submit' type='button' value='Play Track'>
+       <input id='Submit' name='play_track_button' type='Submit' value='Play Track' class="btn btn-default">
        </form>
     </p>
  </div>

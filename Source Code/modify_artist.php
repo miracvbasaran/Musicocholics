@@ -8,9 +8,9 @@
     $query2 = "SELECT * FROM Artist WHERE artist_id = '$artist_id' ";
     $result2 = mysqli_query($db, $query2);
     $artist_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
-    $artist_name = $artist_array('artist_name');
-    $description = $artist_array('description');
-    $picture = $artist_array('picture');
+    $artist_name = $artist_array['artist_name'];
+    $description = $artist_array['description'];
+    $picture = $artist_array['picture'];
     
 
     if(isset($_POST['apply']))

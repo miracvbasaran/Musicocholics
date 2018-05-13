@@ -70,7 +70,7 @@
                     A.artist_id = '$artist_id$') ORDER BY published_date";
   $result = mysqli_query($db, $query_album);
   
-  while ($row = mysql_fetch_array($result, MYSQL_NUM)) {
+  while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
       $a_id = $row[3];
       echo "<a href = \"view_album.php?album_id = {$a_id}\"<tr>";
       echo "<td>" . $row[0] . "</td>";

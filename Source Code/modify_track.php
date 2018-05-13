@@ -129,15 +129,15 @@
     <option value="Live">Live</option>
     <option value="Studio">Studio</option>
   </select> <br>
-  Duration: <input type="text" name="duration" value= <?php echo $duration ?> autofocus><br>
-  Danceability: <input type="text" name="danceability" value= <?php echo $danceability ?> autofocus><br>
-  Acousticness: <input type="text" name="acousticness" value= <?php echo $acousticness ?> autofocus><br>
-  Instrumentalness: <input type="text" name="instrumentalness" value= <?php echo $instrumentalness ?> autofocus><br>
-  Speechness: <input type="text" name="speechness" value= <?php echo $speechness ?> autofocus><br>
-  Balance: <input type="text" name="balance" value= <?php echo $balance ?> autofocus><br>
-  Loudness: <input type="text" name="loudness" value= <?php echo $loudness ?> autofocus><br>
-  Price: <input type="text" name="price" value= <?php echo $price ?> autofocus><br>
-  Date of Addition: <input type="date" name="date_of_addition" value= <?php echo $date_of_addition ?> autofocus><br>
+  Duration: <input type="text" name="duration" value= <?php echo "{$duration}" ?> autofocus><br>
+  Danceability: <input type="text" name="danceability" value= <?php echo "{$danceability}" ?> autofocus><br>
+  Acousticness: <input type="text" name="acousticness" value= <?php echo "{$acousticness}" ?> autofocus><br>
+  Instrumentalness: <input type="text" name="instrumentalness" value= <?php echo "{$instrumentalness}" ?> autofocus><br>
+  Speechness: <input type="text" name="speechness" value= <?php echo "{$speechness}" ?> autofocus><br>
+  Balance: <input type="text" name="balance" value= <?php echo "{$balance}" ?> autofocus><br>
+  Loudness: <input type="text" name="loudness" value= <?php echo "{$loudness}" ?> autofocus><br>
+  Price: <input type="text" name="price" value= <?php echo "{$price}" ?> autofocus><br>
+  Date of Addition: <input type="date" name="date_of_addition" value= <?php echo "{$date_of_addition}" ?> autofocus><br>
   Language: <select name="language">
     <option value="Turkish">Turkish</option>
     <option value="English">English</option>

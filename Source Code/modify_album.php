@@ -8,11 +8,11 @@
     $query2 = "SELECT * FROM Album WHERE album_id = {$album_id} ";
     $result2 = mysqli_query($db, $query2);
     $album_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
-    $album_name = $album_array('album_name');
-    $picture = $album_array('picture');
-    $album_type = $album_array('album_type');
-    $published_date = $album_array('published_date');
-    $publisher_id = $album_array('publisher_id');
+    $album_name = $album_array['album_name'];
+    $picture = $album_array['picture'];
+    $album_type = $album_array['album_type'];
+    $published_date = $album_array['published_date'];
+    $publisher_id = $album_array['publisher_id'];
 
     $query = "SELECT artist_id FROM Album_Belongs_To_Artist WHERE album_id = {$album_id}";
     $result = mysqli_query($db, $query);
