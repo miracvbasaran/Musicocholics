@@ -88,10 +88,10 @@
 	  			$result_playlist = mysqli_query($db, $query_playlist);
 	  			while ($row = mysqli_fetch_array($result_playlist, MYSQLI_NUM)) {
       				$t_id = $row[0];
-     				echo "<a href = \"view_track.php?track_id = {$t_id}\"><tr>";
+     				echo "<tr onclick = \"document.location = 'view_track.php?track_id={$t_id}' \">";
      				echo "<td>" . $row[1] . "</td>";
      				echo "<td>" . $row[2] . "</td>";
-    				echo "<td>" . $row[3] . "</td></a>";
+    				echo "<td>" . $row[3] . "</td>";
      				echo "</tr>";
 	  			}
 	  		?>
@@ -114,16 +114,16 @@
       				$friend_array = mysqli_fetch_array($result_friend, MYSQLI_ASSOC);
       				$cnt_friend = $friend_array['cntfriend'];
       				if( $cnt_friend == 0 ) {
-      					echo "<a href = \"nonfriend_profile.php?other_id = {$person_id}\"<tr>";
+      					echo "<tr onclick = \"document.location = 'nonfriend_profile.php?other_id={$person_id}' \">";
 	      				echo "<td>" . $row[1] . "</td>";
 	      				echo "<td>" . $row[2] . "</td>";
-	      				echo "</tr></a>" ;
+	      				echo "</tr>" ;
 	      			}
 	      			else {
-      					echo "<a href = \"friend_profile.php?other_id = {$person_id}\"<tr>";
+      					echo "<tr onclick = \"document.location = 'friend_profile.php?other_id={$person_id}' \">";
 	      				echo "<td>" . $row[1] . "</td>";
 	      				echo "<td>" . $row[2] . "</td>";
-	      				echo "</tr></a>" ;
+	      				echo "</tr>" ;
 	      			}
 	  			}
 	  		?>

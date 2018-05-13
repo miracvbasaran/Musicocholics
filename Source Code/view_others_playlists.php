@@ -5,7 +5,7 @@
     $result1 = mysqli_query($db, $query1);
     $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
 
-    $other_user_id = $_POST['other_id'];
+    $other_user_id = $_GET['other_id'];    
 
 ?>
 
@@ -59,7 +59,7 @@
       				echo "<tr onclick = \"document.location = 'view_others_playlist.php?playlist_id={$p_id}' \">";
 	      			echo "<td>" . $row[1] . "</td>";
 	      			echo "<td>" . $row[2] . "</td>";
-	      			echo "</tr></a>" ;
+	      			echo "</tr>" ;
 	  			}
 	  		?>
 		</table>

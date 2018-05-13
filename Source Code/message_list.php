@@ -68,16 +68,16 @@
       				$friend_array = mysqli_fetch_array($result_friend, MYSQLI_ASSOC);
       				$cnt_friend = $friend_array['cntfriend'];
       				if( $cnt_friend == 0 ) {
-      					echo "<a href = \"nonfriend_profile.php?other_id = {$p_id}\"<tr>";
+      					echo "<tr onclick = \"document.location = 'nonfriend_profile.php?other_id={$p_id}' \">";
 	      				echo "<td>" . $row[1] . "</td>";
 	      				echo "<td>" . $row[2] . "</td>";
-	      				echo "</tr></a>" ;
+	      				echo "</tr>" ;
 	      			}
 	      			else {
-      					echo "<a href = \"friend_profile.php?other_id = {$p_id}\"<tr>";
+      					echo "<tr onclick = \"document.location = 'friend_profile.php?other_id={$p_id}' \">";
 	      				echo "<td>" . $row[1] . "</td>";
 	      				echo "<td>" . $row[2] . "</td>";
-	      				echo "</tr></a>" ;
+	      				echo "</tr>" ;
 	      			}
 	  			}
 	  		?>

@@ -101,7 +101,7 @@
     <p> Birthday: <?php echo $birthday_f;?></p>
 
 <div align="right" class="container">
- <a href='view_others_playlist.php?other_id=".$view_id."' class="btn btn-success" role="button">View Playlists</a>
+ <a href='view_others_playlists.php?other_id=".$view_id."' class="btn btn-success" role="button">View Playlists</a>
 
  
 </div>

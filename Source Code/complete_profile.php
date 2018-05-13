@@ -90,7 +90,7 @@
    
     <div class="container" align="right" >
 
-    <a href="view_others_playlists.php?other_id=$view_id" class="btn btn-success" role="button">VIEW PLAYLISTS</a>
+    <a href='view_others_playlists.php?other_id=".$view_id."' class="btn btn-success" role="button">View Playlists</a>
 
     <input id='Submit' class="btn btn-danger" name='ban_button' type='button' value='BAN USER' onclick="popMessage()">
 
