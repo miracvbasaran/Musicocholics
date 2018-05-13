@@ -2,7 +2,7 @@
 	  include("session.php");
     $uid = mysqli_real_escape_string($db,$_SESSION['login_id']);
 
-    $query = "SELECT * FROM person WHERE person_id = '$uid' ";
+    $query = "SELECT * FROM person WHERE person_id = '$uid'";
     $result = mysqli_query($db, $query);
     $person_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
@@ -17,7 +17,7 @@
 
           $old_pass = $_POST['old_pass'];
 
-          if( strcmp( $old_pass, $password) != 0 )
+          if(  $old_pass != $password )  
           {
           echo ' <script type="text/javascript"> alert("Old password value is not matched."); </script>';
           }  
@@ -30,13 +30,12 @@
       }
 
       if(isset( ($_POST['new_pass_2']) )   ){
-          if (  strcmp( ($_POST['new_pass_2']) ,$newpass ) ==0 ){
+          if (  ($_POST['new_pass_2']) == $newpass   ){
 
-              $query1 = "UPDATE person SET password = $newpass WHERE person_id = '$uid'";
+              $query1 = "UPDATE person SET password = '$newpass' WHERE person_id = '$uid'";
               $result1 = mysqli_query($db, $query1);
               echo ' <script type="text/javascript"> alert("Password has changed successfully."); </script>';
-       
-              header("location: change_general_information.php?");
+              header("location: change_general_information.php");
           }
           else{
             echo ' <script type="text/javascript"> alert("Passwords are not matched."); </script>';  
