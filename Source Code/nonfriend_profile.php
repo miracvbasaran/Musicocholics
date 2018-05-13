@@ -6,7 +6,7 @@
     $user_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
 
-    $nonfriend_id = $_GET['other_id'];
+    $nonfriend_id = $_GET["other_id"];
     $query2 = "SELECT * FROM person WHERE person_id = '$nonfriend_id'";
     $result2 = mysqli_query($db, $query2);
     $nonfriend_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
