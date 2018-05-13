@@ -1,6 +1,6 @@
-<?php 
+<?php //
 //include("session.php");
-include("connection.php");
+//include("connection.php");
 ?>
 
 <!DOCTYPE html>
