@@ -55,47 +55,58 @@
   </div>
 </nav>
   
-<div class="container">
+<div class="container" align="center">
 
+<div align="center" class="container"><img class="img-circle img-responsive" src="assets/img/ <?php echo $picture_non; ?>" width="200" height="200"></div>
   
-  <h3>This is, <?php echo $username_non;?> </h3> 
-  	<p> 
-
-      <div align="left" class="col-md-6 col-md-offset-3"><img class="img-circle img-responsive" src="assets/img/ <?php echo $picture_non; ?>" width="200" height="200"></div>
-      
-      
-    
+  <h3>This is <?php echo $username_non;?> </h3> 
     <p> Fullname: <?php echo $fullname_non;?></p><br>
     <p> Country: <?php echo $country_non;?></p><br>
     <p> Gender: <?php echo $gender_non;?></p><br>
-    
-    </p>
-    
-    <div> 
-    
-      
-        <a href="add_friend.php?other_id=<?php echo $nonfriend_id; ?> " class="btn btn-success" role="button">ADD AS FRIEND</a>
-    </div>
-    
+
+<div class="container" align="center" >
+    <form method="post" action="">
+
+       <a href=<?php echo "'add_friend.php?other_id={$nonfriend_id}'"; ?> class="btn btn-success" role="button">ADD AS FRIEND</a>
+       
+  </form>
+
 
 </div>
-<div>
-  <footer>
-          <?php
-          $query = "SELECT L1.track_id FROM listens L1 WHERE L1.user_id = '$uid' AND 
-          date = (SELECT max(L2.date) FROM listens L2 WHERE L2.user_id = '$uid') ";
-          $result = mysqli_query($db, $query);
-          $row = mysqli_fetch_array($result, MYSQLI_NUM);
-          $query2 = "SELECT track_name,duration FROM track WHERE track_id = '$row[0]' ";
-          $result2 = mysqli_query($db, $query2);
-          $track_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
 
-            $track_name = $track_array['track_name'];
-            $duration = $track_array['duration'];
-          echo $track_name;
-          echo $duration;
-          ?>
-  </footer>
+</div>
+</div>
+<style>
+.footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   text-align: center;
+}
+</style>
+<div class = "footer">
+
+  <?php
+  $query = "SELECT L1.track_id FROM listens L1 WHERE L1.user_id = '$uid' AND 
+  date = (SELECT max(L2.date) FROM listens L2 WHERE L2.user_id = '$uid') ";
+  $result = mysqli_query($db, $query);
+  $row = mysqli_fetch_array($result, MYSQLI_NUM);
+  $query2 = "SELECT track_name,duration FROM track WHERE track_id = '$row[0]' ";
+  $result2 = mysqli_query($db, $query2);
+  $track_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
+
+  $track_name = $track_array['track_name'];
+  $duration = $track_array['duration'];
+  ?>
+
+  <h4> <?php echo $track_name; ?> (<?php echo $duration; ?> ) </h4>
+  
+  <div class="progress">
+  <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="70"
+  aria-valuemin="0" aria-valuemax="100" style="width:70%">
+    <span class="sr-only"> </span> 
   </div>
+</div>
 </body>
 </html>

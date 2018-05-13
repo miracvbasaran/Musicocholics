@@ -15,8 +15,9 @@
     $fullname_b = $blocked_array['fullname'];
 
     $query3 = "SELECT picture FROM user WHERE user_id = '$blocked_id' ";
-    $picture_b = mysqli_query($db, $query3);
-
+    $result3 = mysqli_query($db, $query3);
+    $pic_array = mysqli_fetch_array($result3,MYSQLI_ASSOC);
+    $picture_b =$pic_array['picture'];
 
 ?>
 
@@ -51,25 +52,16 @@
   </div>
 </nav>
   
-<div class="container">
+<div align="center" class="container"><img class="img-circle img-responsive" src="assets/img/ <?php echo $picture_b; ?>" width="200" height="200"></div> 
 
-  
+<div class="container" align="center"> 
   <h3>This is <?php echo $username_b;?> </h3> 
-  	
 
-     <div align="left" class="col-md-6 col-md-offset-3"><img class="img-circle img-responsive" src="assets/img/ <?php echo $picture_b; ?>" width="200" height="200"></div>
-
-   
-
-    <div class = "container" align = "right">  
+   <div class="container" align="center" >
     <form method="post" action="">
-
-       <input id='Submit' name='unblock_button' type='Submit' class="btn btn-default" value='UNBLOCK'>
-
+      <input id='Submit' name='unblock_button' type='Submit' class="btn btn-danger" value='UNBLOCK'>
     </form>
     </div>
-
-
     <?php 
 
       if(isset($_POST['unblock_button']))
@@ -80,8 +72,17 @@
     ?>
 </div>
 
-<div> 	
-<footer>
+<style>
+.footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   text-align: center;
+}
+</style>
+<div class = "footer">
+
   <?php
   $query = "SELECT L1.track_id FROM listens L1 WHERE L1.user_id = '$uid' AND 
   date = (SELECT max(L2.date) FROM listens L2 WHERE L2.user_id = '$uid') ";
@@ -93,11 +94,16 @@
 
   $track_name = $track_array['track_name'];
   $duration = $track_array['duration'];
-  echo $track_name;
-  echo $duration;
   ?>
 
-</footer>
+  <h4> <?php echo $track_name; ?> (<?php echo $duration; ?> ) </h4>
+  
+  <div class="progress">
+  <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="70"
+  aria-valuemin="0" aria-valuemax="100" style="width:70%">
+    <span class="sr-only"> </span> 
+  </div>
 </div>
+
 </body>
 </html>
