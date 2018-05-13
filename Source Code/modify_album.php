@@ -12,7 +12,8 @@
     $picture = $album_array['picture'];
     $album_type = $album_array['album_type'];
     $published_date = $album_array['published_date'];
-    $publisher_id = $album_array['publisher_id'];
+    $published_date = $album_array['published_date'];
+    $publisher_id =$album_array['publisher_id'];
 
     $query = "SELECT artist_id FROM Album_Belongs_To_Artist WHERE album_id = {$album_id}";
     $result = mysqli_query($db, $query);
@@ -24,13 +25,13 @@
     $artist_names = array();
     for($i = 0; $i < count($artist_ids); $i++){
         $a_id = $artist_ids[$i];
-        $query = "SELECT artist_name FROM Artist WHERE artist_id = {$a_id}";
+        $query = "SELECT artist_name FROM Artist WHERE artist_id = {$a_id};";
         $result = mysqli_query($db, $query);
         $artist_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
         $artist_names[] = $artist_array['artist_name'];
     }
     
-    $query = "SELECT * FROM Publisher WHERE publisher_id = {$publisher_id} ";
+    $query = "SELECT * FROM Publisher WHERE publisher_id = {$publisher_id};";
     $result = mysqli_query($db, $query);
     $publisher_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
     $publisher_name = $publisher_array['publisher_name'];
@@ -39,17 +40,17 @@
     {
       if(isset( ($_POST['album_name']) )  ){
           $album_name = $_POST['album_name'];
-          $query = "UPDATE Album SET album_name = {$album_name} WHERE album_id = {$album_id} ";
+          $query = "UPDATE Album SET album_name = {$album_name} WHERE album_id = {$album_id};";
           $result = mysqli_query($db, $query);
       }
       if(isset( ($_POST['album_type']) )  ){
           $album_type = $_POST['album_type'];
-          $query = "UPDATE Album SET album_type = {$album_type} WHERE album_id = {$album_id} ";
+          $query = "UPDATE Album SET album_type = {$album_type} WHERE album_id = {$album_id};";
           $result = mysqli_query($db, $query);
       }
       if(isset( ($_POST['published_date']) )  ){
           $published_date = $_POST['published_date'];
-          $query = "UPDATE Album SET published_date = {$published_date} WHERE album_id = ${album_id} ";
+          $query = "UPDATE Album SET published_date = {$published_date} WHERE album_id = ${album_id};";
           $result = mysqli_query($db, $query);
       }
     }
@@ -57,7 +58,7 @@
       if(!empty($_POST['check_list'])){
         foreach($_POST['check_list'] as $selected_track_id){
             $selected_track_id = intval($selected_track_id);
-            $query4 = "CALL DeleteTrack({$selected_track_id})";
+            $query4 = "CALL DeleteTrack({$selected_track_id});";
             $result4 = mysqli_query($db, $query4);
         }
       }
@@ -68,7 +69,7 @@
       $new_track_name = $_POST['new_track_name'];
       $new_track_price = $_POST['new_track_price'];
       $insertion_date = date(Y-m-d);
-      $query = "INSERT INTO Track(album_name, album_type, published_date) VALUES({$new_album_name}, {$new_album_type}, {$new_album_publish_date})";
+      $query = "INSERT INTO Track(album_name, album_type, date_of_addition) VALUES({$new_track_name}, {$new_track_price}, {$insertion_date})";
       if(mysqli_query($db, $query) === TRUE){
           $query = "SELECT MAX(album_id) FROM Album";
           $result = mysqli_query($db, $query);
@@ -123,7 +124,7 @@
  </form>
 
 <form method="post" action="">
-  <div class="container" align = "center"><h3><input type="text" name="album_name" value= <?php echo $album_name ?> autofocus> by 
+  <div class="container" align = "center"><h3><input type="text" name="album_name" value= <?php echo $album_name; ?> autofocus> by 
 
     <?php
       for ($i=0; $i < count($artist_names); $i++) { 
