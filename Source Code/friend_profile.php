@@ -24,12 +24,13 @@
 
     if(isset($_POST['sendmessage_button']))
     {
-      header("location: send_message.php?other_id=$friend_id");
+      header("location: send_direct_message.php?receiver_username=".$username_f);
+     
     }
 
     if(isset($_POST['block_button']))
     {
-      header("location: blocked_profile.php?other_id=$friend_id");
+      
       $query3 = "INSERT INTO blocks VALUES ($uid, $friend_id) ";
       $result3 = mysqli_query($db, $query3);
 
@@ -37,16 +38,19 @@
       ($uid = user1_id AND $friend_id = user2_id) OR 
       ( $friend_id = user1_id AND $uid = user2_id) ";
       $result4 = mysqli_query($db, $query4);
+      header("location: blocked_profile.php?other_id=".$friend_id);
+  
     }
 
     if(isset($_POST['unfriend_button']))
     {
-      header("location: nonfriend_profile.php?other_id=$friend_id");
-
+      
       $query4 = "DELETE FROM friendship WHERE 
       ($uid = user1_id AND $friend_id = user2_id) OR 
       ( $friend_id = user1_id AND $uid = user2_id) ";
       $result4 = mysqli_query($db, $query4);
+
+      header("location: nonfriend_profile.php?other_id=".$friend_id);
     }
     
 ?>
@@ -100,16 +104,18 @@
 
  
 </div>
-  <p> 
-       <input id='Submit' name='sendmessage_button' type='button' class='btn btn-default' value='Send Message'>
-
-       <input id='Submit' name='block_button' type='button' class='btn btn-default' value='Block'>
-
-       <input id='Submit' name='unfriend_button' type='button' class='btn btn-default' value='Unfriend'>
+  
        
-    </p>
- </div>
-</div>
+<div class = "container" align = "right">  
+ <form method="post" action="">
+       <input id='Submit' name='sendmessage_button' type='Submit' class="btn btn-default" value='Send Message'>
+
+       <input id='Submit' name='block_button' type='Submit' class="btn btn-default" value='Block'>
+
+       <input id='Submit' name='unfriend_button' type='Submit' class="btn btn-default" value='Unfriend'>
+  </form>
+  </div>
+
 
 
 <div class="container">

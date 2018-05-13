@@ -5,7 +5,7 @@
     $result1 = mysqli_query($db, $query1);
     $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
     
-	$receiver_username = $_POST['receiver_username'];
+	$receiver_username = $_GET["receiver_username"];
 
     if(isset($_POST['send_message'])) {
     	if(isset($_POST['text_message'])) {
