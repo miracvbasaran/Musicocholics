@@ -1,12 +1,18 @@
-<?php 
-include("session.php");
+<?php
+
+	include("session.php");
+
+    $uid = mysqli_real_escape_string($db,$_SESSION['login_id']);
+    $query1 = "SELECT * FROM user WHERE user_id = '$uid' ";
+    $result1 = mysqli_query($db, $query1);
+    $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Musicholics - Advanced Album Search</title>
+	<title>Musicholics - Advanced Track Search</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -15,37 +21,36 @@ include("session.php");
 </head>
 <body>
 
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <ul class="nav navbar-nav">
-      
-      <li><a href="own_profile.php">Profile</a></li>
-      <li><a href="view_playlists.php">Playlist</a></li>
-      <li><a href="view_tracks.php">Tracks</a></li>
-  <li><a href="friends.php">Friends</a></li>
-  <li><a href="message_list.php">Messages</a></li>
-  <li><a href="search.php">Search</a></li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <li><a href="change_general_information.php"><span class="glyphicon glyphicon-user"></span> Settings</a></li>
-      <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-    </ul>
-  </div>
-</nav>
-		
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<ul class="nav navbar-nav">
+				<li><a href="own_profile.php">Profile</a></li>
+				<li><a href="playlists.php">Playlist</a></li>
+				<li><a href="view_tracks.php">Tracks</a></li>
+				<li><a href="friends.php">Friends</a></li>
+				<li><a href="message_list.php">Messages</a></li>
+				<li class="active"><a href="search.php">Search</a></li>
+			</ul>
+		    <ul class="nav navbar-nav navbar-right">
+				<li><a href="change_general_information.php"><span class="glyphicon glyphicon-user"></span> Settings</a></li>
+				<li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+		    </ul>
+		</div>
 		
 		<div align = "center">
 			<form action = "#" method = "post" onsubmit = "return check()">
 				<font color="white">
 					<br/><br/><br/><br/>MUSICHOLICS<br/><br/>Advanced Album Search<br/><br/><br/><br/>
-					<input type = "text" name = "search_key" placeholder = "Album Name"> <br/><br/>
+					<font color="black">
+						<input type = "text" name = "search_key" placeholder = "Album Name"> <br/><br/>
+					</font>
 					<input type = "radio" name="match" value="matches"/> Exactly matches &nbsp; &nbsp;
 					<input type = "radio" name="match" value="contains"/> Contains &nbsp; &nbsp;
 					<input type = "radio" name="match" value="starts_with"/> Starts with
 					<br/><br/>
 					<font color="black">
-						<input type = "date" name = "from_date" placeholder = "Starting date" > 
-						<input type = "date" name = "end_date" placeholder = "End date"> 
+						<input type = "date" name = "from_date" placeholder = "Starting date for addition" > 
+						<input type = "date" name = "end_date" placeholder = "End date for addition">
 					</font>
 					<br/><br/>
 					<input type = "radio" name="type" value="Album"/> Album &nbsp; &nbsp;
@@ -69,7 +74,7 @@ include("session.php");
 				var type = document.getElementById( "type").value;
 
 				if( search_key == "")
-					alert( "Please type an album name");
+					alert( "Please type an track name");
 				if( match = "")
 					alert( "Please one of \"Exactly matches\", \"Exactly Contains\", \"Starts with\"" );
 				if( from_date = "")
@@ -93,31 +98,35 @@ include("session.php");
 			$end_date = mysqli_real_escape_string( $db, $_POST['end_date']);
 			$type = mysqli_real_escape_string( $db, $_POST['type']);
 			
+			
+			
 			if( $match == "matches"){
 				$query = mysqli_query( $db, "SELECT * FROM Album WHERE ( album_name LIKE '$search_key') 
 																		AND album_type = '$type' 
-																		AND published_date >= '$from_date' 
-																		AND published_date <= '$from_date';");
+																		AND published_date >= '$from_date'
+																		AND published_date <= '$end_date';");
+
+										
 				while( $row = $query->fetch_assoc()){ 
-					echo( "<tr> <td><a href='album.php?album_id=".$row['album_id']."'>.$row['album_id'].</a></td> </tr>");
+					echo( "<tr> <td><a href='view_album.php?album_id=".$row['album_id']."'>".$row['album_name']."</a></td> </tr><br/>");
 				}
 			}
 			else if( $match == "contains"){
-				$query = mysqli_query( $db, "SELECT * FROM Album WHERE ( album_name LIKE '$search_key') 
+				$query = mysqli_query( $db, "SELECT * FROM Album WHERE ( album_name LIKE '%$search_key%') 
 																		AND album_type = '$type' 
-																		AND published_date >= '$from_date' 
-																		AND published_date <= '$from_date';");
+																		AND published_date >= '$from_date'
+																		AND published_date <= '$end_date';");
 				while( $row = $query->fetch_assoc()){ 
-					echo( "<tr> <td><a href='album.php?album_id=".$row['album_id']."'>.$row['album_id'].</a></td> </tr>");
+					echo( "<tr> <td><a href='view_album.php?album_id=".$row['album_id']."'>".$row['album_name']."</a></td> </tr><br/>");
 				}
 			}
 			else if( $match == "starts_with"){
 				$query = mysqli_query( $db, "SELECT * FROM Album WHERE ( album_name LIKE '$search_key') 
 																		AND album_type = '$type' 
-																		AND published_date >= '$from_date' 
-																		AND published_date <= '$from_date';");
+																		AND published_date >= '$from_date'
+																		AND published_date <= '$end_date';");
 				while( $row = $query->fetch_assoc()){ 
-					echo( "<tr> <td><a href='album.php?album_id=".$row['album_id']."'>.$row['album_id'].</a></td> </tr>");
+					echo( "<tr> <td><a href='view_album.php?album_id=".$row['album_id']."'>".$row['album_name']."</a></td> </tr>");
 				}
 			}
 			
@@ -126,8 +135,12 @@ include("session.php");
 		?>
 	
 		<br/><br/><br/>
+		<div align = "center">
+			<tr><td><a href='logout.php'>Logout</a></td></tr>
+		</div>
+	</nav>
 
-
+	<div>
 	<footer>
 					<?php
 					$query = "SELECT L1.track_id FROM listens L1 WHERE L1.user_id = '$uid' AND 
@@ -143,6 +156,11 @@ include("session.php");
 					echo $track_name;
 					echo $duration;
 					?>
-			</footer>
+	</footer>
+	</div>
 </body>
 </html>
+
+
+
+
