@@ -76,7 +76,7 @@
   <div align="center" class="col-md-6 col-md-offset-3"><img class="img-circle img-responsive" src="assets/img/ <?php echo $picture; ?>" width="200" height="200"></div>
 
 <div class="container" align = "center">
-  <h3>Album <?php echo $album_name;?></h3> by Artist 
+  <h2>Album <?php echo $album_name;?> by <small> 
   <?php
       for ($i=0; $i < count($artist_names); $i++) { 
         $art_id = $artist_ids[$i];
@@ -85,11 +85,11 @@
           echo ", ";
         }
       }
-    ?>
+    ?></small></h2>
    <br>
-   <h2>
+   <h3>
     From Publisher <?php echo "<a href = \"view_publisher.php?publisher_id={$publisher_id}\"> {$publisher_name}</a>"; ?>
-   </h2>
+   </h3>
 </div>
 
 
