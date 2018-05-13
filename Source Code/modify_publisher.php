@@ -20,17 +20,17 @@
     {
       if(isset( ($_POST['country']) )  ){
         $country = $_POST['country'];
-          $query = "UPDATE Publisher SET country = {$country} WHERE publisher_id = {$publisher_id} ";
+          $query = "UPDATE Publisher SET country = '{$country}' WHERE publisher_id = {$publisher_id};";
           $result = mysqli_query($db, $query);
       }
       if(isset( ($_POST['city']) )  ){
           $city = $_POST['city'];
-          $query = "UPDATE Publisher SET city = {$city} WHERE publisher_id = {$publisher_id} ";
+          $query = "UPDATE Publisher SET city = '{$city}' WHERE publisher_id = {$publisher_id};";
           $result = mysqli_query($db, $query);
       }
       if(isset( ($_POST['publisher_name']) )  ){
           $publisher_name = $_POST['publisher_name'];
-          $query = "UPDATE Publisher SET publisher_name = {$publisher_name} WHERE publisher_id = {$publisher_id} ";
+          $query = "UPDATE Publisher SET publisher_name = '{$publisher_name}'' WHERE publisher_id = {$publisher_id};";
           $result = mysqli_query($db, $query);
       }
       header("Refresh: 0");
@@ -40,8 +40,11 @@
       if(!empty($_POST['check_list'])){
         foreach($_POST['check_list'] as $selected_album_id){
             $selected_album_id = intval($selected_album_id);
-            $query = "CALL DeleteAlbum({$selected_album_id})";
+            $query = "CALL DeleteAlbum({$selected_album_id});";
             $result = mysqli_query($db, $query);
+            if($result === FALSE){
+
+            }
         }
       }
       header("Refresh:0");

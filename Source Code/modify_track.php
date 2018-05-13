@@ -44,12 +44,12 @@
     {
       if(isset( ($_POST['track_name']) )  ){
           $track_name = $_POST['track_name'];
-          $query = "UPDATE Track SET track_name = {$track_name} WHERE track_id = {$track_id} ";
+          $query = "UPDATE Track SET track_name = '{$track_name}' WHERE track_id = {$track_id} ";
           $result = mysqli_query($db, $query);
       }
       if(isset( ($_POST['recording_type']) )  ){
           $recording_type = $_POST['recording_type'];
-          $query = "UPDATE Track SET recording_type = {$recording_type} WHERE track_id = {$track_id} ";
+          $query = "UPDATE Track SET recording_type = '{$recording_type}' WHERE track_id = {$track_id} ";
           $result = mysqli_query($db, $query);
       }
       if(isset( ($_POST['duration']) )  ){
@@ -89,7 +89,7 @@
       }
       if(isset( ($_POST['language']) )  ){
           $language = $_POST['language'];
-          $query = "UPDATE Track SET language = {$language} WHERE track_id = {$track_id};";
+          $query = "UPDATE Track SET language = '{$language}' WHERE track_id = {$track_id};";
           $result = mysqli_query($db, $query);
       }
       if(isset( ($_POST['price']) )  ){
@@ -99,7 +99,7 @@
       }
       if(isset( ($_POST['date_of_addition']) )  ){
           $date_of_addition = $_POST['date_of_addition'];
-          $query = "UPDATE Track SET date_of_addition = {$date_of_addition} WHERE track_id = {$track_id};";
+          $query = "UPDATE Track SET date_of_addition = '{$date_of_addition}' WHERE track_id = {$track_id};";
           $result = mysqli_query($db, $query);
       }
     }
