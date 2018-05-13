@@ -1,6 +1,12 @@
-<?php 
-include("session.php");
+<?php
 
+	include("session.php");
+
+    $uid = mysqli_real_escape_string($db,$_SESSION['login_id']);
+    $query1 = "SELECT * FROM user WHERE user_id = '$uid' ";
+    $result1 = mysqli_query($db, $query1);
+    $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
+	
 ?>
 
 <!DOCTYPE html>
@@ -15,37 +21,37 @@ include("session.php");
 </head>
 <body>
 
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <ul class="nav navbar-nav">
-      
-      <li><a href="own_profile.php">Profile</a></li>
-      <li><a href="view_playlists.php">Playlist</a></li>
-      <li><a href="view_tracks.php">Tracks</a></li>
-  <li><a href="friends.php">Friends</a></li>
-  <li><a href="message_list.php">Messages</a></li>
-  <li><a href="search.php">Search</a></li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <li><a href="change_general_information.php"><span class="glyphicon glyphicon-user"></span> Settings</a></li>
-      <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-    </ul>
-  </div>
-</nav>
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<ul class="nav navbar-nav">
+				<li><a href="own_profile.php">Profile</a></li>
+				<li><a href="playlists.php">Playlist</a></li>
+				<li><a href="view_tracks.php">Tracks</a></li>
+				<li><a href="friends.php">Friends</a></li>
+				<li><a href="message_list.php">Messages</a></li>
+				<li class="active"><a href="#">Search</a></li>
+			</ul>
+		    <ul class="nav navbar-nav navbar-right">
+				<li><a href="change_general_information.php"><span class="glyphicon glyphicon-user"></span> Settings</a></li>
+				<li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+		    </ul>
+		</div>
 		
 		
 		<div align = "center">
 			<form action = "#" method = "post" onsubmit = "return check()">
 				<font color="white">
 					<br/><br/><br/><br/>MUSICHOLICS<br/><br/>Advanced Playlist Search<br/><br/><br/><br/>
-					<input type = "text" name = "search_key" placeholder = "Album Name"> <br/><br/>
+					<font color="black">
+						<input type = "text" name = "search_key" placeholder = "Artist Name"> <br/><br/>
+					</font>
 					<input type = "radio" name="match" value="matches"/> Exactly matches &nbsp; &nbsp;
 					<input type = "radio" name="match" value="contains"/> Contains &nbsp; &nbsp;
 					<input type = "radio" name="match" value="starts_with"/> Starts with
 					<br/><br/>
-					<input type = "text" name = "creator" placeholder = "Creator name contains.."> <br/><br/>
-					<br/><br/>
 					<font color="black">
+						<input type = "text" name = "creator" placeholder = "Creator name contains.."> <br/><br/>
+						<br/><br/>
 						<input id = "" value = "Search" name = "search" type = "submit"> </button> <br/><br/>
 					</font>
 					<br/><br/>
@@ -79,33 +85,27 @@ include("session.php");
 			
 			
 			if( $match == "matches"){
-				$query = mysqli_query( $db, "SELECT * FROM Playlist WHERE ( playlist_name LIKE '$search_key';)");
-				while( $row = $query->fetch_assoc()){ 
-					$pquery = mysqli_query( $db, "SELECT * FROM Person, Playlist WHERE username LIKE '%$creator%'");
-					while( $prow = $pquery->fetch_assoc()){ 
-						if( $row['creator_id'] == $prow['person_id'])
-							echo( "<tr> <td><a href='playlist.php?playlist_id=".$row['playlist_id']."'>.$row['playlist_id'].</a></td> </tr>");
-					}
+				$query = mysqli_query( $db, "SELECT * FROM Person, Playlist WHERE playlist_name LIKE '$search_key' 
+																				AND username LIKE '%$creator%' 
+																				AND creator_id = person_id;");
+				while( $row = $query->fetch_assoc()){ //printing every playlist with that playlist name
+					echo( "<tr><td><a href='playlist.php?playlist_id=".$row['playlist_id']."'>".$row['playlist_name']."</a></td></tr><br/>");
 				}
 			}
 			else if( $match == "contains"){
-				$query = mysqli_query( $db, "SELECT * FROM Playlist WHERE ( playlist_name LIKE '%$search_key%';)");
-				while( $row = $query->fetch_assoc()){ 
-					$pquery = mysqli_query( $db, "SELECT * FROM Person, Playlist WHERE username LIKE '%$creator%'");
-					while( $prow = $pquery->fetch_assoc()){ 
-						if( $row['creator_id'] == $prow['person_id'])
-							echo( "<tr> <td><a href='playlist.php?playlist_id=".$row['playlist_id']."'>.$row['playlist_id'].</a></td> </tr>");
-					}
+				$query = mysqli_query( $db, "SELECT * FROM Person, Playlist WHERE playlist_name LIKE '%$search_key%' 
+																				AND username LIKE '%$creator%' 
+																				AND creator_id = person_id;");
+				while( $row = $query->fetch_assoc()){ //printing every playlist with that playlist name
+					echo( "<tr><td><a href='playlist.php?playlist_id=".$row['playlist_id']."'>".$row['playlist_name']."</a></td></tr><br/>");
 				}
 			}
 			else if( $match == "starts_with"){
-				$query = mysqli_query( $db, "SELECT * FROM Playlist WHERE ( playlist_name LIKE '$search_key%';)");
-				while( $row = $query->fetch_assoc()){ 
-					$pquery = mysqli_query( $db, "SELECT * FROM Person, Playlist WHERE username LIKE '%$creator%'");
-					while( $prow = $pquery->fetch_assoc()){ 
-						if( $row['creator_id'] == $prow['person_id'])
-							echo( "<tr> <td><a href='playlist.php?playlist_id=".$row['playlist_id']."'>.$row['playlist_id'].</a></td> </tr>");
-					}
+				$query = mysqli_query( $db, "SELECT * FROM Person, Playlist WHERE playlist_name LIKE '%$search_key%' 
+																				AND username LIKE '%$creator%' 
+																				AND creator_id = person_id;");
+				while( $row = $query->fetch_assoc()){ //printing every playlist with that playlist name
+					echo( "<tr><td><a href='playlist.php?playlist_id=".$row['playlist_id']."'>".$row['playlist_name']."</a></td></tr><br/>");
 				}
 			}
 			
@@ -114,7 +114,10 @@ include("session.php");
 		?>
 	
 		<br/><br/><br/>
-
+		<div align = "center">
+			<tr><td><a href='logout.php'>Logout</a></td></tr>
+		</div>
+	</nav>
 	<div>
 	<footer>
 					<?php
