@@ -7,7 +7,7 @@
     $membership_type = $user_array['membership_type'];
 
 
-    $track_id = $_POST['track_id'];
+    $track_id = $_GET['track_id'];
     $query2 = "SELECT * FROM track WHERE track_id = {$track_id} ";
     $result2 = mysqli_query($db, $query2);
     $track_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);

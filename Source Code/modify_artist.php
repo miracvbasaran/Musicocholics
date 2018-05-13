@@ -4,7 +4,7 @@
     $query = "SELECT admin_id FROM admin WHERE user_id = '$uid' ";
     $result = mysqli_query($db, $query);
 
-    $artist_id = $_POST['artist_id'];
+    $artist_id = $_GET['artist_id'];
     $query2 = "SELECT * FROM Artist WHERE artist_id = '$artist_id' ";
     $result2 = mysqli_query($db, $query2);
     $artist_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
