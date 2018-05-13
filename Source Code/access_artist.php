@@ -54,7 +54,7 @@
         </ul>
         
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="change_password.php"><span class="glyphicon glyphicon-user"></span> Change Password</a></li>
+          <li><a href="change_password_admin.php"><span class="glyphicon glyphicon-user"></span> Change Password</a></li>
           <li><a href="homepage.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
         </ul>
       </div>
@@ -88,7 +88,7 @@
     <th>Publish Date</th>
   </tr>
   <?php
-  $query_album = "SELECT album_name, album_type, published_date, album_id FROM Album WHERE Album.album_id = IN (SELECT album_id FROM Album_Belongs_To_Artist A WHERE A.artist_id = {$artist_id}) ORDER BY published_date";
+  $query_album = "SELECT album_name, album_type, published_date, album_id FROM Album WHERE Album.album_id IN (SELECT album_id FROM Album_Belongs_To_Artist A WHERE A.artist_id = {$artist_id}) ORDER BY published_date DESC";
   $result = mysqli_query($db, $query_album);
   
   while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {

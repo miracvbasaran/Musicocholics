@@ -76,7 +76,7 @@
         </ul>
         
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="change_password.php"><span class="glyphicon glyphicon-user"></span> Change Password</a></li>
+          <li><a href="change_password_admin.php"><span class="glyphicon glyphicon-user"></span> Change Password</a></li>
           <li><a href="homepage.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
         </ul>
       </div>
@@ -87,7 +87,7 @@
   <div align="center" class="col-md-6 col-md-offset-3"></div>
 
 <div class="container">
-  <div class = "container" align = "center"><h2><?php echo $track_name;?><small> in Album <?php echo "<a href= \"access_album.php?album_id={$album_id}\">{$album_name}</a>" ?></small></h2></div>
+  <div class = "container" align = "center"><h2><?php echo $track_name;?><small> in <?php echo "<a href= \"access_album.php?album_id={$album_id}\">{$album_name}</a>" ?></small></h2></div>
     <div class = "container" align = "center">
     <p>Recording Type: <?php echo $recording_type;?> </p>
     <p> Duration: <?php echo $duration;?></p>

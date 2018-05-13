@@ -26,7 +26,7 @@ include("session.php");
         </ul>
         
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="change_password.php"><span class="glyphicon glyphicon-user"></span> Change Password</a></li>
+          <li><a href="change_password_admin.php"><span class="glyphicon glyphicon-user"></span> Change Password</a></li>
           <li><a href="homepage.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
         </ul>
       </div>
@@ -50,7 +50,7 @@ include("session.php");
 					<input type="checkbox" name="filter_playlist" value="playlist"/> Playlist &nbsp;&nbsp; 
 					<tr><td><a href='advanced_playlist_search.php'> Advanced Playlist Search</a></td></tr><br/>
 					<input type="checkbox" name="filter_user" value="user"/> User &nbsp;&nbsp; 
-					<tr><td><a href='advanced_user_search.php'> Advanced User Search</a></td></tr><br/><br/>
+					<tr><td><a href='advanced_user_search_admin.php'> Advanced User Search</a></td></tr><br/><br/>
 				</font>
 			</form>
 		</div>
