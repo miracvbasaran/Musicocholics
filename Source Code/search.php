@@ -15,21 +15,23 @@
 </head>
 <body>
 
-	<nav class="navbar navbar-inverse">
-		<div class="container-fluid">
-			<ul class="nav navbar-nav">
-				<li><a href="own_profile.php">Profile</a></li>
-				<li><a href="playlists.php">Playlist</a></li>
-				<li><a href="view_tracks.php">Tracks</a></li>
-				<li><a href="friends.php">Friends</a></li>
-				<li><a href="message_list.php">Messages</a></li>
-				<li class="active"><a href="#">Search</a></li>
-			</ul>
-		    <ul class="nav navbar-nav navbar-right">
-				<li><a href="change_general_information.php"><span class="glyphicon glyphicon-user"></span> Settings</a></li>
-				<li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-		    </ul>
-		</div>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <ul class="nav navbar-nav">
+      
+      <li><a href="own_profile.php">Profile</a></li>
+      <li><a href="playlists.php">Playlist</a></li>
+      <li><a href="view_tracks.php">Tracks</a></li>
+	<li><a href="friends.php">Friends</a></li>
+	<li><a href="message_list.php">Messages</a></li>
+	<li><a href="search.php">Search</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="change_general_information.php"><span class="glyphicon glyphicon-user"></span> Settings</a></li>
+      <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+    </ul>
+  </div>
+</nav>
 
 	
 		<div align = "center">
@@ -41,19 +43,16 @@
 						<input type = "text" name = "search_key" placeholder = "Search.."> 
 						<input id = "" value = "Search" name = "search" type = "submit"> </button> <br/><br/>
 					</font>
-					<input type="radio" name="filter" value="all"/> All &nbsp;&nbsp;&nbsp;&nbsp;
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-					<input type="radio" name="filter" value="track"/> Track &nbsp;&nbsp;
+					<input type="radio" name="filter" value="all"/> All <br/>
+					<input type="radio" name="filter" value="track"/> Track 
 					<tr><td><a href='advanced_track_search.php'> Advanced Track Search</a></td></tr><br/>
-					<input type="radio" name="filter" value="album"/> Album &nbsp;&nbsp;
+					<input type="radio" name="filter" value="album"/> Album 
 					<tr><td><a href='advanced_album_search.php'> Advanced Album Search</a></td></tr><br/>
-					<input type="radio" name="filter" value="artist"/> Artist &nbsp;&nbsp; 
+					<input type="radio" name="filter" value="artist"/> Artist 
 					<tr><td><a href='advanced_artist_search.php'> Advanced Artist Search</a></td></tr><br/>
-					<input type="radio" name="filter" value="playlist"/> Playlist &nbsp;&nbsp; 
+					<input type="radio" name="filter" value="playlist"/> Playlist  
 					<tr><td><a href='advanced_playlist_search.php'> Advanced Playlist Search</a></td></tr><br/>
-					<input type="radio" name="filter" value="user"/> User &nbsp;&nbsp; 
+					<input type="radio" name="filter" value="user"/> User 
 					<tr><td><a href='advanced_user_search.php'> Advanced User Search</a></td></tr><br/><br/>
 				</font>
 			</form>

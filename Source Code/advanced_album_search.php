@@ -15,19 +15,23 @@ include("session.php");
 </head>
 <body>
 
-	<nav class="navbar navbar-inverse">
-		<div class="container-fluid">
-			<ul class="nav navbar-nav">
-				<li><a href="own_profile.php">Profile</a></li>
-				<li><a href="playlists.php">Playlist</a></li>
-				<li><a href="view_tracks.php">Tracks</a></li>
-				<li><a href="friends.php">Friends</a></li>
-				<li><a href="message_list.php">Messages</a></li>
-				<li class="active"><a href="#">Search</a></li>
-				<li><a href="change_general_information.php">Settings</a></li>
-				<li><a href="logout.php">Logout</a></li>
-			</ul>
-		</div>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <ul class="nav navbar-nav">
+      
+      <li><a href="own_profile.php">Profile</a></li>
+      <li><a href="playlists.php">Playlist</a></li>
+      <li><a href="view_tracks.php">Tracks</a></li>
+  <li><a href="friends.php">Friends</a></li>
+  <li><a href="message_list.php">Messages</a></li>
+  <li><a href="search.php">Search</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="change_general_information.php"><span class="glyphicon glyphicon-user"></span> Settings</a></li>
+      <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+    </ul>
+  </div>
+</nav>
 		
 		
 		<div align = "center">
@@ -122,10 +126,7 @@ include("session.php");
 		?>
 	
 		<br/><br/><br/>
-		<div align = "center">
-			<tr><td><a href='logout.php'>Logout</a></td></tr>
-		</div>
-	</nav>
+
 
 	<footer>
 					<?php

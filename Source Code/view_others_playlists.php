@@ -23,23 +23,23 @@
 
 <body>
 
-	<nav class="navbar navbar-inverse">
-		<div class="container-fluid">
-	    	<ul class="nav navbar-nav">
-	      		<li class="active"><a href="#">Home</a></li>
-	      		<li><a href="own_profile.php">Profile</a></li>
-	      		<li><a href="view_playlists.php">Playlist</a></li>
-	      		<li><a href="view_tracks.php">Tracks</a></li>
-	  			<li><a href="friends_list.php">Friends</a></li>
-	  			<li><a href="message_list.php">Messages</a></li>
-	  			<li><a href="search.php">Search</a></li>
-	    	</ul>
-	    	<ul class="nav navbar-nav navbar-right">
-	      		<li><a href="change_general_information.php"><span class="glyphicon glyphicon-user"></span>Settings</a></li>
-	      		<li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span>Logout</a></li>
-	    	</ul>
-	  	</div>
-	</nav>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <ul class="nav navbar-nav">
+      
+      <li><a href="own_profile.php">Profile</a></li>
+      <li><a href="playlists.php">Playlist</a></li>
+      <li><a href="view_tracks.php">Tracks</a></li>
+	<li><a href="friends.php">Friends</a></li>
+	<li><a href="message_list.php">Messages</a></li>
+	<li><a href="search.php">Search</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="change_general_information.php"><span class="glyphicon glyphicon-user"></span> Settings</a></li>
+      <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+    </ul>
+  </div>
+</nav>
 
 	<div class="container">
 		<h3> Playlists </h3> <br>
