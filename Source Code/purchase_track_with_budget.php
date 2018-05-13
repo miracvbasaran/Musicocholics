@@ -28,8 +28,10 @@
     $price = $track_array['price'];
 
     if(isset( ($_POST['purchase']) ) ){
-        
-        if($budget >= $price){
+        $query = "SELECT * FROM buys WHERE user_id = {$user_id} AND track_id = {$track_id}";
+        $result = mysqli_query($db, $query);
+        if($result === FALSE){
+          if($budget >= $price){
 
           $newbudget = $budget-$price;
           
@@ -39,17 +41,23 @@
           $query = "INSERT INTO buys VALUES( '$uid', '$track_id' ) ";
           $result = mysqli_query($db, $query);
 
-          echo ' <script type="text/javascript"> alert("You purchased {$track_name} successfully."); </script>';
+          echo "<script type=\"text/javascript\"> alert(\"You purchased {$track_name} successfully.\"); </script>";
 
-          header("location: search_result_screen.php");
+          header("location: view_tracks.php");
+        }
+          else{
+          echo " <script type=\"text/javascript\"> alert(\"Your budget is not sufficient.\"); </script>";
+          }
         }
         else{
-          echo ' <script type="text/javascript"> alert("Your budget is not sufficient."); </script>';
+            echo " <script type=\"text/javascript\"> alert(\"You already have this track in your library.\"); </script>";
         }
+
+        
     }
         
     if( isset( ($_POST['cancel']) )){
-      header("location: search_result_screen.php");
+      header("Location: " . $_SERVER['HTTP_REFERER']);
     }
 
 ?>
@@ -95,8 +103,8 @@ Your budget: $<?php echo $budget; ?> <br>
 </h>
 
 <form method="post" action="">
-  <input type="submit" name="purchase" value="Purchase"  > 
-  <input type="reset" name=cancel value= "Cancel">
+  <input type="submit" name="purchase" value="Purchase"  class = "btn btn-success"> 
+  <input type="reset" name=cancel value= "Cancel" class = "btn btn-danger">
 </form> 
 
  
