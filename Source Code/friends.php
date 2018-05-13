@@ -1,3 +1,7 @@
+<?php
+// Turn off all error reporting
+error_reporting(0);
+?>
 <?php 
 	include("session.php");
 	$uid = mysqli_real_escape_string($db,$_SESSION['login_id']);
@@ -37,23 +41,20 @@
 		
 		
 		<?php
-		
-		$id = mysqli_real_escape_string( $db, $_SESSION['login_id']);
-		$fquery = mysqli_query( $db, "SELECT * FROM Friendship WHERE user1_id = '$id' OR user2_id = '$id');");
-		if($fquery == TRUE){
-			while( $frow = mysqli_fetch_array($fquery, MYSQLI_ASSOC)){ //for each friend
-			$fid = $frow['user1_id'];
-			if( $fid == $id){
-				$fid = $frow['user2_id'];
-			}
-			$_SESSION['remove_friend_id'] = $fid;
-			$uquery = mysqli_query( $db, "SELECT * FROM Person WHERE person_id = '$fid');"); //friends profile
-			echo( "<tr><td><a href='friend_profile.php?friend_id=".$id."'>".$uquery['fullname']."	</a></td></tr></br>");
-			echo( "<tr><td><a href='send_message.php?friend_id=".$id."'>Send Message</a></td></tr>	"); //SEND MESSAGE
-			echo( "<tr><td><a href='remove_friend.php'>Remove</a></td></tr>	"); //REMOVE
-			}
-		
+		$query = mysqli_query( $db, "SELECT * FROM Person, User, Friendship WHERE user_id = person_id
+																			AND ((user1_id = '$uid' AND user2_id = user_id)
+																				OR (user1_id = user_id AND user2_id = '$uid'));");
+		while( $row = $query->fetch_assoc()){
+			if( $user1_id == $uid)
+				$fid = $user2_id;
+			else if( $user2_id == $uid)
+				$fid = $user1_id;
+			
+			echo( "<tr><td><a href='friend_profile.php?friend_id=".$id."'>".$row['username']. "&nbsp;&nbsp;</a></td></tr>");
+			echo( "<tr><td><a href='send_direct_message.php?friend_id=".$id.	"&nbsp;&nbsp;'>Send Message</a></td></tr>	"); //SEND MESSAGE
+			echo( "<tr><td><a href='remove_friend.php?remove_id=".$fid.	"&nbsp;&nbsp;'>Remove</a></td></tr>	<br/> <br/>"); //REMOVE
 		}
+		
 		
 		?>
 		
