@@ -93,16 +93,16 @@
     <p> Birthday: <?php echo $birthday_f;?></p>
 
 <div align="right" class="container">
- <a href="view_others_playlist.php?other_id=$view_id" class="btn btn-success" role="button">VIEW PLAYLISTS</a>
+ <a href="view_others_playlist.php?other_id=$view_id" class="btn btn-success" role="button">View Playlists</a>
 
  
 </div>
   <p> 
-       <input id='Submit' name='sendmessage_button' value='Submit' type='button' value='SEND MESSAGE'>
+       <input id='Submit' name='sendmessage_button' type='Submit' class='btn btn-default' value='Send Message'>
 
-       <input id='Submit' name='block_button' value='Submit' type='button' value='BLOCK'>
+       <input id='Submit' name='block_button' type='Submit' class='btn btn-default' value='Block'>
 
-       <input id='Submit' name='unfriend_button' value='Submit' type='button' value='UNFRIEND'>
+       <input id='Submit' name='unfriend_button' type='Submit' class='btn btn-default' value='Unfriend'>
        
     </p>
  </div>
@@ -112,10 +112,10 @@
 <div class="container">
 <p> POSTS <br><br>
 <?php
-  $query = "SELECT U.username , P.post, P.date FROM posts P, User U WHERE P.reciver_id = '$friend_id' AND P.writer_id = U.user_id ORDER BY date DESC ";
+  $query = "SELECT U.username , P.post, P.date FROM posts P, User U WHERE P.receiver_id = '$friend_id' AND P.writer_id = U.user_id ORDER BY date DESC ";
   $result = mysqli_query($db, $query);
   
-  while ($row = mysql_fetch_array($result, MYSQL_NUM)) {
+  while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
       printf("%s (%s) : %s ", $row[0] , $row[2], $row[1] );  
   }
 
