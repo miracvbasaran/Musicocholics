@@ -110,7 +110,7 @@
       <li><a href="own_profile.php">Profile</a></li>
       <li><a href="view_playlists.php">Playlist</a></li>
       <li><a href="view_tracks.php">Tracks</a></li>
-	<li><a href="friends_list.php">Friends</a></li>
+	<li><a href="friends.php">Friends</a></li>
 	<li><a href="message_list.php">Messages</a></li>
 	<li><a href="search_result_screen.php">Search</a></li>
     </ul>
