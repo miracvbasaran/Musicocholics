@@ -18,7 +18,7 @@
 
           $old_pass = $_POST['old_pass'];
 
-          if(  $old_pass != $password )  
+          if(  strcmp($old_pass, $password) != 0 )  
           {
           echo " <script type=\"text/javascript\"> alert(\"Old password value is not matched.\"); </script>";
           }
