@@ -6,8 +6,7 @@
     $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
 
     if(isset($_POST['create_playlist'])) {
-    	if(isset($_POST['playlist_name'])) {
-    		if(isset($_POST['playlist_description'])) {
+    	
     			$playlist_name = $_POST['playlist_name'];
     			$playlist_description = $_POST['playlist_description'];
     			$date = new DateTime();
@@ -18,14 +17,7 @@
          		$index_array = mysqli_fetch_array($result5, MYSQLI_NUM);
         	  	header("location: view_own_playlist.php?playlist_id=".$index_array[0]);
     		}
-    		else {
-    			echo ' <script type="text/javascript"> alert("Description is not entered."); </script>';
-    		}
-    	}
-    	else {
-			echo ' <script type="text/javascript"> alert("Playlist name is not entered."); </script>';
-    	}
-    }
+    		
 ?>
 
 <!DOCTYPE html>

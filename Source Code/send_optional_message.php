@@ -10,7 +10,9 @@
     		if(isset($_POST['text_message'])) {
     			$receiver_username = $_POST['receiver_username'];
     			$text_message = $_POST['text_message'];
-    			$query2 = "SELECT person_id FROM person WHERE username = {$receiver_username}";
+          echo $receiver_username;
+          echo $text_message;
+    			$query2 = "SELECT person_id FROM person WHERE username = '$receiver_username'";
     			$result2 = mysqli_query($db, $query2);
     			$receiver_array = mysqli_fetch_array($result2, MYSQLI_ASSOC);
     			if($receiver_array == FALSE) {
@@ -19,8 +21,9 @@
     			else {
     				$receiver_id = $receiver_array['person_id'];
     				$date = new DateTime();
-    				$query3 = "INSERT INTO send_message(sender_id, receiver_id, date, message) VALUES({$uid}, {$receiver_id}, {$date->getTimestamp()}, {$text_message})";
-    				header("location: message_list.php");
+    				$query3 = "INSERT INTO sends_message(sender_id, receiver_id, date, message) VALUES({$uid}, {$receiver_id}, {$date->getTimestamp()}, {$text_message})";
+            $result3 = mysqli_query($db, $query3);
+            echo "ADDED";
     			}
     		}
     		else {
