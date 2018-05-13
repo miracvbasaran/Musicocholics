@@ -22,8 +22,9 @@ include("session.php");
 				<font color="white">
 					<br/><br/><br/><br/>MUSICHOLICS<br/><br/>Search<br/><br/><br/><br/>
 					
-					<input type = "text" name = "search_key" placeholder = "Search.."> 
+					
 					<font color="black">
+						<input type = "text" name = "search_key" placeholder = "Search.."> 
 						<input id = "" value = "Search" name = "search" type = "submit"> </button>
 					</font>
 					<br/><br/>
