@@ -4,18 +4,18 @@
     $query1 = "SELECT * FROM person WHERE user_id = {$uid} ";
     $result1 = mysqli_query($db, $query1);
     $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
-    
-    $otheruser_id = $_POST['user_id'];
-    $query5 = "SELECT * FROM person WHERE user_id = {$otheruser_id} ";
-    $result5 = mysqli_query($db, $query5);
-    $other_user_array = mysqli_fetch_array($result5, MYSQLI_ASSOC);
-    $username = $other_user_array['username'];
 
     $playlist_id = $_POST['playlist_id'];
     $query2 = "SELECT * FROM playlist WHERE playlist_id = {$playlist_id}";
     $result2 = mysqli_query($db, $query2);
     $playlist_array =  mysqli_fetch_array($result2, MYSQLI_ASSOC);
     $playlist_name = $playlist_array['playlist_name'];
+    $playlist_creator = $playlist_array['playlist_creator'];
+
+    $query5 = "SELECT * FROM person WHERE person_id = {$playlist_creator}";
+    $result5 = mysqli_query($db, $query5);
+    $creator_array =  mysqli_fetch_array($result5, MYSQLI_ASSOC);
+    $username = $creator_array['username'];
 
     $query3 = "SELECT AVG(rate) as avg_rate FROM rates WHERE playlist_id = {$playlist_id}";
     $result3 = mysqli_query($db, $query3);
@@ -84,11 +84,11 @@
 	    		<th>Price</th> 
 	  		</tr>
 	  		<?php
-	  			$query_playlist = "SELECT A.track_id , T.track_name , T.duration , T.price FROM added A , Track T WHERE A.playlist_id = {$playlist_id}";
+	  			$query_playlist = "SELECT A.track_id , T.track_name , T.duration , T.price FROM added A , Track T WHERE A.track_id = T.track_id AND A.playlist_id = {$playlist_id}";
 	  			$result_playlist = mysqli_query($db, $query_playlist);
 	  			while ($row = mysqli_fetch_array($result_playlist, MYSQLI_NUM)) {
-      				$p_id = $row[0];
-     				echo "<a href = \"view_track.php?album_id = {$p_id}\"><tr>";
+      				$t_id = $row[0];
+     				echo "<a href = \"view_track.php?track_id = {$t_id}\"><tr>";
      				echo "<td>" . $row[1] . "</td>";
      				echo "<td>" . $row[2] . "</td>";
     				echo "<td>" . $row[3] . "</td></a>";
@@ -114,13 +114,13 @@
       				$friend_array = mysqli_fetch_array($result_friend, MYSQLI_ASSOC);
       				$cnt_friend = $friend_array['cntfriend'];
       				if( $cnt_friend == 0 ) {
-      					echo "<a href = \"nonfriend_profile.php?p_id = {$p_id}\"<tr>";
+      					echo "<a href = \"nonfriend_profile.php?other_id = {$person_id}\"<tr>";
 	      				echo "<td>" . $row[1] . "</td>";
 	      				echo "<td>" . $row[2] . "</td>";
 	      				echo "</tr></a>" ;
 	      			}
 	      			else {
-      					echo "<a href = \"friend_profile.php?p_id = {$p_id}\"<tr>";
+      					echo "<a href = \"friend_profile.php?other_id = {$person_id}\"<tr>";
 	      				echo "<td>" . $row[1] . "</td>";
 	      				echo "<td>" . $row[2] . "</td>";
 	      				echo "</tr></a>" ;

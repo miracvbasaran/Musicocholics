@@ -1,7 +1,7 @@
 <?php
 	include("session.php");
     $uid = mysqli_real_escape_string($db, $_SESSION['login_id']);
-    $query1 = "SELECT * FROM person WHERE user_id = {$uid} ";
+    $query1 = "SELECT * FROM person WHERE person_id = {$uid} ";
     $result1 = mysqli_query($db, $query1);
     $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
     $username = $user_array['username'];
@@ -24,7 +24,7 @@
     	$resultD2 = mysqli_query($db, $queryD2);
     	$queryD3 = "DELETE FROM follows WHERE playlist_id = {$playlist_i} ";
     	$resultD3 = mysqli_query($db, $queryD3);
-    	$queryD4 = "DELETE FROM rates WHERE playlist_id = {$playlist_id] ";
+    	$queryD4 = "DELETE FROM rates WHERE playlist_id = {$playlist_id} ";
     	$resultD4 = mysqli_query($db, $queryD4);
     	$queryD5 = "DELETE FROM comments WHERE playlist_id = {$playlist_id} ";
     	$resultD5 = mysqli_query($db, $queryD5);

@@ -6,7 +6,7 @@
     $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
     
     if(isset($_POST['send_optional_message'])) {
-    	header("location: send_optional_message.php?");
+    	header("location: send_optional_message.php");
     }
 ?>
 
@@ -59,7 +59,7 @@
 	    		<th>Message</th> 
 	  		</tr>
 	  		<?php
-	  			$query_message = "SELECT P.person_id, P.fullname, M.message, FROM sends_message M , Person P WHERE P.person_id = M.sender_id AND M.receiver_id = {$uid} ORDER BY M.date";
+	  			$query_message = "SELECT P.person_id, P.fullname, M.message FROM sends_message M , person P WHERE P.person_id = M.sender_id AND M.receiver_id = {$uid} ORDER BY M.date";
 	  			$result_message = mysqli_query($db, $query_message);
 	  			while ($row = mysqli_fetch_array($result_message, MYSQLI_NUM)) {
       				$p_id = $row[0];
@@ -68,7 +68,7 @@
       				$friend_array = mysqli_fetch_array($result_friend, MYSQLI_ASSOC);
       				$cnt_friend = $friend_array['cntfriend'];
       				if( $cnt_friend == 0 ) {
-      					echo "<a href = \"nonfriend_profile.php?pother_id = {$p_id}\"<tr>";
+      					echo "<a href = \"nonfriend_profile.php?other_id = {$p_id}\"<tr>";
 	      				echo "<td>" . $row[1] . "</td>";
 	      				echo "<td>" . $row[2] . "</td>";
 	      				echo "</tr></a>" ;

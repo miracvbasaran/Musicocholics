@@ -1,7 +1,14 @@
-<?php 
+<?php
+
 include("session.php");
 
+$uid = mysqli_real_escape_string($db,$_SESSION['login_id']);
+$query1 = "SELECT * FROM user WHERE user_id = '$uid' ";
+$result1 = mysqli_query($db, $query1);
+$user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
+	
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,40 +22,38 @@ include("session.php");
 </head>
 <body>
 
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <ul class="nav navbar-nav">
-      
-      <li><a href="own_profile.php">Profile</a></li>
-      <li><a href="view_playlists.php">Playlist</a></li>
-      <li><a href="view_tracks.php">Tracks</a></li>
-  <li><a href="friends.php">Friends</a></li>
-  <li><a href="message_list.php">Messages</a></li>
-  <li><a href="search.php">Search</a></li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <li><a href="change_general_information.php"><span class="glyphicon glyphicon-user"></span> Settings</a></li>
-      <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-    </ul>
-  </div>
-</nav>
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<ul class="nav navbar-nav">
+				<li><a href="own_profile.php">Profile</a></li>
+				<li><a href="playlists.php">Playlist</a></li>
+				<li><a href="view_tracks.php">Tracks</a></li>
+				<li><a href="friends.php">Friends</a></li>
+				<li><a href="message_list.php">Messages</a></li>
+				<li class="active"><a href="#">Search</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="change_general_information.php"><span class="glyphicon glyphicon-user"></span> Settings</a></li>
+				<li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+			</ul>
+		</div>
 		
 		
 		<div align = "center">
 			<form action = "#" method = "post" onsubmit = "return check()">
 				<font color="white">
 					<br/><br/><br/><br/>MUSICHOLICS<br/><br/>Advanced User Search<br/><br/><br/><br/>
-					<input type = "text" name = "username" placeholder = "Username"> <br/><br/>
+					<font color="black">
+						<input type = "text" name = "username" placeholder = "Username"> <br/><br/>
+					</font>
 					<input type = "radio" name="match" value="matches"/> Exactly matches &nbsp; &nbsp;
 					<input type = "radio" name="match" value="contains"/> Contains &nbsp; &nbsp;
 					<input type = "radio" name="match" value="starts_with"/> Starts with <br/><br/><br/>
-					<input type = "text" name = "fullname" placeholder = "Name"> <br/><br/>
-					<input type = "radio" name="country" value="tr"/> Turkey &nbsp; &nbsp;
-					<input type = "radio" name="country" value="gb"/> Global &nbsp; &nbsp;
-					<br/><br/>
-					<input type = "radio" name="gender" value="f"/> Female &nbsp; &nbsp;
-					<input type = "radio" name="gender" value="m"/> Male &nbsp; &nbsp;
-					<input type = "radio" name="gender" value="n"/> Nonbinary gender
+					<font color="black">
+						<input type = "text" name = "fullname" placeholder = "Name"> <br/><br/>
+					</font>
+					<input type = "radio" name="country" value="Turkey"/> Turkey &nbsp; &nbsp;
+					<input type = "radio" name="country" value="Germany"/> Germany
 					<br/><br/>
 					<input type = "radio" name="relationship" value="friend"/> Only friends &nbsp; &nbsp;
 					<input type = "radio" name="relationship" value="all"/> All people 
@@ -74,8 +79,6 @@ include("session.php");
 					alert( "Please type an username");
 				if( match == "")
 					alert( "Please one of \"Exactly matches\", \"Exactly Contains\", \"Starts with\"" );
-				if( fullname = "")
-					alert( "Please type full name");
 				if( country == "")
 					alert( "Please select a country");
 				if( relationship == "")
@@ -86,130 +89,199 @@ include("session.php");
 			</script>
 		
 		
-		<?php
+			<?php
 	
-		if( isset( $_POST['search'])){
-			$username = mysqli_real_escape_string( $db, $_POST['username']);
-			$match = mysqli_real_escape_string( $db, $_POST['match']);
-			$fullname = mysqli_real_escape_string( $db, $_POST['fullname']);
-			$country = mysqli_real_escape_string( $db, $_POST['country']);
-			$relationship = mysqli_real_escape_string( $db, $_POST['relationship']);
-			$id = $_SESSION['login_id'];
-			
-			if( $relationship == "friend"){ //searching a friend
+			if( isset( $_POST['search'])){
+				$username = mysqli_real_escape_string( $db, $_POST['username']);
+				$match = mysqli_real_escape_string( $db, $_POST['match']);
+				$fullname = mysqli_real_escape_string( $db, $_POST['fullname']);
+				$country = mysqli_real_escape_string( $db, $_POST['country']);
+				$relationship = mysqli_real_escape_string( $db, $_POST['relationship']);
+				
+				$id_list = new SplDoublyLinkedList;
+				
 				if( $match == "matches"){
-					$fquery = mysqli_query( $db, "SELECT * FROM Friendship WHERE user1_id = '$id';"); //user2 is the friend
-					while( $frow = $fquery->fetch_assoc()){ 
-						$upquery = mysqli_query( $db, "SELECT * FROM User, Person WHERE user_id = '$frow['user2_id']' 
-																					AND person_id = '$frow['user2_id']' 
-																					AND ( username LIKE '$username') 
-																					AND country = '$country';"); //id is unique, so only one row
-						$uprow = $upquery->fetch_assoc();
-						echo( "<tr><td><a href='friend_profile.php?friend_id=".$uprow['user_id']."'>.$uprow['user_id'].</a></td></tr>");
-					}
-					
-					
-					$fquery = mysqli_query( $db, "SELECT * FROM Friendship WHERE user2_id = '$id';"); //user2 is the friend
-					while( $frow = $fquery->fetch_assoc()){ 
-						$upquery = mysqli_query( $db, "SELECT * FROM User, Person WHERE user_id = '$frow['user1_id']' 
-																					AND person_id = '$frow['user1_id']' 
-																					AND ( username LIKE '$username') 
-																					AND country = '$country';"); //id is unique, so only one row
-						$uprow = $upquery->fetch_assoc();
-						echo( "<tr><td><a href='friend_profile.php?friend_id=".$uprow['user_id']."'>.$uprow['user_id'].</a></td></tr>");
-					}
-				}
-				else if( $match == "contains"){
-					$fquery = mysqli_query( $db, "SELECT * FROM Friendship WHERE user1_id = '$id';"); //user2 is the friend
-					while( $frow = $fquery->fetch_assoc()){ 
-						$upquery = mysqli_query( $db, "SELECT * FROM User, Person WHERE user_id = '$frow['user2_id']' 
-																					AND person_id = '$frow['user2_id']' 
-																					AND ( username LIKE '%$username%') 
-																					AND country = '$country';"); //id is unique, so only one row
-						$uprow = $upquery->fetch_assoc();
-						echo( "<tr><td><a href='friend_profile.php?friend_id=".$uprow['user_id']."'>.$uprow['user_id'].</a></td></tr>");
-					}
-					
-					
-					$fquery = mysqli_query( $db, "SELECT * FROM Friendship WHERE user2_id = '$id';"); //user2 is the friend
-					while( $frow = $fquery->fetch_assoc()){ 
-						$upquery = mysqli_query( $db, "SELECT * FROM User, Person WHERE user_id = '$frow['user1_id']' 
-																					AND person_id = '$frow['user1_id']' 
-																					AND ( username LIKE '%$username%') 
-																					AND country = '$country';"); //id is unique, so only one row
-						$uprow = $upquery->fetch_assoc();
-						echo( "<tr><td><a href='friend_profile.php?friend_id=".$uprow['user_id']."'>.$uprow['user_id'].</a></td></tr>");
-					}
-				}
-				else if( $match == "starts_with"){
-					$fquery = mysqli_query( $db, "SELECT * FROM Friendship WHERE user1_id = '$id';"); //user2 is the friend
-					while( $frow = $fquery->fetch_assoc()){ 
-						$upquery = mysqli_query( $db, "SELECT * FROM User, Person WHERE user_id = '$frow['user2_id']' 
-																					AND person_id = '$frow['user2_id']' 
-																					AND ( username LIKE '$username%') 
-																					AND country = '$country';"); //id is unique, so only one row
-						$uprow = $upquery->fetch_assoc();
-						echo( "<tr><td><a href='friend_profile.php?friend_id=".$uprow['user_id']."'>.$uprow['user_id'].</a></td></tr>");
-					}
-					
-					
-					$fquery = mysqli_query( $db, "SELECT * FROM Friendship WHERE user2_id = '$id';"); //user2 is the friend
-					while( $frow = $fquery->fetch_assoc()){ 
-						$upquery = mysqli_query( $db, "SELECT * FROM User, Person WHERE user_id = '$frow['user1_id']' 
-																					AND person_id = '$frow['user1_id']' 
-																					AND ( username LIKE '$username%') 
-																					AND country = '$country';"); //id is unique, so only one row
-						$uprow = $upquery->fetch_assoc();
-						echo( "<tr><td><a href='friend_profile.php?friend_id=".$uprow['user_id']."'>.$uprow['user_id'].</a></td></tr>");
-					}
-				}
-			}
-			else if( $relationship == "all"){ //searching all people
-				if( $match == "matches"){
-					$upquery = mysqli_query( $db, "SELECT * FROM User, Person WHERE ( username LIKE '$username') 
+					$query = mysqli_query( $db, "SELECT * FROM Person, User WHERE (username LIKE '$search_key') 
+																				AND user_id = person_id
 																				AND country = '$country';");
-					$uprow = $upquery->fetch_assoc();
-					echo( "<tr><td><a href='friend_profile.php?friend_id=".$uprow['user_id']."'>.$uprow['user_id'].</a></td></tr>");
-				}
-				else if( $match == "contains"){
-					$upquery = mysqli_query( $db, "SELECT * FROM User, Person WHERE ( username LIKE '%$username%') 
-																				AND country = '$country';");
-					$uprow = $upquery->fetch_assoc();
-					echo( "<tr><td><a href='friend_profile.php?friend_id=".$uprow['user_id']."'>.$uprow['user_id'].</a></td></tr>");
-				}
-				else if( $match == "starts_with"){
-					$upquery = mysqli_query( $db, "SELECT * FROM User, Person WHERE ( username LIKE '$username%') 
-																				AND country = '$country';");
-					$uprow = $upquery->fetch_assoc();
-					echo( "<tr><td><a href='friend_profile.php?friend_id=".$uprow['user_id']."'>.$uprow['user_id'].</a></td></tr>");
+					
+					$id_list = new SplDoublyLinkedList;
+					
+					while( $row = $query->fetch_assoc()){ //printing every user with that user name
+						$id = $row['person_id'];
+						
+						
+						//not printing own profile
+						if( $id != $uid){
+							//printing friends
+							$fquery = mysqli_query( $db, "SELECT * FROM Friendship WHERE (user1_id = '$uid' OR user2_id = '$uid') AND (user1_id = '$id' OR user2_id = '$id');");
+							while( $frow = $fquery->fetch_assoc()){ //for each friend
+								echo( "<tr><td><a href='friend_profile.php?friend_id=".$id."'>".$row['username']."</a></td></tr><br/>");
+								$id_list->push($id);
+							}
+							
+							
+							//not printing blocked profiles
+							$bquery = mysqli_query( $db, "SELECT * FROM Blocks WHERE (blocked_id = '$id' AND blocker_id = '$uid') OR (blocker_id = '$id' AND blocked_id = '$uid')");
+							while( $brow = $bquery->fetch_assoc()){ //for each blocked/blocker
+									$id_list->push($id);
+							}
+							
+							
+							//printing non-friends
+							$id_count = $id_list->count();
+							for( $i = 0; $i < $id_count; $i++){
+								if( $id_list->bottom() != $id){
+									$id_list->shift();
+									$id_list->push( $id);
+								}
+								else{
+									$id_list->shift(); 
+								}
+									
+							}
+							
+							if( $relationship == "all"){
+								if( $id_count == $id_list->count()){ //not friend, not blocked -> non-friend
+									echo( "<tr><td><a href='nonfriend_profile.php?nonfriend_id=".$id."'>".$row['username']."</a></td></tr><br/>");
+								}
+							}
+							
+						}
+						
+					}
 				}
 				
+				if( $match == "contains"){
+					$query = mysqli_query( $db, "SELECT * FROM Person, User WHERE (username LIKE '%$search_key%') 
+																				AND user_id = person_id
+																				AND country = '$country';");
+					
+					$id_list = new SplDoublyLinkedList;
+					
+					while( $row = $query->fetch_assoc()){ //printing every user with that user name
+						$id = $row['person_id'];
+						
+						//not printing own profile
+						if( $id != $uid){
+							//printing friends
+							$fquery = mysqli_query( $db, "SELECT * FROM Friendship WHERE (user1_id = '$uid' OR user2_id = '$uid') AND (user1_id = '$id' OR user2_id = '$id');");
+							while( $frow = $fquery->fetch_assoc()){ //for each friend
+								echo( "<tr><td><a href='friend_profile.php?friend_id=".$id."'>".$row['username']."</a></td></tr><br/>");
+								$id_list->push($id);
+							}
+							
+							
+							//not printing blocked profiles
+							$bquery = mysqli_query( $db, "SELECT * FROM Blocks WHERE (blocked_id = '$id' AND blocker_id = '$uid') OR (blocker_id = '$id' AND blocked_id = '$uid')");
+							while( $brow = $bquery->fetch_assoc()){ //for each blocked/blocker
+									$id_list->push($id);
+							}
+							
+							
+							//printing non-friends
+							$id_count = $id_list->count();
+							for( $i = 0; $i < $id_count; $i++){
+								if( $id_list->bottom() != $id){
+									$id_list->shift();
+									$id_list->push( $id);
+								}
+								else{
+									$id_list->shift(); 
+								}
+									
+							}
+							
+							if( $relationship == "all"){
+								if( $id_count == $id_list->count()){ //not friend, not blocked -> non-friend
+									echo( "<tr><td><a href='nonfriend_profile.php?nonfriend_id=".$id."'>".$row['username']."</a></td></tr><br/>");
+								}
+							}
+							
+						}
+						
+					}
+				}
+				
+				if( $match == "starts_with"){
+					$query = mysqli_query( $db, "SELECT * FROM Person, User WHERE (username LIKE '$search_key%') 
+																				AND user_id = person_id
+																				AND country = '$country';");
+					
+					$id_list = new SplDoublyLinkedList;
+					
+					while( $row = $query->fetch_assoc()){ //printing every user with that user name
+						$id = $row['person_id'];
+						
+						
+						//not printing own profile
+						if( $id != $uid){
+							//printing friends
+							$fquery = mysqli_query( $db, "SELECT * FROM Friendship WHERE (user1_id = '$uid' OR user2_id = '$uid') AND (user1_id = '$id' OR user2_id = '$id');");
+							while( $frow = $fquery->fetch_assoc()){ //for each friend
+								echo( "<tr><td><a href='friend_profile.php?friend_id=".$id."'>".$row['username']."</a></td></tr><br/>");
+								$id_list->push($id);
+							}
+							
+							
+							//not printing blocked profiles
+							$bquery = mysqli_query( $db, "SELECT * FROM Blocks WHERE (blocked_id = '$id' AND blocker_id = '$uid') OR (blocker_id = '$id' AND blocked_id = '$uid')");
+							while( $brow = $bquery->fetch_assoc()){ //for each blocked/blocker
+									$id_list->push($id);
+							}
+							
+							
+							//printing non-friends
+							$id_count = $id_list->count();
+							for( $i = 0; $i < $id_count; $i++){
+								if( $id_list->bottom() != $id){
+									$id_list->shift();
+									$id_list->push( $id);
+								}
+								else{
+									$id_list->shift(); 
+								}
+									
+							}
+							
+							if( $relationship == "all"){
+								if( $id_count == $id_list->count()){ //not friend, not blocked -> non-friend
+									echo( "<tr><td><a href='nonfriend_profile.php?nonfriend_id=".$id."'>".$row['username']."</a></td></tr><br/>");
+								}
+							}
+							
+						}
+						
+					}
+				}
+					
 			}
-			
-		}
 		
-		?>
+			?>
 	
-		<br/><br/><br/>
-	
+				<br/><br/><br/>
+				<div align = "center">
+					<tr><td><a href='logout.php'>Logout</a></td></tr>
+				</div>
+			</nav>
 
-	<div> 	
-			<footer>
+			<div> 	
+				<footer>
 					<?php
 					$query = "SELECT L1.track_id FROM listens L1 WHERE L1.user_id = '$uid' AND 
-					date = (SELECT max(L2.date) FROM listens L2 WHERE L2.user_id = '$uid') ";
+						date = (SELECT max(L2.date) FROM listens L2 WHERE L2.user_id = '$uid') ";
 					$result = mysqli_query($db, $query);
 					$row = mysqli_fetch_array($result, MYSQLI_NUM);
 					$query2 = "SELECT track_name,duration FROM track WHERE track_id = '$row[0]' ";
 					$result2 = mysqli_query($db, $query2);
 					$track_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
 
-				  	$track_name = $track_array['track_name'];
-				  	$duration = $track_array['duration'];
+					$track_name = $track_array['track_name'];
+					$duration = $track_array['duration'];
 					echo $track_name;
 					echo $duration;
 					?>
-			</footer>
-		</div>
-</body>
-</html>
+				</footer>
+			</div>
+		</body>
+		</html>
