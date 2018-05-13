@@ -497,12 +497,11 @@ INSERT INTO `posts`(`writer_id`, `receiver_id`, `date`, `post`) VALUES
 DELIMITER $$
 CREATE PROCEDURE DeleteTrack(IN trackId INT)
 BEGIN
-	DELETE FROM Track WHERE track_id = trackId;
 	DELETE FROM Added WHERE track_id = trackId;
 	DELETE FROM Buys WHERE track_id = trackId;
 	DELETE FROM Gift WHERE track_id = trackId;
 	DELETE FROM Listens WHERE track_id = trackId;
-
+	DELETE FROM Track WHERE track_id = trackId;
 END
 $$
 
@@ -514,7 +513,6 @@ BEGIN
 	DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
 
 	DELETE FROM Album_Belongs_To_Artist WHERE album_id = albumId;
-	DELETE FROM Album WHERE album_id = albumId;
 	OPEN cur_tracks;
 	track_loop: LOOP
 		FETCH cur_tracks INTO i;
@@ -524,6 +522,7 @@ BEGIN
 		CALL DeleteTrack(i);
 	END LOOP;
 	CLOSE cur_tracks;
+	DELETE FROM Album WHERE album_id = albumId;
 
 END
 $$
