@@ -20,33 +20,33 @@
 
           if(  $old_pass != $password )  
           {
-          echo ' <script type="text/javascript"> alert("Old password value is not matched."); </script>';
-          }  
-
-      if(isset( ($_POST['new_pass_1']) )  ){
-          $newpass = ($_POST['new_pass_1']);
-      }
-      else{
-        echo ' <script type="text/javascript"> alert("You need to enter new password."); </script>'; 
-      }
-
-      if(isset( ($_POST['new_pass_2']) )   ){
-          if (  ($_POST['new_pass_2']) == $newpass   ){
-
-              $query1 = "UPDATE person SET password = '$newpass' WHERE person_id = '$uid'";
-              $result1 = mysqli_query($db, $query1);
-              echo ' <script type="text/javascript"> alert("Password has changed successfully."); </script>';
-              header("location: change_general_information.php");
+          echo " <script type=\"text/javascript\"> alert(\"Old password value is not matched.\"); </script>";
           }
           else{
-            echo ' <script type="text/javascript"> alert("Passwords are not matched."); </script>';  
+             if(isset( ($_POST['new_pass_1']) )  ){
+              $newpass = ($_POST['new_pass_1']);
+            }
+            else{
+            echo ' <script type="text/javascript"> alert("You need to enter new password."); </script>'; 
+            }
+
+            if(isset( ($_POST['new_pass_2']) )   ){
+                if (  ($_POST['new_pass_2']) == $newpass   ){
+
+                    $query1 = "UPDATE person SET password = '$newpass' WHERE person_id = '$uid'";
+                    $result1 = mysqli_query($db, $query1);
+                    echo ' <script type="text/javascript"> alert("Password has changed successfully."); </script>';
+                    header("Location: admin.php");
+                }
+                else{
+                  echo ' <script type="text/javascript"> alert("Passwords are not matched."); </script>';  
+                }
+            }   
+            else{
+              echo ' <script type="text/javascript"> alert("You need to enter new password again."); </script>';
+            } 
           }
-      }   
-      else{
-        echo ' <script type="text/javascript"> alert("You need to enter new password again."); </script>';
-      } 
-      
-        
+
     }
 ?>
 

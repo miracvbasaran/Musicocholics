@@ -11,6 +11,7 @@
     $result2 = mysqli_query($db, $query2);
     if($result2 === FALSE){
       echo " <script type=\"text/javascript\"> alert(\"There is no artist to show!\"); </script>";
+      header("Location: own_profile.php");
     }
     else{
       $artist_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
