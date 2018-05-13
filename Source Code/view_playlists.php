@@ -84,7 +84,7 @@
 	    		<th>Description</th> 
 	  		</tr>
 	  		<?php
-	  			$query_playlist = "SELECT P.playlist_id, P.playlist_name, P.description, P.date, FROM Playlist P WHERE P.creator_id = {$uid} ORDER BY P.date";
+	  			$query_playlist = "SELECT P.playlist_id, P.playlist_name, P.description, P.date, FROM playlist P WHERE P.creator_id = {$uid} ORDER BY P.date";
 	  			$result_playlist = mysqli_query($db, $query_playlist);
 	  			while ($row = mysqli_fetch_array($result_playlist, MYSQLI_NUM)) {
       				$p_id = $row[0];
