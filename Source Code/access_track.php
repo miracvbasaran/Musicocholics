@@ -20,6 +20,12 @@
     $price = $track_array['price'];
     $date_of_addition = $track_array['date_of_addition'];
     $album_id = $track_array['album_id'];
+
+    $query2 = "SELECT * FROM Album WHERE album_id = {$album_id} ";
+    $result2 = mysqli_query($db, $query2);
+    $album_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
+    $album_name = $album_array['album_name'];
+    
     if(isset($_POST['modify_track_button']))
     {
       header("location: modify_track.php?track_id=".$track_id);

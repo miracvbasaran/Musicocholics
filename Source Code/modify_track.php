@@ -20,7 +20,10 @@
     $date_of_addition = $track_array['date_of_addition'];
     $album_id = $track_array['album_id'];
     
-
+    $query2 = "SELECT * FROM Album WHERE album_id = {$album_id} ";
+    $result2 = mysqli_query($db, $query2);
+    $album_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
+    $album_name = $album_array['album_name'];
     if(isset($_POST['apply']))
     {
       if(isset( ($_POST['track_name']) )  ){
@@ -124,21 +127,21 @@
 
 
 <form method="post" action="">
-  Track Name: <input type="text" name="track_name" value= <?php echo $track_name ?> autofocus><br>
-  Recording Type: <select name="recording_type">
+  Track Name: <input type="text" name="track_name" class = "form-control" value= <?php echo $track_name; ?> autofocus><br>
+  Recording Type: <select class = "form-control" name="recording_type">
     <option value="Live">Live</option>
     <option value="Studio">Studio</option>
   </select> <br>
-  Duration: <input type="text" name="duration" value= <?php echo "{$duration}" ?> autofocus><br>
-  Danceability: <input type="text" name="danceability" value= <?php echo "{$danceability}" ?> autofocus><br>
-  Acousticness: <input type="text" name="acousticness" value= <?php echo "{$acousticness}" ?> autofocus><br>
-  Instrumentalness: <input type="text" name="instrumentalness" value= <?php echo "{$instrumentalness}" ?> autofocus><br>
-  Speechness: <input type="text" name="speechness" value= <?php echo "{$speechness}" ?> autofocus><br>
-  Balance: <input type="text" name="balance" value= <?php echo "{$balance}" ?> autofocus><br>
-  Loudness: <input type="text" name="loudness" value= <?php echo "{$loudness}" ?> autofocus><br>
-  Price: <input type="text" name="price" value= <?php echo "{$price}" ?> autofocus><br>
-  Date of Addition: <input type="date" name="date_of_addition" value= <?php echo "{$date_of_addition}" ?> autofocus><br>
-  Language: <select name="language">
+  Duration: <input type="text" name="duration" class = "form-control" value= <?php echo "{$duration}"; ?> autofocus><br>
+  Danceability: <input type="text" name="danceability" class = "form-control" value= <?php echo "{$danceability}"; ?> autofocus><br>
+  Acousticness: <input type="text" name="acousticness" class = "form-control" value= <?php echo "{$acousticness}"; ?> autofocus><br>
+  Instrumentalness: <input type="text" name="instrumentalness" class = "form-control" value= <?php echo "{$instrumentalness}"; ?> autofocus><br>
+  Speechness: <input type="text" name="speechness" class = "form-control" value= <?php echo "{$speechness}"; ?> autofocus><br>
+  Balance: <input type="text" name="balance" class = "form-control" value= <?php echo "{$balance}"; ?> autofocus><br>
+  Loudness: <input type="text" name="loudness" class = "form-control" value= <?php echo "{$loudness}"; ?> autofocus><br>
+  Price: <input type="text" name="price" class = "form-control" value= <?php echo "{$price}"; ?> autofocus><br>
+  Date of Addition: <input type="date" name="date_of_addition" class = "form-control" value= <?php echo "{$date_of_addition}"; ?> autofocus><br>
+  Language: <select class = "form-control" name="language">
     <option value="Turkish">Turkish</option>
     <option value="English">English</option>
     <option value="German">German</option>
