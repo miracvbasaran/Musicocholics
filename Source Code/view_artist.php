@@ -56,13 +56,13 @@
 
 
 <div class="container">
-  <div class="col-md-6 col-md-offset-3"><img class="img-circle img-responsive" src="assets/img/ <?php echo $picture; ?>" width="200" height="200"></div>
+  <div class="col-md-6 col-md-offset-3" align = "center"><img class="img-circle img-responsive" src="assets/img/ <?php echo $picture; ?>" width="200" height="200"></div>
 
-  <h3><?php echo $artist_name;?></h3>
-  <div class = "container"><p><?php echo $description;?></p></div>
+  <div class = "container" align = "center"><h2><?php echo $artist_name;?></h2></div>
+  <div class = "well"><p><?php echo $description;?></p></div>
     
 <div class="container">
-  <table style="width:100%">
+  <table class = "table table-hover" style="width:100%" align = "center">
   <tr>
     <th>Album Name</th>
     <th>Album Type</th> 

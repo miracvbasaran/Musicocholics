@@ -63,11 +63,11 @@
 
 
 <div class = "container">
-<div class="container" align = "left">
+<div class="container" align = "center">
   <div class="col-md-6 col-md-offset-3"><img class="img-circle img-responsive" src="assets/img/ <?php echo $picture; ?>" width="200" height="200"></div>
 
-  <h3><?php echo $artist_name;?></h3>
-  <div class = "container"><p><?php echo $description;?></p></div>
+  <div class = "container" align = "center"><h2><?php echo $artist_name;?></h2></div>
+  <div class = "well"><p><?php echo $description;?></p></div>
 </div>
 <div class = "container" align = "right">
   <form method="post" action="">

@@ -28,7 +28,7 @@
       }
       else{
         echo "<script type=\"text/javascript\"> alert(\"Publisher deleted succesfully.\"); </script>";
-        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        header("Location: admin.php");
       }
       
     }
