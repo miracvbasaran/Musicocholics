@@ -116,17 +116,15 @@
     <p> Date of Addition <?php echo $date_of_addition;?></p>
 
 <div align="right" class="container">
-
- 
-</div>
-  <p> <form method="post" action="">
+       <form method="post" action="">
        <input id='Submit' name='purchase_track_button' type='Submit' value='Purchase Track' class="btn btn-default">
 
        <input id='Submit' name='gift_button' type='Submit' value='Gift Track' class="btn btn-default">
 
        <input id='Submit' name='play_track_button' type='Submit' value='Play Track' class="btn btn-default">
        </form>
-    </p>
+</div>
+
  </div>
 </div>  
 

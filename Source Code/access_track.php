@@ -67,10 +67,10 @@
 
 <div class="container">
     
-  <div align="left" class="col-md-6 col-md-offset-3"></div>
+  <div align="center" class="col-md-6 col-md-offset-3"></div>
 
 <div class="container">
-  <h3><?php echo $track_name;?></h3> 
+  <h3><?php echo $track_name;?></h3> <h2> in Album <?php echo "<a href= \"access_album.php?album_id = {$album_id}\">{$album_name}</a>" ?></h2>
     <p>Recording Type: <?php echo $recording_type;?> </p>
     <p> Duration: <?php echo $duration;?></p>
     <p> Danceability: <?php echo $danceability;?></p>
@@ -84,9 +84,6 @@
     <p> Date of Addition <?php echo $date_of_addition;?></p>
 
 <div align="right" class="container">
-
- 
-</div>
   <p> <form method="post" action="">
        <input id='Submit' name='modify_track_button' type='Submit' type='button' value='Modify Track' class = "btn btn-default">
 
@@ -94,6 +91,8 @@
        </form>
     </p>
  </div>
+</div>
+ 
 </div>  
 
 </body>

@@ -74,7 +74,7 @@
 
 <div class="container">
     
-  <div align="left" class="col-md-6 col-md-offset-3"><img class="img-circle img-responsive" src="assets/img/ <?php echo $picture; ?>" width="200" height="200"></div>
+  <div align="center" class="col-md-6 col-md-offset-3"><img class="img-circle img-responsive" src="assets/img/ <?php echo $picture; ?>" width="200" height="200"></div>
 
 <div class="container" align = "center">
   <h3>Album <?php echo $album_name;?></h3> by Artist 

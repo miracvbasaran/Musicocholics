@@ -74,9 +74,9 @@
       </div>
     </nav>
 
-   <div align="left" class="col-md-6 col-md-offset-3"><img class="img-circle img-responsive" src="assets/img/ <?php echo $picture_v; ?>" width="200" height="200"></div>
+   <div align="center" class="col-md-6 col-md-offset-3"><img class="img-circle img-responsive" src="assets/img/ <?php echo $picture_v; ?>" width="200" height="200"></div>
 
-<div class="container">
+<div class="container" align = "center">
   <h3>Publisher <?php echo $publisher_name;?></h3> 
 
 
@@ -93,14 +93,14 @@
   City:  <input type="text" name="city" value= <?php echo $city ?> autofocus>
   
 
-  <input type="submit" name="apply" value="Apply"  > 
+  <input type="submit" name="apply" value="Apply"  class = "btn btn-default"> 
 
 </form> 
 
  </div>
-<div class = "container"> 
+<div class = "container" align = "center"> 
  <form method="post" action="">
-  <table style="width:100%">
+  <table style="width:100%" class = "table table-hover">
   <tr>
     <th>Album Name</th>
     <th>Album Type</th> 
@@ -123,7 +123,7 @@
   ?>
 </table>
 
-<input type="submit" name="delete_albums" value="Delete"/>
+<input type="submit" name="delete_albums" value="Delete" class = "btn btn-default">
 </form>
 
 </div>
