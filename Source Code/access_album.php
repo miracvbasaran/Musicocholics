@@ -88,7 +88,7 @@
 </div> 
 <div class = "container">
 <div class="container" align = "center">
-  <h2>Album <?php echo $album_name;?> by  <small>
+  <h2><?php echo $album_name;?> by  <small>
   <?php
       for ($i=0; $i < count($artist_names); $i++) { 
         $art_id = $artist_ids[$i];

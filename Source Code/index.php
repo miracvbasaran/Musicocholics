@@ -14,7 +14,7 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<div align = "center">
+	<div class = "jumbotron" align = "center">
 		<tr><td><a href='login.php'>Sign In</a></td></tr>
 		<tr><td><a href='register.php'>Sign Up</a></td></tr>
 	</div>

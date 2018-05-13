@@ -76,7 +76,7 @@
   <div align="center" class="col-md-6 col-md-offset-3"><img class="img-circle img-responsive" src="assets/img/ <?php echo $picture; ?>" width="200" height="200"></div>
 
 <div class="container" align = "center">
-  <h2>Album <?php echo $album_name;?> by <small> 
+  <h2><?php echo $album_name;?> by <small> 
   <?php
       for ($i=0; $i < count($artist_names); $i++) { 
         $art_id = $artist_ids[$i];

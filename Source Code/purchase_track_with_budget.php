@@ -41,7 +41,7 @@
 
           echo ' <script type="text/javascript"> alert("You purchased {$track_name} successfully."); </script>';
 
-          header("location: search_result_screen.php?");
+          header("location: search_result_screen.php");
         }
         else{
           echo ' <script type="text/javascript"> alert("Your budget is not sufficient."); </script>';
@@ -49,7 +49,7 @@
     }
         
     if( isset( ($_POST['cancel']) )){
-      header("location: search_result_screen.php?");
+      header("location: search_result_screen.php");
     }
 
 ?>

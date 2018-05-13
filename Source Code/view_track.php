@@ -112,7 +112,7 @@
   <div align="left" class="col-md-6 col-md-offset-3"></div>
 
 <div class="container">
-  <div class = "container" align = "center"><h2><?php echo $track_name;?><small> in <?php echo "<a href= \"access_album.php?album_id={$album_id}\">{$album_name}</a>" ?></small></h2></div>
+  <div class = "container" align = "center"><h2><?php echo $track_name;?><small> in <?php echo "<a href= \"view_album.php?album_id={$album_id}\">{$album_name}</a>" ?></small></h2></div>
    <div class = "container" align = "center">
     <p>Recording Type: <?php echo $recording_type;?> </p>
     <p> Duration: <?php echo $duration;?></p>
