@@ -45,14 +45,13 @@ error_reporting(0);
 																			AND ((user1_id = '$uid' AND user2_id = user_id)
 																				OR (user1_id = user_id AND user2_id = '$uid'));");
 		while( $row = $query->fetch_assoc()){
-			if( $user1_id == $uid)
-				$fid = $user2_id;
-			else if( $user2_id == $uid)
-				$fid = $user1_id;
+			if( $user2_id == $uid)
+				$fid = $row[user1_id];
+			else 
+				$fid = $row[user2_id];
+			 
+			echo( "<tr><td><a href='friend_profile.php?other_id=".$fid."'>".$row['username']."</a></td></tr><br><br/>");
 			
-			echo( "<tr><td><a href='friend_profile.php?friend_id=".$id."'>".$row['username']. "&nbsp;&nbsp;</a></td></tr>");
-			echo( "<tr><td><a href='send_direct_message.php?friend_id=".$id.	"&nbsp;&nbsp;'>Send Message</a></td></tr>	"); //SEND MESSAGE
-			echo( "<tr><td><a href='remove_friend.php?remove_id=".$fid.	"&nbsp;&nbsp;'>Remove</a></td></tr>	<br/> <br/>"); //REMOVE
 		}
 		
 		

@@ -40,17 +40,17 @@
     {
       if(isset( ($_POST['album_name']) )  ){
           $album_name = $_POST['album_name'];
-          $query = "UPDATE Album SET album_name = {$album_name} WHERE album_id = {$album_id};";
+          $query = "UPDATE Album SET album_name = '{$album_name}' WHERE album_id = {$album_id};";
           $result = mysqli_query($db, $query);
       }
       if(isset( ($_POST['album_type']) )  ){
           $album_type = $_POST['album_type'];
-          $query = "UPDATE Album SET album_type = {$album_type} WHERE album_id = {$album_id};";
+          $query = "UPDATE Album SET album_type = '{$album_type}' WHERE album_id = {$album_id};";
           $result = mysqli_query($db, $query);
       }
       if(isset( ($_POST['published_date']) )  ){
           $published_date = $_POST['published_date'];
-          $query = "UPDATE Album SET published_date = {$published_date} WHERE album_id = ${album_id};";
+          $query = "UPDATE Album SET published_date = '{$published_date}' WHERE album_id = ${album_id};";
           $result = mysqli_query($db, $query);
       }
     }
@@ -120,7 +120,7 @@
 <div class="container">
 
 <form action="" method="post" enctype="multipart/form-data">
-    <input class="btn btn-primary btn-sm" type="file" name="photo" id="photo" accept="image/*"> <button class="btn btn-success btn-sm" type="submit" name="uploadpic">Update</button>
+    <input align = "center" class="btn btn-primary btn-sm" type="file" name="photo" id="photo" accept="image/*"> <button class="btn btn-success btn-sm" type="submit" name="uploadpic">Update</button>
  </form>
 
 <form method="post" action="">
@@ -129,7 +129,7 @@
 <?php
       for ($i=0; $i < count($artist_names); $i++) { 
         $art_id = $artist_ids[$i];
-        echo "<a href = \"access_artist.ph?artist_id={$art_id}\">" . $artist_names[$i] . "</a>";
+        echo "<a href = \"access_artist.php?artist_id={$art_id}\">" . $artist_names[$i] . "</a>";
         if(count($artist_names) != 1 && $i < count($artist_names) - 1){
           echo ", ";
         }
@@ -137,13 +137,13 @@
     ?>
 </h3></div>
   <br><div align = "center">
-  Album Type:<div class="col-xs-3">
+  <div class="col-xs-3">Album Type: 
   <select name="album_type">
     <option value="Album">Album</option>
     <option value="Single">Single</option>
   </select></div>
-  Date: <div class="col-xs-3"><input type="text" name="published_date" value= <?php echo $published_date ?> autofocus></div>
-  <input type="submit" name="apply" value="Apply"  class = "btn btn-default"> </div>
+ <div class="col-xs-3">Date: <input type="date" name="published_date" value= <?php echo $published_date ?> autofocus></div>
+  <input type="submit" name="apply" value="Apply"  class = "btn btn-success"> </div>
 
  </form> 
 <div class="container">
@@ -171,7 +171,7 @@
   ?>
 </table>
 
-<div class = "container" align = "right"><input type="submit" name="delete_tracks" value="Delete Tracks" class = "btn btn-default"></div>
+<div class = "container" align = "right"><input type="submit" name="delete_tracks" value="Delete Tracks" class = "btn btn-danger"></div>
 </form>
 
 </div>
@@ -183,7 +183,7 @@
   <input type="text" name="new_track_name" value= "Track Name" autofocus>
   <input type="text" name="new_track_price" value= "Price" autofocus>
 
-  <input type="submit" name="add_track" value="Add Track"  class = "btn btn-default"> 
+  <input type="submit" name="add_track" value="Add Track"  class = "btn btn-success"> 
 
  </form> 
  </div>

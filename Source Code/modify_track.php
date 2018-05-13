@@ -138,14 +138,14 @@
       </div>
     </nav>
 
-   <div align="left" class="col-md-6 col-md-offset-3"><img class="img-circle img-responsive" src="assets/img/ <?php echo $picture_v; ?>" width="200" height="200"></div>
+   <div align="center" class="col-md-6 col-md-offset-3"><img class="img-circle img-responsive" src="assets/img/ <?php echo $picture_v; ?>" width="200" height="200"></div>
 
 <div class="container" align = "center">
   <h2><?php echo $track_name;?><small> in <?php echo "<a href= \"access_album.php?album_id={$album_id}\">{$album_name}</a>" ?></small></h2>
 
 
 <form method="post" action="">
-  <div class="col-xs-3">Track Name: <input type="text" name="track_name" class = "form-control" value= <?php echo $track_name; ?> autofocus> </div><br>
+  <div class="col-xs-3">Track Name: <input type="text" name="track_name" class = "form-control" value= <?php echo "$track_name"; ?> autofocus> </div><br>
 
   <div class="col-xs-3">Recording Type: <select class = "form-control" name="recording_type">
     <option value="Live">Live</option>
@@ -166,7 +166,7 @@
     <option value="German">German</option>
   </select> <br></div>
   
-  <div class="col-xs-3"><input type="submit" name="apply" value="Apply" class = "btn btn-default" > </div>
+  <div class="col-xs-3"><input type="submit" name="apply" value="Apply" class = "btn btn-default" align = "right"> </div>
 
 </form> 
 
