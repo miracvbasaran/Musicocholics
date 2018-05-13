@@ -4,17 +4,13 @@
     $query1 = "SELECT * FROM user WHERE user_id = {$uid} ";
     $result1 = mysqli_query($db, $query1);
     $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
-    
-    if(isset($_POST['send_optional_message'])) {
-    	header("location: send_optional_message.php?");
-    }
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-	<title>Musicholics - Message List</title>
+	<title>Musicholics - View Tracks</title>
   	<meta charset="utf-8">
   	<meta name="viewport" content="width=device-width, initial-scale=1">
   	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -43,42 +39,40 @@
 	</nav>
 
 	<div class="container">
-		<h3> Messages </h3> <br>
-		<div align="right" class="container"></div>
-		<p>
-			<form method="post" action="">
-				<input id='Submit' name='send_optional_message' type='Submit' value='Send Message' class="btn btn-default">
-			</form>
-		</p>
-	</div>
-
-	<div class="container">
 		<table class = "table table-hover" style="width:100%">
 	  		<tr>
 	    		<th>Name</th>
-	    		<th>Message</th> 
+	    		<th>Recording Type</th>
+	    		<th>Duration</th>
+	    		<th>Danceability</th>
+	    		<th>Acousticness</th>
+	    		<th>Instrumentalness</th>
+	    		<th>Speechness</th>
+	    		<th>Balance</th>
+	    		<th>Loudness</th>
+	    		<th>Language</th>
+	    		<th>Price</th>
+	    		<th>Date of Addition</th>
 	  		</tr>
 	  		<?php
-	  			$query_message = "SELECT P.person_id, P.fullname, M.message, FROM sends_message M , Person P WHERE P.person_id = M.sender_id AND M.receiver_id = {uid} ORDER BY M.date";
-	  			$result_message = mysqli_query($db, $query_message);
-	  			while ($row = mysqli_fetch_array($result_message, MYSQLI_NUM)) {
-      				$p_id = $row[0];
-      				$query_friend = "SELECT COUNT(*) as cntfriend FROM friendship F WHERE (F.user1_id={$uid} AND F.user2_id={$p_id}) OR (F.user2_id={$uid} AND F.user1_id={$p_id})";
-      				$result_friend = mysqli_query($db, $query_friend);
-      				$friend_array = mysqli_fetch_array($result_friend, MYSQLI_ASSOC);
-      				$cnt_friend = $friend_array['cntfriend'];
-      				if( $cnt_friend == 0 ) {
-      					echo "<a href = \"nonfriend_profile.php?p_id = {$p_id}\"<tr>";
-	      				echo "<td>" . $row[1] . "</td>";
-	      				echo "<td>" . $row[2] . "</td>";
-	      				echo "</tr></a>" ;
-	      			}
-	      			else {
-      					echo "<a href = \"friend_profile.php?p_id = {$p_id}\"<tr>";
-	      				echo "<td>" . $row[1] . "</td>";
-	      				echo "<td>" . $row[2] . "</td>";
-	      				echo "</tr></a>" ;
-	      			}
+	  			$query_track = "SELECT T.track_id, T.track_name, T.recording_type, T.duration, T.danceability, T.Acousticness, T.Instrumentalness, T.Speechness, T.Balance, T.Loudness, T.Language, T.Price, T.date_of_addition FROM buys B, track T WHERE B.user_id = {$uid} AND B.track_id = T.track_id";
+	  			$result_track = mysqli_query($db, $query_track);
+	  			while ($row = mysqli_fetch_array($result_track, MYSQLI_NUM)) {
+      				$t_id = $row[0];
+      				echo "<a href = \"view_track.php?track_id = {$t_id}\"<tr>";
+	      			echo "<td>" . $row[1] . "</td>";
+	      			echo "<td>" . $row[2] . "</td>";
+	      			echo "<td>" . $row[3] . "</td>";
+	      			echo "<td>" . $row[4] . "</td>";
+	      			echo "<td>" . $row[5] . "</td>";
+	      			echo "<td>" . $row[6] . "</td>";
+	      			echo "<td>" . $row[7] . "</td>";
+	      			echo "<td>" . $row[8] . "</td>";
+	      			echo "<td>" . $row[9] . "</td>";
+	      			echo "<td>" . $row[10] . "</td>";
+	      			echo "<td>" . $row[11] . "</td>";
+	      			echo "<td>" . $row[12] . "</td>";
+	      			echo "</tr></a>" ;
 	  			}
 	  		?>
 		</table>

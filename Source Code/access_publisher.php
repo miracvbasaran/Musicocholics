@@ -54,9 +54,9 @@
       </div>
     </nav>
 
-   <div align="left" class="col-md-6 col-md-offset-3"><img class="img-circle img-responsive" src="assets/img/ <?php echo $picture_v; ?>" width="200" height="200"></div>
+   <div align="center" class="col-md-6 col-md-offset-3"><img class="img-circle img-responsive" src="assets/img/ <?php echo $picture_v; ?>" width="200" height="200"></div>
 <div class = "container">
-<div class="container" align = "left">
+<div class="container" align = "center">
   <h3>Publisher <?php echo $publisher_name;?></h3> 
   <p>Country: <?php echo $country ?>
   <p>City:  <?php echo $city ?>
@@ -64,16 +64,16 @@
  </div>
  <div class = "container" align = "right">
     <form method="post" action="">
-       <input id='Submit' name='modify_publisher_button' type='Submit' type='button' value='Modify Publisher'>
+       <input id='Submit' name='modify_publisher_button' type='Submit' type='button' value='Modify Publisher' class = "btn btn-default">
 
-       <input id='Submit' name='delete_publisher_button' type='Submit' type='button' value='Delete Publisher'>
+       <input id='Submit' name='delete_publisher_button' type='Submit' type='button' value='Delete Publisher' class = "btn btn-default">
        </form>
     </p>
  </div>
 </div>
-<div class = "container"> 
+<div class = "container" align = "center"> 
 
-<table style="width:100%">
+<table class = "table table-hover" style="width:100%">
   <tr>
     <th>Album Name</th>
     <th>Album Type</th> 

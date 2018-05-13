@@ -69,7 +69,7 @@
   <form method="post" action="">
        <input id='Submit' name='modify_artist_button' type='Submit' class="btn btn-default" value='Modify Artist'>
 
-       <input id='Submit' name='delete_artist_button' type='Submit' class="btn btn-default"' value='Delete Artist'>
+       <input id='Submit' name='delete_artist_button' type='Submit' class="btn btn-default" value='Delete Artist'>
   </form>
  </div>
 </div>
@@ -84,16 +84,15 @@
     <th>Publish Date</th>
   </tr>
   <?php
-  $query_album = "SELECT album_name, album_type, published_date FROM Album WHERE Album.album_id = IN (SELECT album_id FROM Album_Belongs_To_Artist A WHERE 
-                    A.artist_id = '$artist_id') ORDER BY published_date";
+  $query_album = "SELECT album_name, album_type, published_date, album_id FROM Album WHERE Album.album_id = IN (SELECT album_id FROM Album_Belongs_To_Artist A WHERE A.artist_id = {$artist_id}) ORDER BY published_date";
   $result = mysqli_query($db, $query_album);
   
   while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
-      echo "<tr>";
+      echo "<a href = \"access_album.php?album_id= {$row[3]}\"><tr>";
       echo "<td>" . $row[0] . "</td>";
       echo "<td>" . $row[1] . "</td>";
       echo "<td>" . $row[2] . "</td>";
-      echo "</tr>";
+      echo "</tr></a>";
   }
   ?>
 </table>

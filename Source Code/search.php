@@ -24,9 +24,11 @@
 				<li><a href="friends.php">Friends</a></li>
 				<li><a href="message_list.php">Messages</a></li>
 				<li class="active"><a href="#">Search</a></li>
-				<li><a href="change_general_information.php">Settings</a></li>
-				<li><a href="logout.php">Logout</a></li>
 			</ul>
+		    <ul class="nav navbar-nav navbar-right">
+				<li><a href="change_general_information.php"><span class="glyphicon glyphicon-user"></span> Settings</a></li>
+				<li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+		    </ul>
 		</div>
 
 	
@@ -91,34 +93,46 @@
 					}
 					if( $filter == "user" || $filter == "all"){ //USER
 						$query = mysqli_query( $db, "SELECT * FROM Person, User WHERE (username LIKE '%$search_key%') AND user_id = person_id;");
-						//if( !query){
-						//	throw new Exception( "error at user query");
-						//}
+						
+						$id_list = new SplDoublyLinkedList;
+						
 						while( $row = $query->fetch_assoc()){ //printing every user with that user name
 							$id = $row['person_id'];
-							echo( "<tr><td>***ID: ".$id."	</td></tr>"); echo( "<tr><td>UID: ".$uid."</td></tr><br/>");
+							
+							
+							//not printing own profile
 							if( $id != $uid){
-								
-								// //printing non-friends
-// 								$nfquery = mysqli_query( $db, "SELECT * FROM Friendship WHERE (user1_id = '$uid' OR user2_id = '$id') AND (user1_id = '$id' OR user2_id = '$uid');");
-// 								while( $nfrow = $nfquery->fetch_assoc()){ //for each friend
-// 									echo( "<tr><td><a href='nonfriend_profile.php?nonfriend_id=".$id."'>".$row['fullname']."</a></td></tr><br/>");
-// 								}
-								
 								//printing friends
 								$fquery = mysqli_query( $db, "SELECT * FROM Friendship WHERE (user1_id = '$uid' OR user2_id = '$uid') AND (user1_id = '$id' OR user2_id = '$id');");
 								while( $frow = $fquery->fetch_assoc()){ //for each friend
-									echo( "<tr><td>Friend: <a href='friend_profile.php?friend_id=".$id."'>".$row['fullname']."</a></td></tr><br/>");
-									echo( "<tr><td>**ID: ".$id."	</td></tr>"); echo( "<tr><td>UID: ".$uid."</td></tr><br/>");
+									echo( "<tr><td><a href='friend_profile.php?friend_id=".$id."'>".$row['username']."</a></td></tr><br/>");
+									$id_list->push($id);
 								}
-				
-								//not printing own profile
+								
+								
+								//not printing blocked profiles
+								$bquery = mysqli_query( $db, "SELECT * FROM Blocks WHERE (blocked_id = '$id' AND blocker_id = '$uid') OR (blocker_id = '$id' AND blocked_id = '$uid')");
+								while( $brow = $bquery->fetch_assoc()){ //for each blocked/blocker
+										$id_list->push($id);
+								}
+								
+								
 								//printing non-friends
-								$nfquery = mysqli_query( $db, "SELECT * FROM Friendship WHERE user1_id != '$id' AND user2_id != '$id';");
-								while( $nfrow = $nfquery->fetch_assoc()){ //for each friend
-										echo( "<tr><td><a href='nonfriend_profile.php?nonfriend_id=".$id."'>".$row['fullname']."</a></td></tr><br/>");
-										echo( "<tr><td>*ID: ".$id."	</td></tr>"); echo( "<tr><td>UID: ".$uid."</td></tr><br/>");
-}
+								$id_count = $id_list->count();
+								for( $i = 0; $i < $id_count; $i++){
+									if( $id_list->bottom() != $id){
+										$id_list->shift();
+										$id_list->push( $id);
+									}
+									else{
+										$id_list->shift(); 
+									}
+										
+								}
+								if( $id_count == $id_list->count()){ //not friend, not blocked -> non-friend
+									echo( "<tr><td><a href='nonfriend_profile.php?nonfriend_id=".$id."'>".$row['username']."</a></td></tr><br/>");
+								}
+								
 							}
 							
 						}

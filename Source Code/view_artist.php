@@ -7,7 +7,7 @@
 
 
     $artist_id = $_GET['artist_id'];
-    $query2 = "SELECT * FROM Artist WHERE artist_id = '$artist_id' ";
+    $query2 = "SELECT * FROM Artist WHERE artist_id = {$artist_id} ";
     $result2 = mysqli_query($db, $query2);
     $artist_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
     $artist_name = $artist_array['artist_name'];
@@ -66,13 +66,12 @@
     <th>Publish Date</th>
   </tr>
   <?php
-  $query_album = "SELECT album_name, album_type, published_date, album_id FROM Album WHERE Album.album_id = IN (SELECT album_id FROM Album_Belongs_To_Artist A WHERE 
-                    A.artist_id = '$artist_id$') ORDER BY published_date";
+  $query_album = "SELECT album_name, album_type, published_date, album_id FROM Album WHERE Album.album_id = IN (SELECT album_id FROM Album_Belongs_To_Artist A WHERE A.artist_id = {$artist_id}) ORDER BY published_date";
   $result = mysqli_query($db, $query_album);
   
   while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
       $a_id = $row[3];
-      echo "<a href = \"view_album.php?album_id = {$a_id}\"<tr>";
+      echo "<a href = \"view_album.php?album_id = {$a_id}\"><tr>";
       echo "<td>" . $row[0] . "</td>";
       echo "<td>" . $row[1] . "</td>";
       echo "<td>" . $row[2] . "</td>";
