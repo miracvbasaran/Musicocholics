@@ -2,28 +2,13 @@
 
 	include("session.php");
 
-    $uid = mysqli_real_escape_string($db,$_SESSION['login_id']);
-    $query = "SELECT * FROM user U WHERE U.user_id = '$uid' ";
-    $result = mysqli_query($db, $query);
-    $user_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
+    $uid = mysqli_real_escape_string($db,$_POST['login_id']);
+    $query1 = "SELECT * FROM user WHERE user_id = '$uid' ";
+    $result1 = mysqli_query($db, $query1);
+    $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
 
-    if( $other_id != '' )
-    	$user_id = $_POST['other_id'];
-
-    if ( isset($_POST['sendmessage_button']) ) {
-    	if ( isset($_POST['receiver']) ) {
-    		if ( isset($_POST['text_message']) ) {
-    			$query = "INSERT INTO SENDS_MESSAGE VALUES ('$uid', '$user_id', getdate(), '$text_message' ";
-    			$result = mysqli_query($db, $query);
-    			header("location: message_list.php?");
-    		}
-    		else {
-    			echo '<div class="alert alert-danger" role="alert"> Receiver is not entered. </div>';
-    		}
-    	}
-    	else {
-			echo '<div class="alert alert-danger" role="alert"> Message is not entered. </div>';
-    	}
+	if (isset($_POST['addplaylist_button'])) {
+    	
     }
 
 ?>
@@ -51,7 +36,7 @@
 		      		<li><a href="view_tracks.php">Tracks</a></li>
 					<li><a href="friends_list.php">Friends</a></li>
 					<li><a href="message_list.php">Messages</a></li>
-					<li><a href="search.php">Search</a></li>
+					<li><a href="search_result_screen.php">Search</a></li>
 		    	</ul>
 		    	<ul class="nav navbar-nav navbar-right">
 		      		<li><a href="change_general_information.php"><span class="glyphicon glyphicon-user"></span> Settings</a></li>
@@ -60,20 +45,36 @@
 			</div>
 		</nav>
 
-		<form method="post" action="">
-			Receiver: <input type="text" name="receiver" value= <?php echo "\"".$user_id."\"";?> autofocus> <br>
-		</form>
-
-		<form method="post" action="">
-			Text Message: <input type="text" name="text_message" value= <?php echo "\"".$text_message."\"";?> autofocus> <br>
-		</form>
-
 		<div class="container">
-			<p> <input id='Submit' name='sendmessage_button' value='Submit' type='button' value='SEND MESSAGE'> </p>
+
+			<h3> Your Playlists: </h3> <br>
+			<p>
+				<?php
+					$queryOP = "SELECT P.playlist_name FROM Playlist P WHERE P.creator_id = '$uid' "
+					$resultOP = mysqli_query($db, $queryOP);
+					while( $row = mysql_fetch_array($resultOP, MYSQL_NUM) ) {
+						printf("%s\n", $row[0]);  
+					}
+				?>
+			</p>
+
+			<p> <input id='Submit' name='addplaylist_button' value='Submit' type='button' value='ADD PLAYLIST'> </p>
+
+			<h3> Your Followed Playlists: </h3> <br>
+			<p>
+				<?php
+					$queryFP = "SELECT P.playlist_name FROM Playlist P , Follows F WHERE F.user_id = '$uid' AND F.playlist_id = P.playlist_id"
+					$resultFP = mysqli_query($db, $queryFP);
+					while( $row = mysql_fetch_array($resultFP, MYSQL_NUM) ) {
+						printf("%s\n", $row[0]);  
+					}
+				?>
+			</p>
+
 		</div>
 
-		<div> 	
-			<footer>
+<div>
+	<footer>
 					<?php
 					$query = "SELECT L1.track_id FROM listens L1 WHERE L1.user_id = '$uid' AND 
 					date = (SELECT max(L2.date) FROM listens L2 WHERE L2.user_id = '$uid') ";
@@ -88,8 +89,8 @@
 					echo $track_name;
 					echo $duration;
 					?>
-			</footer>
-		</div>
+	</footer>
+	</div>
 
 	</body>
 

@@ -36,7 +36,7 @@
       <li class="active"><a href="#">Home</a></li>
       
       <li><a href="own_profile.php">Profile</a></li>
-      <li><a href="view_own_playlist.php">Playlist</a></li>
+      <li><a href="playlists.php">Playlist</a></li>
       <li><a href="view_tracks.php">Tracks</a></li>
   <li><a href="friends_list.php">Friends</a></li>
   <li><a href="message_list.php">Messages</a></li>
