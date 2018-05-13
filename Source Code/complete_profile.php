@@ -6,7 +6,7 @@
     $query = "SELECT admin_id FROM admin WHERE user_id = '$uid' ";
     $result = mysqli_query($db, $query);
 
-    $view_id = $_GET['other_id'];
+    $view_id = $_GET["other_id"];
     $query2 = "SELECT * FROM user WHERE user_id = '$view_id' ";
     $result2 = mysqli_query($db, $query2);
     $view_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
@@ -17,21 +17,22 @@
 
     $username_v = $person_array['username'];
     $fullname_v = $person_array['fullname'];
+    $email_v = $person_array['email'];
+
     $country_v = $view_array['country'];
     $language_v = $view_array['language'];
     $birthday_v = $view_array['birthday'];
     $gender_v = $view_array['gender'];
-    $email_v = $person_array['email'];
     $picture_v = $view_array['picture'];
     $user_id_v = $view_array['user_id'];
     $date_of_registration_v = $view_array['date_of_registration'];
     $budget_v = $view_array['budget'];
-    $membership_type_v = $user_array['membership_type'];
+    $membership_type_v = $view_array['membership_type'];
 
     if(isset($_POST['ban_button']))
     {
 
-      $query5 = "INSERT INTO bans VALUES( $admin_id,$view_id )";
+      $query5 = "INSERT INTO bans VALUES( '$admin_id','$view_id' )";
       $result5 = mysqli_query($db, $query5);
 
 
@@ -72,9 +73,9 @@
       </div>
     </nav>
 
-   <div align="left" class="col-md-6 col-md-offset-3"><img class="img-circle img-responsive" src="assets/img/ <?php echo $picture_v; ?>" width="200" height="200"></div>
+   <div align="center" class="container"><img class="img-circle img-responsive" src="assets/img/ <?php echo $picture_v; ?>" width="200" height="200"></div>
 
-<div class="container">
+<div class="container" align="center" >
   <h3>This is, </h3> <?php echo $fullname_v;?>
   	<p>Username: <?php echo $username_v;?> </p>
   	<p>	Fullname: <?php echo $fullname_v;?></p>
@@ -87,9 +88,13 @@
   	<p>	Date of registration: <?php echo $date_of_registration_v;?> </p>
   	<p>	Membership type: <?php echo $membership_type_v;?> </p>
    
-    <p> 
-    <input id='Submit' name='ban_button' value='Submit' type='button' value='BAN' onclick="popMessage()">
-    </p>
+    <div class="container" align="right" >
+
+    <a href="view_others_playlists.php?other_id=$view_id" class="btn btn-success" role="button">VIEW PLAYLISTS</a>
+
+    <input id='Submit' class="btn btn-danger" name='ban_button' type='button' value='BAN USER' onclick="popMessage()">
+
+    </div>
 
     <script>
     function popMessage(){
@@ -99,22 +104,30 @@
 
  </div>
 
-<div align="right" class="container">
- <a href="view_others_playlist.php?other_id=$view_id" class="btn btn-success" role="button">VIEW PLAYLISTS</a>
-</div>
-
-
 </p>
+<div class="container" align="left">
+<fieldset>
+    <legend><h3>  POSTS </h3></legend> 
 <div class="container">
+
 <?php
-	$query = "SELECT U.username , P.date, P.post FROM posts P, User U WHERE P.receiver_id = {$view_id} AND P.writer_id = U.user_id ORDER BY date DESC";
-	$result = mysqli_query($db, $query);
-	
-	while ($row = mysql_fetch_array($result, MYSQL_NUM)) {
-    	printf("%s (%s) : %s ", $row[0] , $row[1],$row[2] );  
-	}
+  $query = "SELECT P.writer_id , P.date, P.post FROM posts P WHERE P.receiver_id = '$uid' ORDER BY date DESC";
+  $result = mysqli_query($db, $query);
+  $writer_names = array();
+  while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+      $query1 = "SELECT P.username FROM Person P WHERE P.person_id = '$row[writer_id]' ";
+      $result1 = mysqli_query($db, $query1);
+      $writer_names[] = mysqli_fetch_array($result1, MYSQLI_ASSOC)['username'];
+  }
+  $i=0;
+  $result = mysqli_query($db, $query);
+  while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+      echo " <div class=\"well\"> <div  align=\"left\" > {$writer_names[$i]} ( {$row['date']} ): <br> </div> <div align=\"left\" > {$row['post']}  <br> </div> </div>"; 
+      $i = $i + 1;
+  }
 
 ?>
+<fieldset>
 </div>
 
 </body>
