@@ -70,13 +70,13 @@
       $new_track_name = $_POST['new_track_name'];
       $new_track_price = $_POST['new_track_price'];
       $insertion_date = date(Y-m-d);
-      $query = "INSERT INTO Track(album_name, album_type, date_of_addition) VALUES({$new_track_name}, {$new_track_price}, {$insertion_date})";
+      $query = "INSERT INTO Track(album_name, album_type, date_of_addition) VALUES('{$new_track_name}', '{$new_track_price}', '{$insertion_date}')";
       if(mysqli_query($db, $query) === TRUE){
           $query = "SELECT LAST_INSERT_ID()";
           $result = mysqli_query($db, $query);
           $index_array = mysqli_fetch_array($result, MYSQLI_NUM);
           $album_id = $index_array[0];
-          header("location: modify_album.php?album_id=".$album_id);
+          header("Location: modify_album.php?album_id=".$album_id);
       }
       else{
         echo ' <script type="text/javascript"> alert("Could not add track to album."); </script>';
@@ -182,7 +182,7 @@
 <form method="post" action="">
   <h3>Add Track</h3>
   <input type="text" name="new_track_name" value= "Track Name" autofocus>
-  <input type="text" name="new_track_price" value= "Price" autofocus>
+  <input type="number" step="0.01" name="new_track_price" value= "Price" autofocus>
 
   <input type="submit" name="add_track" value="Add Track"  class = "btn btn-success"> 
 

@@ -91,8 +91,7 @@
 
 
 <form method="post" action="">
-  <div class="col-xs-3">Name: <input type="text" name="name" value= <?php echo $publisher_name ?> autofocus></div>
-  <br>
+  <div class="col-xs-3">Name: <input type="text" name="name" value= <?php echo $publisher_name ?> autofocus><br></div>
   <div class="col-xs-3">Country: <select name="country">
     <option value="Turkey">Turkey</option>
     <option value="USA">USA</option>

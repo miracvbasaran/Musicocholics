@@ -59,12 +59,13 @@
       else{
         $publisher_id = $index_array[0];
 
-        $query = "INSERT INTO Album(album_name, album_type, published_date, publisher_id) VALUES({$new_album_name}, {$new_album_type}, {$new_album_publish_date}, {$publisher_id})";
+        $query = "INSERT INTO Album(album_name, album_type, published_date, publisher_id) VALUES('{$new_album_name}', '{$new_album_type}', '{$new_album_publish_date}', {$publisher_id})";
         if(mysqli_query($db, $query) == TRUE){
           $query = "SELECT MAX(album_id) FROM Album";
           $result = mysqli_query($db, $query);
           $index_array = mysqli_fetch_array($result, MYSQLI_NUM);
           $album_id = $index_array[0];
+          echo "<script type=\"text/javascript\"> alert(\"Succesfully added album to artist.\"); </script>";
           header("location: modify_album.php?album_id=".$album_id);
         }
         else{
@@ -115,14 +116,12 @@
     <input class="btn btn-primary btn-sm" type="file" name="photo" id="photo" accept="image/*"> <button class="btn btn-success btn-sm" type="submit" name="uploadpic">Update</button>
  </form>
 
-<form method="post" action="">
-  <div class="container" align = "center"><h3><input type="text" name="name" value= <?php echo "'".$artist_name."'"; ?> autofocus></h3></div>
-  <br>
-  <input type="text" name="description" value= <?php echo "".$description."'"; ?> autofocus> <br>
-  
-
-  <input type="submit" name="apply" value="Apply"  class = "btn btn-default"> 
-
+<form method="post" action=""><div class="container" align = "center">
+  <div class="col-xs-4"><h3><input type="text" name="name" value= <?php echo "'".$artist_name."'"; ?> autofocus></h3>
+  <br></div>
+  <div class="col-xs-4"><input type="text" name="description" value= <?php echo "".$description."'"; ?> autofocus> <br></div>
+  <div class="col-xs-4"><input type="submit" name="apply" value="Apply"  class = "btn btn-success"> </div>
+</div>
  </form> 
 
  </div>
@@ -151,8 +150,8 @@
   }
   ?>
 </table>
-
-<input type="submit" name="delete_albums" value="Delete" class = "btn btn-danger">
+<div class = "container" align = "right">
+<input type="submit" name="delete_albums" value="Delete" class = "btn btn-danger"></div>
 </form>
 
 </div>
@@ -161,16 +160,16 @@
 
 <form method="post" action="">
   <h3>Add Album</h3>
-  <input type="text" name="new_album_name" value= "Album Name" autofocus>
-  <input type = "text" name"new_album_publisher" value "Publisher Name" autofocus>
+  <div class="col-xs-3"><input type="text" name="new_album_name" value = "Album Name" autofocus></div>
+  <div class="col-xs-3"><input type = "text" name"new_album_publisher" value = "Publisher Name" autofocus></div>
   <select name="new_album_type">
     <option value="Album">Album</option>
     <option value="Single">Single</option>
-  </select>
-  <input type="text" name="new_album_publish_date" value= "Publish Date" autofocus>
+  </select></div>
+  <div class="col-xs-3"><input type="date" name="new_album_publish_date" autofocus></div>
   
 
-  <input type="submit" name="apply" value="add_album" class = "btn btn-success" > 
+  <input type="submit" name="apply" value="Add Album" class = "btn btn-success" > 
 
  </form> 
  </div>
