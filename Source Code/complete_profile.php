@@ -90,7 +90,11 @@
    
     <div class="container" align="right" >
 
+<<<<<<< HEAD
     <a href=<?php echo "'view_others_playlists.php?other_id={$view_id}'"; ?> class="btn btn-success" role="button">View Playlists</a>
+=======
+    <a href='view_others_playlists.php?other_id=".$view_id."' class="btn btn-success" role="button">View Playlists</a>
+>>>>>>> fedc1cc8dfa1d77245fd3379303d6014642586ab
 
     <input id='Submit' class="btn btn-danger" name='ban_button' type='button' value='Ban User'>
 

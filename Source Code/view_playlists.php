@@ -86,7 +86,7 @@
       				echo "<tr onclick = \"document.location = 'view_own_playlist.php?playlist_id={$p_id}' \">";
 	      			echo "<td>" . $row[1] . "</td>";
 	      			echo "<td>" . $row[2] . "</td>";
-	      			echo "</tr></a>" ;
+	      			echo "</tr>" ;
 	  			}
 	  		?>
 		</table>
