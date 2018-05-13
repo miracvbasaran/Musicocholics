@@ -59,7 +59,7 @@
 	  			$result_track = mysqli_query($db, $query_track);
 	  			while ($row = mysqli_fetch_array($result_track, MYSQLI_NUM)) {
       				$t_id = $row[0];
-      				echo "<a href = \"view_track.php?track_id = {$t_id}\"<tr>";
+      				echo "<tr onclick = \"document.location = 'access_track.php?track_id={$t_id}' \">";
 	      			echo "<td>" . $row[1] . "</td>";
 	      			echo "<td>" . $row[2] . "</td>";
 	      			echo "<td>" . $row[3] . "</td>";
@@ -72,7 +72,7 @@
 	      			echo "<td>" . $row[10] . "</td>";
 	      			echo "<td>" . $row[11] . "</td>";
 	      			echo "<td>" . $row[12] . "</td>";
-	      			echo "</tr></a>" ;
+	      			echo "</tr>" ;
 	  			}
 	  		?>
 		</table>

@@ -100,11 +100,11 @@
   $result = mysqli_query($db, $query_album);
   
   while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
-      echo "<a href = \"access_album.php?album_id={$row[3]}\"><tr>";
+      echo "<tr onclick = \"document.location = 'access_album.php?album_id={$row[3]}' \">";
       echo "<td>" . $row[0] . "</td>";
       echo "<td>" . $row[1] . "</td>";
       echo "<td>" . $row[2] . "</td>";
-      echo "</tr></a>";
+      echo "</tr>";
   }
   ?>
 </table>
