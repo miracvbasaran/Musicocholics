@@ -1,7 +1,7 @@
 <?php
 	include("session.php");
     $uid = mysqli_real_escape_string($db,$_SESSION['login_id']);
-    $query = "SELECT * FROM user WHERE user_id = {]}$uid} ";
+    $query = "SELECT * FROM user WHERE user_id = {$uid} ";
     $result = mysqli_query($db, $query);
     $user_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
@@ -81,7 +81,7 @@
   <?php
       for ($i=0; $i < count($artist_names); $i++) { 
         $art_id = $artist_ids[$i];
-        echo "<a href = \"<view_artist.ph?artist_id = {$art_id}\">" . $artist_names[$i] . "</a>";
+        echo "<a href = \"<view_artist.php?artist_id = {$art_id}\">" . $artist_names[$i] . "</a>";
         if(count($artist_names) != 1 && $i < count($artist_names) - 1){
           echo ", ";
         }
