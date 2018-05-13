@@ -104,6 +104,7 @@
           $query = "UPDATE Track SET date_of_addition = '{$date_of_addition}' WHERE track_id = {$track_id};";
           $result = mysqli_query($db, $query);
       }
+      header("Location: access_track.php?track_id=".$track_id);
     }
 ?>
 

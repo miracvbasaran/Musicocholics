@@ -91,15 +91,15 @@
 
 
 <form method="post" action="">
-  <div class="col-xs-3">Name: <input type="text" name="name" value= <?php echo $publisher_name ?> autofocus><br></div>
-  <div class="col-xs-3">Country: <select name="country">
+  <div class="col-xs-3">Name: <input class = "form-control" type="text" name="name" value= <?php echo $publisher_name ?> autofocus><br></div>
+  <div class="col-xs-3">Country: <select class = "form-control" name="country">
     <option value="Turkey">Turkey</option>
     <option value="USA">USA</option>
     <option value="England">England</option>
     <option value="Germany">Germany</option>
     <option value="Ireland">Ireland</option>
   </select> <br></div>
-  <div class="col-xs-3">City:  <input type="text" name="city" value= <?php echo $city ?> autofocus></div>
+  <div class="col-xs-3">City:  <input class = "form-control" type="text" name="city" value= <?php echo $city ?> autofocus></div>
   
 
   <input type="submit" name="apply" value="Apply"  class = "btn btn-success"> 
@@ -126,7 +126,7 @@
       echo "<td>" . $row[0] . "</td>";
       echo "<td>" . $row[1] . "</td>";
       echo "<td>" . $row[2] . "</td>";
-      echo "<td> <input type = \"checkbox\" name = \"check_list[]\" value = \"{$a_id}\"></td>";
+      echo "<td> <input class = \"form-control\" type = \"checkbox\" name = \"check_list[]\" value = \"{$a_id}\"></td>";
       echo "</tr>";
   }
   ?>
