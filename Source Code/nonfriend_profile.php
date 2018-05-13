@@ -14,12 +14,12 @@
     $fullname_non = $nonfriend_array['fullname'];
 
 
-    $query4 = "SELECT country, picture FROM user WHERE user_id = '$nonfriend_id' ";
+    $query4 = "SELECT country, picture,gender FROM user WHERE user_id = '$nonfriend_id' ";
     $result4 = mysqli_query($db, $query4);
     $nonfriend_array_u = mysqli_fetch_array($result4,MYSQLI_ASSOC);
     $country_non = $nonfriend_array_u['country'];
     $picture_non = $nonfriend_array_u['picture'];
-
+    $gender_non = $nonfriend_array_u['gender'];
 
     if(isset($_POST['add_friend_button']))
     {
@@ -64,14 +64,22 @@
 <div class="container">
 
   
-  <h3>This is, </h3> <?php echo $fullname_non;?>
+  <h3>This is, <?php echo $username_non;?> </h3> 
   	<p> 
 
       <div align="left" class="col-md-6 col-md-offset-3"><img class="img-circle img-responsive" src="assets/img/ <?php echo $picture_non; ?>" width="200" height="200"></div>
-
-       <class="btn btn-info" role="button" name=add_friend_button value="ADD AS A FRIEND" >
+      
+      
+    
+    <p> Fullname: <?php echo $fullname_non;?></p><br>
+    <p> Country: <?php echo $country_non;?></p><br>
+    <p> Gender: <?php echo $gender_non;?></p><br>
+    
     </p>
-
+    
+    <div> 
+    <a href="friend_profile.php?other_id='$nonfriend_id' " class="btn btn-success" role="button">ADD AS FRIEND</a>
+    </div>
 
 </div>
 <div>
