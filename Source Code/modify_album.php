@@ -137,7 +137,7 @@
     <option value="Single">Single</option>
   </select>
   <input type="text" name="published_date" value= <?php echo $published_date ?> autofocus>
-  <input type="submit" name="apply" value="Apply"  > 
+  <input type="submit" name="apply" value="Apply"  class = "btn btn-default"> 
 
  </form> 
 <div class="container">
@@ -165,7 +165,7 @@
   ?>
 </table>
 
-<input type="submit" name="delete_tracks" value="Delete"/>
+<input type="submit" name="delete_tracks" value="Delete" class = "btn btn-default">
 </form>
 
 </div>
@@ -177,7 +177,7 @@
   <input type="text" name="new_track_name" value= "Track Name" autofocus>
   <input type="text" name="new_track_price" value= "Price" autofocus>
 
-  <input type="submit" name="add_track" value="Add Track"  > 
+  <input type="submit" name="add_track" value="Add Track"  class = "btn btn-default"> 
 
  </form> 
  </div>
