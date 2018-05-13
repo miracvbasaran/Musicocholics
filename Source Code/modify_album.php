@@ -118,15 +118,16 @@
     </nav>
 
    <div align="center" class="col-md-6 col-md-offset-3"><img class="img-circle img-responsive" src="assets/img/ <?php echo $picture_v; ?>" width="200" height="200"></div>
-
-<div class="container">
-
+<div align = "center">
 <form action="" method="post" enctype="multipart/form-data">
     <input align = "center" class="btn btn-primary btn-sm" type="file" name="photo" id="photo" accept="image/*"> <button class="btn btn-success btn-sm" type="submit" name="uploadpic">Update</button>
- </form>
+ </form></div>
+<div class="container">
+
+
 
 <form method="post" action="">
-  <div class="col-xs-5" align = "center"><h3><input type="text" class = "form-control" name="album_name" value= <?php echo $album_name; ?> autofocus> by 
+  <div class = "container" align = "center"><div class="col-xs-5" align = "center"><h3><input type="text" class = "form-control" name="album_name" value= <?php echo $album_name; ?> autofocus> by 
 
 <?php
       for ($i=0; $i < count($artist_names); $i++) { 
@@ -137,7 +138,7 @@
         }
       }
     ?>
-</h3></div>
+</h3></div></div>
   <br><div align = "center">
   <div class="col-xs-3">Album Type: 
   <select class = "form-control" name="album_type">

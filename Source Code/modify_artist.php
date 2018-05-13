@@ -109,19 +109,19 @@
       </div>
     </nav>
 
-   <div align="left" class="col-md-6 col-md-offset-3"><img class="img-circle img-responsive" src="assets/img/ <?php echo $picture_v; ?>" width="200" height="200"></div>
-
+   <div align="center" class="col-md-6 col-md-offset-3"><img class="img-circle img-responsive" src="assets/img/ <?php echo $picture_v; ?>" width="200" height="200"></div>
+<div class = "center"><form action="" method="post" enctype="multipart/form-data">
+    <input class="btn btn-primary btn-sm" type="file" name="photo" id="photo" accept="image/*"> <button class="btn btn-success btn-sm" type="submit" name="uploadpic">Update</button>
+ </form></div>
 <div class="container">
 
-<form action="" method="post" enctype="multipart/form-data">
-    <input class="btn btn-primary btn-sm" type="file" name="photo" id="photo" accept="image/*"> <button class="btn btn-success btn-sm" type="submit" name="uploadpic">Update</button>
- </form>
+
 
 <form method="post" action=""><div class="container" align = "center">
-  <div class = "container" align = "center"><div class="col-xs-4"><input type="text" class = "form-control" name="name" value= <?php echo "'".$artist_name."'"; ?> autofocus>
-  <br></div></div>
+   <div class="form-group"><div class = "container" align = "center"><div class="col-xs-4"><input type="text" class = "form-control" name="name" value= <?php echo "'".$artist_name."'"; ?> autofocus>
+  <br></div></div></div>
   <div class="col-xs-4"><input type="text" class = "form-control" name="description" value= <?php echo "'".$description."'"; ?> autofocus> <br></div>
-  <div class="col-xs-4"><input type="submit" name="apply" value="Apply"  class = "btn btn-success"> </div>
+  <div class="container"><input type="submit" name="apply" value="Apply"  class = "btn btn-success"> </div>
 </div>
  </form> 
 
@@ -161,13 +161,13 @@
 
 <form method="post" action="">
   <h3>Add Album</h3>
-  <div class="col-xs-3"><input class = "form-control" type="text" name="new_album_name" value = "Album Name" autofocus></div>
-  <div class="col-xs-3"><input class = "form-control" type = "text" name"new_album_publisher" value = "Publisher Name" autofocus></div>
-   <div class="col-xs-3"><select class = "form-control" name="new_album_type">
+  <div class="col-xs-3">Album Name: <input class = "form-control" type="text" name="new_album_name"  autofocus></div>
+  <div class="col-xs-3">Album Publisher: <input class = "form-control" type = "text" name"new_album_publisher"  autofocus></div>
+   <div class="col-xs-3">Album Type: <select class = "form-control" name="new_album_type">
     <option value="Album">Album</option>
     <option value="Single">Single</option>
   </select></div>
-  <div class="col-xs-3"><input type="date" class = "form-control" name="new_album_publish_date" autofocus></div>
+  <div class="col-xs-3">Publish Date: <input type="date" class = "form-control" name="new_album_publish_date" autofocus></div>
   
 
   <div class = "container" align = "right"><input type="submit" name="add_album" value="Add Album" class = "btn btn-success"> </div>
