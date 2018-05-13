@@ -48,9 +48,9 @@
       <li><a href="own_profile.php">Profile</a></li>
       <li><a href="view_playlists.php">Playlist</a></li>
       <li><a href="view_tracks.php">Tracks</a></li>
-  <li><a href="friends.php">Friends</a></li>
-  <li><a href="message_list.php">Messages</a></li>
-  <li><a href="search.php">Search</a></li>
+      <li><a href="friends.php">Friends</a></li>
+      <li><a href="message_list.php">Messages</a></li>
+      <li><a href="search.php">Search</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="change_general_information.php"><span class="glyphicon glyphicon-user"></span> Settings</a></li>
@@ -60,10 +60,13 @@
 </nav>
 
 
-  <div align="left" class="col-md-6 col-md-offset-3"><img class="img-circle img-responsive" src="assets/img/ <?php echo $picture; ?>" width="200" height="200"></div>
+   <div align="center" class="container">
+      <img class="img-circle img-responsive" src="assets/img/ <?php echo $picture; ?>" width="100" height="100">
+  </div>
 
-<div class="container">
-  <h3>Hello, </h3> <?php echo $fullname; ?>
+<div class="container" align="center" >
+
+  <h3> Hello, <?php echo $fullname; ?> </h3>  
 	<br>
   	<p> Username: <?php echo $username;?> </p><br>
   	<p>	Fullname: <?php echo $fullname;?></p><br>
@@ -78,28 +81,43 @@
 
  </div>
 
-
-POSTS<br><br>
+<div class="container" align="left">
+<fieldset>
+    <legend><h3>  POSTS </h3></legend> 
 <div class="container">
+
 <?php
 	$query = "SELECT P.writer_id , P.date, P.post FROM posts P WHERE P.receiver_id = '$uid' ORDER BY date DESC";
 	$result = mysqli_query($db, $query);
 	$writer_names = array();
-	while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
-      $query1 = "SELECT P.username FROM Person P WHERE P.person_id = {$row[0]} ";
-		$result1 = mysqli_query($db, $query1);
-		$writer_names[] = mysqli_fetch_array($result1, MYSQLI_ASSOC)['username'];
+	while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+      $query1 = "SELECT P.username FROM Person P WHERE P.person_id = '$row[writer_id]' ";
+		  $result1 = mysqli_query($db, $query1);
+		  $writer_names[] = mysqli_fetch_array($result1, MYSQLI_ASSOC)['username'];
 	}
 	$i=0;
-	while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
-      echo " <div >  <div align=\"left\" > {$writer_names[$i]} ( {$row[1]} ) <br> </div> <div align=\"right\" > {$row[2]}  <br> </div> </div>"; 
+  $result = mysqli_query($db, $query);
+	while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+      echo " <div class=\"well\"> <div  align=\"left\" > {$writer_names[$i]} ( {$row['date']} ): <br> </div> <div align=\"left\" > {$row['post']}  <br> </div> </div>"; 
       $i = $i + 1;
 	}
 
 ?>
+<fieldset>
 </div>
 
-<div > 	
+</div> 	
+
+<style>
+.footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 80%;
+   text-align: center;
+}
+</style>
+<div class = "footer">
 <footer>
 	<?php
 	$query = "SELECT L1.track_id FROM listens L1 WHERE L1.user_id = '$uid' AND 
@@ -112,11 +130,19 @@ POSTS<br><br>
 
   $track_name = $track_array['track_name'];
   $duration = $track_array['duration'];
-	echo $track_name;
-	echo $duration;
 	?>
 
+  <h4> <?php echo $track_name; ?> (<?php echo $duration; ?> ) </h4>
+  
+  <div class="progress">
+  <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="70"
+  aria-valuemin="0" aria-valuemax="100" style="width:70%">
+    <span class="sr-only"> </span> 
+  </div>
+
 </footer>
+</div>
+
 </div>
 </body>
 </html>
