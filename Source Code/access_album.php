@@ -14,7 +14,7 @@
     $picture = $album_array['picture'];
     $album_type = $album_array['album_type'];
     $published_date = $album_array['published_date'];
-    $publisher_id =$album_array['publisher_id'];
+    $publisher_id = intval($album_array['publisher_id']);
 
     $query = "SELECT artist_id FROM Album_Belongs_To_Artist WHERE album_id = {$album_id};";
     $result = mysqli_query($db, $query);
@@ -43,9 +43,9 @@
     }
     if(isset($_POST['delete_album_button']))
     {
-      $query = "CALL DeleteAlbum({$album_id})";
+      $query = "CALL DeleteAlbum({$album_id});";
       $result = mysqli_query($db, $query);
-      header('Location: ' . $_SERVER['HTTP_REFERER']);
+      header("Location: " . $_SERVER['HTTP_REFERER']);
     }
     
 ?>
@@ -92,7 +92,7 @@
   <?php
       for ($i=0; $i < count($artist_names); $i++) { 
         $art_id = $artist_ids[$i];
-        echo "<a href = \"<view_artist.ph?artist_id = {$art_id}\">" . $artist_names[$i] . "</a>";
+        echo "<a href = \"access_artist.ph?artist_id = {$art_id}\">" . $artist_names[$i] . "</a>";
         if(count($artist_names) != 1 && $i < count($artist_names) - 1){
           echo ", ";
         }
