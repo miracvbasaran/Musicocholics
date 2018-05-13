@@ -80,7 +80,7 @@
   <?php
       for ($i=0; $i < count($artist_names); $i++) { 
         $art_id = $artist_ids[$i];
-        echo "<a href = \"<view_artist.php?artist_id={$art_id}\">" . $artist_names[$i] . "</a>";
+        echo "<a href = \"view_artist.php?artist_id={$art_id}\">" . $artist_names[$i] . "</a>";
         if(count($artist_names) != 1 && $i < count($artist_names) - 1){
           echo ", ";
         }

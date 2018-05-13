@@ -66,25 +66,25 @@ include("session.php");
 					if( isset( $_POST['filter_track'])){//TRACK
 						$query = mysqli_query( $db, "SELECT * FROM Track WHERE track_name LIKE '%$search_key%';");
 						while( $row = $query->fetch_assoc()){ //printing every track with that track name
-							echo( "<tr> <td><a href='track.php?track_id=".$row['track_id']."'>".$row['track_name']."</a></td> </tr><br/>");
+							echo( "<tr> <td><a href='access_track.php?track_id=".$row['track_id']."'>".$row['track_name']."</a></td> </tr><br/>");
 						}
 					}
 					if( isset( $_POST['filter_album'])){ //ALBUM
 						$query = mysqli_query( $db, "SELECT * FROM Album WHERE album_name LIKE '%$search_key%';");
 						while( $row = $query->fetch_assoc()){ //printing every album with that album name
-							echo( "<tr> <td><a href='album.php?album_id=".$row['album_id']."'>".$row['album_name']."</a></td> </tr><br/>");
+							echo( "<tr> <td><a href='access_album.php?album_id=".$row['album_id']."'>".$row['album_name']."</a></td> </tr><br/>");
 						}
 					}
 					if( isset( $_POST['filter_artist'])){ //ARTIST
 						$query = mysqli_query( $db, "SELECT * FROM Artist WHERE artist_name LIKE '%$search_key%';");
 						while( $row = $query->fetch_assoc()){ //printing every artist with that artist name
-							echo( "<tr><td><a href='artist.php?artist_id=".$row['artist_id']."'>".$row['artist_name']."</a></td></tr><br/>");
+							echo( "<tr><td><a href='access_artist.php?artist_id=".$row['artist_id']."'>".$row['artist_name']."</a></td></tr><br/>");
 						}
 					}
 					if( isset( $_POST['filter_playlist'])){ //PLAYLIST
 						$query = mysqli_query( $db, "SELECT * FROM Playlist WHERE playlist_name LIKE '%$search_key%';");
 						while( $row = $query->fetch_assoc()){ //printing every playlist with that playlist name
-							echo( "<tr><td><a href='playlist.php?playlist_id=".$row['playlist_id']."'>".$row['playlist_name']."</a></td></tr><br/>");
+							echo( "<tr><td><a href='access_playlist.php?playlist_id=".$row['playlist_id']."'>".$row['playlist_name']."</a></td></tr><br/>");
 						}
 					}
 					if( isset( $_POST['filter_user'])){ //USER
