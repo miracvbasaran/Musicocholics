@@ -1,6 +1,6 @@
 <?php
 	include("session.php");
-    $uid = mysqli_real_escape_string($db,$_GET['login_id']);
+    $uid = mysqli_real_escape_string($db,$_SESSION['login_id']);
 
 
     $track_id = $_GET['track_id'];

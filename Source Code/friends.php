@@ -1,6 +1,6 @@
 <?php 
 include("session.php");
-include("connection.php");
+
 ?>
 
 <!DOCTYPE html>
@@ -32,7 +32,7 @@ include("connection.php");
 		
 		<?php
 		
-		$id = mysqli_real_escape_string( $db, $_POST['login_id']);
+		$id = mysqli_real_escape_string( $db, $_SESSION['login_id']);
 		$fquery = mysqli_query( $db, "SELECT * FROM Friendship WHERE user1_id = '$id' OR user2_id = '$id');");
 		
 		while( $frow = $fquery->fetch_assoc()){ //for each friend

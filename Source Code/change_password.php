@@ -1,6 +1,6 @@
 <?php
 	include("session.php");
-    $uid = mysqli_real_escape_string($db,$_GET['user_id']);
+    $uid = mysqli_real_escape_string($db,$_SESSION['user_id']);
     $query = "SELECT * FROM user WHERE user_id = '$uid' ";
     $result = mysqli_query($db, $query);
   $user_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
