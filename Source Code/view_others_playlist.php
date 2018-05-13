@@ -113,7 +113,7 @@
       				$result_friend = mysqli_query($db, $query_friend);
       				$friend_array = mysqli_fetch_array($result_friend, MYSQLI_ASSOC);
       				$cnt_friend = $friend_array['cntfriend'];
-      				if( $cnt_friend == 0 ) {
+      				if( $cnt_friend === 0 ) {
       					echo "<tr onclick = \"document.location = 'nonfriend_profile.php?other_id={$person_id}' \">";
 	      				echo "<td>" . $row[1] . "</td>";
 	      				echo "<td>" . $row[2] . "</td>";

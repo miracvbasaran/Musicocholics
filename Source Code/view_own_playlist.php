@@ -112,14 +112,14 @@
 	  		<?php
 	  			$query_comment = "SELECT P.person_id , P.username , C.comment , FROM person P , comments C WHERE P.person_id = C.person_id AND C.playlist_id = {$playlist_id}";
 	  			$result_comment  = mysqli_query($db, $query_comment);
-	  			if( $result_comment == TRUE ) {
+	  			if( $result_comment === TRUE ) {
 		  			while ($row = mysqli_fetch_array($result_comment, MYSQLI_NUM)) {
 	      				$person_id = $row[0];
 	      				$query_friend = "SELECT COUNT(*) as cntfriend FROM friendship F WHERE (F.user1_id={$uid} AND F.user2_id={$person_id}) OR (F.user2_id={$uid} AND F.user1_id={$person_id})";
 	      				$result_friend = mysqli_query($db, $query_friend);
 	      				$friend_array = mysqli_fetch_array($result_friend, MYSQLI_ASSOC);
 	      				$cnt_friend = $friend_array['cntfriend'];
-	      				if( $cnt_friend == 0 ) {
+	      				if( $cnt_friend === 0 ) {
 	      					echo "<tr onclick = \"document.location = 'nonfriend_profile.php?p_id={$p_id}' \">";
 		      				echo "<td>" . $row[1] . "</td>";
 		      				echo "<td>" . $row[2] . "</td>";
