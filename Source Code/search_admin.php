@@ -14,8 +14,23 @@ include("session.php");
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-
-	<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">Home</a></li>
+          <li><a href="search_admin.php">Search</a></li>
+          <li><a href="add_track.php">Add Track</a></li>
+          <li><a href="add_album.php">Add Album</a></li>
+          <li><a href="add_artist.php">Add Artist</a></li>
+          <li><a href="add_publisher.php">Add Publisher</a></li>
+        </ul>
+        
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="change_password.php"><span class="glyphicon glyphicon-user"></span> Change Password</a></li>
+          <li><a href="homepage.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+        </ul>
+      </div>
+    </nav>
 	
 		<div align = "center">
 			<form action = "#" method = "post">
