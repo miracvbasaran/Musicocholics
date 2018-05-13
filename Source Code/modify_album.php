@@ -161,10 +161,10 @@
   
   while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
       $t_id = $row[3];
-      echo "<a href = \"view_track.ph?track_id={$t_id}\"><tr>";
+      echo "<tr onclick = \"document.location = 'access_track.php?track_id={$t_id}' \">";
       echo "<td>" . $row[0] . "</td>";
       echo "<td>" . $row[1] . "</td>";
-      echo "<td>" . $row[2] . "</td></a>";
+      echo "<td>" . $row[2] . "</td>";
       echo "<td> <input type = \"checkbox\" name = \"check_list[]\" value = \"{$t_id}\"></td>";
       echo "</tr>";
   }

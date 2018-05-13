@@ -140,10 +140,10 @@
   
   while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
       $a_id = $row[3];
-      echo "<a href = \"access_album.php?album_id={$a_id}\"><tr>";
+      echo "<tr onclick = \"document.location = 'access_album.php?album_id={$row[3]}' \">";
       echo "<td>" . $row[0] . "</td>";
       echo "<td>" . $row[1] . "</td>";
-      echo "<td>" . $row[2] . "</td></a>";
+      echo "<td>" . $row[2] . "</td>";
       echo "<td> <input type = \"checkbox\" name = \"check_list[]\" value = \"{$a_id}\"></td>";
       echo "</tr>";
   }

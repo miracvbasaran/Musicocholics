@@ -97,11 +97,11 @@
   
   while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
       $a_id = $row[3];
-      echo "<a href = \"view_album.php?album_id={$a_id}\"<tr>";
+      echo "<tr onclick = \"document.location = 'access_album.php?album_id={$a_id}' \">";
       echo "<td>" . $row[0] . "</td>";
       echo "<td>" . $row[1] . "</td>";
       echo "<td>" . $row[2] . "</td>";
-      echo "</tr></a>";
+      echo "</tr>";
   }
   ?>
 </table>
