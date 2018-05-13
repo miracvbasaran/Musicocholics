@@ -69,14 +69,15 @@
     {
       $new_track_name = $_POST['new_track_name'];
       $new_track_price = $_POST['new_track_price'];
+      $new_track_duration = $_POST['new_track_duration'];
       $insertion_date = date(Y-m-d);
-      $query = "INSERT INTO Track(track_name, price, date_of_addition) VALUES('{$new_track_name}', '{$new_track_price}', '{$insertion_date}')";
+      $query = "INSERT INTO Track(track_name, price, date_of_addition, duration, album_id) VALUES('{$new_track_name}', '{$new_track_price}', '{$insertion_date}', $new_track_duration, $album_id)";
       if(mysqli_query($db, $query) === TRUE){
           $query = "SELECT LAST_INSERT_ID()";
           $result = mysqli_query($db, $query);
           $index_array = mysqli_fetch_array($result, MYSQLI_NUM);
           $album_id = $index_array[0];
-          header("Location: modify_album.php?album_id=".$album_id);
+          header("Location: modify_track.php?track_id=".$track_id);
       }
       else{
         echo ' <script type="text/javascript"> alert("Could not add track to album."); </script>';
@@ -181,8 +182,9 @@
 
 <form method="post" action="">
   <h3>Add Track</h3>
-  <div class="col-xs-3"><input type="text" name="new_track_name" value= "Track Name" autofocus></div>
-  <div class="col-xs-3"><input type="number" step="0.01" name="new_track_price" value= "Price" style="text-align:right;" autofocus> $</div>
+  <div class="col-xs-3">Track Name: <input type="text" name="new_track_name"  autofocus></div>
+  <div class="col-xs-3">Duration: <input type="time" name="new_track_duration"  autofocus></div>
+  <div class="col-xs-3">Price: <input type="number" step="0.01" name="new_track_price" style="text-align:right;" autofocus> $</div>
 
   <div class="col-xs-3"><input type="submit" name="add_track" value="Add Track"  class = "btn btn-success"> </div>
 

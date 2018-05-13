@@ -8,7 +8,8 @@
     $query2 = "SELECT * FROM Artist WHERE artist_id = '$artist_id' ";
     $result2 = mysqli_query($db, $query2);
     if($result2 === FALSE){
-      echo " <script type=\"text/javascript\"> alert(\"There is no artist to show!\"); </script>";
+      echo ' <script type="text/javascript"> alert("There is no artist to show!"); </script>';
+      header("Location: admin.php");
     }
     else{
       $artist_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
@@ -52,11 +53,11 @@
 
       $query = "SELECT publisher_id FROM Publisher WHERE publisher_name = '{$new_album_publisher}'";
       $result = mysqli_query($db, $query);
-      $index_array = mysqli_fetch_array($result, MYSQLI_NUM);
-      if($index_array == FALSE){
+      if($result == FALSE){
         echo ' <script type="text/javascript"> alert("There is no such publisher"); </script>';
       }
       else{
+        $index_array = mysqli_fetch_array($result, MYSQLI_NUM);
         $publisher_id = $index_array[0];
 
         $query = "INSERT INTO Album(album_name, album_type, published_date, publisher_id) VALUES('{$new_album_name}', '{$new_album_type}', '{$new_album_publish_date}', {$publisher_id})";

@@ -7,7 +7,7 @@
     $query2 = "SELECT * FROM Artist WHERE artist_id = '$artist_id' ";
     $result2 = mysqli_query($db, $query2);
     if($result2 === FALSE){
-      echo " <script type=\"text/javascript\"> alert(\"There is no artist to show!\"); </script>";
+      echo ' <script type="text/javascript"> alert("There is no artist to show!"); </script>';
       header("Location: admin.php");
     }
     else{
@@ -26,10 +26,10 @@
       $query = "CALL DeleteArtist({$artist_id})";
       $result = mysqli_query($db, $query);
       if($result === FALSE){
-        echo " <script type=\"text/javascript\"> alert(\"Could not delete artist!\"); </script>";
+        echo ' <script type="text/javascript"> alert("Could not delete artist!"); </script>';
       }
       else{
-        echo " <script type=\"text/javascript\"> alert(\"Artist succesfully deleted!\"); </script>";
+        echo ' <script type="text/javascript"> alert("Artist successfully deleted!"); </script>';
         header("Location: admin.php");
       }
       
