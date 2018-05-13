@@ -34,7 +34,7 @@
     	$queryD6 = "DELETE FROM collaborates WHERE playlist_id = '$pid' ";
     	$resultD6 = mysqli_query($db, $queryD6);
 
-    	header("location: view_playlists.php?");
+    	header("location: view_own_playlists.php?");
 
     }
 
@@ -59,9 +59,13 @@
 		    	<ul class="nav navbar-nav">
 		      		<li class="active"><a href="#">Home</a></li>      
 		      		<li><a href="own_profile.php">Profile</a></li>
+<<<<<<< HEAD
 		      		<li><a href="view_own_playlists.php">Playlist</a></li>
+=======
+		      		<li><a href="view_own_playlist.php">Playlist</a></li>
+>>>>>>> 05d6c11f3d63f368a6d6f569d675e17439f3cbe7
 		      		<li><a href="view_tracks.php">Tracks</a></li>
-					<li><a href="friends_list.php">Friends</a></li>
+					<li><a href="friends.php">Friends</a></li>
 					<li><a href="message_list.php">Messages</a></li>
 					<li><a href="search.php">Search</a></li>
 		    	</ul>
