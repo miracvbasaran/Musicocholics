@@ -1,22 +1,25 @@
 <?php
 	include("session.php");
     $uid = mysqli_real_escape_string($db,$_SESSION['login_id']);
-    $query = "SELECT * FROM user WHERE user_id = '$uid' ";
+    
+    $friend_id = $_GET["other_id"];
+
+    $query = "SELECT * FROM person WHERE person_id = '$friend_id'";
     $result = mysqli_query($db, $query);
-    $user_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
+    $fPer_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
+    $username_f = $fPer_array['username'];
+    $fullname_f = $fPer_array['fullname'];
+    $email_f = $fPer_array['email'];
 
-
-    $friend_id = $_GET['other_id'];
-    $query2 = "SELECT * FROM user WHERE user_id = '$friend_id' ";
+    $query2 = "SELECT * FROM user WHERE user_id = '$friend_id'";
     $result2 = mysqli_query($db, $query2);
     $friend_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
-    $username_f = $friend_array['username'];
-    $fullname_f = $friend_array['fullname'];
+    
     $country_f = $friend_array['country'];
     $language_f = $friend_array['language'];
     $birthday_f = $friend_array['birthday'];
     $gender_f = $friend_array['gender'];
-    $email_f = $friend_array['email'];
+    
     $picture_f = $friend_array['picture'];
 
     if(isset($_POST['sendmessage_button']))
@@ -84,7 +87,7 @@
   <div align="left" class="col-md-6 col-md-offset-3"><img class="img-circle img-responsive" src="assets/img/ <?php echo $picture_f; ?>" width="200" height="200"></div>
 
 <div class="container">
-  <h3>This is, </h3> <?php echo $fullname_f;?>
+  <h3>This is, <?php echo $fullname_f;?> </h3> 
     <p>Username: <?php echo $username_f;?> </p>
     <p> E-mail address: <?php echo $email_f;?></p>
     <p> Country: <?php echo $country_f;?></p>
@@ -93,16 +96,16 @@
     <p> Birthday: <?php echo $birthday_f;?></p>
 
 <div align="right" class="container">
- <a href="view_others_playlist.php?other_id=$view_id" class="btn btn-success" role="button">View Playlists</a>
+ <a href='view_others_playlist.php?other_id=".$view_id."' class="btn btn-success" role="button">View Playlists</a>
 
  
 </div>
   <p> 
-       <input id='Submit' name='sendmessage_button' type='Submit' class='btn btn-default' value='Send Message'>
+       <input id='Submit' name='sendmessage_button' type='button' class='btn btn-default' value='Send Message'>
 
-       <input id='Submit' name='block_button' type='Submit' class='btn btn-default' value='Block'>
+       <input id='Submit' name='block_button' type='button' class='btn btn-default' value='Block'>
 
-       <input id='Submit' name='unfriend_button' type='Submit' class='btn btn-default' value='Unfriend'>
+       <input id='Submit' name='unfriend_button' type='button' class='btn btn-default' value='Unfriend'>
        
     </p>
  </div>
@@ -114,10 +117,13 @@
 <?php
   $query = "SELECT U.username , P.post, P.date FROM posts P, User U WHERE P.receiver_id = '$friend_id' AND P.writer_id = U.user_id ORDER BY date DESC ";
   $result = mysqli_query($db, $query);
-  
-  while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
-      printf("%s (%s) : %s ", $row[0] , $row[2], $row[1] );  
+  if($result == TRUE){
+      while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
+        printf("%s (%s) : %s ", $row[0] , $row[2], $row[1] );  
+     } 
+
   }
+
 
 ?>
 </div>

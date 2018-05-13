@@ -7,27 +7,21 @@
 
 
     $nonfriend_id = $_GET['other_id'];
-    $query2 = "SELECT * FROM person WHERE person_id = '$nonfriend_id' ";
+    $query2 = "SELECT * FROM person WHERE person_id = '$nonfriend_id'";
     $result2 = mysqli_query($db, $query2);
     $nonfriend_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
     $username_non = $nonfriend_array['username'];
     $fullname_non = $nonfriend_array['fullname'];
 
 
-    $query4 = "SELECT country, picture,gender FROM user WHERE user_id = '$nonfriend_id' ";
+    $query4 = "SELECT country, picture,gender FROM user WHERE user_id = '$nonfriend_id'";
     $result4 = mysqli_query($db, $query4);
     $nonfriend_array_u = mysqli_fetch_array($result4,MYSQLI_ASSOC);
     $country_non = $nonfriend_array_u['country'];
     $picture_non = $nonfriend_array_u['picture'];
     $gender_non = $nonfriend_array_u['gender'];
 
-    if(isset($_POST['add_friend_button']))
-    {
-
-      $query3 = "INSERT INTO friendship VALUES ($uid, $nonfriend_id) ";
-      $result3 = mysqli_query($db, $query3);
-      header("location: friend_profile.php?other_id={$friend_id} ");
-    }
+    
 ?>
 
 <!DOCTYPE html>
@@ -78,8 +72,11 @@
     </p>
     
     <div> 
-    <a href="friend_profile.php?other_id='$nonfriend_id' " class="btn btn-success" role="button">ADD AS FRIEND</a>
+    
+      
+        <a href="add_friend.php?other_id=<?php echo $nonfriend_id; ?> " class="btn btn-success" role="button">ADD AS FRIEND</a>
     </div>
+    
 
 </div>
 <div>
