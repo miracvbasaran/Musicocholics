@@ -26,45 +26,48 @@
     $picture = $user_array['picture'];
     $membership_type = $user_array['membership_type'];
 
-    if(isset( ($_POST['apply']) ) ){
-      if(isset( ($_POST['country']) )  ){
-          $country = $_POST['country']);
+    if( isset( $_POST["apply"] ) ) {
+      if(isset( ($_POST["country"]) ))  {
+          $country = $_POST["country"];
           $query = "UPDATE user SET country = '$country' WHERE user_id = '$uid' ";
           $result = mysqli_query($db, $query);
 
       }
-      if(isset( ($_POST['fullname']) )  ){
-        $fullname = $_POST['fullname']);
+      if(isset( ($_POST['fullname']) ) )  {
+          $fullname = $_POST['fullname'];
           $query = "UPDATE user SET fullname = '$fullname' WHERE user_id = '$uid' ";
           $result = mysqli_query($db, $query);
+          $resultP = mysqli_query($db,  "UPDATE person SET fullname = '$fullname' WHERE person_id = '$uid' ");
 
       }
-      if(isset( ($_POST['username']) )  ){
-          $username = $_POST['username']);
+      if(isset( ($_POST['username']) ) )  {
+          $username = $_POST['username'];
           $query = "UPDATE user SET username = '$username' WHERE user_id = '$uid' ";
           $result = mysqli_query($db, $query);
+          $resultP = mysqli_query($db,  "UPDATE person SET username = '$username' WHERE person_id = '$uid' ");
 
       }
 
-      if(isset( ($_POST['email']) )  ){
-          $email = $_POST['email']);
+      if(isset( ($_POST['email']) ) )  {
+          $email = $_POST['email'];
           $query = "UPDATE user SET email = '$email' WHERE user_id = '$uid' ";
           $result = mysqli_query($db, $query);
+          $resultP = mysqli_query($db,  "UPDATE person SET email = '$email' WHERE person_id = '$uid' ");
 
       }
-      if(isset( ($_POST['birthday']) )  ){
+      if(isset( ($_POST['birthday']) ) )  {
           $query = "UPDATE user SET birthday = '$birthday' WHERE user_id = '$uid' ";
           $result = mysqli_query($db, $query);
 
       }
-      if(isset( ($_POST['language']) )  ){
-          $language = $_POST['language']);
+      if(isset( ($_POST['language']) ) )  {
+          $language = $_POST['language'];
           $query = "UPDATE user SET language = '$language' WHERE user_id = '$uid' ";
           $result = mysqli_query($db, $query);
 
       }
-      if(isset( ($_POST['gender']) )  ){
-          $gender = $_POST['gender']);
+      if(isset( ($_POST['gender']) ) )  {
+          $gender = $_POST['gender'];
           $query = "UPDATE user SET gender = '$gender' WHERE user_id = '$uid' ";
           $result = mysqli_query($db, $query);
 
@@ -83,7 +86,7 @@
         $query = "UPDATE User SET picture = '$filename' WHERE user_id = '$uid'";
         $result = mysqli_query($db, $query);
         
-        if (move_uploaded_file($_FILES['photo']['tmp_name'], $uploadfile)) {
+        if (move_uploaded_file($_FILES['photo']['tmp_name'], $uploadfile) ) {
           echo ' <script type="text/javascript"> alert("Profile photo uploaded successfully."); </script>';
           
         } else {
