@@ -111,7 +111,7 @@
 								//printing friends
 								$fquery = mysqli_query( $db, "SELECT * FROM Friendship WHERE (user1_id = '$uid' OR user2_id = '$uid') AND (user1_id = '$id' OR user2_id = '$id');");
 								while( $frow = $fquery->fetch_assoc()){ //for each friend
-									echo( "<tr><td><a href='friend_profile.php?friend_id=".$id."'>".$row['username']."</a></td></tr><br/>");
+									echo( "<tr><td><a href='friend_profile.php?other_id=".$id."'>".$row['username']."</a></td></tr><br/>");
 									$id_list->push($id);
 								}
 								
