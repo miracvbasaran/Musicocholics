@@ -1,5 +1,5 @@
 <?php
-	include("session.php");
+	  include("session.php");
     $uid = mysqli_real_escape_string($db,$_SESSION['login_id']);
     
     $friend_id = $_GET["other_id"];
@@ -89,71 +89,91 @@
   
 <div class="container">
   	
-  <div align="left" class="col-md-6 col-md-offset-3"><img class="img-circle img-responsive" src="assets/img/ <?php echo $picture_f; ?>" width="200" height="200"></div>
+  <div align="center" class="container"><img class="img-circle img-responsive" src="assets/img/ <?php echo $picture_f; ?>" width="200" height="200"></div>
 
-<div class="container">
-  <h3>This is, <?php echo $fullname_f;?> </h3> 
-    <p>Username: <?php echo $username_f;?> </p>
+<div class="container" align="center">
+  <h3>This is <?php echo $username_f;?> </h3> 
     <p> E-mail address: <?php echo $email_f;?></p>
     <p> Country: <?php echo $country_f;?></p>
     <p> Gender: <?php echo $gender_f;?></p>
     <p> Language: <?php echo $language_f;?></p>
     <p> Birthday: <?php echo $birthday_f;?></p>
 
-<div align="right" class="container">
- <a href='view_others_playlist.php?other_id=".$view_id."' class="btn btn-success" role="button">View Playlists</a>
+<div class="container" align="right" >
+    <form method="post" action="">
 
- 
-</div>
-  
-       
-<div class = "container" align = "right">  
- <form method="post" action="">
-       <input id='Submit' name='sendmessage_button' type='Submit' class="btn btn-default" value='Send Message'>
+       <input id='Submit' name='sendmessage_button' type='Submit' class="btn btn-warning" value='Send Message'>
 
-       <input id='Submit' name='block_button' type='Submit' class="btn btn-default" value='Block'>
+       <a href=<?php echo "'view_others_playlists.php?other_id={$friend_id}'"; ?> class="btn btn-success" role="button">View Playlists</a>
+       <br><br>
+       <input id='Submit' name='block_button' type='Submit' class="btn btn-danger" value='Block'>
 
-       <input id='Submit' name='unfriend_button' type='Submit' class="btn btn-default" value='Unfriend'>
+       <input id='Submit' name='unfriend_button' type='Submit' class="btn btn-primary" value='Unfriend'>
+
+           
   </form>
-  </div>
 
 
+</div>
 
+
+<div class="container" align="left">
+<fieldset>
+    <legend><h3>  POSTS </h3></legend> 
 <div class="container">
-<p> POSTS <br><br>
-<?php
-  $query = "SELECT U.username , P.post, P.date FROM posts P, User U WHERE P.receiver_id = '$friend_id' AND P.writer_id = U.user_id ORDER BY date DESC ";
-  $result = mysqli_query($db, $query);
-  if($result == TRUE){
-      while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
-        printf("%s (%s) : %s ", $row[0] , $row[2], $row[1] );  
-     } 
 
+<?php
+  $query = "SELECT P.writer_id , P.date, P.post FROM posts P WHERE P.receiver_id = '$friend_id' ORDER BY date DESC";
+  $result = mysqli_query($db, $query);
+  $writer_names = array();
+  while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+      $query1 = "SELECT P.username FROM Person P WHERE P.person_id = '$row[writer_id]' ";
+      $result1 = mysqli_query($db, $query1);
+      $writer_names[] = mysqli_fetch_array($result1, MYSQLI_ASSOC)['username'];
+  }
+  $i=0;
+  $result = mysqli_query($db, $query);
+  while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+      echo " <div class=\"well\"> <div  align=\"left\" > {$writer_names[$i]} ( {$row['date']} ): <br> </div> <div align=\"left\" > {$row['post']}  <br> </div> </div>"; 
+      $i = $i + 1;
   }
 
-
 ?>
+<fieldset>
 </div>
-</p>
 
+<style>
+.footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   text-align: center;
+}
+</style>
+<div class = "footer">
 
-<div>
-  <footer>
-          <?php
-          $query = "SELECT L1.track_id FROM listens L1 WHERE L1.user_id = '$uid' AND 
-          date = (SELECT max(L2.date) FROM listens L2 WHERE L2.user_id = '$uid') ";
-          $result = mysqli_query($db, $query);
-          $row = mysqli_fetch_array($result, MYSQLI_NUM);
-          $query2 = "SELECT track_name,duration FROM track WHERE track_id = '$row[0]' ";
-          $result2 = mysqli_query($db, $query2);
-          $track_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
+  <?php
+  $query = "SELECT L1.track_id FROM listens L1 WHERE L1.user_id = '$uid' AND 
+  date = (SELECT max(L2.date) FROM listens L2 WHERE L2.user_id = '$uid') ";
+  $result = mysqli_query($db, $query);
+  $row = mysqli_fetch_array($result, MYSQLI_NUM);
+  $query2 = "SELECT track_name,duration FROM track WHERE track_id = '$row[0]' ";
+  $result2 = mysqli_query($db, $query2);
+  $track_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
 
-            $track_name = $track_array['track_name'];
-            $duration = $track_array['duration'];
-          echo $track_name;
-          echo $duration;
-          ?>
-  </footer>
+  $track_name = $track_array['track_name'];
+  $duration = $track_array['duration'];
+  ?>
+
+  <h4> <?php echo $track_name; ?> (<?php echo $duration; ?> ) </h4>
+  
+  <div class="progress">
+  <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="70"
+  aria-valuemin="0" aria-valuemax="100" style="width:70%">
+    <span class="sr-only"> </span> 
   </div>
+</div>
+
 </body>
 </html>

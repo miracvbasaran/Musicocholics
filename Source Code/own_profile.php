@@ -113,12 +113,12 @@
    position: fixed;
    left: 0;
    bottom: 0;
-   width: 80%;
+   width: 100%;
    text-align: center;
 }
 </style>
 <div class = "footer">
-<footer>
+ 
 	<?php
 	$query = "SELECT L1.track_id FROM listens L1 WHERE L1.user_id = '$uid' AND 
 	date = (SELECT max(L2.date) FROM listens L2 WHERE L2.user_id = '$uid') ";
@@ -139,8 +139,7 @@
   aria-valuemin="0" aria-valuemax="100" style="width:70%">
     <span class="sr-only"> </span> 
   </div>
-
-</footer>
+ 
 </div>
 
 </div>

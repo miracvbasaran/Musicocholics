@@ -34,9 +34,9 @@
 
       $query5 = "INSERT INTO bans VALUES( '$admin_id','$view_id' )";
       $result5 = mysqli_query($db, $query5);
+      echo ' <script type="text/javascript"> alert("The user is banned succesfully."); </script>';
 
-
-      header("location: admin.php?");
+      header("location: admin.php");
 
     }
 
@@ -90,17 +90,13 @@
    
     <div class="container" align="right" >
 
-    <a href="view_others_playlists.php?other_id=$view_id" class="btn btn-success" role="button">VIEW PLAYLISTS</a>
+    <a href=<?php echo "'view_others_playlists.php?other_id={$view_id}'"; ?> class="btn btn-success" role="button">View Playlists</a>
 
-    <input id='Submit' class="btn btn-danger" name='ban_button' type='button' value='BAN USER' onclick="popMessage()">
+    <input id='Submit' class="btn btn-danger" name='ban_button' type='button' value='Ban User'>
 
     </div>
 
-    <script>
-    function popMessage(){
-        alert("User is banned succesfully!");     
-    }   
-  </script>
+
 
  </div>
 
@@ -111,7 +107,7 @@
 <div class="container">
 
 <?php
-  $query = "SELECT P.writer_id , P.date, P.post FROM posts P WHERE P.receiver_id = '$uid' ORDER BY date DESC";
+  $query = "SELECT P.writer_id , P.date, P.post FROM posts P WHERE P.receiver_id = '$view_id' ORDER BY date DESC";
   $result = mysqli_query($db, $query);
   $writer_names = array();
   while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
