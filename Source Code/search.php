@@ -51,15 +51,15 @@
 						<input type = "text" name = "search_key" placeholder = "Search.."> 
 						<input id = "" value = "Search" name = "search" type = "submit"> </button> <br/><br/>
 					</font>
-					<input type="checkbox" name="filter_track" value="track"/> Track &nbsp;&nbsp;
+					<input type="checkbox" name="filter_track" value="track"/> Track 
 					<tr><td><a href='advanced_track_search.php'> Advanced Track Search</a></td></tr><br/>
-					<input type="checkbox" name="filter_album" value="album"/> Album &nbsp;&nbsp;
+					<input type="checkbox" name="filter_album" value="album"/> Album 
 					<tr><td><a href='advanced_album_search.php'> Advanced Album Search</a></td></tr><br/>
-					<input type="checkbox" name="filter_artist" value="artist"/> Artist &nbsp;&nbsp; 
+					<input type="checkbox" name="filter_artist" value="artist"/> Artist 
 					<tr><td><a href='advanced_artist_search.php'> Advanced Artist Search</a></td></tr><br/>
-					<input type="checkbox" name="filter_playlist" value="playlist"/> Playlist &nbsp;&nbsp; 
+					<input type="checkbox" name="filter_playlist" value="playlist"/> Playlist 
 					<tr><td><a href='advanced_playlist_search.php'> Advanced Playlist Search</a></td></tr><br/>
-					<input type="checkbox" name="filter_user" value="user"/> User &nbsp;&nbsp; 
+					<input type="checkbox" name="filter_user" value="user"/> User 
 					<tr><td><a href='advanced_user_search.php'> Advanced User Search</a></td></tr><br/><br/>
 				</font>
 			</form>
@@ -69,7 +69,9 @@
 	
 				if( isset( $_POST['search'])){
 					$search_key = mysqli_real_escape_string( $db, $_POST['search_key']);
-					$filter = mysqli_real_escape_string( $db, $_POST['filter']);
+					
+
+					//$filter = mysqli_real_escape_string( $db, $_POST['filter']);
 					//echo( "<tr> <td>".$search_key."</td> </tr><br/>");
 					//echo( "<tr> <td>".$filter."</td> </tr><br/>");
 		
@@ -136,7 +138,7 @@
 										
 								}
 								if( $id_count == $id_list->count()){ //not friend, not blocked -> non-friend
-									echo( "<tr><td><a href='nonfriend_profile.php?nonfriend_id=".$id."'>".$row['username']."</a></td></tr><br/>");
+									echo( "<tr><td><a href='nonfriend_profile.php?other_id=".$id."'>".$row['username']."</a></td></tr><br/>");
 								}
 								
 							}
