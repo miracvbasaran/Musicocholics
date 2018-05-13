@@ -22,7 +22,7 @@
     	$resultD1 = mysqli_query($db, $queryD1);
     	$queryD2 = "DELETE FROM added WHERE playlist_id = {$playlist_id} ";
     	$resultD2 = mysqli_query($db, $queryD2);
-    	$queryD3 = "DELETE FROM follows WHERE playlist_id = {$playlist_i} ";
+    	$queryD3 = "DELETE FROM follows WHERE playlist_id = {$playlist_id} ";
     	$resultD3 = mysqli_query($db, $queryD3);
     	$queryD4 = "DELETE FROM rates WHERE playlist_id = {$playlist_id} ";
     	$resultD4 = mysqli_query($db, $queryD4);
@@ -30,7 +30,7 @@
     	$resultD5 = mysqli_query($db, $queryD5);
     	$queryD6 = "DELETE FROM collaborates WHERE playlist_id = {$playlist_id} ";
     	$resultD6 = mysqli_query($db, $queryD6);
-    	header("location: view_playlists");
+    	header("location: view_playlists.php");
     }
 
 ?>
