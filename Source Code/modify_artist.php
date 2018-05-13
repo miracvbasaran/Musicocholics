@@ -118,8 +118,8 @@
  </form>
 
 <form method="post" action=""><div class="container" align = "center">
-  <div class="col-xs-4"><h3><input type="text" class = "form-control" name="name" value= <?php echo "'".$artist_name."'"; ?> autofocus></h3>
-  <br></div>
+  <div class = "container" align = "center"><div class="col-xs-4"><input type="text" class = "form-control" name="name" value= <?php echo "'".$artist_name."'"; ?> autofocus>
+  <br></div></div>
   <div class="col-xs-4"><input type="text" class = "form-control" name="description" value= <?php echo "'".$description."'"; ?> autofocus> <br></div>
   <div class="col-xs-4"><input type="submit" name="apply" value="Apply"  class = "btn btn-success"> </div>
 </div>
@@ -146,7 +146,7 @@
       echo "<td>" . $row[0] . "</td>";
       echo "<td>" . $row[1] . "</td>";
       echo "<td>" . $row[2] . "</td>";
-      echo "<td> <input type = \"checkbox\" name = \"check_list[]\" value = \"{$a_id}\"></td>";
+      echo "<td> <input class = \"form-control\" type = \"checkbox\" name = \"check_list[]\" value = \"{$a_id}\"></td>";
       echo "</tr>";
   }
   ?>
@@ -170,7 +170,7 @@
   <div class="col-xs-3"><input type="date" class = "form-control" name="new_album_publish_date" autofocus></div>
   
 
-  <input type="submit" name="add_album" value="Add Album" class = "btn btn-success" > 
+  <div class = "container" align = "right"><input type="submit" name="add_album" value="Add Album" class = "btn btn-success"> </div>
 
  </form> 
  </div>

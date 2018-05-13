@@ -126,7 +126,7 @@
  </form>
 
 <form method="post" action="">
-  <div class="container" align = "center"><h3><input type="text" class = "form-control" name="album_name" value= <?php echo $album_name; ?> autofocus> by 
+  <div class="col-xs-5" align = "center"><h3><input type="text" class = "form-control" name="album_name" value= <?php echo $album_name; ?> autofocus> by 
 
 <?php
       for ($i=0; $i < count($artist_names); $i++) { 
@@ -184,7 +184,7 @@
   <h3>Add Track</h3>
   <div class="col-xs-3">Track Name: <input type="text" class = "form-control" name="new_track_name"  autofocus></div>
   <div class="col-xs-3">Duration: <input type="time" class = "form-control" name="new_track_duration"  autofocus></div>
-  <div class="col-xs-3">Price: <input type="number" class = "form-control" step="0.01" name="new_track_price" style="text-align:right;" autofocus> $</div>
+  <div class="col-xs-3">Price: <input type="number" class = "form-control" step="0.01" name="new_track_price" style="text-align:right;" autofocus>$</div>
 
   <div class="col-xs-3"><input type="submit" name="add_track" value="Add Track"  class = "btn btn-success"> </div>
 
