@@ -47,7 +47,7 @@
 
 		<div class="container">
 
-			<p> <input id='Submit' name='sendmessage_button' value='Submit' type='button' value='SEND MESSAGE'> </p>
+			<p> <input id='Submit' name='sendmessage_button' value='Submit' type='button' value='Send Message' class="btn btn-default"> </p>
 			
 			<h3> MESSAGES </h3> <br>
 			

@@ -60,7 +60,7 @@
 				?>
 			</p>
 
-			<p> <input id='Submit' name='addplaylist_button'  type='button' value='ADD PLAYLIST'> </p>
+			<p> <input id='Submit' name='addplaylist_button'  type='button' value='Add Playlist' class="btn btn-default"> </p>
 
 			<h3> Your Followed Playlists: </h3> <br>
 			<p>

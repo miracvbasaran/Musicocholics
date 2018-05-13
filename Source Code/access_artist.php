@@ -67,9 +67,9 @@
 </div>
 <div class = "container" align = "right">
   <form method="post" action="">
-       <input id='Submit' name='modify_artist_button' type='Submit' type='button' value='Modify Artist'>
+       <input id='Submit' name='modify_artist_button' type='Submit' class="btn btn-default" value='Modify Artist'>
 
-       <input id='Submit' name='delete_artist_button' type='Submit' type='button' value='Delete Artist'>
+       <input id='Submit' name='delete_artist_button' type='Submit' class="btn btn-default"' value='Delete Artist'>
   </form>
  </div>
 </div>
