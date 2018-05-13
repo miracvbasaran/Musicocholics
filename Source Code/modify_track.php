@@ -149,20 +149,20 @@
     <option value="Live">Live</option>
     <option value="Studio">Studio</option>
   </select> <br>
-  Duration: <input type="text" name="duration" class = "form-control" value= <?php echo "{$duration}"; ?> autofocus><br>
-  Danceability: <input type="text" name="danceability" class = "form-control" value= <?php echo "{$danceability}"; ?> autofocus><br>
-  Acousticness: <input type="text" name="acousticness" class = "form-control" value= <?php echo "{$acousticness}"; ?> autofocus><br>
-  Instrumentalness: <input type="text" name="instrumentalness" class = "form-control" value= <?php echo "{$instrumentalness}"; ?> autofocus><br>
-  Speechness: <input type="text" name="speechness" class = "form-control" value= <?php echo "{$speechness}"; ?> autofocus><br>
-  Balance: <input type="text" name="balance" class = "form-control" value= <?php echo "{$balance}"; ?> autofocus><br>
-  Loudness: <input type="text" name="loudness" class = "form-control" value= <?php echo "{$loudness}"; ?> autofocus><br>
-  Price: <input type="text" name="price" class = "form-control" value= <?php echo "{$price}"; ?> autofocus><br>
-  Date of Addition: <input type="date" name="date_of_addition" class = "form-control" value= <?php echo "{$date_of_addition}"; ?> autofocus><br>
-  Language: <select class = "form-control" name="language">
+  <div class="col-xs-3">Duration: <input type="text" name="duration" class = "form-control" value= <?php echo "{$duration}"; ?> autofocus><br></div>
+  <div class="col-xs-3">Danceability: <input type="text" name="danceability" class = "form-control" value= <?php echo "{$danceability}"; ?> autofocus><br></div>
+  <div class="col-xs-3">Acousticness: <input type="text" name="acousticness" class = "form-control" value= <?php echo "{$acousticness}"; ?> autofocus><br></div>
+  <div class="col-xs-3">Instrumentalness: <input type="text" name="instrumentalness" class = "form-control" value= <?php echo "{$instrumentalness}"; ?> autofocus><br></div>
+  <div class="col-xs-3">Speechness: <input type="text" name="speechness" class = "form-control" value= <?php echo "{$speechness}"; ?> autofocus><br></div>
+  <div class="col-xs-3">Balance: <input type="text" name="balance" class = "form-control" value= <?php echo "{$balance}"; ?> autofocus><br></div>
+  <div class="col-xs-3">Loudness: <input type="text" name="loudness" class = "form-control" value= <?php echo "{$loudness}"; ?> autofocus><br></div>
+  <div class="col-xs-3">Price: <input type="text" name="price" class = "form-control" value= <?php echo "{$price}"; ?> autofocus><br></div>
+  <div class="col-xs-3">Date of Addition: <input type="date" name="date_of_addition" class = "form-control" value= <?php echo "{$date_of_addition}"; ?> autofocus><br></div>
+  <div class="col-xs-3">Language: <select class = "form-control" name="language">
     <option value="Turkish">Turkish</option>
     <option value="English">English</option>
     <option value="German">German</option>
-  </select> <br>
+  </select> <br></div>
   
   <input type="submit" name="apply" value="Apply" class = "btn btn-default" > 
 
