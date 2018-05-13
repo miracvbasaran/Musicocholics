@@ -144,7 +144,7 @@
     <option value="German">German</option>
   </select> <br>
   
-  <input type="submit" name="apply" value="Apply"  > 
+  <input type="submit" name="apply" value="Apply" class = "btn btn-default" > 
 
 </form> 
 

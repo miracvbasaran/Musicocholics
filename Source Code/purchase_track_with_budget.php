@@ -88,7 +88,7 @@
 <h> 
 Purchase <?php echo $track_name; ?> <br> 
 
-Price of <?php echo $track_name echo ": ";  echo $price; ?> <br>
+Price of <?php echo $track_name; echo ": ";  echo $price; ?> <br>
 
 Your budget: $<?php echo $budget; ?> <br>
 

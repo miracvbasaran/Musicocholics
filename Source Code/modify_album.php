@@ -18,11 +18,11 @@
     $result = mysqli_query($db, $query);
     $artist_ids = array();
     while($artist_array = mysqli_fetch_array($result,MYSQLI_ASSOC)){
-        $artist_ids[] = artist_array['artist_id'];
+        $artist_ids[] = $artist_array['artist_id'];
     }
 
     $artist_names = array();
-    for($i = 0; $i < artist_ids.count(); $i++){
+    for($i = 0; $i < count($artist_ids); $i++){
         $a_id = $artist_ids[$i];
         $query = "SELECT artist_name FROM Artist WHERE artist_id = {$a_id}";
         $result = mysqli_query($db, $query);
@@ -30,7 +30,11 @@
         $artist_names[] = $artist_array['artist_name'];
     }
     
-
+    $query = "SELECT * FROM Publisher WHERE publisher_id = {$publisher_id} ";
+    $result = mysqli_query($db, $query);
+    $publisher_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
+    $publisher_name = $publisher_array['publisher_name'];
+    
     if(isset($_POST['apply']))
     {
       if(isset( ($_POST['album_name']) )  ){
@@ -122,9 +126,9 @@
   <div class="container" align = "center"><h3><input type="text" name="album_name" value= <?php echo $album_name ?> autofocus> by 
 
     <?php
-      for ($i=0; $i < $artist_names.count(); $i++) { 
+      for ($i=0; $i < count($artist_names); $i++) { 
         echo $artist_names[$i];
-        if($artist_names.count() != 1 && $i < $artist_names.count() - 1){
+        if(count($artist_names) != 1 && $i < count($artist_names) - 1){
           echo ", ";
         }
       }
@@ -137,7 +141,7 @@
     <option value="Single">Single</option>
   </select>
   <input type="text" name="published_date" value= <?php echo $published_date ?> autofocus>
-  <input type="submit" name="apply" value="Apply"  > 
+  <input type="submit" name="apply" value="Apply"  class = "btn btn-default"> 
 
  </form> 
 <div class="container">
@@ -165,7 +169,7 @@
   ?>
 </table>
 
-<input type="submit" name="delete_tracks" value="Delete"/>
+<input type="submit" name="delete_tracks" value="Delete" class = "btn btn-default">
 </form>
 
 </div>
@@ -177,7 +181,7 @@
   <input type="text" name="new_track_name" value= "Track Name" autofocus>
   <input type="text" name="new_track_price" value= "Price" autofocus>
 
-  <input type="submit" name="add_track" value="Add Track"  > 
+  <input type="submit" name="add_track" value="Add Track"  class = "btn btn-default"> 
 
  </form> 
  </div>

@@ -15,6 +15,26 @@
     $album_type = $album_array['album_type'];
     $published_date = $album_array['publisher_id'];
 
+    $query = "SELECT artist_id FROM Album_Belongs_To_Artist WHERE album_id = {$album_id}";
+    $result = mysqli_query($db, $query);
+    $artist_ids = array();
+    while($artist_array = mysqli_fetch_array($result,MYSQLI_ASSOC)){
+        $artist_ids[] = $artist_array['artist_id'];
+    }
+
+    $artist_names = array();
+    for($i = 0; $i < count($artist_ids); $i++){
+        $a_id = $artist_ids[$i];
+        $query = "SELECT artist_name FROM Artist WHERE artist_id = {$a_id}";
+        $result = mysqli_query($db, $query);
+        $artist_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
+        $artist_names[] = $artist_array['artist_name'];
+    }
+
+    $query = "SELECT * FROM Publisher WHERE publisher_id = {$publisher_id} ";
+    $result = mysqli_query($db, $query);
+    $publisher_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
+    $publisher_name = $publisher_array['publisher_name'];
 
     if(isset($_POST['modify_album_button']))
     {
