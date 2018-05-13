@@ -1,6 +1,9 @@
 <?php 
-//include("session.php");
-include("connection.php");
+include("session.php");
+	$uid = mysqli_real_escape_string($db,$_SESSION['login_id']);
+    $query = "SELECT * FROM user WHERE user_id = '$uid' ";
+    $result = mysqli_query($db, $query);
+    $user_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -90,23 +93,35 @@ include("connection.php");
 							// if( !$fquery){
 		// 						throw new Exception("Database Error: $fquery");
 		// 					}
-							while( $frow = $fquery->fetch_assoc()){ //for each friend
+							if( $fquery == TRUE){
+								while( $frow = $fquery->fetch_assoc()){ //for each friend
 								echo( "<tr><td><a href='nonfriend_profile.php?nonfriend_id=".$frow['person_id']."'>".$frow['person_id']."</a></td></tr><br/>");
+								}
+
 							}
+							
 				
 							//not printing own profile
 							//printing non-friends
-							if( $query['person_id'] != id){
-								$nfquery = mysqli_query( $db, "SELECT * FROM Friendship WHERE user1_id != '$id' AND user2_id != '$id');");
-								while( $nfrow = $nfquery->fetch_assoc()){ //for each friend
-									echo( "<tr><td><a href='nonfriend_profile.php?nonfriend_id=".$nfrow['person_id']."'>".$nfrow['person_id']."</a></td></tr><br/>");
+							while( $row = $query->fetch_assoc()){
+								if( $row['person_id'] != $id){
+									$nfquery = mysqli_query( $db, "SELECT * FROM Friendship WHERE user1_id != '$id' AND user2_id != '$id');");
+									if($nfquery == TRUE){
+										while( $nfrow = $nfquery->fetch_assoc()){ //for each friend
+										echo( "<tr><td><a href='nonfriend_profile.php?nonfriend_id=".$nfrow['person_id']."'>".$nfrow['person_id']."</a></td></tr><br/>");
+										}
+
+									}
+									
 								}
 							}
 				
 							//printing blocked people ?????
 							$bquery = mysqli_query( $db, "SELECT * FROM Blocks WHERE blocked_id = '$id');");
-							while( $brow = $bquery->fetch_assoc()){ //for each friend
-								echo( "<tr><td><a href='blocked_profile.php?blocked_id=".$brow['person_id']."'>".$brow['person_id']."</a></td></tr><br/>");
+							if($bquery == TRUE){
+								while( $brow = $bquery->fetch_assoc()){ //for each friend
+									echo( "<tr><td><a href='blocked_profile.php?blocked_id=".$brow['person_id']."'>".$brow['person_id']."</a></td></tr><br/>");
+								}
 							}
 						}
 					}
