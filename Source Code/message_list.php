@@ -59,7 +59,7 @@
 	    		<th>Message</th> 
 	  		</tr>
 	  		<?php
-	  			$query_message = "SELECT P.person_id, P.fullname, M.message, FROM sends_message M , person P WHERE P.person_id = M.sender_id AND M.receiver_id = {$uid} ORDER BY M.date";
+	  			$query_message = "SELECT P.person_id, P.fullname, M.message FROM sends_message M , person P WHERE P.person_id = M.sender_id AND M.receiver_id = {$uid} ORDER BY M.date";
 	  			$result_message = mysqli_query($db, $query_message);
 	  			while ($row = mysqli_fetch_array($result_message, MYSQLI_NUM)) {
       				$p_id = $row[0];
