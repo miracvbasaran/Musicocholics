@@ -13,7 +13,7 @@
     $album_name = $album_array['album_name'];
     $picture = $album_array['picture'];
     $album_type = $album_array['album_type'];
-    $published_date = $album_array['publisher_id'];
+    $published_date = $album_array['publisher_date'];
 
     $query = "SELECT artist_id FROM Album_Belongs_To_Artist WHERE album_id = {$album_id}";
     $result = mysqli_query($db, $query);
