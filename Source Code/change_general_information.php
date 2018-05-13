@@ -47,7 +47,6 @@
           $resultP = mysqli_query($db,  "UPDATE person SET username = '$username' WHERE person_id = '$uid' ");
 
       }
-
       if(isset( ($_POST['email']) ) )  {
           $email = $_POST['email'];
           $query = "UPDATE user SET email = '$email' WHERE user_id = '$uid' ";
@@ -74,7 +73,7 @@
       }
       echo ' <script type="text/javascript"> alert("Profile information is changed successfully."); </script>';
   
-      header("location: change_general_information.php?");
+      header("Refresh:0");
     }
 
      if(isset($_POST["uploadpic"]))
@@ -135,12 +134,12 @@
  </form>
 
 <form method="post" action="">
-  Fullname: <input type="text" name="fullname" value= <?php echo "\"".$fullname."\""; ?> autofocus><br>
+  Fullname: <input type="text" name="fullname" value= <?php echo "{$fullname}"; ?> autofocus><br>
 
-  Username: <input type="text" name="username" value= <?php echo "\"".$username."\"";?> autofocus><br>
-  E-mail address:   <input type="email" name="email" value= <?php echo "\"".$email."\"";?> autofocus><br>
+  Username: <input type="text" name="username" value= <?php echo "{$username}";?> autofocus><br>
+  E-mail address:   <input type="email" name="email" value= <?php echo "{$email}";?> autofocus><br>
 
-  Birthday: <input type="date" name="birthday" value= <?php echo "\"".$birthday."\"";?>autofocus> <br>
+  Birthday: <input type="date" name="birthday" value= <?php echo "{$birthday}";?> autofocus> <br>
 
   Contry: <select name="country">
     <option value="Turkey">Turkey</option>
