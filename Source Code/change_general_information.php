@@ -11,61 +11,61 @@
     $person_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
 
    
+    $fullname = $person_array['fullname'];
+    $password = $person_array['password'];
+    $user_id = $person_array['person_id'];
+    $email = $person_array['email'];
+    $username = $person_array['username'];
 
-    $user_id = $user_array['user_id'];
     $country = $user_array['country'];
     $language = $user_array['language'];
     $date_of_registration = $user_array['date_of_registration'];
     $birthday = $user_array['birthday'];
     $gender = $user_array['gender'];
     $budget = $user_array['budget'];
-	  $username = $person_array['username'];
-	  $fullname = $person_array['fullname'];
-	  $password = $user_array['password'];
-	  $email = $person_array['email'];
     $picture = $user_array['picture'];
     $membership_type = $user_array['membership_type'];
 
     if(isset( ($_POST['apply']) ) ){
       if(isset( ($_POST['country']) )  ){
           $country = $_POST['country']);
-          $query = "UPDATE user SET country = $country WHERE user_id = '$uid' ";
+          $query = "UPDATE user SET country = '$country' WHERE user_id = '$uid' ";
           $result = mysqli_query($db, $query);
 
       }
       if(isset( ($_POST['fullname']) )  ){
         $fullname = $_POST['fullname']);
-          $query = "UPDATE user SET fullname = $fullname WHERE user_id = '$uid' ";
+          $query = "UPDATE user SET fullname = '$fullname' WHERE user_id = '$uid' ";
           $result = mysqli_query($db, $query);
 
       }
       if(isset( ($_POST['username']) )  ){
           $username = $_POST['username']);
-          $query = "UPDATE user SET username = $username WHERE user_id = '$uid' ";
+          $query = "UPDATE user SET username = '$username' WHERE user_id = '$uid' ";
           $result = mysqli_query($db, $query);
 
       }
 
       if(isset( ($_POST['email']) )  ){
           $email = $_POST['email']);
-          $query = "UPDATE user SET email = $email WHERE user_id = '$uid' ";
+          $query = "UPDATE user SET email = '$email' WHERE user_id = '$uid' ";
           $result = mysqli_query($db, $query);
 
       }
       if(isset( ($_POST['birthday']) )  ){
-          $query = "UPDATE user SET birthday = $birthday WHERE user_id = '$uid' ";
+          $query = "UPDATE user SET birthday = '$birthday' WHERE user_id = '$uid' ";
           $result = mysqli_query($db, $query);
 
       }
       if(isset( ($_POST['language']) )  ){
           $language = $_POST['language']);
-          $query = "UPDATE user SET language = $language WHERE user_id = '$uid' ";
+          $query = "UPDATE user SET language = '$language' WHERE user_id = '$uid' ";
           $result = mysqli_query($db, $query);
 
       }
       if(isset( ($_POST['gender']) )  ){
           $gender = $_POST['gender']);
-          $query = "UPDATE user SET gender = $gender WHERE user_id = '$uid' ";
+          $query = "UPDATE user SET gender = '$gender' WHERE user_id = '$uid' ";
           $result = mysqli_query($db, $query);
 
       }

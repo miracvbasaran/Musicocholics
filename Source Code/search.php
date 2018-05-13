@@ -1,7 +1,6 @@
 <?php 
-include("session.php");
-include("connection.php");
-$uid = mysqli_real_escape_string($db,$_SESSION['login_id']);
+	include("session.php");
+	$uid = mysqli_real_escape_string($db,$_SESSION['login_id']);
 ?>
 
 <!DOCTYPE html>
@@ -97,17 +96,8 @@ $uid = mysqli_real_escape_string($db,$_SESSION['login_id']);
 						//}
 						while( $row = $query->fetch_assoc()){ //printing every user with that user name
 							$id = $row['person_id'];
+							echo( "<tr><td>***ID: ".$id."	</td></tr>"); echo( "<tr><td>UID: ".$uid."</td></tr><br/>");
 							if( $id != $uid){
-								
-								// //printing friends
-// 								$fquery = mysqli_query( $db, "SELECT * FROM Friendship WHERE (user1_id = '$uid' AND user2_id = '$id');");
-// 								while( $frow = $fquery->fetch_assoc()){ //for each friend
-// 									echo( "<tr><td><a href='friend_profile.php?friend_id=".$id."'>".$row['fullname']."</a></td></tr><br/>");
-// 								}
-// 								$fquery = mysqli_query( $db, "SELECT * FROM Friendship WHERE (user2_id = '$uid' AND user1_id = '$id');");
-// 								while( $frow = $fquery->fetch_assoc()){ //for each friend
-// 									echo( "<tr><td><a href='friend_profile.php?friend_id=".$id."'>".$row['fullname']."</a></td></tr><br/>");
-// 								}
 								
 								// //printing non-friends
 // 								$nfquery = mysqli_query( $db, "SELECT * FROM Friendship WHERE (user1_id = '$uid' OR user2_id = '$id') AND (user1_id = '$id' OR user2_id = '$uid');");
@@ -115,15 +105,11 @@ $uid = mysqli_real_escape_string($db,$_SESSION['login_id']);
 // 									echo( "<tr><td><a href='nonfriend_profile.php?nonfriend_id=".$id."'>".$row['fullname']."</a></td></tr><br/>");
 // 								}
 								
-								
-								
 								//printing friends
-								$fquery = mysqli_query( $db, "SELECT * FROM Friendship WHERE (user1_id = '$uid' OR user2_id = '$uid') AND (user1_id = '$uid' OR user2_id = '$uid');");
-								// if( !$fquery){
-			// 						throw new Exception("Database Error: $fquery");
-			// 					}
+								$fquery = mysqli_query( $db, "SELECT * FROM Friendship WHERE (user1_id = '$uid' OR user2_id = '$uid') AND (user1_id = '$id' OR user2_id = '$id');");
 								while( $frow = $fquery->fetch_assoc()){ //for each friend
-									echo( "<tr><td><a href='friend_profile.php?friend_id=".$id."'>".$row['fullname']."</a></td></tr><br/>");
+									echo( "<tr><td>Friend: <a href='friend_profile.php?friend_id=".$id."'>".$row['fullname']."</a></td></tr><br/>");
+									echo( "<tr><td>**ID: ".$id."	</td></tr>"); echo( "<tr><td>UID: ".$uid."</td></tr><br/>");
 								}
 				
 								//not printing own profile
@@ -131,6 +117,7 @@ $uid = mysqli_real_escape_string($db,$_SESSION['login_id']);
 								$nfquery = mysqli_query( $db, "SELECT * FROM Friendship WHERE user1_id != '$id' AND user2_id != '$id';");
 								while( $nfrow = $nfquery->fetch_assoc()){ //for each friend
 										echo( "<tr><td><a href='nonfriend_profile.php?nonfriend_id=".$id."'>".$row['fullname']."</a></td></tr><br/>");
+										echo( "<tr><td>*ID: ".$id."	</td></tr>"); echo( "<tr><td>UID: ".$uid."</td></tr><br/>");
 }
 							}
 							
