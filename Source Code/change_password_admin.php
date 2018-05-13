@@ -82,7 +82,7 @@
           <li><a href="add_publisher.php">Add Publisher</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="change_password.php"><span class="glyphicon glyphicon-user"></span> Change Password</a></li>
+      <li><a href="change_password_admin.php"><span class="glyphicon glyphicon-user"></span> Change Password</a></li>
       <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
     </ul>
   </div>
