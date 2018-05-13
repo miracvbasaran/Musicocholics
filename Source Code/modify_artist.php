@@ -118,9 +118,9 @@
  </form>
 
 <form method="post" action=""><div class="container" align = "center">
-  <div class="col-xs-4"><h3><input type="text" name="name" value= <?php echo "'".$artist_name."'"; ?> autofocus></h3>
+  <div class="col-xs-4"><h3><input type="text" class = "form-control" name="name" value= <?php echo "'".$artist_name."'"; ?> autofocus></h3>
   <br></div>
-  <div class="col-xs-4"><input type="text" name="description" value= <?php echo "".$description."'"; ?> autofocus> <br></div>
+  <div class="col-xs-4"><input type="text" class = "form-control" name="description" value= <?php echo "'".$description."'"; ?> autofocus> <br></div>
   <div class="col-xs-4"><input type="submit" name="apply" value="Apply"  class = "btn btn-success"> </div>
 </div>
  </form> 
@@ -161,16 +161,16 @@
 
 <form method="post" action="">
   <h3>Add Album</h3>
-  <div class="col-xs-3"><input type="text" name="new_album_name" value = "Album Name" autofocus></div>
-  <div class="col-xs-3"><input type = "text" name"new_album_publisher" value = "Publisher Name" autofocus></div>
-  <select name="new_album_type">
+  <div class="col-xs-3"><input class = "form-control" type="text" name="new_album_name" value = "Album Name" autofocus></div>
+  <div class="col-xs-3"><input class = "form-control" type = "text" name"new_album_publisher" value = "Publisher Name" autofocus></div>
+   <div class="col-xs-3"><select class = "form-control" name="new_album_type">
     <option value="Album">Album</option>
     <option value="Single">Single</option>
   </select></div>
-  <div class="col-xs-3"><input type="date" name="new_album_publish_date" autofocus></div>
+  <div class="col-xs-3"><input type="date" class = "form-control" name="new_album_publish_date" autofocus></div>
   
 
-  <input type="submit" name="apply" value="Add Album" class = "btn btn-success" > 
+  <input type="submit" name="add_album" value="Add Album" class = "btn btn-success" > 
 
  </form> 
  </div>

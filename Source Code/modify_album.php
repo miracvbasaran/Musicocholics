@@ -126,7 +126,7 @@
  </form>
 
 <form method="post" action="">
-  <div class="container" align = "center"><h3><input type="text" name="album_name" value= <?php echo $album_name; ?> autofocus> by 
+  <div class="container" align = "center"><h3><input type="text" class = "form-control" name="album_name" value= <?php echo $album_name; ?> autofocus> by 
 
 <?php
       for ($i=0; $i < count($artist_names); $i++) { 
@@ -140,11 +140,11 @@
 </h3></div>
   <br><div align = "center">
   <div class="col-xs-3">Album Type: 
-  <select name="album_type">
+  <select class = "form-control" name="album_type">
     <option value="Album">Album</option>
     <option value="Single">Single</option>
   </select></div>
- <div class="col-xs-3">Date: <input type="date" name="published_date" value= <?php echo $published_date ?> autofocus></div>
+ <div class="col-xs-3">Date: <input type="date" class = "form-control" name="published_date" value= <?php echo $published_date ?> autofocus></div>
   <input type="submit" name="apply" value="Apply"  class = "btn btn-success"> </div>
 
  </form> 
@@ -167,7 +167,7 @@
       echo "<td>" . $row[0] . "</td>";
       echo "<td>" . $row[1] . "</td>";
       echo "<td>" . $row[2] . "</td>";
-      echo "<td> <input type = \"checkbox\" name = \"check_list[]\" value = \"{$t_id}\"></td>";
+      echo "<td> <input class = \"form-control\" type = \"checkbox\" name = \"check_list[]\" value = \"{$t_id}\"></td>";
       echo "</tr>";
   }
   ?>
@@ -182,9 +182,9 @@
 
 <form method="post" action="">
   <h3>Add Track</h3>
-  <div class="col-xs-3">Track Name: <input type="text" name="new_track_name"  autofocus></div>
-  <div class="col-xs-3">Duration: <input type="time" name="new_track_duration"  autofocus></div>
-  <div class="col-xs-3">Price: <input type="number" step="0.01" name="new_track_price" style="text-align:right;" autofocus> $</div>
+  <div class="col-xs-3">Track Name: <input type="text" class = "form-control" name="new_track_name"  autofocus></div>
+  <div class="col-xs-3">Duration: <input type="time" class = "form-control" name="new_track_duration"  autofocus></div>
+  <div class="col-xs-3">Price: <input type="number" class = "form-control" step="0.01" name="new_track_price" style="text-align:right;" autofocus> $</div>
 
   <div class="col-xs-3"><input type="submit" name="add_track" value="Add Track"  class = "btn btn-success"> </div>
 
