@@ -133,12 +133,17 @@
  </form>
 
 <form method="post" action="">
-  Fullname: <input type="text" name="fullname" value= <?php echo "{$fullname}"; ?> autofocus><br>
+  Fullname: <input type="text" name="fullname" value= <?php echo "{$fullname}"; ?> autofocus>
+  <br><br>
 
-  Username: <input type="text" name="username" value= <?php echo "{$username}";?> autofocus><br>
-  E-mail address:   <input type="email" name="email" value= <?php echo "{$email}";?> autofocus><br>
+  Username: <input type="text" name="username" value= <?php echo "{$username}";?> autofocus>
+  <br><br>
+  
+  E-mail address:   <input type="email" name="email" value= <?php echo "{$email}";?> autofocus>
+  <br><br>
 
-  Birthday: <input type="date" name="birthday" value= <?php echo "{$birthday}";?> autofocus> <br>
+  Birthday: <input type="date" name="birthday" value= <?php echo "{$birthday}";?> autofocus> 
+  <br><br>
 
   Contry: <select name="country">
     <option value="Turkey">Turkey</option>
@@ -159,23 +164,26 @@
     <option value="Male">Male</option>
   </select> <br>
 
-  <input type="submit" name="apply" value="APPLY" > 
+  Membership Type : <?php echo $membership_type; ?>
+  <br><br>
+
+  Current Budger : <?php echo $budget; ?>
+  <br><br>
+  <input type="submit" class="btn btn-success" name="apply" value="APPLY" > 
 
 </form> 
 
 <div class="container">
     <br> <br>
 
-     CHANGE PACKET WITH <a href="purchase_packet_with_budget.php" class="btn btn-success" role="button">BUDGET</a>
-     OR 
-     <a href="purchase_packet_with_creditcard.php" class="btn btn-success" role="button">CREDIT CARD</a>
-    <br>
+      <a href="purchase_packet_with_budget.php" class="btn btn-success" role="button">CHANGE PACKET</a>
+     <br><br>
 
-    UPLOAD MONEY TO <a href="add_budget.php" class="btn btn-success" role="button">BUDGET</a>
+      <a href="add_budget.php" class="btn btn-success" role="button"> UPLOAD MONEY TO BUDGET</a>
+      <br><br>
 
-
-    PASSWORD: <a href="change_password.php" class="btn btn-success" role="button">CHANGE</a>
-    <br>
+      <a href="change_password.php" class="btn btn-success" role="button">PASSWORD CHANGE</a>
+      <br><br>
 
 </div>
 
