@@ -6,7 +6,7 @@
     $user_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
 
-    $album_id = $_POST['album_id'];
+    $album_id = $_GET['album_id'];
     $query2 = "SELECT * FROM Album WHERE album_id = '$album_id' ";
     $result2 = mysqli_query($db, $query2);
     $album_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
@@ -33,7 +33,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Musicholics - View Album</title>
+  <title>Musicholics - Access Album</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -67,18 +67,26 @@
 </div> 
 <div class = "container">
 <div class="container" align = "left">
-  <h3>Album <?php echo $album_name;?></h3> by Artist <?php
-   $query_art = "SELECT Max(artist_name) as artist_name FROM Artist WHERE artist_id IN (SELECT artist_id FROM Album_Belongs_To_Artist A WHERE album_id = '$album_id')";
-   $result_art = mysqli_query($db, $query_art);
-   $artist_array = mysqli_fetch_array($result_art,MYSQLI_ASSOC);
-   $artist_name = $artist_array['artist_name'];
-   echo $artist_name;?>
+  <h3>Album <?php echo $album_name;?></h3> by Artist 
+  <?php
+      for ($i=0; $i < count($artist_names); $i++) { 
+        $art_id = $artist_ids[$i];
+        echo "<a href = \"<view_artist.ph?artist_id = {$art_id}\">" . $artist_names[$i] . "</a>";
+        if(count($artist_names) != 1 && $i < count($artist_names) - 1){
+          echo ", ";
+        }
+      }
+    ?>
+   <br>
+   <h2>
+    From Publisher <?php echo "<a href = \"view_publisher.php?publisher_id = {$publisher_id}\"> {$publisher_name}</a>"; ?>
+   </h2>
 </div>
 <div class "container" align = "right">
   <form method="post" action="">
-       <input id='Submit' name='modify_album_button' type='Submit' type='button' value='Modify Album'>
+       <input id='Submit' name='modify_album_button' type='Submit' type='button' value='Modify Album' class="btn btn-default">
 
-       <input id='Submit' name='delete_album_button' type='Submit' type='button' value='Delete Album'>
+       <input id='Submit' name='delete_album_button' type='Submit' type='button' value='Delete Album' class="btn btn-default">
   </form>
 </div>
 </div>
