@@ -92,21 +92,21 @@
     </ul>
   </div>
 </nav>
+<div class="container" align="center">
+<h3> 
+<small> Purchase </small> <?php echo $track_name; ?> <br> <br> <br> 
 
-<h> 
-Purchase <?php echo $track_name; ?> <br> 
+Price of <?php echo $track_name; echo ": $ ";  echo $price; ?> <br><br> <br> 
 
-Price of <?php echo $track_name; echo ": ";  echo $price; ?> <br>
+Your budget: $<?php echo $budget; ?> <br><br> <br> 
 
-Your budget: $<?php echo $budget; ?> <br>
-
-</h>
+</h3>
 
 <form method="post" action="">
-  <input type="submit" name="purchase" value="Purchase"  class = "btn btn-success"> 
-  <input type="submit" name=cancel value= "Cancel" class = "btn btn-danger">
+  <input type="submit" style="height:35px;font-size:12pt;" name="purchase" value="Purchase"  class = "btn btn-success"> 
+  <input type="submit" style="height:35px;font-size:12pt;" name=cancel value= "Cancel" class = "btn btn-danger">
 </form> 
-
+</div>
 <style>
 .footer {
    position: fixed;
