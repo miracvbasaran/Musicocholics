@@ -30,7 +30,7 @@
     if(isset( ($_POST['purchase']) ) ){
         $query = "SELECT * FROM buys WHERE user_id = {$user_id} AND track_id = {$track_id}";
         $result = mysqli_query($db, $query);
-        if($result === FALSE){
+        if(mysqli_num_rows($result) === 0){
           if($budget >= $price){
 
           $newbudget = $budget-$price;
@@ -43,7 +43,7 @@
 
           echo "<script type=\"text/javascript\"> alert(\"You purchased {$track_name} successfully.\"); </script>";
 
-          header("location: view_tracks.php");
+          //header("location: view_tracks.php");
         }
           else{
           echo " <script type=\"text/javascript\"> alert(\"Your budget is not sufficient.\"); </script>";
@@ -57,7 +57,7 @@
     }
         
     if( isset( ($_POST['cancel']) )){
-      header("Location: " . $_SERVER['HTTP_REFERER']);
+      header("Location: view_track.php?track_id={$track_id}");
     }
 
 ?>
@@ -104,7 +104,7 @@ Your budget: $<?php echo $budget; ?> <br>
 
 <form method="post" action="">
   <input type="submit" name="purchase" value="Purchase"  class = "btn btn-success"> 
-  <input type="reset" name=cancel value= "Cancel" class = "btn btn-danger">
+  <input type="submit" name=cancel value= "Cancel" class = "btn btn-danger">
 </form> 
 
 <style>

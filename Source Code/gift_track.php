@@ -10,7 +10,7 @@
     $budget = $user_array['budget'];
 
 
-    $track_id = mysqli_real_escape_string($db,$_POST['track_id']);
+    $track_id = mysqli_real_escape_string($db,$_GET['track_id']);
     $query3 = "SELECT * FROM track WHERE track_id = '$track_id' ";
     $result3 = mysqli_query($db, $query3);
     $track_array = mysqli_fetch_array($result3,MYSQLI_ASSOC);
@@ -26,29 +26,37 @@
           if(isset( ($_POST['giftname']) ) ){
 
             $giftedname = ($_POST['giftname']) ;
-            $query = "SELECT $user_id FROM user WHERE username = '$giftedname' ) ";
+            $query = "SELECT * FROM Person WHERE username = '$giftedname' ";
             $result = mysqli_query($db, $query);
-            $gifted_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
 
-            $gifted_id = $gifted_array['user_id'];
+            if(mysqli_num_rows($result) > 0){
+                $gifted_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
-            if(mysql_num_rows($result) > 0){
-                $query = " INSERT INTO gift VALUES('$uid', '$gifted_id', '$track_id' )";
+                $gifted_id = $gifted_array['person_id'];
+                //Check if gifted_user has the track
+                $query = "SELECT * FROM Buys WHERE user_id = {$gifted_id} AND track_id = {$track_id} ";
                 $result = mysqli_query($db, $query);
+                if(mysqli_num_rows($result) === 0){
+                  $query = " INSERT INTO gift VALUES('$uid', '$gifted_id', '$track_id' )";
+                  $result = mysqli_query($db, $query);
 
-                $newbudget = $budget-$price;
-              
-                $query = "UPDATE user SET budget = '$newbudget' WHERE user_id = '$uid' ";
-                $result = mysqli_query($db, $query);
+                  $newbudget = $budget-$price;
 
-                $query = "INSERT INTO buys VALUES('$gifted_id', '$track_id' )";
-                $result = mysqli_query($db, $query);
-                $user_exist = 1;
+                  $query = "UPDATE user SET budget = '$newbudget' WHERE user_id = '$uid' ";
+                  $result = mysqli_query($db, $query);
 
-                echo ' <script type="text/javascript"> alert("You purchased {$track_name} as a gift successfully!"); </script>';
+                  $query = "INSERT INTO buys VALUES({$gifted_id}, {$track_id})";
+                  $result = mysqli_query($db, $query);
+                  if($result){
+                    echo ' <script type="text/javascript"> alert("You purchased the track as a gift successfully!"); </script>';
+                  }
+                }
+                else{
+                  echo ' <script type="text/javascript"> alert("He already has this track!"); </script>';
+                }
                 
-                header("location: search_result_screen.php?");
+                //header("Location: view_track.php?track_id=".$track_id);
 
             }
             else{
@@ -70,7 +78,7 @@
     }
         
     if( isset( ($_POST['cancel']) )){
-      header("location: search_result_screen.php?");
+      header("Location: view_track.php?track_id=".$track_id);
     }
 
 ?>
@@ -118,9 +126,9 @@ Your budget: $<?php echo $budget; ?> <br>
 <form method="post" action="">
    
   Name of the user that you purchase a gift: <br>
-  <input type="text" name="giftname"  autofocus><br>
-  <input type="submit" name="purchase" value="PURCHASE"  > 
-  <input type="reset" name=cancel value= "CANCEL">
+ <input type="text" name="giftname"  autofocus><br>
+  <input type="submit" name="purchase" class = "btn btn-success"value="Purchase"  > 
+  <input type="submit" class = "btn btn-danger" name = "cancel" value= "Cancel">
 </form> 
 
 <style>

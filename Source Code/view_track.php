@@ -57,7 +57,6 @@
         $result = mysqli_query($db, $query);
         $result_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
         $num_listens = $result_array['num_listens'];
-        echo $num_listens;
         $query = "SELECT * FROM Buys WHERE user_id = {$uid} AND track_id = {$track_id};";
         $result = mysqli_query($db, $query);
 
@@ -73,7 +72,6 @@
       }
       if($flag){
         $query4 = "INSERT INTO Listens VALUES({$uid}, {$track_id}, '$insertion_date');";
-        echo $query4;
         $result4 = mysqli_query($db, $query4);
       }
       else{
