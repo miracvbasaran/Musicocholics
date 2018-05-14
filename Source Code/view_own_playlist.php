@@ -18,8 +18,6 @@
     $avg_rate = $rates_array['avg_rate'];
 
     if(isset($_POST['delete_playlist'])) {
-    	$queryD1 = "DELETE FROM playlist WHERE playlist_id = {$playlist_id} ";
-    	$resultD1 = mysqli_query($db, $queryD1);
     	$queryD2 = "DELETE FROM added WHERE playlist_id = {$playlist_id} ";
     	$resultD2 = mysqli_query($db, $queryD2);
     	$queryD3 = "DELETE FROM follows WHERE playlist_id = {$playlist_id} ";
@@ -30,7 +28,44 @@
     	$resultD5 = mysqli_query($db, $queryD5);
     	$queryD6 = "DELETE FROM collaborates WHERE playlist_id = {$playlist_id} ";
     	$resultD6 = mysqli_query($db, $queryD6);
+    	$queryD1 = "DELETE FROM playlist WHERE playlist_id = {$playlist_id} ";
+    	$resultD1 = mysqli_query($db, $queryD1);
     	header("location: view_playlists.php");
+    }
+    if(isset($_POST['listen_playlist'])) {
+    	$added_query = "SELECT * FROM added WHERE playlist_id = {$playlist_id}";
+    	$added_result = mysqli_query($db, $added_query);
+	  	while ($row = mysqli_fetch_array($added_result, MYSQLI_ASSOC)) {
+      		$t_id = $row['track_id'];
+		    $insertion_date = date("Y-m-d H:i:s");
+		    $flag = TRUE;
+		    if($membership_type === "normal") {
+		    	$query = "SELECT count(*) AS num_listens FROM Listens WHERE track_id NOT IN (SELECT track_id FROM Buys WHERE user_id = {$uid}) AND user_id = {$uid} AND date_format(date, '%Y-%m-%d') = '" . date('Y-m-d') ."'";
+		        $result = mysqli_query($db, $query);
+		        $result_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
+		        $num_listens = $result_array['num_listens'];
+		        echo $num_listens;
+		        $query = "SELECT * FROM Buys WHERE user_id = {$uid} AND track_id = {$t_id};";
+		        $result = mysqli_query($db, $query);
+		        if(mysqli_num_rows($result) != 0){
+		        	$flag = TRUE;
+		        }
+		        else if($num_listens > 5){
+		        	$flag = FALSE;
+		        }
+		        else{
+		        	$flag = TRUE;
+		        }
+		    }
+		    if($flag) {
+		        $query4 = "INSERT INTO Listens VALUES({$uid}, {$t_id}, '$insertion_date');";
+		        echo $query4;
+		        $result4 = mysqli_query($db, $query4);
+		    }
+		    else {
+		        echo " <script type=\"text/javascript\"> alert(\"PARA BİRİKTİR DE PREMIUM AL!.\"); </script>";
+		    }
+     	}
     }
 
 ?>
@@ -77,6 +112,7 @@
 		<p>
 			<form method="post" action="">
 				<input id='Submit' name='delete_playlist' type='Submit' value='Delete Playlist' class="btn btn-default">
+				<input id='Submit' name='listen_playlist' type='Submit' value='Listen Playlist' class="btn btn-default">
 			</form>
 		</p>
 	</div>
