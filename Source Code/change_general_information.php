@@ -78,6 +78,7 @@
 
      if(isset($_POST["uploadpic"]))
     {
+
         $name = $_FILES['photo']['name']; 
         $ext = pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION);
         $uploadfile = $dir . $uid . '.' . $ext;
@@ -132,9 +133,10 @@
 
 <div class="container" align="center">
 
-  <form action="" method="post" enctype="multipart/form-data">
-    <input class="btn btn-primary btn-sm" type="file" name="photo" id="photo" accept="image/*"> <button class="btn btn-success btn-sm" type="submit" name="uploadpic">Update Photo</button>
- </form>
+ <form method="POST" action="getdata.php" enctype="multipart/form-data">
+ <input type="file" name="photo">
+ <input type="submit" name="uploadpic" value="Upload">
+</form>
  <br><br><br><br>
 
 <form method="post" action="">
