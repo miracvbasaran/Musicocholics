@@ -78,7 +78,7 @@
 
      if(isset($_POST["uploadpic"]))
     {
-        $name       = $_FILES['photo']['name']; 
+        $name = $_FILES['photo']['name']; 
         $ext = pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION);
         $uploadfile = $dir . $uid . '.' . $ext;
         $filename = $login_id . '.' . $ext;
@@ -98,7 +98,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Musicholics - My Profile</title>
+  <title>Musicholics - Profile Settings</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -126,66 +126,82 @@
   </div>
 </nav>
 
-<div align="left" class="col-md-6 col-md-offset-3"><img class="img-circle img-responsive" src="assets/img/ <?php echo $picture; ?>" width="200" height="200"></div>
+<div class="container">
 
-<form action="" method="post" enctype="multipart/form-data">
-    <input class="btn btn-primary btn-sm" type="file" name="photo" id="photo" accept="image/*"> <button class="btn btn-success btn-sm" type="submit" name="uploadpic">Update</button>
+<div align="center" class="container"><img class="img-circle img-responsive" src="assets/img/ <?php echo $picture; ?>" width="200" height="200"></div>
+
+<div class="container" align="center">
+
+  <form action="" method="post" enctype="multipart/form-data">
+    <input class="btn btn-primary btn-sm" type="file" name="photo" id="photo" accept="image/*"> <button class="btn btn-success btn-sm" type="submit" name="uploadpic">Update Photo</button>
  </form>
+ <br><br><br><br>
 
 <form method="post" action="">
-  Fullname: <input type="text" name="fullname" value= <?php echo "{$fullname}"; ?> autofocus>
+  Fullname: <input style="height:25px;font-size:12pt;" type="text" name="fullname" value= <?php echo "{$fullname}"; ?> autofocus>
   <br><br>
 
-  Username: <input type="text" name="username" value= <?php echo "{$username}";?> autofocus>
+  Username: <input  style="height:25px;font-size:12pt;" type="text" name="username" value= <?php echo "{$username}";?> autofocus>
   <br><br>
   
-  E-mail address:   <input type="email" name="email" value= <?php echo "{$email}";?> autofocus>
+  E-mail address:  <input style="height:25px;font-size:12pt;width:340px" type="email" name="email" value= <?php echo "{$email}";?> autofocus>
   <br><br>
 
-  Birthday: <input type="date" name="birthday" value= <?php echo "{$birthday}";?> autofocus> 
+  Birthday: <input style="height:25px;font-size:12pt;" type="date" name="birthday" value= <?php echo "{$birthday}";?> autofocus> 
   <br><br>
+<div style="height:25px;font-size:12pt;" >
+      Contry: <select name="country" >
+        <option value="Turkey">Turkey</option>
+        <option value="USA">USA</option>
+        <option value="England">England</option>
+        <option value="Germany">Germany</option>
+      </select> <br><br>
 
-  Contry: <select name="country">
-    <option value="Turkey">Turkey</option>
-    <option value="USA">USA</option>
-    <option value="England">England</option>
-    <option value="Germany">Germany</option>
-  </select> <br>
+      Language: <select name="language"  >
+        <option value="Turkish">Turkish</option>
+        <option value="English">English</option>
+        <option value="German">German</option>
+        
+      </select> <br><br>
 
-  Language: <select name="language">
-    <option value="Turkish">Turkish</option>
-    <option value="English">English</option>
-    <option value="German">German</option>
-    
-  </select> <br>
+      Gender: <select name="gender"  >
+        <option value="Female">Female</option>
+        <option value="Male">Male</option>
+      </select> <br><br>
 
-  Gender: <select name="gender">
-    <option value="Female">Female</option>
-    <option value="Male">Male</option>
-  </select> <br>
+      Membership Type : <?php echo $membership_type; ?>
+      <br><br>
 
-  Membership Type : <?php echo $membership_type; ?>
+      Current Budget : <?php echo $budget; ?>
+
+  
   <br><br>
+    <input  style="height:25px;font-size:12pt;" type="submit" class="btn btn-success" name="apply" value="APPLY" > 
 
-  Current Budger : <?php echo $budget; ?>
-  <br><br>
-  <input type="submit" class="btn btn-success" name="apply" value="APPLY" > 
-
-</form> 
-
-<div class="container">
+    <div class="container" align="right" style="height:25px;font-size:12pt;">
     <br> <br>
 
-      <a href="purchase_packet_with_budget.php" class="btn btn-success" role="button">CHANGE PACKET</a>
-     <br><br>
+      <a href="purchase_packet_with_budget.php" class="btn btn-info" role="button">CHANGE PACKET</a>
+     
 
-      <a href="add_budget.php" class="btn btn-success" role="button"> UPLOAD MONEY TO BUDGET</a>
-      <br><br>
+      <a href="add_budget.php" class="btn btn-info" role="button"> UPLOAD MONEY TO BUDGET</a>
 
-      <a href="change_password.php" class="btn btn-success" role="button">PASSWORD CHANGE</a>
-      <br><br>
+
+      <a href="change_password.php" class="btn btn-info" role="button">PASSWORD CHANGE</a>
+      <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
 </div>
+    </div>
+<br><br>
+
+</form>
+
+ 
+</div>
+</div>
+
+
+
 <style>
 .footer {
    position: fixed;
