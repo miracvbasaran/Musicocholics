@@ -57,10 +57,11 @@
         $result = mysqli_query($db, $query);
         $result_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
         $num_listens = $result_array['num_listens'];
-        $query = "SELECT count(*) FROM Buys WHERE user_id = {$uid} AND track_id = {$track_id};";
+        echo $num_listens;
+        $query = "SELECT * FROM Buys WHERE user_id = {$uid} AND track_id = {$track_id};";
         $result = mysqli_query($db, $query);
 
-        if($result){
+        if(mysqli_num_rows($result) != 0){
           $flag = TRUE;
         }
         else if($num_listens > 5){

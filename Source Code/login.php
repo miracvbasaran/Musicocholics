@@ -26,7 +26,7 @@ session_start();
 					Sign In<br/><br/><br/><br/>
 				</font>
 				<input type = "text" name = "name" placeholder = "Username" >	<br/><br/>
-				<input type = "text" name = "pass" placeholder = "Password"> <br/><br/>
+				<input type = "password" name = "pass" placeholder = "Password"> <br/><br/>
 				<input id = "" value = "Login" name = "login" type = "submit"> </button>
 			</form>
 		</div>
