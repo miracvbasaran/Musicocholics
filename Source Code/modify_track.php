@@ -162,9 +162,9 @@
   <div class="col-xs-3">Price: <input type="text" name="price" class = "form-control" value= <?php echo "{$price}"; ?> autofocus><br></div>
   <div class="col-xs-3">Date of Addition: <input type="date" name="date_of_addition" class = "form-control" value= <?php echo "{$date_of_addition}"; ?> autofocus><br></div>
   <div class="col-xs-3">Language: <select class = "form-control" name="language">
-    <option <?php if(strcasecmp("Turkish", $album_type) === 0){ echo "selected = "."\"selected\"";} ?> value="Turkish">Turkish</option>
-    <option <?php if(strcasecmp("English", $album_type) === 0){ echo "selected = "."\"selected\"";} ?> value="English">English</option>
-    <option <?php if(strcasecmp("German", $album_type) === 0){ echo "selected = "."\"selected\"";} ?> value="German">German</option>
+    <option <?php if(strcasecmp("Turkish", $language) === 0){ echo "selected = "."\"selected\"";} ?> value="Turkish">Turkish</option>
+    <option <?php if(strcasecmp("English", $language) === 0){ echo "selected = "."\"selected\"";} ?> value="English">English</option>
+    <option <?php if(strcasecmp("German", $language) === 0){ echo "selected = "."\"selected\"";} ?> value="German">German</option>
   </select> <br></div>
   
   <div class="container" align = "right"><input type="submit" name="apply" value="Apply" class = "btn btn-success"> </div>
