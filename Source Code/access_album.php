@@ -1,9 +1,9 @@
 <?php
 	include("session.php");
     $uid = mysqli_real_escape_string($db,$_SESSION['login_id']);
-    $query = "SELECT * FROM Admin WHERE user_id = '$uid' ";
-    $result = mysqli_query($db, $query);
-    $user_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
+    //$query = "SELECT * FROM Admim WHERE admin_id = '$uid' ";
+    //$result = mysqli_query($db, $query);
+    //$user_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
 
     $album_id = $_GET['album_id'];
