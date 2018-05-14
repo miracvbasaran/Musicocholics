@@ -38,8 +38,12 @@ error_reporting(0);
     </ul>
   </div>
 </nav>
-		
-		
+		<div class="container">
+    <table class = "table table-hover" style="width:60%">
+		<tr>
+          <th>Username</th>
+          <th>Fullname</th>
+        </tr>
 		<?php
 		$query = mysqli_query( $db, "SELECT * FROM Person, User, Friendship WHERE user_id = person_id
 																			AND ((user1_id = '$uid' AND user2_id = user_id)
@@ -49,15 +53,24 @@ error_reporting(0);
 				$fid = $row[user1_id];
 			else 
 				$fid = $row[user2_id];
-			 
-			echo( "<tr><td><a href='friend_profile.php?other_id=".$fid."'>".$row['username']."</a></td></tr><br><br/>");
+
+      $query_p = mysqli_query( $db, "SELECT fullname FROM Person WHERE '$fid' = person_id;");
+      $row_big = $query_p->fetch_assoc();
+			
+      echo "<tr onclick = \"document.location = 'friend_profile.php?other_id={$fid}' \">";
+                echo "<td>" . $row['username'] . "</td>";
+                echo "<td>" . $row_big['fullname'] . "</td>";
+      echo "</tr>" ;
+
+			//echo( "<tr><td><a href='friend_profile.php?other_id=".$fid."'>".$row['username']."</a></td></tr><br><br/>");
 			
 		}
 		
 		
 		?>
 		
-	</nav>
+	 </table>
+  </div>
 
 <style>
 .footer {
