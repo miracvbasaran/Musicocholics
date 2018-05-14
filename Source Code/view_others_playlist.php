@@ -35,6 +35,30 @@
     		$query7 = "INSERT INTO Comments(user_id, playlist_id, comment, date) VALUES({$uid}, {$playlist_id}, '$text_comment', '$date')";
           	$result7 = mysqli_query($db, $query7);
 		}
+		else {
+			echo " <script type=\"text/javascript\"> alert(\"Comment is not entered.\"); </script>";
+		}
+    }
+
+    if(isset($_POST['rate_button'])) {
+    	if(isset($_POST['rate_choice'])) {
+    		$my_rate = $_POST['rate_choice'];
+    		$query8 = "SELECT COUNT(*) as cnt_rate FROM Rates WHERE user_id = {$uid} AND playlist_id = {$playlist_id}";
+    		$result8 = mysqli_query($db, $query8);
+    		$r_rates_array =  mysqli_fetch_array($result8, MYSQLI_ASSOC);
+    		$cnt_rates = $r_rates_array['cnt_rate'];
+    		if( $cnt_rates == 0 ) {
+    			$query88 = "INSERT INTO Rates(user_id, playlist_id, rate) VALUES({$uid}, {$playlist_id}, {$my_rate})";
+          		$result88 = mysqli_query($db, $query88);
+				header("Refresh:0");
+    		}
+    		else {
+    			echo " <script type=\"text/javascript\"> alert(\"Already rated.\"); </script>";
+    		}
+    	}
+    	else {
+    		echo " <script type=\"text/javascript\"> alert(\"Rate is not entered.\"); </script>";
+    	}
     }
 
 ?>
@@ -84,6 +108,19 @@
 			</form>
 		</p>
 	</div>
+
+	<form method="post" action="">
+		<div class="col-xs-3">Rate:
+			<select class = "form-control" name="rate_choice">
+	    		<option value="1">1</option>
+	    		<option value="2">2</option>
+	    		<option value="3">3</option>
+	    		<option value="4">4</option>
+	    		<option value="5">5</option>
+	  		</select> <br>
+	  	</div>
+	  	<div class="container" align = "right"><input type="submit" name="rate_button" value="Rate" class="btn btn-success"> </div>
+	</form>
 
 	<div class="container">
 		<table class = "table table-hover" style="width:100%">
