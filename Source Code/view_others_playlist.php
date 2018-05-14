@@ -33,7 +33,7 @@
     		$text_comment = $_POST['text_comment'];
     		$date = date('Y-m-d G:i:s');
     		$query7 = "INSERT INTO Comments(user_id, playlist_id, comment, date) VALUES({$uid}, {$playlist_id}, '$text_comment', '$date')";
-          	$result7 = mysqli_query($db, $query2);
+          	$result7 = mysqli_query($db, $query7);
 		}
     }
 
