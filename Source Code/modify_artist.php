@@ -56,13 +56,17 @@
       if($result){
         $index_array = mysqli_fetch_array($result, MYSQLI_ASSOC);
         $publisher_id = $index_array['publisher_id'];
-        $query = "INSERT INTO Album(album_name, album_type, published_date, publisher_id, artist_id) VALUES('{$new_album_name}', '{$new_album_type}', '{$new_album_publish_date}', {$publisher_id}, {$artist_id})";
-        if(mysqli_query($db, $query) == TRUE){
-          $query = "SELECT MAX(album_id) FROM Album";
+        $query = "INSERT INTO Album(album_name, album_type, published_date, publisher_id) VALUES('{$new_album_name}', '{$new_album_type}', '{$new_album_publish_date}', {$publisher_id})";
+        if(mysqli_query($db, $query) === TRUE){
+          $query = "SELECT LAST_INSERT_ID()";
           $result = mysqli_query($db, $query);
           $index_array = mysqli_fetch_array($result, MYSQLI_NUM);
           $album_id = $index_array[0];
+
+          $query = "INSERT INTO Album_Belongs_To_Artist(album_id, artist_id) VALUES({$album_id}, {$artist_id});";
+          $result = mysqli_query($db, $query);
           echo "<script type=\"text/javascript\"> alert(\"Succesfully added album to artist.\"); </script>";
+
           header("location: modify_album.php?album_id=".$album_id);
         }
         else{
@@ -140,8 +144,8 @@
   
   while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
       $a_id = $row[3];
-      echo "<tr onclick = \"document.location = 'access_album.php?album_id={$row[3]}' \">";
-      echo "<td>" . $row[0] . "</td>";
+      echo "<tr>";
+      echo "<td><a href = \"access_album.php?album_id={$a_id}\">" . $row[0] . "</a></td>";
       echo "<td>" . $row[1] . "</td>";
       echo "<td>" . $row[2] . "</td>";
       echo "<td> <input class = \"form-control\" type = \"checkbox\" name = \"check_list[]\" value = \"{$a_id}\"></td>";
