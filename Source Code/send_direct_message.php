@@ -62,7 +62,8 @@
     <h3> Send Message </h3> <br>
     <h3> <?php echo $receiver_username;?> </h3> <br>
     <form method="post" action="">
-      <input type="text" name="text_message" value= "Text Message" autofocus>
+      <label for="comment">Message:</label>
+      <textarea class="form-control" rows="5" name="text_message" autofocus></textarea>
       <input type="submit" name="send_message" value="Send Message" > 
     </form>
   </div>
