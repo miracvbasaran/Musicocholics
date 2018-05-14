@@ -18,6 +18,11 @@
     $playlist_name = $playlist_array['playlist_name'];
     $playlist_desc = $playlist_array['description'];
 
+    $query_sum = "SELECT SUM(T.duration) as sum_duration FROM Track T , Added A WHERE A.playlist_id = {$playlist_id} AND A.track_id = T.track_id";
+    $result_sum = mysqli_query($db, $query_sum);
+    $sum_array =  mysqli_fetch_array($result_sum, MYSQLI_ASSOC);
+    $playlist_sum = $sum_array['sum_duration'];
+
     $query_c = "SELECT COUNT(rate) as cnt_rate FROM rates WHERE playlist_id = {$playlist_id}";
     $result_c = mysqli_query($db, $query_c);
     $rates_array_c =  mysqli_fetch_array($result_c, MYSQLI_ASSOC);
@@ -27,7 +32,6 @@
     $result3 = mysqli_query($db, $query3);
     $rates_array =  mysqli_fetch_array($result3, MYSQLI_ASSOC);
     $avg_rate = $rates_array['avg_rate'];
-    
 
     if(isset($_POST['add_tracks'])) {
     	header("location: modify_playlist_add.php?playlist_id=".$playlist_id);

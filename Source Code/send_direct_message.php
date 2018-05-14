@@ -68,23 +68,38 @@
     </form>
   </div>
 
-  <div>   
-    <footer>
-        <?php
-          $query0 = "SELECT L1.track_id FROM listens L1 WHERE L1.user_id = {$uid} AND 
-          date = (SELECT max(L2.date) FROM listens L2 WHERE L2.user_id = {$uid}) ";
-          $result0 = mysqli_query($db, $query0);
-          $row = mysqli_fetch_array($result0, MYSQLI_NUM);
-          $query9 = "SELECT track_name,duration FROM track WHERE track_id = {$row[0]} ";
-          $result9 = mysqli_query($db, $query9);
-          $track_array = mysqli_fetch_array($result9, MYSQLI_ASSOC);
-          $track_name = $track_array['track_name'];
-          $duration = $track_array['duration'];
-          echo $track_name;
-          echo $duration;
-        ?>
-    </footer>
+<style>
+.footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   text-align: center;
+}
+</style>
+<div class = "footer">
+
+  <?php
+  $query = "SELECT L1.track_id FROM listens L1 WHERE L1.user_id = '$uid' AND 
+  date = (SELECT max(L2.date) FROM listens L2 WHERE L2.user_id = '$uid') ";
+  $result = mysqli_query($db, $query);
+  $row = mysqli_fetch_array($result, MYSQLI_NUM);
+  $query2 = "SELECT track_name,duration FROM track WHERE track_id = '$row[0]' ";
+  $result2 = mysqli_query($db, $query2);
+  $track_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
+
+  $track_name = $track_array['track_name'];
+  $duration = $track_array['duration'];
+  ?>
+
+  <h4> <?php echo $track_name; ?> (<?php echo $duration; ?> ) </h4>
+  
+  <div class="progress">
+  <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="70"
+  aria-valuemin="0" aria-valuemax="100" style="width:70%">
+    <span class="sr-only"> </span> 
   </div>
+</div>
 
 </body>
 
