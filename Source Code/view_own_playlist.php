@@ -14,8 +14,16 @@
 
     $query3 = "SELECT AVG(rate) as avg_rate FROM rates WHERE playlist_id = {$playlist_id}";
     $result3 = mysqli_query($db, $query3);
-    $rates_array =  mysqli_fetch_array($result3, MYSQLI_ASSOC);
-    $avg_rate = $rates_array['avg_rate'];
+    if($result3->num_rows === 1 ){
+    	$avg_rate = 0.0;
+    	
+    }
+    else{
+    	$rates_array =  mysqli_fetch_array($result3, MYSQLI_ASSOC);
+    	$avg_rate = $rates_array['avg_rate'];
+
+    }
+    
 
     if(isset($_POST['delete_playlist'])) {
     	$queryD2 = "DELETE FROM added WHERE playlist_id = {$playlist_id} ";
@@ -103,16 +111,17 @@
 </nav>
 
 	<div class="container">
-		<h3> Playlist </h3> <br>
-		<h3> <?php echo $playlist_name;?> </h3> <p> by <?php echo $username?> </p> <br>
-		<h3> <p>Rate:</p> <?php echo $avg_rate;?> </h3> <br>
+		<h1> <small> Playlist: </small> <?php echo $playlist_name;?> </h1> 
+		<h3>     by <?php echo $username?> </h3> <br>
+		<h4> <p>Rate: <?php echo $avg_rate;?> </h4> <br>
 	</div>
 
 	<div class="container" align="right">
 		<p>
 			<form method="post" action="">
-				<input id='Submit' name='delete_playlist' type='Submit' value='Delete Playlist' class="btn btn-default">
-				<input id='Submit' name='listen_playlist' type='Submit' value='Listen Playlist' class="btn btn-default">
+				<input id='Submit' name='listen_playlist' type='Submit' value='Listen Playlist' class="btn btn-success">
+				<input id='Submit' name='delete_playlist' type='Submit' value='Delete Playlist' class="btn btn-danger">
+				
 			</form>
 		</p>
 	</div>
@@ -138,7 +147,7 @@
 	  		?>
 		</table>
 	</div>
-
+	<br><br><br>
 	<div class="container">
 		<table class = "table table-hover" style="width:100%">
 	  		<tr>
@@ -178,24 +187,39 @@
 	  		?>
 		</table>
 	</div>
+<br><br><br><br><br>
+<style>
+.footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   text-align: center;
+}
+</style>
+<div class = "footer">
 
-	<div>   
-		<footer>
-	  		<?php
-		  		$query0 = "SELECT L1.track_id FROM listens L1 WHERE L1.user_id = {$uid} AND 
-		  		date = (SELECT max(L2.date) FROM listens L2 WHERE L2.user_id = {$uid}) ";
-		  		$result0 = mysqli_query($db, $query0);
-		  		$row = mysqli_fetch_array($result0, MYSQLI_NUM);
-		  		$query9 = "SELECT track_name,duration FROM track WHERE track_id = {$row[0]} ";
-		  		$result9 = mysqli_query($db, $query9);
-		  		$track_array = mysqli_fetch_array($result9, MYSQLI_ASSOC);
-		  		$track_name = $track_array['track_name'];
-		  		$duration = $track_array['duration'];
-		  		echo $track_name;
-		  		echo $duration;
-	  		?>
-		</footer>
-	</div>
+  <?php
+  $query = "SELECT L1.track_id FROM listens L1 WHERE L1.user_id = '$uid' AND 
+  date = (SELECT max(L2.date) FROM listens L2 WHERE L2.user_id = '$uid') ";
+  $result = mysqli_query($db, $query);
+  $row = mysqli_fetch_array($result, MYSQLI_NUM);
+  $query2 = "SELECT track_name,duration FROM track WHERE track_id = '$row[0]' ";
+  $result2 = mysqli_query($db, $query2);
+  $track_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
+
+  $track_name = $track_array['track_name'];
+  $duration = $track_array['duration'];
+  ?>
+
+  <h4> <?php echo $track_name; ?> (<?php echo $duration; ?> ) </h4>
+  
+  <div class="progress">
+  <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="70"
+  aria-valuemin="0" aria-valuemax="100" style="width:70%">
+    <span class="sr-only"> </span> 
+  </div>
+</div>
 
 </body>
 
