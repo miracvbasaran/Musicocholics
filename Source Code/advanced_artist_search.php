@@ -38,10 +38,19 @@
 		    </ul>
 		</div>
 		
+		
+	  <div class = "container" align = "center"><h2>
+		<font color="white">
+			<br/><br/>
+			Advanced Artist Search</h2>
+			<br/><br/>
+		</font>
+		</div>
+		
+		
 		<div align = "center">
 			<form action = "#" method = "post" onsubmit = "">
 				<font color="white">
-					<br/><br/><br/><br/>MUSICHOLICS<br/><br/>Advanced Artist Search<br/><br/><br/><br/>
 					<font color="black">
 						<input type = "text" name = "search_key" placeholder = "Artist Name"> <br/><br/>
 					</font>
@@ -57,6 +66,15 @@
 				</font>
 			</form>
 		</div>
+		
+		
+  	  <div class = "container" align = "center"><h4>
+  		<font color="white">
+  			<br/><br/>
+  			Results</h4>
+  			<br/><br/>
+  		</font>
+  		</div>
 		
 		
 		<?php
@@ -78,21 +96,21 @@
 																		AND description LIKE '%$description%';");
 										
 				while( $row = $query->fetch_assoc()){ 
-					echo( "<tr> <td><a href='view_artist.php?artist_id=".$row['artist_id']."'>".$row['artist_name']."</a></td> </tr><br/>");
+					echo( "<div align = \"center\"><tr> <td><a href='view_artist.php?artist_id=".$row['artist_id']."'>".$row['artist_name']."</a></td> </tr><br/></div>");
 				}
 			}
 			else if( $match == "contains"){
 				$query = mysqli_query( $db, "SELECT * FROM Artist WHERE ( artist_name LIKE '%$search_key%') 
 																		AND description LIKE '%$description%';");
 				while( $row = $query->fetch_assoc()){ 
-					echo( "<tr> <td><a href='view_artist.php?artist_id=".$row['artist_id']."'>".$row['artist_name']."</a></td> </tr><br/>");
+					echo( "<div align = \"center\"><tr> <td><a href='view_artist.php?artist_id=".$row['artist_id']."'>".$row['artist_name']."</a></td> </tr><br/></div>");
 				}
 			}
 			else if( $match == "starts_with"){
 				$query = mysqli_query( $db, "SELECT * FROM Artist WHERE ( artist_name LIKE '$search_key') 
 																		AND description LIKE '%$description%';");
 				while( $row = $query->fetch_assoc()){ 
-					echo( "<tr> <td><a href='view_artist.php?artist_id=".$row['artist_id']."'>".$row['artist_id']."</a></td> </tr>");
+					echo( "<div align = \"center\"><tr> <td><a href='view_artist.php?artist_id=".$row['artist_id']."'>".$row['artist_id']."</a></td> </tr></div>");
 				}
 			}
 			

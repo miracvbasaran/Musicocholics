@@ -40,10 +40,18 @@ $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
 		</div>
 		
 		
+	  <div class = "container" align = "center"><h2>
+		<font color="white">
+			<br/><br/>
+			Advanced User Search</h2>
+			<br/><br/>
+		</font>
+		</div>
+		
+		
 		<div align = "center">
 			<form action = "#" method = "post" onsubmit = "return check()">
 				<font color="white">
-					<br/><br/><br/><br/>MUSICHOLICS<br/><br/>Advanced User Search<br/><br/><br/><br/>
 					<font color="black">
 						<input type = "text" name = "username" placeholder = "Username"> <br/><br/>
 					</font>
@@ -66,6 +74,14 @@ $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
 				</font>
 			</form>
 		</div>
+		
+  	  <div class = "container" align = "center"><h4>
+  		<font color="white">
+  			<br/><br/>
+  			Results</h4>
+  			<br/><br/>
+  		</font>
+  		</div>
 		
 		
 		<script type = "text/javascript">
@@ -100,21 +116,21 @@ $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
 				$relationship = mysqli_real_escape_string( $db, $_POST['relationship']);
 				
 				
-				if( $search_key == "")
+				if( $search_key === "")
 					echo ' <script type="text/javascript"> alert("Search will be done for any username"); </script>';
-				if( $match == "")
+				if( $match === "")
 					echo ' <script type="text/javascript"> alert("Select from Exactly matches, Contains, Starts with "); </script>';
-				if( $fullname == "")
+				if( $fullname === "")
 					echo ' <script type="text/javascript"> alert("Please type a name"); </script>';
-				if( $country == "")
+				if( $country === "")
 					echo ' <script type="text/javascript"> alert("Select a country "); </script>';
-				if( $relationship == "")
+				if( $relationship === "")
 					echo ' <script type="text/javascript"> alert("Please select if you want to search amongst your friends or all users"); </script>';
 				
 				
 				$id_list = new SplDoublyLinkedList;
 				
-				if( $match == "matches"){
+				if( $match === "matches"){
 					$query = mysqli_query( $db, "SELECT * FROM Person, User WHERE (username LIKE '$username') 
 																				AND user_id = person_id
 																				AND country = '$country';");
@@ -130,7 +146,7 @@ $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
 							//printing friends
 							$fquery = mysqli_query( $db, "SELECT * FROM Friendship WHERE (user1_id = '$uid' OR user2_id = '$uid') AND (user1_id = '$id' OR user2_id = '$id');");
 							while( $frow = $fquery->fetch_assoc()){ //for each friend
-								echo( "<tr><td><a href='friend_profile.php?friend_id=".$id."'>".$row['username']."</a></td></tr><br/>");
+								echo( "<div align = \"center\"><tr><td><a href='friend_profile.php?friend_id=".$id."'>".$row['username']."</a></td></tr><br/></div>");
 								$id_list->push($id);
 							}
 							
@@ -157,7 +173,7 @@ $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
 							
 							if( $relationship == "all"){
 								if( $id_count == $id_list->count()){ //not friend, not blocked -> non-friend
-									echo( "<tr><td><a href='nonfriend_profile.php?nonfriend_id=".$id."'>".$row['username']."</a></td></tr><br/>");
+									echo( "<div align = \"center\"><tr><td><a href='nonfriend_profile.php?nonfriend_id=".$id."'>".$row['username']."</a></td></tr><br/></div>");
 								}
 							}
 							
@@ -181,7 +197,7 @@ $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
 							//printing friends
 							$fquery = mysqli_query( $db, "SELECT * FROM Friendship WHERE (user1_id = '$uid' OR user2_id = '$uid') AND (user1_id = '$id' OR user2_id = '$id');");
 							while( $frow = $fquery->fetch_assoc()){ //for each friend
-								echo( "<tr><td><a href='friend_profile.php?friend_id=".$id."'>".$row['username']."</a></td></tr><br/>");
+								echo( "<div align = \"center\"><tr><td><a href='friend_profile.php?friend_id=".$id."'>".$row['username']."</a></td></tr><br/></div>");
 								$id_list->push($id);
 							}
 							
@@ -208,7 +224,7 @@ $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
 							
 							if( $relationship == "all"){
 								if( $id_count == $id_list->count()){ //not friend, not blocked -> non-friend
-									echo( "<tr><td><a href='nonfriend_profile.php?nonfriend_id=".$id."'>".$row['username']."</a></td></tr><br/>");
+									echo( "<div align = \"center\"><tr><td><a href='nonfriend_profile.php?nonfriend_id=".$id."'>".$row['username']."</a></td></tr><br/></div>");
 								}
 							}
 							
@@ -233,7 +249,7 @@ $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
 							//printing friends
 							$fquery = mysqli_query( $db, "SELECT * FROM Friendship WHERE (user1_id = '$uid' OR user2_id = '$uid') AND (user1_id = '$id' OR user2_id = '$id');");
 							while( $frow = $fquery->fetch_assoc()){ //for each friend
-								echo( "<tr><td><a href='friend_profile.php?friend_id=".$id."'>".$row['username']."</a></td></tr><br/>");
+								echo( "<div align = \"center\"><tr><td><a href='friend_profile.php?friend_id=".$id."'>".$row['username']."</a></td></tr><br/></div>");
 								$id_list->push($id);
 							}
 							
@@ -260,7 +276,7 @@ $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
 							
 							if( $relationship == "all"){
 								if( $id_count == $id_list->count()){ //not friend, not blocked -> non-friend
-									echo( "<tr><td><a href='nonfriend_profile.php?nonfriend_id=".$id."'>".$row['username']."</a></td></tr><br/>");
+									echo( "<div align = \"center\"><tr><td><a href='nonfriend_profile.php?nonfriend_id=".$id."'>".$row['username']."</a></td></tr><br/></div>");
 								}
 							}
 							

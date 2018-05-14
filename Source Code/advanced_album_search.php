@@ -38,10 +38,17 @@
 		    </ul>
 		</div>
 		
+		  <div class = "container" align = "center"><h2>
+			<font color="white">
+				<br/><br/>
+				Advanced Album Search</h2>
+				<br/><br/>
+			</font>
+			</div>
+	
 		<div align = "center">
 			<form action = "#" method = "post" onsubmit = "">
 				<font color="white">
-					<br/><br/><br/><br/>MUSICHOLICS<br/><br/>Advanced Album Search<br/><br/><br/><br/>
 					<font color="black">
 						<input type = "text" name = "search_key" placeholder = "Album Name"> <br/><br/>
 					</font>
@@ -66,7 +73,13 @@
 			</form>
 		</div>
 		
-		
+  	  <div class = "container" align = "center"><h4>
+  		<font color="white">
+  			<br/><br/>
+  			Results</h4>
+  			<br/><br/>
+  		</font>
+  		</div>
 		
 		
 		<?php
@@ -98,7 +111,24 @@
 
 										
 				while( $row = $query->fetch_assoc()){ 
-					echo( "<tr> <td><a href='view_album.php?album_id=".$row['album_id']."'>".$row['album_name']."</a></td> </tr><br/>");
+					
+					?>
+				    <div class = "container" align = "center">
+				    <p>Recording Type: <?php echo $recording_type;?> </p>
+				    <p> Duration: <?php echo $duration;?></p>
+				    <p> Danceability: <?php echo $danceability;?></p>
+				    <p> Acousticness: <?php echo $acousticness;?></p>
+				    <p> Instrumentalness: <?php echo $instrumentalness;?></p>
+				    <p> Speechess: <?php echo $speechness;?></p>
+				    <p> Balance: <?php echo $balance;?></p>
+				    <p> Loudness: <?php echo $loudness;?></p>
+				    <p> Language: <?php echo $language;?></p>
+				    <p> Price: <?php echo $price;?></p>
+				    <p> Date of Addition <?php echo $date_of_addition;?></p>
+				  </div>
+					
+					<?
+					echo( "<div align = \"center\"><tr> <td><a href='view_album.php?album_id=".$row['album_id']."'>".$row['album_name']."</a></td> </tr><br/></div>");
 				}
 			}
 			else if( $match == "contains"){
@@ -107,7 +137,7 @@
 																		AND published_date >= '$from_date'
 																		AND published_date <= '$end_date';");
 				while( $row = $query->fetch_assoc()){ 
-					echo( "<tr> <td><a href='view_album.php?album_id=".$row['album_id']."'>".$row['album_name']."</a></td> </tr><br/>");
+					echo( "<div align = \"center\"><tr> <td><a href='view_album.php?album_id=".$row['album_id']."'>".$row['album_name']."</a></td> </tr><br/></div>");
 				}
 			}
 			else if( $match == "starts_with"){
@@ -116,7 +146,7 @@
 																		AND published_date >= '$from_date'
 																		AND published_date <= '$end_date';");
 				while( $row = $query->fetch_assoc()){ 
-					echo( "<tr> <td><a href='view_album.php?album_id=".$row['album_id']."'>".$row['album_name']."</a></td> </tr>");
+					echo( "<div align = \"center\"><tr> <td><a href='view_album.php?album_id=".$row['album_id']."'>".$row['album_name']."</a></td> </tr></div>");
 				}
 			}
 			

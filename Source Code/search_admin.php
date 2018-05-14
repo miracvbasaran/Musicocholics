@@ -17,7 +17,7 @@ include("session.php");
 <nav class="navbar navbar-inverse">
       <div class="container-fluid">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="admin.php">Home</a></li>
+          <li class="active"><a href="#">Home</a></li>
           <li><a href="search_admin.php">Search</a></li>
           <li><a href="add_track.php">Add Track</a></li>
           <li><a href="add_album.php">Add Album</a></li>
@@ -30,12 +30,18 @@ include("session.php");
           <li><a href="homepage.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
         </ul>
       </div>
+	  
+	  <div class = "container" align = "center"><h2>
+		<font color="white">
+			<br/><br/>
+			Search</h2>
+			<br/><br/>
+		</font>
+		</div>
 	
 		<div align = "center">
 			<form action = "#" method = "post">
 				<font color="white">
-					<br/><br/><br/><br/>MUSICHOLICS<br/><br/>Search<br/><br/><br/><br/>
-					
 					<font color="black">
 						<input type = "text" name = "search_key" placeholder = "Search.."> 
 						<input id = "" value = "Search" name = "search" type = "submit"> </button> <br/><br/>
@@ -53,6 +59,15 @@ include("session.php");
 				</font>
 			</form>
 		</div>
+		
+		
+  	  <div class = "container" align = "center"><h4>
+  		<font color="white">
+  			<br/><br/>
+  			Results</h4>
+  			<br/><br/>
+  		</font>
+  		</div>
 
 				<?php
 	
@@ -68,19 +83,19 @@ include("session.php");
 					if( isset( $_POST['filter_track'])){//TRACK
 						$query = mysqli_query( $db, "SELECT * FROM Track WHERE track_name LIKE '%$search_key%';");
 						while( $row = $query->fetch_assoc()){ //printing every track with that track name
-							echo( "<tr> <td><a href='access_track.php?track_id=".$row['track_id']."'>".$row['track_name']."</a></td> </tr><br/>");
+							echo( "<div align = \"center\"><tr> <td><a href='access_track.php?track_id=".$row['track_id']."'>".$row['track_name']."</a></td> </tr><br/></div>");
 						}
 					}
 					if( isset( $_POST['filter_album'])){ //ALBUM
 						$query = mysqli_query( $db, "SELECT * FROM Album WHERE album_name LIKE '%$search_key%';");
 						while( $row = $query->fetch_assoc()){ //printing every album with that album name
-							echo( "<tr> <td><a href='access_album.php?album_id=".$row['album_id']."'>".$row['album_name']."</a></td> </tr><br/>");
+							echo( "<div align = \"center\"><tr> <td><a href='access_album.php?album_id=".$row['album_id']."'>".$row['album_name']."</a></td> </tr><br/></div>");
 						}
 					}
 					if( isset( $_POST['filter_artist'])){ //ARTIST
 						$query = mysqli_query( $db, "SELECT * FROM Artist WHERE artist_name LIKE '%$search_key%';");
 						while( $row = $query->fetch_assoc()){ //printing every artist with that artist name
-							echo( "<tr><td><a href='access_artist.php?artist_id=".$row['artist_id']."'>".$row['artist_name']."</a></td></tr><br/>");
+							echo( "<div align = \"center\"><tr><td><a href='access_artist.php?artist_id=".$row['artist_id']."'>".$row['artist_name']."</a></td></tr><br/></div>");
 						}
 					}
 					// if( isset( $_POST['filter_playlist'])){ //PLAYLIST
@@ -92,7 +107,7 @@ include("session.php");
 					if( isset( $_POST['filter_user'])){ //USER
 						$query = mysqli_query( $db, "SELECT * FROM Person, User WHERE (username LIKE '%$search_key%') AND user_id = person_id;");
 						while( $row = $query->fetch_assoc()){ //printing every user with that user name
-							echo( "<tr><td><a href='complete_profile.php?view_id=".$row['username']."'>".$row['username']."</a></td></tr><br/>");
+							echo( "<div align = \"center\"><tr><td><a href='complete_profile.php?view_id=".$row['username']."'>".$row['username']."</a></td></tr><br/></div>");
 						}
 					}
 				}
