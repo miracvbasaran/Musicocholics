@@ -159,5 +159,5 @@ $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
     <span class="sr-only"> </span> 
   </div>
 </div>
-		</body>
-		</html>
+</body>
+</html>
