@@ -72,7 +72,7 @@
 					$search_key = mysqli_real_escape_string( $db, $_POST['search_key']);
 					
 					if( $search_key == "")
-						echo ' <script type="text/javascript"> alert("Please type an album name"); </script>';
+						echo ' <script type="text/javascript"> alert("Search will be done with an empty key"); </script>';
 					
 
 					//$filter = mysqli_real_escape_string( $db, $_POST['filter']);

@@ -28,6 +28,15 @@
     	header("Refresh:0");
     }
 
+    if(isset($_POST['post_comment'])) {
+    	if(isset($_POST['text_comment'])) {
+    		$text_comment = $_POST['text_comment'];
+    		$date = date('Y-m-d G:i:s');
+    		$query7 = "INSERT INTO Comments(user_id, playlist_id, comment, date) VALUES({$uid}, {$playlist_id}, '$text_comment', '$date')";
+          	$result7 = mysqli_query($db, $query7);
+		}
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -135,6 +144,13 @@
 	  		?>
 		</table>
 	</div>
+
+  	<div class="container" align="center">
+    	<form method="post" action="">
+      		<input type="text" name="text_comment" value= "Comment" autofocus>
+      		<input type="submit" name="post_comment" value="Post Comment" > 
+    	</form>
+  	</div>
 
 	<div>   
 		<footer>

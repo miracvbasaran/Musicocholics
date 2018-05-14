@@ -272,6 +272,10 @@ $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
 			}
 		
 			?>
+			
+			<div align = "center">
+				<tr><td><a href='search.php'>Go back to main search page</a></td></tr>
+			</div>
 	
 				<br/><br/><br/>
 <style>
