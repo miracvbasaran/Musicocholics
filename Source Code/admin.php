@@ -23,6 +23,10 @@
     $result_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
     $num_tracks = $result_array['num_tracks'];
 
+	$query = "SELECT COUNT(*) AS num_publishers FROM Publisher;";
+    $result = mysqli_query($db, $query);
+    $result_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
+    $num_publishers = $result_array['num_publishers'];
 
 	$query = "SELECT user_id, MAX(num) AS num_listens FROM ((SELECT user_id, COUNT(*) AS num FROM Listens GROUP BY user_id) AS temp);";
     $result = mysqli_query($db, $query);
@@ -109,13 +113,13 @@
 			Welcome back Admin!
 		</h1>
 		<h3>
-			Currently, there are <?php echo $num_users ?> users, <?php echo $num_artists ?> artists, <?php echo $num_albums ?> albums and <?php echo $num_tracks ?> tracks in the system.
+			Currently, there are <?php echo $num_users ?> users, <?php echo $num_artists ?> artists, <?php echo $num_albums ?> albums, <?php echo $num_tracks ?> tracks and <?php echo $num_publishers ?> publishers in the system.
 		</h3>
 	</div>
 
 	<div class = "container" align = "center">
-		<h2>Most Active User</h2>
-		<div class="container">
+		<h2>Most Active User</h2></div>
+		<div class="container" align = "center">
 		 <table class = "table table-hover" style="width:100%">
 			  <tr>
 			    <th>User Name</th>
@@ -133,8 +137,8 @@
 		</div>
 	</div>
 	<div class = "container" align = "center">
-		<h2>Most Shopaholic User</h2>
-		<div class="container">
+		<h2>Most Shopaholic User</h2></div>
+		<div class="container" align = "center">
 		 <table class = "table table-hover" style="width:100%">
 			  <tr>
 			    <th>User Name</th>
@@ -152,8 +156,8 @@
 		</div>
 	</div>
 	<div class = "container" align = "center">
-		<h2>Most Generous User</h2>
-		<div class="container">
+		<h2>Most Generous User</h2></div>
+		<div class="container" align = "center">
 		 <table class = "table table-hover" style="width:100%">
 			  <tr>
 			    <th>User Name</th>
@@ -171,8 +175,8 @@
 		</div>
 	</div>
 	<div class = "container" align = "center">
-		<h2>Richest User</h2>
-		<div class="container">
+		<h2>Richest User</h2></div>
+		<div class="container" align = "center">
 		 <table class = "table table-hover" style="width:100%">
 			  <tr>
 			    <th>User Name</th>

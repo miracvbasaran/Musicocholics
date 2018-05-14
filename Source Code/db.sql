@@ -63,8 +63,8 @@ INSERT INTO `User` (`user_id`, `country`, `language`, `picture`, `date_of_regist
 CREATE TABLE IF NOT EXISTS `publisher` (
 `publisher_id` INT NOT NULL AUTO_INCREMENT,
 `publisher_name` VARCHAR(45) NOT NULL UNIQUE,
-`country` VARCHAR(45) NOT NULL,
-`city` VARCHAR(45) NOT NULL,
+`country` VARCHAR(45) NULL,
+`city` VARCHAR(45) NULL,
 PRIMARY KEY(`publisher_id`) ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
@@ -178,7 +178,7 @@ INSERT INTO `track`(`track_name`, `recording_type`, `duration`, `danceability`, 
 , '2014-12-03', 8),
 ('Hello', 'live', "00:03:41", '0001.100', '0001.100','0001.100','0001.100','0001.100','0001.100', 'English', '001.15'
 , '2012-12-03', 9),
-('Rolling in the Deep', 'studio', "00:04:21", '0000-02-34', '0001.100', '0001.100','0001.100','0001.100','0001.100','0001.100', 'English', '001.15'
+('Rolling in the Deep', 'studio', "00:04:21", '0001.100', '0001.100','0001.100','0001.100','0001.100','0001.100', 'English', '001.15'
 , '2012-12-03', 9),
 ('Berivan', 'studio', "00:03:12", '0001.100', '0001.100','0001.100','0001.100','0001.100','0001.100', 'Turkish', '001.15'
 , '2007-12-03', 10),

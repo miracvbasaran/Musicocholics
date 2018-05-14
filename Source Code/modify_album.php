@@ -77,7 +77,7 @@
           $result = mysqli_query($db, $query);
           $index_array = mysqli_fetch_array($result, MYSQLI_NUM);
           $album_id = $index_array[0];
-          header("Location: modify_track.php?track_id=".$track_id);
+          header("Refresh:0");
       }
       else{
         echo ' <script type="text/javascript"> alert("Could not add track to album."); </script>';
@@ -141,19 +141,19 @@
 
 
 <form method="post" action="">
-<div class = "col-xs-4" ><input type="text" class = "form-control" name="album_name" 
+  <div class = "container" align = "center">
+<div class = "col-xs-3" >Album Name: <input type="text" class = "form-control" name="album_name" 
     default = <?php echo "'".$album_name."'"; ?> value= <?php echo "'".$album_name."'"; ?> autofocus> 
 </div>
-  <br><div class = "container" align = "center">
   <div class="col-xs-3">Album Type: 
   <select class = "form-control" name="album_type">
     <option value="Album">Album</option>
     <option value="Single">Single</option>
   </select></div>
  <div class="col-xs-3">Date: <input type="date" class = "form-control" name="published_date" value= <?php echo $published_date ?> autofocus></div>
-  <div class="col-xs-3"><br><input type="submit" name="apply" value="Apply"  class = "btn btn-success"> </div>
+  <div class="container" align = "right"><br><input type="submit" name="apply" value="Apply"  class = "btn btn-success"> </div></div>
 
- </form> </div>
+ </form>
 <div class="container" align = "center">
   <form method="post" action="">
   <table class = "table table-hover" style="width:100%">
@@ -169,8 +169,8 @@
   
   while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
       $t_id = $row[3];
-      echo "<tr onclick = \"document.location = 'access_track.php?track_id={$t_id}' \">";
-      echo "<td>" . $row[0] . "</td>";
+      echo "<tr>";
+      echo "<td><a href = \"access_track.php?track_id={$t_id}\">" . $row[0] . "</a></td>";
       echo "<td>" . $row[1] . "</td>";
       echo "<td>" . $row[2] . "</td>";
       echo "<td> <input class = \"form-control\" type = \"checkbox\" name = \"check_list[]\" value = \"{$t_id}\"></td>";
