@@ -47,7 +47,7 @@
 		<div align="right" class="container"></div>
 		<p>
 			<form method="post" action="">
-				<input id='Submit' name='send_optional_message' type='Submit' value='Send Message' class="btn btn-default">
+				<input id='Submit' name='send_optional_message' type='Submit' value='Send Message' class="btn btn-warning">
 			</form>
 		</p>
 	</div>
