@@ -101,7 +101,7 @@ $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
 				$id_list = new SplDoublyLinkedList;
 				
 				if( $match == "matches"){
-					$query = mysqli_query( $db, "SELECT * FROM Person, User WHERE (username LIKE '$search_key') 
+					$query = mysqli_query( $db, "SELECT * FROM Person, User WHERE (username LIKE '$username') 
 																				AND user_id = person_id
 																				AND country = '$country';");
 					
@@ -153,7 +153,7 @@ $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
 				}
 				
 				if( $match == "contains"){
-					$query = mysqli_query( $db, "SELECT * FROM Person, User WHERE (username LIKE '%$search_key%') 
+					$query = mysqli_query( $db, "SELECT * FROM Person, User WHERE (username LIKE '%$username%') 
 																				AND user_id = person_id
 																				AND country = '$country';");
 					
@@ -204,7 +204,7 @@ $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
 				}
 				
 				if( $match == "starts_with"){
-					$query = mysqli_query( $db, "SELECT * FROM Person, User WHERE (username LIKE '$search_key%') 
+					$query = mysqli_query( $db, "SELECT * FROM Person, User WHERE (username LIKE '$username%') 
 																				AND user_id = person_id
 																				AND country = '$country';");
 					

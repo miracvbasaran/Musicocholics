@@ -96,8 +96,6 @@
 			$match = mysqli_real_escape_string( $db, $_POST['match']);
 			$from_date = mysqli_real_escape_string( $db, $_POST['from_date']);
 			$end_date = mysqli_real_escape_string( $db, $_POST['end_date']);
-			$min_duration = mysqli_real_escape_string( $db, $_POST['min_duration']);
-			$max_duration = mysqli_real_escape_string( $db, $_POST['max_duration']);
 			$type = mysqli_real_escape_string( $db, $_POST['type']);
 			
 			
