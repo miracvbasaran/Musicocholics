@@ -42,7 +42,7 @@
 	  <div class = "container" align = "center"><h2>
 		<font color="white">
 			<br/><br/>
-			Advanced Track Search</h2>
+			Advanced Artist Search</h2>
 			<br/><br/>
 		</font>
 		</div>

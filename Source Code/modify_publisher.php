@@ -123,8 +123,8 @@
   
   while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
       $a_id = $row[3];
-      echo "<tr onclick = \"document.location = 'access_album.php?album_id={$a_id}' \">";
-      echo "<td>" . $row[0] . "</td>";
+      echo "<tr>";
+      echo "<td><a href = \"access_album.php?album_id={$a_id}\">" . $row[0] . "</a></td>";
       echo "<td>" . $row[1] . "</td>";
       echo "<td>" . $row[2] . "</td>";
       echo "<td> <input class = \"form-control\" type = \"checkbox\" name = \"check_list[]\" value = \"{$a_id}\"></td>";
