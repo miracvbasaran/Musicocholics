@@ -21,7 +21,7 @@ session_start();
     <div class = "container" align = "center"><h2>
   	<font color="black">
   		<br/><br/>
-  		Register</h2>
+  		Login</h2>
   		<br/><br/>
   	</font>
   	</div>
