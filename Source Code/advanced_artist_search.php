@@ -68,7 +68,7 @@
 			
 			
 			if( $search_key == "")
-				echo ' <script type="text/javascript"> alert("Please type an album name"); </script>';
+				echo ' <script type="text/javascript"> alert("Search will be done for any artist name"); </script>';
 			if( $match == "")
 				echo ' <script type="text/javascript"> alert("Select from Exactly matches, Contains, Starts with "); </script>';
 			

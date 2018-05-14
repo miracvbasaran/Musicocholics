@@ -28,11 +28,15 @@
     $result_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
     $num_publishers = $result_array['num_publishers'];
 
-	$query = "SELECT user_id, MAX(num) AS num_listens FROM ((SELECT user_id, COUNT(*) AS num FROM Listens GROUP BY user_id) AS temp);";
+	$query = "SELECT MAX(num) AS num_listens FROM ((SELECT user_id, COUNT(*) AS num FROM Listens GROUP BY user_id) AS temp);";
+    $result = mysqli_query($db, $query);
+    $result_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
+    $max_listener_num_listens = $result_array['num_listens'];
+	$query = "SELECT user_id FROM ((SELECT user_id, COUNT(*) AS num FROM Listens GROUP BY user_id) AS temp) WHERE num = {$max_listener_num_listens};";
     $result = mysqli_query($db, $query);
     $result_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
     $max_listener_id = $result_array['user_id'];
-    $max_listener_num_listens = $result_array['num_listens'];
+
 
     $query = "SELECT * FROM Person WHERE person_id = {$max_listener_id};";
     $result = mysqli_query($db, $query);
@@ -40,11 +44,15 @@
     $max_listener_username = $result_array['username'];
     $max_listener_fullname = $result_array['fullname'];
 
-	$query = "SELECT user_id, MAX(num) AS num_listens FROM ((SELECT user_id, COUNT(*) AS num FROM Buys GROUP BY user_id) AS temp);";
+	$query = "SELECT MAX(num) AS num_listens FROM ((SELECT user_id, COUNT(*) AS num FROM Buys GROUP BY user_id) AS temp);";
+    $result = mysqli_query($db, $query);
+    $result_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
+
+    $max_buyer_num_buys = $result_array['num_listens'];
+    $query = "SELECT user_id FROM ((SELECT user_id, COUNT(*) AS num FROM Buys GROUP BY user_id) AS temp) WHERE num = {$max_buyer_num_buys};";
     $result = mysqli_query($db, $query);
     $result_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
     $max_buyer_id = $result_array['user_id'];
-    $max_buyer_num_buys = $result_array['num_listens'];
 
     $query = "SELECT * FROM Person WHERE person_id = {$max_buyer_id};";
     $result = mysqli_query($db, $query);
@@ -52,11 +60,15 @@
     $max_buyer_username = $result_array['username'];
     $max_buyer_fullname = $result_array['fullname'];
 
-    $query = "SELECT giver_id AS user_id, MAX(num) AS num_listens FROM ((SELECT giver_id, COUNT(*) AS num FROM Gift GROUP BY giver_id) AS temp);";
+    $query = "SELECT MAX(num) AS num_listens FROM ((SELECT giver_id, COUNT(*) AS num FROM Gift GROUP BY giver_id) AS temp);";
+    $result = mysqli_query($db, $query);
+    $result_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
+    $max_gifter_num_gifts = $result_array['num_listens'];
+
+    $query = "SELECT user_id FROM ((SELECT giver_id AS user_id, COUNT(*) AS num FROM Gift GROUP BY giver_id) AS temp) WHERE num = {$max_gifter_num_gifts};";
     $result = mysqli_query($db, $query);
     $result_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
     $max_gifter_id = $result_array['user_id'];
-    $max_gifter_num_gifts = $result_array['num_listens'];
 
     $query = "SELECT * FROM Person WHERE person_id = {$max_gifter_id};";
     $result = mysqli_query($db, $query);
@@ -64,11 +76,15 @@
     $max_gifter_username = $result_array['username'];
     $max_gifter_fullname = $result_array['fullname'];
 
-    $query = "SELECT user_id, MAX(budget) AS budget FROM USER GROUP BY user_id;";
+    $query = "SELECT MAX(budget) AS budget FROM USER;";
+    $result = mysqli_query($db, $query);
+    $result_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
+    $richest_budget = $result_array['budget'];
+
+    $query = "SELECT user_id FROM USER WHERE budget = {$richest_budget};";
     $result = mysqli_query($db, $query);
     $result_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
     $richest_id = $result_array['user_id'];
-    $richest_budget = $result_array['budget'];
 
     $query = "SELECT * FROM Person WHERE person_id = {$richest_id};";
     $result = mysqli_query($db, $query);

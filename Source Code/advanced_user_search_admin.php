@@ -23,10 +23,10 @@ $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
 </head>
 <body>
 
-    <nav class="navbar navbar-inverse">
+<nav class="navbar navbar-inverse">
       <div class="container-fluid">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="#">Home</a></li>
+          <li class="active"><a href="admin.php">Home</a></li>
           <li><a href="search_admin.php">Search</a></li>
           <li><a href="add_track.php">Add Track</a></li>
           <li><a href="add_album.php">Add Album</a></li>
@@ -35,8 +35,8 @@ $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
         </ul>
         
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="change_password.php"><span class="glyphicon glyphicon-user"></span> Change Password</a></li>
-          <li><a href="homepage.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+          <li><a href="change_password_admin.php"><span class="glyphicon glyphicon-user"></span> Change Password</a></li>
+          <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
         </ul>
       </div>
 		
@@ -52,7 +52,7 @@ $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
 					<input type = "radio" name="match" value="contains"/> Contains &nbsp; &nbsp;
 					<input type = "radio" name="match" value="starts_with"/> Starts with <br/><br/><br/>
 					<font color="black">
-						<input type = "text" name = "fullname" placeholder = "Name"> <br/><br/>
+						<input type = "text" name = "fullname" placeholder = "Name contains.."> <br/><br/>
 					</font>
 					<input type = "radio" name="country" value="Turkey"/> Turkey &nbsp; &nbsp;
 					<input type = "radio" name="country" value="Germany"/> Germany
@@ -67,7 +67,6 @@ $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
 		
 		
 		
-		
 			<?php
 	
 			if( isset( $_POST['search'])){
@@ -78,11 +77,11 @@ $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
 				
 				
 				if( $search_key == "")
-					echo ' <script type="text/javascript"> alert("Please type an album name"); </script>';
+					echo ' <script type="text/javascript"> alert("Search will be done using for any username"); </script>';
 				if( $match == "")
 					echo ' <script type="text/javascript"> alert("Select from Exactly matches, Contains, Starts with "); </script>';
 				if( $fullname == "")
-					echo ' <script type="text/javascript"> alert("Please type a name"); </script>';
+					echo ' <script type="text/javascript"> alert("Search will be done using any name"); </script>';
 				if( $country == "")
 					echo ' <script type="text/javascript"> alert("Select a country "); </script>';
 				
@@ -123,41 +122,10 @@ $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
 			?>
 			
 			<div align = "center">
-				<tr><td><a href='search.php'>Go back to main search page</a></td></tr>
+				<tr><td><a href='search_admin.php'>Go back to main search page</a></td></tr>
 			</div>
 	
 				<br/><br/><br/>
-	<style>
-.footer {
-   position: fixed;
-   left: 0;
-   bottom: 0;
-   width: 100%;
-   text-align: center;
-}
-</style>
-<div class = "footer">
 
-  <?php
-  $query = "SELECT L1.track_id FROM listens L1 WHERE L1.user_id = '$uid' AND 
-  date = (SELECT max(L2.date) FROM listens L2 WHERE L2.user_id = '$uid') ";
-  $result = mysqli_query($db, $query);
-  $row = mysqli_fetch_array($result, MYSQLI_NUM);
-  $query2 = "SELECT track_name,duration FROM track WHERE track_id = '$row[0]' ";
-  $result2 = mysqli_query($db, $query2);
-  $track_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
-
-  $track_name = $track_array['track_name'];
-  $duration = $track_array['duration'];
-  ?>
-
-  <h4> <?php echo $track_name; ?> (<?php echo $duration; ?> ) </h4>
-  
-  <div class="progress">
-  <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="70"
-  aria-valuemin="0" aria-valuemax="100" style="width:70%">
-    <span class="sr-only"> </span> 
-  </div>
-</div>
-</body>
-</html>
+		</body>
+		</html>

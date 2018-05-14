@@ -45,7 +45,7 @@
     {
       $query = "CALL DeleteAlbum({$album_id});";
       $result = mysqli_query($db, $query);
-      header("Location: " . $_SERVER['HTTP_REFERER']);
+      header("Location: admin.php");
     }
     
 ?>

@@ -22,21 +22,22 @@
 </head>
 <body>
 
-	<nav class="navbar navbar-inverse">
-		<div class="container-fluid">
-			<ul class="nav navbar-nav">
-				<li><a href="own_profile.php">Profile</a></li>
-				<li><a href="view_playlists.php">Playlist</a></li>
-				<li><a href="view_tracks.php">Tracks</a></li>
-				<li><a href="friends.php">Friends</a></li>
-				<li><a href="message_list.php">Messages</a></li>
-				<li class="active"><a href="search.php">Search</a></li>
-			</ul>
-		    <ul class="nav navbar-nav navbar-right">
-				<li><a href="change_general_information.php"><span class="glyphicon glyphicon-user"></span> Settings</a></li>
-				<li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-		    </ul>
-		</div>
+<nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="admin.php">Home</a></li>
+          <li><a href="search_admin.php">Search</a></li>
+          <li><a href="add_track.php">Add Track</a></li>
+          <li><a href="add_album.php">Add Album</a></li>
+          <li><a href="add_artist.php">Add Artist</a></li>
+          <li><a href="add_publisher.php">Add Publisher</a></li>
+        </ul>
+        
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="change_password_admin.php"><span class="glyphicon glyphicon-user"></span> Change Password</a></li>
+          <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+        </ul>
+      </div>
 		
 		<div align = "center">
 			<form action = "#" method = "post" onsubmit = "">
@@ -79,7 +80,7 @@
 			$type = mysqli_real_escape_string( $db, $_POST['type']);
 			
 			if( $search_key == "")
-				echo ' <script type="text/javascript"> alert("Please type an album name"); </script>';
+				echo ' <script type="text/javascript"> alert("Search will be done for any album name"); </script>';
 			if( $match == "")
 				echo ' <script type="text/javascript"> alert("Select from Exactly matches, Contains, Starts with "); </script>';
 			if( $from_date == "")
@@ -98,7 +99,7 @@
 
 										
 				while( $row = $query->fetch_assoc()){ 
-					echo( "<tr> <td><a href='view_album.php?album_id=".$row['album_id']."'>".$row['album_name']."</a></td> </tr><br/>");
+					echo( "<tr> <td><a href='modify_album.php?album_id=".$row['album_id']."'>".$row['album_name']."</a></td> </tr><br/>");
 				}
 			}
 			else if( $match == "contains"){
@@ -107,7 +108,7 @@
 																		AND published_date >= '$from_date'
 																		AND published_date <= '$end_date';");
 				while( $row = $query->fetch_assoc()){ 
-					echo( "<tr> <td><a href='view_album.php?album_id=".$row['album_id']."'>".$row['album_name']."</a></td> </tr><br/>");
+					echo( "<tr> <td><a href='modify_album.php?album_id=".$row['album_id']."'>".$row['album_name']."</a></td> </tr><br/>");
 				}
 			}
 			else if( $match == "starts_with"){
@@ -116,7 +117,7 @@
 																		AND published_date >= '$from_date'
 																		AND published_date <= '$end_date';");
 				while( $row = $query->fetch_assoc()){ 
-					echo( "<tr> <td><a href='view_album.php?album_id=".$row['album_id']."'>".$row['album_name']."</a></td> </tr>");
+					echo( "<tr> <td><a href='modify_album.php?album_id=".$row['album_id']."'>".$row['album_name']."</a></td> </tr>");
 				}
 			}
 			
@@ -125,21 +126,13 @@
 		?>
 	
 	<div align = "center">
-		<tr><td><a href='search.php'>Go back to main search page</a></td></tr>
+		<tr><td><a href='search_admin.php'>Go back to main search page</a></td></tr>
 	</div>
 	
 		<br/><br/><br/>
-<style>
-.footer {
-   position: fixed;
-   left: 0;
-   bottom: 0;
-   width: 100%;
-   text-align: center;
-}
-</style>
 
 
+</nav>
 </body>
 </html>
 

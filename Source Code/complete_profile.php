@@ -11,7 +11,7 @@
     $result2 = mysqli_query($db, $query2);
     $view_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
 
-    $query3 = "SELECT * FROM person WHERE person_id = '$uid' ";
+    $query3 = "SELECT * FROM person WHERE person_id = '$view_id' ";
     $result3 = mysqli_query($db, $query3);
     $person_array = mysqli_fetch_array($result3,MYSQLI_ASSOC);
 
