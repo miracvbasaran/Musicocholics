@@ -22,10 +22,10 @@
 </head>
 <body>
 
-	<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-inverse">
       <div class="container-fluid">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="admin.php">Home</a></li>
+          <li class="active"><a href="#">Home</a></li>
           <li><a href="search_admin.php">Search</a></li>
           <li><a href="add_track.php">Add Track</a></li>
           <li><a href="add_album.php">Add Album</a></li>
@@ -35,10 +35,9 @@
         
         <ul class="nav navbar-nav navbar-right">
           <li><a href="change_password_admin.php"><span class="glyphicon glyphicon-user"></span> Change Password</a></li>
-          <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+          <li><a href="homepage.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
         </ul>
       </div>
-    </nav>
 		
 		
 		<div align = "center">
@@ -46,7 +45,7 @@
 				<font color="white">
 					<br/><br/><br/><br/>MUSICHOLICS<br/><br/>Advanced Playlist Search<br/><br/><br/><br/>
 					<font color="black">
-						<input type = "text" name = "search_key" placeholder = "Artist Name"> <br/><br/>
+						<input type = "text" name = "search_key" placeholder = "Playlist Name"> <br/><br/>
 					</font>
 					<input type = "radio" name="match" value="matches"/> Exactly matches &nbsp; &nbsp;
 					<input type = "radio" name="match" value="contains"/> Contains &nbsp; &nbsp;
@@ -71,7 +70,7 @@
 			$creator = mysqli_real_escape_string( $db, $_POST['creator']);
 			
 			if( $search_key == "")
-				echo ' <script type="text/javascript"> alert("Please type an album name"); </script>';
+				echo ' <script type="text/javascript"> alert("Searh will be done for any playlist name"); </script>';
 			if( $match == "")
 				echo ' <script type="text/javascript"> alert("Select from Exactly matches, Contains, Starts with "); </script>';
 			
@@ -81,7 +80,7 @@
 																				AND username LIKE '%$creator%' 
 																				AND creator_id = person_id;");
 				while( $row = $query->fetch_assoc()){ //printing every playlist with that playlist name
-					echo( "<tr><td><a href='access_playlist.php?playlist_id=".$row['playlist_id']."'>".$row['playlist_name']."</a></td></tr><br/>");
+					echo( "<tr><td><a href='view_others_playlist.php?playlist_id=".$row['playlist_id']."'>".$row['playlist_name']."</a></td></tr><br/>");
 				}
 			}
 			else if( $match == "contains"){
@@ -89,7 +88,7 @@
 																				AND username LIKE '%$creator%' 
 																				AND creator_id = person_id;");
 				while( $row = $query->fetch_assoc()){ //printing every playlist with that playlist name
-					echo( "<tr><td><a href='access_playlist.php?playlist_id=".$row['playlist_id']."'>".$row['playlist_name']."</a></td></tr><br/>");
+					echo( "<tr><td><a href='view_others_playlist.php?playlist_id=".$row['playlist_id']."'>".$row['playlist_name']."</a></td></tr><br/>");
 				}
 			}
 			else if( $match == "starts_with"){
@@ -97,7 +96,7 @@
 																				AND username LIKE '%$creator%' 
 																				AND creator_id = person_id;");
 				while( $row = $query->fetch_assoc()){ //printing every playlist with that playlist name
-					echo( "<tr><td><a href='access_playlist.php?playlist_id=".$row['playlist_id']."'>".$row['playlist_name']."</a></td></tr><br/>");
+					echo( "<tr><td><a href='view_others_playlist.php?playlist_id=".$row['playlist_id']."'>".$row['playlist_name']."</a></td></tr><br/>");
 				}
 			}
 			
@@ -110,15 +109,6 @@
 		</div>
 	
 		<br/><br/><br/>
-<style>
-.footer {
-   position: fixed;
-   left: 0;
-   bottom: 0;
-   width: 100%;
-   text-align: center;
-}
-</style>
 
 </body>
 </html>
