@@ -64,7 +64,7 @@
     $max_gifter_username = $result_array['username'];
     $max_gifter_fullname = $result_array['fullname'];
 
-    $query = "SELECT user_id, MAX(budget) AS budget FROM USER GROUP BY user_id;";
+    $query = "SELECT user_id, MIN(budget) AS budget FROM USER GROUP BY user_id;";
     $result = mysqli_query($db, $query);
     $result_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
     $richest_id = $result_array['user_id'];
