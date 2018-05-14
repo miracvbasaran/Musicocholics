@@ -39,6 +39,10 @@
 </nav>
 
 	<div class="container">
+		<h3> Tracks </h3> <br>
+	</div>
+
+	<div class="container">
 		<table class = "table table-hover" style="width:100%">
 	  		<tr>
 	    		<th>Name</th>
