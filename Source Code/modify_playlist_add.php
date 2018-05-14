@@ -8,7 +8,7 @@
     $playlist_id = $_GET['playlist_id'];
 
     if(isset($_POST['add_tracks'])) {
-      if(!empty($_POST['check_list'])){
+      
         foreach($_POST['check_list'] as $selected_track_id){
             $selected_track_id = intval($selected_track_id);
            	$date = date('Y-m-d G:i:s');
@@ -16,10 +16,8 @@
            	$result3 = mysqli_query($db, $query3);
         }
         header("location: view_own_playlist.php?playlist_id=".$playlist_id);
-      }
-      else {
-      	echo ' <script type="text/javascript"> alert("Nothing has chosen."); </script>';
-      }
+      
+      
     }
 
 ?>
@@ -69,45 +67,47 @@
 	</div>
 
 	<div class="container">
-		<table class = "table table-hover" style="width:100%">
-	  		<tr>
-	    		<th>Name</th>
-	    		<th>Recording Type</th>
-	    		<th>Duration</th>
-	    		<th>Danceability</th>
-	    		<th>Acousticness</th>
-	    		<th>Instrumentalness</th>
-	    		<th>Speechness</th>
-	    		<th>Balance</th>
-	    		<th>Loudness</th>
-	    		<th>Language</th>
-	    		<th>Price</th>
-	    		<th>Date of Addition</th>
-	    		<th></th>
-	  		</tr>
-	  		<?php
-	  			$query_track = "SELECT T.track_id, T.track_name, T.recording_type, T.duration, T.danceability, T.Acousticness, T.Instrumentalness, T.Speechness, T.Balance, T.Loudness, T.Language, T.Price, T.date_of_addition FROM buys B, track T WHERE B.user_id = {$uid} AND B.track_id = T.track_id";
-	  			$result_track = mysqli_query($db, $query_track);
-	  			while ($row = mysqli_fetch_array($result_track, MYSQLI_NUM)) {
-      				$t_id = $row[0];
-      				echo "<tr>";
-      				echo "<td><a href = \"view_track.php?track_id={$t_id}\">" . $row[1] . "</a></td>";
-	      			echo "<td>" . $row[2] . "</td>";
-	      			echo "<td>" . $row[3] . "</td>";
-	      			echo "<td>" . $row[4] . "</td>";
-	      			echo "<td>" . $row[5] . "</td>";
-	      			echo "<td>" . $row[6] . "</td>";
-	      			echo "<td>" . $row[7] . "</td>";
-	      			echo "<td>" . $row[8] . "</td>";
-	      			echo "<td>" . $row[9] . "</td>";
-	      			echo "<td>" . $row[10] . "</td>";
-	      			echo "<td>" . $row[11] . "</td>";
-	      			echo "<td>" . $row[12] . "</td>";
-	      			echo "<td> <input class = \"form-control\" type = \"checkbox\" name = \"check_list[]\" value = \"{$t_id}\"></td>";
-	      			echo "</tr>" ;
-	  			}
-	  		?>
-		</table>
+    <form method="post" action="">
+  		<table class = "table table-hover" style="width:100%">
+  	  		<tr>
+  	    		<th>Name</th>
+  	    		<th>Recording Type</th>
+  	    		<th>Duration</th>
+  	    		<th>Danceability</th>
+  	    		<th>Acousticness</th>
+  	    		<th>Instrumentalness</th>
+  	    		<th>Speechness</th>
+  	    		<th>Balance</th>
+  	    		<th>Loudness</th>
+  	    		<th>Language</th>
+  	    		<th>Price</th>
+  	    		<th>Date of Addition</th>
+  	    		<th></th>
+  	  		</tr>
+  	  		<?php
+  	  			$query_track = "SELECT T.track_id, T.track_name, T.recording_type, T.duration, T.danceability, T.Acousticness, T.Instrumentalness, T.Speechness, T.Balance, T.Loudness, T.Language, T.Price, T.date_of_addition FROM buys B, track T WHERE B.user_id = {$uid} AND B.track_id = T.track_id";
+  	  			$result_track = mysqli_query($db, $query_track);
+  	  			while ($row = mysqli_fetch_array($result_track, MYSQLI_NUM)) {
+        				$t_id = $row[0];
+        				echo "<tr>";
+        				echo "<td><a href = \"view_track.php?track_id={$t_id}\">" . $row[1] . "</a></td>";
+  	      			echo "<td>" . $row[2] . "</td>";
+  	      			echo "<td>" . $row[3] . "</td>";
+  	      			echo "<td>" . $row[4] . "</td>";
+  	      			echo "<td>" . $row[5] . "</td>";
+  	      			echo "<td>" . $row[6] . "</td>";
+  	      			echo "<td>" . $row[7] . "</td>";
+  	      			echo "<td>" . $row[8] . "</td>";
+  	      			echo "<td>" . $row[9] . "</td>";
+  	      			echo "<td>" . $row[10] . "</td>";
+  	      			echo "<td>" . $row[11] . "</td>";
+  	      			echo "<td>" . $row[12] . "</td>";
+  	      			echo "<td> <input class = \"form-control\" type = \"checkbox\" name = \"check_list[]\" value = \"{$t_id}\"></td>";
+  	      			echo "</tr>";
+  	  			}
+  	  		?>
+  		</table>
+    </form>
 	</div>
 <style>
 .footer {
