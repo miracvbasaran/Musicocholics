@@ -141,7 +141,8 @@
 
 
 <form method="post" action="">
-  <div class = "container" align = "center"><div class = "col-xs-4" align = "center" ><input type="text" class = "form-control" name="album_name" default= <?php echo $album_name; ?> value= <?php echo $album_name; ?> autofocus> by 
+  <div class = "container" align = "center"><div class = "col-xs-4" align = "center" ><input type="text" class = "form-control" name="album_name" 
+    default = <?php echo "'".$album_name."'"; ?> value= <?php echo "'".$album_name."'"; ?> autofocus> by 
 
 </div></div>
   <br><div class = "container" align = "center">

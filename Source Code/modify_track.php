@@ -146,7 +146,8 @@
 
 
 <form method="post" action="">
-  <div class="col-xs-3">Track Name: <input type="text" name="track_name" class = "form-control" default = <?php echo "$track_name"; ?> value= <?php echo "$track_name"; ?> autofocus><br></div>
+  <div class="col-xs-3">Track Name: <input type="text" name="track_name" class = "form-control" default = <?php echo "'".$track_name."'"; ?> 
+    value= <?php echo "'".$track_name."'"; ?> autofocus><br></div>
   <div class="col-xs-3">Recording Type: <select class = "form-control" name="recording_type">
     <option value="Live">Live</option>
     <option value="Studio">Studio</option>
