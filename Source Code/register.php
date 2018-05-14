@@ -14,9 +14,17 @@ include("connection.php");
 </head>
 <body>
 
+	
+  <div class = "container" align = "center"><h2>
+	<font color="black">
+		<br/><br/>
+		Register</h2>
+		<br/><br/>
+	</font>
+	</div>
+
 	<div align = "center">
 		<form action = "#" method = "post" onsubmit = "">
-			<br/><br/><br/><br/>MUSICHOLICS<br/><br/>Register<br/><br/><br/><br/>
 			<input type = "text" name = "name" placeholder = "Name"> <br/><br/>
 			<input type = "text" name = "username" placeholder = "Username"> <br/><br/>
 			<input type = "password" name = "pass" placeholder = "Password"> <br/><br/>
@@ -132,6 +140,6 @@ include("connection.php");
 	}
 				
 ?>
-	
+
 </body>
 </html>
