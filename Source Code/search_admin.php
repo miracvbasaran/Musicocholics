@@ -27,10 +27,9 @@ include("session.php");
         
         <ul class="nav navbar-nav navbar-right">
           <li><a href="change_password_admin.php"><span class="glyphicon glyphicon-user"></span> Change Password</a></li>
-          <li><a href="login.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+          <li><a href="homepage.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
         </ul>
       </div>
-    </nav>
 	
 		<div align = "center">
 			<form action = "#" method = "post">
@@ -47,8 +46,8 @@ include("session.php");
 					<tr><td><a href='advanced_album_search_admin.php'> Advanced Album Search</a></td></tr><br/>
 					<input type="checkbox" name="filter_artist" value="artist"/> Artist &nbsp;&nbsp; 
 					<tr><td><a href='advanced_artist_search_admin.php'> Advanced Artist Search</a></td></tr><br/>
-					<input type="checkbox" name="filter_playlist" value="playlist"/> Playlist &nbsp;&nbsp; 
-					<tr><td><a href='advanced_playlist_search_admin.php'> Advanced Playlist Search</a></td></tr><br/>
+					<!-- <input type="checkbox" name="filter_playlist" value="playlist"/> Playlist &nbsp;&nbsp;
+					<tr><td><a href='advanced_playlist_search_admin.php'> Advanced Playlist Search</a></td></tr><br/> -->
 					<input type="checkbox" name="filter_user" value="user"/> User &nbsp;&nbsp; 
 					<tr><td><a href='advanced_user_search_admin.php'> Advanced User Search</a></td></tr><br/><br/>
 				</font>
@@ -63,7 +62,7 @@ include("session.php");
 					//echo( "<tr> <td>".$filter."</td> </tr><br/>");
 					
 					if( $search_key == "")
-						echo ' <script type="text/javascript"> alert("Please type an album name"); </script>';
+						echo ' <script type="text/javascript"> alert("Search will be done for anything"); </script>';
 					
 					
 					if( isset( $_POST['filter_track'])){//TRACK
@@ -84,16 +83,16 @@ include("session.php");
 							echo( "<tr><td><a href='access_artist.php?artist_id=".$row['artist_id']."'>".$row['artist_name']."</a></td></tr><br/>");
 						}
 					}
-					if( isset( $_POST['filter_playlist'])){ //PLAYLIST
-						$query = mysqli_query( $db, "SELECT * FROM Playlist WHERE playlist_name LIKE '%$search_key%';");
-						while( $row = $query->fetch_assoc()){ //printing every playlist with that playlist name
-							echo( "<tr><td><a href='access_playlist.php?playlist_id=".$row['playlist_id']."'>".$row['playlist_name']."</a></td></tr><br/>");
-						}
-					}
+					// if( isset( $_POST['filter_playlist'])){ //PLAYLIST
+// 						$query = mysqli_query( $db, "SELECT * FROM Playlist WHERE playlist_name LIKE '%$search_key%';");
+// 						while( $row = $query->fetch_assoc()){ //printing every playlist with that playlist name
+// 							echo( "<tr><td><a href='access_playlist.php?playlist_id=".$row['playlist_id']."'>".$row['playlist_name']."</a></td></tr><br/>");
+// 						}
+// 					}
 					if( isset( $_POST['filter_user'])){ //USER
 						$query = mysqli_query( $db, "SELECT * FROM Person, User WHERE (username LIKE '%$search_key%') AND user_id = person_id;");
 						while( $row = $query->fetch_assoc()){ //printing every user with that user name
-							echo( "<tr><td><a href='complete_profile.php?view_id=".$row['username']."'>".$row['user_id']."</a></td></tr><br/>");
+							echo( "<tr><td><a href='complete_profile.php?view_id=".$row['username']."'>".$row['username']."</a></td></tr><br/>");
 						}
 					}
 				}
