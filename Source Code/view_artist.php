@@ -75,7 +75,7 @@
   
   while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
       $a_id = $row[3];
-      echo "<tr onclick = \"document.location = 'access_album.php?album_id={$row[3]}' \">";
+      echo "<tr onclick = \"document.location = 'view_album.php?album_id={$row[3]}' \">";
       echo "<td>" . $row[0] . "</td>";
       echo "<td>" . $row[1] . "</td>";
       echo "<td>" . $row[2] . "</td>";
