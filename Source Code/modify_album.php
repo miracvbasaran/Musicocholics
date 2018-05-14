@@ -70,9 +70,9 @@
       $new_track_name = $_POST['new_track_name'];
       $new_track_price = $_POST['new_track_price'];
       $new_track_duration = $_POST['new_track_duration'];
-      $insertion_date = date(Y-m-d);
-      $query = "INSERT INTO Track(track_name, price, date_of_addition, duration, album_id) VALUES('{$new_track_name}', '{$new_track_price}', '{$insertion_date}', $new_track_duration, $album_id)";
-      if(mysqli_query($db, $query) === TRUE){
+      $insertion_date = date('Y-m-d');
+      $query = "INSERT INTO Track(track_name, price, date_of_addition, duration, album_id) VALUES('{$new_track_name}', {$new_track_price}, '{$insertion_date}', \"{$new_track_duration}\", $album_id)";
+      if(mysqli_query($db, $query)){
           $query = "SELECT LAST_INSERT_ID()";
           $result = mysqli_query($db, $query);
           $index_array = mysqli_fetch_array($result, MYSQLI_NUM);
@@ -102,7 +102,7 @@
 <nav class="navbar navbar-inverse">
       <div class="container-fluid">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="#">Home</a></li>
+          <li class="active"><a href="admin.php">Home</a></li>
           <li><a href="search_admin.php">Search</a></li>
           <li><a href="add_track.php">Add Track</a></li>
           <li><a href="add_album.php">Add Album</a></li>
@@ -189,7 +189,7 @@
 <form method="post" action="">
   <h3>Add Track</h3>
   <div class="col-xs-3">Track Name: <input type="text" class = "form-control" name="new_track_name"  autofocus></div>
-  <div class="col-xs-3">Duration: <input type="time" class = "form-control" name="new_track_duration"  autofocus></div>
+  <div class="col-xs-3">Duration: <input type="time" class = "form-control" name="new_track_duration"  step="1" autofocus></div>
   <div class="col-xs-3">Price (in $): <input type="number" class = "form-control" step="0.01" name="new_track_price" style="text-align:right;" autofocus></div>
 
   <div class="col-xs-3"><br><input type="submit" name="add_track" value="Add Track"  class = "btn btn-success"> </div>

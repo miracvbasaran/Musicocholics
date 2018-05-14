@@ -51,16 +51,12 @@
       $new_album_publish_date = $_POST['new_album_publish_date'];
       $new_album_publisher = $_POST['new_album_publisher'];
 
-      $query = "SELECT publisher_id FROM Publisher WHERE publisher_name = '{$new_album_publisher}'";
+      $query = "SELECT * FROM Publisher WHERE publisher_name = '$new_album_publisher';";
       $result = mysqli_query($db, $query);
-      if($result == FALSE){
-        echo ' <script type="text/javascript"> alert("There is no such publisher"); </script>';
-      }
-      else{
-        $index_array = mysqli_fetch_array($result, MYSQLI_NUM);
-        $publisher_id = $index_array[0];
-
-        $query = "INSERT INTO Album(album_name, album_type, published_date, publisher_id) VALUES('{$new_album_name}', '{$new_album_type}', '{$new_album_publish_date}', {$publisher_id})";
+      if($result){
+        $index_array = mysqli_fetch_array($result, MYSQLI_ASSOC);
+        $publisher_id = $index_array['publisher_id'];
+        $query = "INSERT INTO Album(album_name, album_type, published_date, publisher_id, artist_id) VALUES('{$new_album_name}', '{$new_album_type}', '{$new_album_publish_date}', {$publisher_id}, {$artist_id})";
         if(mysqli_query($db, $query) == TRUE){
           $query = "SELECT MAX(album_id) FROM Album";
           $result = mysqli_query($db, $query);
@@ -72,8 +68,11 @@
         else{
           echo ' <script type="text/javascript"> alert("Could not add album to artist."); </script>';
         }
-
       
+      }
+      else{
+        echo ' <script type="text/javascript"> alert("There is no such publisher"); </script>';
+        
       }
     }
 ?>
@@ -94,7 +93,7 @@
 <nav class="navbar navbar-inverse">
       <div class="container-fluid">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="#">Home</a></li>
+          <li class="active"><a href="admin.php">Home</a></li>
           <li><a href="search_admin.php">Search</a></li>
           <li><a href="add_track.php">Add Track</a></li>
           <li><a href="add_album.php">Add Album</a></li>
@@ -157,11 +156,11 @@
 </div>
 
  <div class="container">
-
+<h3>Add Album</h3>
 <form method="post" action="">
-  <h3>Add Album</h3>
+  
   <div class="col-xs-3">Album Name: <input class = "form-control" type="text" name="new_album_name"  autofocus></div>
-  <div class="col-xs-3">Album Publisher: <input class = "form-control" type = "text" name"new_album_publisher"  autofocus></div>
+  <div class="col-xs-3">Album Publisher: <input class = "form-control" type = "text" name = "new_album_publisher"  autofocus></div>
    <div class="col-xs-3">Album Type: <select class = "form-control" name="new_album_type">
     <option value="Album">Album</option>
     <option value="Single">Single</option>
