@@ -42,13 +42,13 @@ include("session.php");
 						<input id = "" value = "Search" name = "search" type = "submit"> </button> <br/><br/>
 					</font>
 					<input type="checkbox" name="filter_track" value="track"/> Track &nbsp;&nbsp;
-					<tr><td><a href='advanced_track_search.php'> Advanced Track Search</a></td></tr><br/>
+					<tr><td><a href='advanced_track_search_admin.php'> Advanced Track Search</a></td></tr><br/>
 					<input type="checkbox" name="filter_album" value="album"/> Album &nbsp;&nbsp;
-					<tr><td><a href='advanced_album_search.php'> Advanced Album Search</a></td></tr><br/>
+					<tr><td><a href='advanced_album_search_admin.php'> Advanced Album Search</a></td></tr><br/>
 					<input type="checkbox" name="filter_artist" value="artist"/> Artist &nbsp;&nbsp; 
-					<tr><td><a href='advanced_artist_search.php'> Advanced Artist Search</a></td></tr><br/>
+					<tr><td><a href='advanced_artist_search_admin.php'> Advanced Artist Search</a></td></tr><br/>
 					<input type="checkbox" name="filter_playlist" value="playlist"/> Playlist &nbsp;&nbsp; 
-					<tr><td><a href='advanced_playlist_search.php'> Advanced Playlist Search</a></td></tr><br/>
+					<tr><td><a href='advanced_playlist_search_admin.php'> Advanced Playlist Search</a></td></tr><br/>
 					<input type="checkbox" name="filter_user" value="user"/> User &nbsp;&nbsp; 
 					<tr><td><a href='advanced_user_search_admin.php'> Advanced User Search</a></td></tr><br/><br/>
 				</font>
