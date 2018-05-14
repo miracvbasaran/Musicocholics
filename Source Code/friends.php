@@ -38,7 +38,10 @@ error_reporting(0);
     </ul>
   </div>
 </nav>
+   
+
 		<div class="container">
+     <h2> FRIENDS </h2>
     <table class = "table table-hover" style="width:60%">
 		<tr>
           <th>Username</th>
@@ -62,8 +65,6 @@ error_reporting(0);
                 echo "<td>" . $row_big['fullname'] . "</td>";
       echo "</tr>" ;
 
-			//echo( "<tr><td><a href='friend_profile.php?other_id=".$fid."'>".$row['username']."</a></td></tr><br><br/>");
-			
 		}
 		
 		
