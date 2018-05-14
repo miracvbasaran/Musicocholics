@@ -22,10 +22,10 @@
 </head>
 <body>
 
-	<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-inverse">
       <div class="container-fluid">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="admin.php">Home</a></li>
+          <li class="active"><a href="#">Home</a></li>
           <li><a href="search_admin.php">Search</a></li>
           <li><a href="add_track.php">Add Track</a></li>
           <li><a href="add_album.php">Add Album</a></li>
@@ -35,10 +35,9 @@
         
         <ul class="nav navbar-nav navbar-right">
           <li><a href="change_password_admin.php"><span class="glyphicon glyphicon-user"></span> Change Password</a></li>
-          <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+          <li><a href="homepage.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
         </ul>
       </div>
-    </nav>
 		
 		<div align = "center">
 			<form action = "#" method = "post" onsubmit = "">
@@ -81,7 +80,7 @@
 			
 			
 			if( $search_key == "")
-				echo ' <script type="text/javascript"> alert("Please type an album name"); </script>';
+				echo ' <script type="text/javascript"> alert("Search will be done for any track name"); </script>';
 			if( $match == "")
 				echo ' <script type="text/javascript"> alert("Select from Exactly matches, Contains, Starts with "); </script>';
 			if( $from_date == "")
@@ -100,7 +99,7 @@
 
 										
 				while( $row = $query->fetch_assoc()){ 
-																			echo( "<tr> <td><a href='access_track.php?track_id=".$row['track_id']."'>".$row['track_name']."</a></td> </tr><br/>");
+																			echo( "<tr> <td><a href='modify_track.php?track_id=".$row['track_id']."'>".$row['track_name']."</a></td> </tr><br/>");
 				}
 			}
 			else if( $match == "contains"){
@@ -109,7 +108,7 @@
 																		AND date_of_addition >= '$from_date'
 																		AND date_of_addition <= '$end_date';");
 				while( $row = $query->fetch_assoc()){ 
-					echo( "<tr> <td><a href='access_album.php?track_id=".$row['track_id']."'>".$row['track_name']."</a></td> </tr><br/>");
+					echo( "<tr> <td><a href='modify_track.php?track_id=".$row['track_id']."'>".$row['track_name']."</a></td> </tr><br/>");
 				}
 			}
 			else if( $match == "starts_with"){
@@ -118,7 +117,7 @@
 																		AND date_of_addition >= '$from_date'
 																		AND date_of_addition <= '$end_date';");
 				while( $row = $query->fetch_assoc()){ 
-					echo( "<tr> <td><a href='access_album.php?track_id=".$row['track_id']."'>".$row['track_id']."</a></td> </tr>");
+					echo( "<tr> <td><a href='modify_track.php?track_id=".$row['track_id']."'>".$row['track_name']."</a></td> </tr>");
 				}
 			}
 			
@@ -131,15 +130,6 @@
 		</div>
 	
 		<br/><br/><br/>
-<style>
-.footer {
-   position: fixed;
-   left: 0;
-   bottom: 0;
-   width: 100%;
-   text-align: center;
-}
-</style>
 
 </body>
 </html>
