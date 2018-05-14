@@ -5,37 +5,30 @@
     $result1 = mysqli_query($db, $query1);
     $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
 
-    if(isset($_POST['create_playlist'])) {
-    	if(isset($_POST['playlist_name'])) {
-        if(isset($_POST['playlist_description'])) {
-          $playlist_name = $_POST['playlist_name'];
-          $playlist_description = $_POST['playlist_description'];
-          $empty_picture = '';
-          $date = date('Y-m-d');
-          $query_insert = "INSERT INTO Playlist(playlist_name, description, picture, creator_id, date) VALUES('$playlist_name', '$playlist_description', '$empty_picture', {$uid}, '$date')";
-          $result_insert = mysqli_query($db, $query_insert);
-          $query5 = "SELECT MAX(playlist_id) as new_id FROM Playlist";
-          $result5 = mysqli_query($db, $query5);
-          $index_array = mysqli_fetch_array($result5, MYSQLI_ASSOC);
-          $new_id = $index_array['new_id'];
-          header("location: modify_playlist_add.php?playlist_id=".$new_id);
+    $playlist_id = $_GET['playlist_id'];
+
+    if(isset($_POST['add_tracks'])) {
+      if(!empty($_POST['check_list'])){
+        foreach($_POST['check_list'] as $selected_track_id){
+            $selected_track_id = intval($selected_track_id);
+           	$date = date('Y-m-d G:i:s');
+           	$query3 = "INSERT INTO added(playlist_id, track_id, date) VALUES({$playlist_id}, {$selected_track_id}, '$date')";
+           	$result3 = mysqli_query($db, $query3);
         }
-        else {
-          echo ' <script type="text/javascript"> alert("Playlist description is not entered."); </script>';
-        }
+        header("location: view_own_playlist.php?playlist_id=".$playlist_id);
       }
       else {
-        echo ' <script type="text/javascript"> alert("Playlist name is not entered."); </script>';
+      	echo ' <script type="text/javascript"> alert("Nothing has chosen."); </script>';
       }
     }
-    		
+
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-	<title>Musicholics - Own Playlists</title>
+	<title>Musicholics - View Tracks</title>
   	<meta charset="utf-8">
   	<meta name="viewport" content="width=device-width, initial-scale=1">
   	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -63,31 +56,54 @@
   </div>
 </nav>
 
-  <div class="container" align="center">
-    <h3> Playlists </h3> <br>
-    <form method="post" action="">
-      Playlist Name: <input type="text" name="playlist_name" value= "" autofocus> <br>
+	<div class="container">
+		<h3> Tracks </h3> <br>
+	</div>
 
-      Description: <textarea class="form-control" rows="2" name="playlist_description" autofocus></textarea><br>
-
-      <input type="submit" name="create_playlist" value="Create Playlist" class="btn btn-warning"> <br><br>
-    </form>
-  </div>
+	<div class="container" align="right">
+		<p>
+			<form method="post" action="">
+				<input id='Submit' name='add_tracks' type='Submit' value='Add Tracks' class="btn btn-success">
+			</form>
+		</p>
+	</div>
 
 	<div class="container">
 		<table class = "table table-hover" style="width:100%">
 	  		<tr>
 	    		<th>Name</th>
-	    		<th>Description</th> 
+	    		<th>Recording Type</th>
+	    		<th>Duration</th>
+	    		<th>Danceability</th>
+	    		<th>Acousticness</th>
+	    		<th>Instrumentalness</th>
+	    		<th>Speechness</th>
+	    		<th>Balance</th>
+	    		<th>Loudness</th>
+	    		<th>Language</th>
+	    		<th>Price</th>
+	    		<th>Date of Addition</th>
+	    		<th></th>
 	  		</tr>
 	  		<?php
-	  			$query_playlist = "SELECT P.playlist_id, P.playlist_name, P.description FROM playlist P WHERE P.creator_id = {$uid}";
-	  			$result_playlist = mysqli_query($db, $query_playlist);
-	  			while ($row = mysqli_fetch_array($result_playlist, MYSQLI_NUM)) {
-      				$p_id = $row[0];
-      				echo "<tr onclick = \"document.location = 'view_own_playlist.php?playlist_id={$p_id}' \">";
-	      			echo "<td>" . $row[1] . "</td>";
+	  			$query_track = "SELECT T.track_id, T.track_name, T.recording_type, T.duration, T.danceability, T.Acousticness, T.Instrumentalness, T.Speechness, T.Balance, T.Loudness, T.Language, T.Price, T.date_of_addition FROM buys B, track T WHERE B.user_id = {$uid} AND B.track_id = T.track_id";
+	  			$result_track = mysqli_query($db, $query_track);
+	  			while ($row = mysqli_fetch_array($result_track, MYSQLI_NUM)) {
+      				$t_id = $row[0];
+      				echo "<tr>";
+      				echo "<td><a href = \"view_track.php?track_id={$t_id}\">" . $row[1] . "</a></td>";
 	      			echo "<td>" . $row[2] . "</td>";
+	      			echo "<td>" . $row[3] . "</td>";
+	      			echo "<td>" . $row[4] . "</td>";
+	      			echo "<td>" . $row[5] . "</td>";
+	      			echo "<td>" . $row[6] . "</td>";
+	      			echo "<td>" . $row[7] . "</td>";
+	      			echo "<td>" . $row[8] . "</td>";
+	      			echo "<td>" . $row[9] . "</td>";
+	      			echo "<td>" . $row[10] . "</td>";
+	      			echo "<td>" . $row[11] . "</td>";
+	      			echo "<td>" . $row[12] . "</td>";
+	      			echo "<td> <input class = \"form-control\" type = \"checkbox\" name = \"check_list[]\" value = \"{$t_id}\"></td>";
 	      			echo "</tr>" ;
 	  			}
 	  		?>
