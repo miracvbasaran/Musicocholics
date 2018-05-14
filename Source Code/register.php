@@ -23,25 +23,26 @@ include("connection.php");
 			<input type = "text" name = "email" placeholder = "E-mail address"> <br/><br/>
 			<select name="country">
 				<option value="Country">Country</option>
-				<option value="tr">Turkey</option>
-				<option value="gb">Global</option>
+				<option value="Turkey">Turkey</option>
+				<option value="Germany">Germany</option>
+				<option value="USA">USA</option>
 			</select>
 			<br/><br/>
 			<select name="language">
 				<option value="Language">Language</option>
-				<option value="tr">Turkish</option>
-				<option value="en">English</option>
+				<option value="Turkish">Turkish</option>
+				<option value="English">English</option>
+				<option value="German">German</option>
 			</select>
 			<br/><br/>
 			<input type="date" name="birthday" placeholder="Birtdate (YYYY-MM-DD)"><br/><br/>
 			<select name="gender">
 				<option value="Gender">Gender</option>
-				<option value="M">Male</option>
-				<option value="F">Female</option>
-				<option value="NB">Non-binary</option>
+				<option value="male">Male</option>
+				<option value="female">Female</option>
+				<option value="nonbinary">Non-binary</option>
 			</select>
 			<br/><br/>
-			
 			
 			<br/><br/>
 			<br/><br/>
@@ -63,8 +64,6 @@ include("connection.php");
 		$birthday = mysqli_real_escape_string( $db, $_POST['birthday']);
 		$gender = mysqli_real_escape_string( $db, $_POST['gender']);
 		$budget = 0;
-		
-		
 		//picture_path
 		if(isset($_POST["uploadpic"])){
 			$name = $_FILES['photo']['name'];
@@ -88,13 +87,13 @@ include("connection.php");
 			echo ' <script type="text/javascript"> alert("Fill in the password area"); </script>';
 		if( $email == "")
 			echo ' <script type="text/javascript"> alert("Fill in the email area"); </script>';
-		if( $country == "")
+		if( $country == "Country")
 			echo ' <script type="text/javascript"> alert("Select your country"); </script>';
-		if( $language == "")
+		if( $language == "Language")
 			echo ' <script type="text/javascript"> alert("Select your language"); </script>';
 		if( $birthday == "")
 			echo ' <script type="text/javascript"> alert("Fill in the birthday area"); </script>';
-		if( $gender == "")
+		if( $gender == "Gender")
 			echo ' <script type="text/javascript"> alert("Select your gender"); </script>';
 		
 		
@@ -120,7 +119,7 @@ include("connection.php");
 				echo ' <script type="text/javascript"> alert("Error: Could not insert into Person"); </script>';
 			}
 
-			$uresult = mysqli_query( $db, "INSERT INTO User ( user_id, country, language, date_of_registration, birthday, gender, budget) VALUES ( (SELECT MAX(person_id) FROM Person), '$country', '$language', '$date_of_registration', '$birthday', '$gender', '$budget');") or die( mysqli_error( $db));
+			$uresult = mysqli_query( $db, "INSERT INTO User ( user_id, country, language, date_of_registration, birthday, gender, budget, membership_type) VALUES ( (SELECT MAX(person_id) FROM Person), '$country', '$language', '$date_of_registration', '$birthday', '$gender', '$budget', 'normal');") or die( mysqli_error( $db));
 					
 			if( !$uresult){
 				echo ' <script type="text/javascript"> alert("Error: Could not insert into User"); </script>';
