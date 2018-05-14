@@ -38,10 +38,18 @@
 		    </ul>
 		</div>
 		
+	  <div class = "container" align = "center"><h2>
+		<font color="white">
+			<br/><br/>
+			Advanced Track Search</h2>
+			<br/><br/>
+		</font>
+		</div>
+		
+		
 		<div align = "center">
 			<form action = "#" method = "post" onsubmit = "">
 				<font color="white">
-					<br/><br/><br/><br/>MUSICHOLICS<br/><br/>Advanced Track Search<br/><br/><br/><br/>
 					<font color="black">
 						<input type = "text" name = "search_key" placeholder = "Track Name"> <br/><br/>
 					</font>
@@ -65,7 +73,13 @@
 			</form>
 		</div>
 		
-		
+  	  <div class = "container" align = "center"><h4>
+  		<font color="white">
+  			<br/><br/>
+  			Results</h4>
+  			<br/><br/>
+  		</font>
+  		</div>
 		
 		
 		<?php
@@ -98,7 +112,7 @@
 
 										
 				while( $row = $query->fetch_assoc()){ 
-																			echo( "<tr> <td><a href='track.php?track_id=".$row['track_id']."'>".$row['track_name']."</a></td> </tr><br/>");
+					echo( "<div align = \"center\"><tr> <td><a href='view_track.php?track_id=".$row['track_id']."'>".$row['track_name']."</a></td> </tr><br/></div>");
 				}
 			}
 			else if( $match == "contains"){
@@ -107,7 +121,7 @@
 																		AND date_of_addition >= '$from_date'
 																		AND date_of_addition <= '$end_date';");
 				while( $row = $query->fetch_assoc()){ 
-					echo( "<tr> <td><a href='album.php?track_id=".$row['track_id']."'>".$row['track_name']."</a></td> </tr><br/>");
+					echo( "<div align = \"center\"><tr> <td><a href='view_track.php?track_id=".$row['track_id']."'>".$row['track_name']."</a></td> </tr><br/></div>");
 				}
 			}
 			else if( $match == "starts_with"){
@@ -116,7 +130,7 @@
 																		AND date_of_addition >= '$from_date'
 																		AND date_of_addition <= '$end_date';");
 				while( $row = $query->fetch_assoc()){ 
-					echo( "<tr> <td><a href='album.php?track_id=".$row['track_id']."'>".$row['track_id']."</a></td> </tr>");
+					echo( "<div align = \"center\"><tr> <td><a href='view_track.php?track_id=".$row['track_id']."'>".$row['track_id']."</a></td> </tr><br/></div>");
 				}
 			}
 			

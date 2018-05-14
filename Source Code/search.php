@@ -42,11 +42,17 @@
 		    </ul>
 		</div>
 
+		  <div class = "container" align = "center"><h2>
+			<font color="white">
+				<br/><br/>
+				Search</h2>
+				<br/><br/>
+			</font>
+			</div>
 	
 		<div align = "center">
 			<form action = "#" method = "post">
 				<font color="white">
-					<br/><br/><br/><br/>MUSICHOLICS<br/><br/>Search<br/><br/><br/><br/>
 					
 					<font color="black">
 						<input type = "text" name = "search_key" placeholder = "Search.."> 
@@ -65,6 +71,15 @@
 				</font>
 			</form>
 		</div>
+		
+		
+	  <div class = "container" align = "center"><h4>
+		<font color="white">
+			<br/><br/>
+			Results</h4>
+			<br/><br/>
+		</font>
+		</div>
 
 				<?php
 	
@@ -82,19 +97,19 @@
 					if( isset( $_POST['filter_track'])){//TRACK
 						$query = mysqli_query( $db, "SELECT * FROM Track WHERE track_name LIKE '%$search_key%';");
 						while( $row = $query->fetch_assoc()){ //printing every track with that track name
-							echo( "<tr> <td><a href='view_track.php?track_id=".$row['track_id']."'>".$row['track_name']."</a></td> </tr><br/>");
+							echo( "<div align = \"center\"><tr> <td><a href='view_track.php?track_id=".$row['track_id']."'>".$row['track_name']."</a></td> </tr><br/></div>");
 						}
 					}
 					if( isset( $_POST['filter_album'])){ //ALBUM
 						$query = mysqli_query( $db, "SELECT * FROM Album WHERE album_name LIKE '%$search_key%';");
 						while( $row = $query->fetch_assoc()){ //printing every album with that album name
-							echo( "<tr> <td><a href='view_album.php?album_id=".$row['album_id']."'>".$row['album_name']."</a></td> </tr><br/>");
+							echo( "<div align = \"center\"><tr> <td><a href='view_album.php?album_id=".$row['album_id']."'>".$row['album_name']."</a></td> </tr><br/></div>");
 						}
 					}
 					if( isset( $_POST['filter_artist'])){ //ARTIST
 						$query = mysqli_query( $db, "SELECT * FROM Artist WHERE artist_name LIKE '%$search_key%';");
 						while( $row = $query->fetch_assoc()){ //printing every artist with that artist name
-							echo( "<tr><td><a href='view_artist.php?artist_id=".$row['artist_id']."'>".$row['artist_name']."</a></td></tr><br/>");
+							echo( "<div align = \"center\"><tr><td><a href='view_artist.php?artist_id=".$row['artist_id']."'>".$row['artist_name']."</a></td></tr><br/></div>");
 						}
 					}
 					if( isset( $_POST['filter_playlist'])){ //PLAYLIST
@@ -102,10 +117,10 @@
 						while( $row = $query->fetch_assoc()){ //printing every playlist with that playlist name
 							$query2 = mysqli_query( $db, "SELECT * FROM Playlist WHERE playlist_id = {$row['playlist_id']} AND creator_id = {$u_id};");
 							if($query2){
-								echo( "<tr><td><a href='view_own_playlist.php?playlist_id=".$row['playlist_id']."'>".$row['playlist_name']."</a></td></tr><br/>");
+								echo( "<div align = \"center\"><tr><td><a href='view_own_playlist.php?playlist_id=".$row['playlist_id']."'>".$row['playlist_name']."</a></td></tr><br/></div>");
 							}
 							else{
-								echo( "<tr><td><a href='view_others_playlist.php?playlist_id=".$row['playlist_id']."'>".$row['playlist_name']."</a></td></tr><br/>");
+								echo( "<div align = \"center\"><tr><td><a href='view_others_playlist.php?playlist_id=".$row['playlist_id']."'>".$row['playlist_name']."</a></td></tr><br/></div>");
 							}
 							
 						}
@@ -124,7 +139,7 @@
 								//printing friends
 								$fquery = mysqli_query( $db, "SELECT * FROM Friendship WHERE (user1_id = '$uid' OR user2_id = '$uid') AND (user1_id = '$id' OR user2_id = '$id');");
 								while( $frow = $fquery->fetch_assoc()){ //for each friend
-									echo( "<tr><td><a href='friend_profile.php?other_id=".$id."'>".$row['username']."</a></td></tr><br/>");
+									echo( "<div align = \"center\"><tr><td><a href='friend_profile.php?other_id=".$id."'>".$row['username']."</a></td></tr><br/></div>");
 									$id_list->push($id);
 								}
 								
@@ -149,7 +164,7 @@
 										
 								}
 								if( $id_count == $id_list->count()){ //not friend, not blocked -> non-friend
-									echo( "<tr><td><a href='nonfriend_profile.php?other_id=".$id."'>".$row['username']."</a></td></tr><br/>");
+									echo( "<div align = \"center\"><tr><td><a href='nonfriend_profile.php?other_id=".$id."'>".$row['username']."</a></td></tr><br/></div>");
 								}
 								
 							}

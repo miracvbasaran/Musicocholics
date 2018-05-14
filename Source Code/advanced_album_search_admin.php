@@ -25,24 +25,32 @@
 <nav class="navbar navbar-inverse">
       <div class="container-fluid">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="admin.php">Home</a></li>
-          <li><a href="search_admin.php">Search</a></li>
-          <li><a href="add_track.php">Add Track</a></li>
-          <li><a href="add_album.php">Add Album</a></li>
-          <li><a href="add_artist.php">Add Artist</a></li>
-          <li><a href="add_publisher.php">Add Publisher</a></li>
+          <li><a href="admin.php">Home</a></li>
+          <li class="active"><a href="search_admin.php">Search</a></li>
+          <li><a href="modify_track.php">Add Track</a></li>
+          <li><a href="modify_album.php">Add Album</a></li>
+          <li><a href="modify_artist.php">Add Artist</a></li>
+          <li><a href="modify_publisher.php">Add Publisher</a></li>
         </ul>
+        
         
         <ul class="nav navbar-nav navbar-right">
           <li><a href="change_password_admin.php"><span class="glyphicon glyphicon-user"></span> Change Password</a></li>
-          <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+          <li><a href="homepage.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
         </ul>
       </div>
+	  
+	  <div class = "container" align = "center"><h2>
+		<font color="white">
+			<br/><br/>
+			Advanced Track Search</h2>
+			<br/><br/>
+		</font>
+		</div>
 		
 		<div align = "center">
 			<form action = "#" method = "post" onsubmit = "">
 				<font color="white">
-					<br/><br/><br/><br/>MUSICHOLICS<br/><br/>Advanced Album Search<br/><br/><br/><br/>
 					<font color="black">
 						<input type = "text" name = "search_key" placeholder = "Album Name"> <br/><br/>
 					</font>
@@ -67,7 +75,13 @@
 			</form>
 		</div>
 		
-		
+    	  <div class = "container" align = "center"><h4>
+    		<font color="white">
+    			<br/><br/>
+    			Results</h4>
+    			<br/><br/>
+    		</font>
+    		</div>
 		
 		
 		<?php
@@ -99,7 +113,7 @@
 
 										
 				while( $row = $query->fetch_assoc()){ 
-					echo( "<tr> <td><a href='modify_album.php?album_id=".$row['album_id']."'>".$row['album_name']."</a></td> </tr><br/>");
+					echo( "<div align = \"center\"><tr> <td><a href='modify_album.php?album_id=".$row['album_id']."'>".$row['album_name']."</a></td> </tr><br/></div>");
 				}
 			}
 			else if( $match == "contains"){
@@ -108,7 +122,7 @@
 																		AND published_date >= '$from_date'
 																		AND published_date <= '$end_date';");
 				while( $row = $query->fetch_assoc()){ 
-					echo( "<tr> <td><a href='modify_album.php?album_id=".$row['album_id']."'>".$row['album_name']."</a></td> </tr><br/>");
+					echo( "<div align = \"center\"><tr> <td><a href='modify_album.php?album_id=".$row['album_id']."'>".$row['album_name']."</a></td> </tr><br/></div>");
 				}
 			}
 			else if( $match == "starts_with"){
@@ -117,7 +131,7 @@
 																		AND published_date >= '$from_date'
 																		AND published_date <= '$end_date';");
 				while( $row = $query->fetch_assoc()){ 
-					echo( "<tr> <td><a href='modify_album.php?album_id=".$row['album_id']."'>".$row['album_name']."</a></td> </tr>");
+					echo( "<div align = \"center\"><tr> <td><a href='modify_album.php?album_id=".$row['album_id']."'>".$row['album_name']."</a></td> </tr><br/></div>");
 				}
 			}
 			

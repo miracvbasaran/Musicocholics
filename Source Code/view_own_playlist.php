@@ -6,24 +6,32 @@
     $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
     $username = $user_array['username'];
 
+    $query5 = "SELECT * FROM user WHERE user_id = {$uid}";
+    $result5 = mysqli_query($db, $query5);
+    $u_user_array = mysqli_fetch_array($result5, MYSQLI_ASSOC);
+    $membership_type = $u_user_array['membership_type'];
+
     $playlist_id = $_GET['playlist_id'];
     $query2 = "SELECT * FROM playlist WHERE playlist_id = {$playlist_id}";
     $result2 = mysqli_query($db, $query2);
     $playlist_array =  mysqli_fetch_array($result2, MYSQLI_ASSOC);
     $playlist_name = $playlist_array['playlist_name'];
+    $playlist_desc = $playlist_array['description'];
+
+    $query_c = "SELECT COUNT(rate) as cnt_rate FROM rates WHERE playlist_id = {$playlist_id}";
+    $result_c = mysqli_query($db, $query_c);
+    $rates_array_c =  mysqli_fetch_array($result_c, MYSQLI_ASSOC);
+    $cnt_rate_c = $rates_array_c['cnt_rate'];
 
     $query3 = "SELECT AVG(rate) as avg_rate FROM rates WHERE playlist_id = {$playlist_id}";
     $result3 = mysqli_query($db, $query3);
-    if($result3->num_rows === 1 ){
-    	$avg_rate = 0.0;
-    	
-    }
-    else{
-    	$rates_array =  mysqli_fetch_array($result3, MYSQLI_ASSOC);
-    	$avg_rate = $rates_array['avg_rate'];
-
-    }
+    $rates_array =  mysqli_fetch_array($result3, MYSQLI_ASSOC);
+    $avg_rate = $rates_array['avg_rate'];
     
+
+    if(isset($_POST['add_tracks'])) {
+    	header("location: modify_playlist_add.php?playlist_id=".$playlist_id);
+    }
 
     if(isset($_POST['delete_playlist'])) {
     	$queryD2 = "DELETE FROM added WHERE playlist_id = {$playlist_id} ";
@@ -40,6 +48,7 @@
     	$resultD1 = mysqli_query($db, $queryD1);
     	header("location: view_playlists.php");
     }
+
     if(isset($_POST['listen_playlist'])) {
     	$added_query = "SELECT * FROM added WHERE playlist_id = {$playlist_id}";
     	$added_result = mysqli_query($db, $added_query);
@@ -47,12 +56,11 @@
       		$t_id = $row['track_id'];
 		    $insertion_date = date("Y-m-d H:i:s");
 		    $flag = TRUE;
-		    if($membership_type === "normal") {
+		    if($membership_type == "normal") {
 		    	$query = "SELECT count(*) AS num_listens FROM Listens WHERE track_id NOT IN (SELECT track_id FROM Buys WHERE user_id = {$uid}) AND user_id = {$uid} AND date_format(date, '%Y-%m-%d') = '" . date('Y-m-d') ."'";
 		        $result = mysqli_query($db, $query);
 		        $result_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
 		        $num_listens = $result_array['num_listens'];
-		        echo $num_listens;
 		        $query = "SELECT * FROM Buys WHERE user_id = {$uid} AND track_id = {$t_id};";
 		        $result = mysqli_query($db, $query);
 		        if(mysqli_num_rows($result) != 0){
@@ -67,7 +75,6 @@
 		    }
 		    if($flag) {
 		        $query4 = "INSERT INTO Listens VALUES({$uid}, {$t_id}, '$insertion_date');";
-		        echo $query4;
 		        $result4 = mysqli_query($db, $query4);
 		    }
 		    else {
@@ -111,17 +118,18 @@
 </nav>
 
 	<div class="container">
-		<h1> <small> Playlist: </small> <?php echo $playlist_name;?> </h1> 
-		<h3>     by <?php echo $username?> </h3> <br>
-		<h4> <p>Rate: <?php echo $avg_rate;?> </h4> <br>
+		<h1> <small> Playlist: </small> <?php echo $playlist_name;?> </h1>
+		<h3> by <?php echo $username?> </h3> <br>
+		<p>  <?php echo $playlist_desc;?> </p> <br>
+		<h4> <p>Rate: <?php if($cnt_rate_c == 0) echo "N/A"; else echo $avg_rate;?> </h4> <br>
 	</div>
 
 	<div class="container" align="right">
 		<p>
 			<form method="post" action="">
 				<input id='Submit' name='listen_playlist' type='Submit' value='Listen Playlist' class="btn btn-success">
+				<input id='Submit' name='add_tracks' type='Submit' value='Add Tracks' class="btn btn-success">
 				<input id='Submit' name='delete_playlist' type='Submit' value='Delete Playlist' class="btn btn-danger">
-				
 			</form>
 		</p>
 	</div>

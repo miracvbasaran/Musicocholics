@@ -17,19 +17,20 @@ session_start();
 </head>
 
 <body>
+	
+    <div class = "container" align = "center"><h2>
+  	<font color="black">
+  		<br/><br/>
+  		Register</h2>
+  		<br/><br/>
+  	</font>
+  	</div>
 
-	<div class="container" align = "center">
-	<h2> MUSICHOLICS </h2><br/><br/>
-
-	<h3> Sign In </h3><br/><br/>
+		<div align = "center">
 			<form action = "#" method = "post" onsubmit = "">
-				
-			Username : <input type = "text" name = "name" placeholder = "Username" >	<br/><br/>
-			Password : <input type = "password" name = "pass" placeholder = "Password"> <br/><br/>
-
-			<input id = "" class="btn btn-success" value = "Login" name = "login" type = "submit"> </button>
-			<input id = "" class="btn btn-danger" value = "Cancel" name = "cancel" type = "submit"> </button>
-			
+				<input type = "text" name = "name" placeholder = "Username" >	<br/><br/>
+				<input type = "password" name = "pass" placeholder = "Password"> <br/><br/>
+				<input id = "" value = "Login" name = "login" type = "submit"> </button>
 			</form>
 		</div>
 		
@@ -42,55 +43,42 @@ session_start();
 				
 				if( $username == "")
 					echo ' <script type="text/javascript"> alert("Fill in the username area"); </script>';
-				else{
-					if( $password == "")
+				if( $password == "")
 					echo ' <script type="text/javascript"> alert("Fill in the password area"); </script>';
 				
-					else{
-						if( mysqli_num_rows( mysqli_query( $db, "SELECT * FROM Person WHERE username = '$username';")) < 1){ //no matching username
-							echo ' <script type="text/javascript"> alert("No such user exists"); </script>';
-						} 
-						else{ //if a user exists with that user name
-							if( mysqli_num_rows( mysqli_query( $db, "SELECT * FROM Person WHERE password = '$password';")) != 1){ //incorrect password
-								echo ' <script type="text/javascript"> alert("Incorrect password"); </script>';
-							}
-							else{
-							
-								$result = mysqli_query( $db, "SELECT person_id FROM Person WHERE username = '$username';");
-								$array = mysqli_fetch_array($result, MYSQLI_ASSOC);
-								$person_id = $array['person_id'];
-								$_SESSION['login_id'] = $person_id;
-							
-								$array = mysqli_query( $db, "SELECT * FROM User WHERE user_id = '$person_id'");
-							
-								if( mysqli_num_rows( mysqli_query( $db, "SELECT * FROM User WHERE user_id = '$person_id'")) == 1){ //person is a user
-									$_SESSION['login_user'] = $username;
-									header( "Location: own_profile.php");
-									exit();
-								}
-								else if( mysqli_num_rows( mysqli_query( $db, "SELECT * FROM Admin WHERE admin_id = '$person_id'")) == 1){ //person is an admin
-									$_SESSION['login_user'] = $username;
-									header( "Location: admin.php");
-									exit();
-								}
-								else //some weird error
-									echo ' <script type="text/javascript"> alert("ID is not related to a user or an admin profile."); </script>';
-							}
-						}
-						
-					}
-					
-					
-				}
 				
-			}
-
-			if( isset($_POST['cancel'])){
-				header( "Location: index.php");
-			}
-
+				if( mysqli_num_rows( mysqli_query( $db, "SELECT * FROM Person WHERE username = '$username';")) < 1){ //no matching username
+					echo ' <script type="text/javascript"> alert("No such user exists"); </script>';
+				} 
+				else{ //if a user exists with that user name
+					if( mysqli_num_rows( mysqli_query( $db, "SELECT * FROM Person WHERE password = '$password';")) != 1){ //incorrect password
+						echo ' <script type="text/javascript"> alert("Incorrect password"); </script>';
+					}
+					else{
+						
+						$result = mysqli_query( $db, "SELECT person_id FROM Person WHERE username = '$username';");
+						$array = mysqli_fetch_array($result, MYSQLI_ASSOC);
+						$person_id = $array['person_id'];
+						$_SESSION['login_id'] = $person_id;
+					
+						$array = mysqli_query( $db, "SELECT * FROM User WHERE user_id = '$person_id'");
+					
+						if( mysqli_num_rows( mysqli_query( $db, "SELECT * FROM User WHERE user_id = '$person_id'")) == 1){ //person is a user
+							$_SESSION['login_user'] = $username;
+							header( "Location: own_profile.php");
+							exit();
+						}
+						else if( mysqli_num_rows( mysqli_query( $db, "SELECT * FROM Admin WHERE admin_id = '$person_id'")) == 1){ //person is an admin
+							$_SESSION['login_user'] = $username;
+							header( "Location: admin.php");
+							exit();
+						}
+						else //some weird error
+							echo ' <script type="text/javascript"> alert("ID is not related to a user or an admin profile."); </script>';
+					}
+				}
+			}	
 			
 			?>
-		</nav>
 	</body>
 	</html>

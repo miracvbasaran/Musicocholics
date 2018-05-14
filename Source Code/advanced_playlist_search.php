@@ -39,10 +39,18 @@
 		</div>
 		
 		
+	  <div class = "container" align = "center"><h2>
+		<font color="white">
+			<br/><br/>
+			Advanced Playlist Search</h2>
+			<br/><br/>
+		</font>
+		</div>
+		
+		
 		<div align = "center">
 			<form action = "#" method = "post" onsubmit = "">
 				<font color="white">
-					<br/><br/><br/><br/>MUSICHOLICS<br/><br/>Advanced Playlist Search<br/><br/><br/><br/>
 					<font color="black">
 						<input type = "text" name = "search_key" placeholder = "Artist Name"> <br/><br/>
 					</font>
@@ -59,6 +67,15 @@
 				</font>
 			</form>
 		</div>
+		
+		
+  	  <div class = "container" align = "center"><h4>
+  		<font color="white">
+  			<br/><br/>
+  			Results</h4>
+  			<br/><br/>
+  		</font>
+  		</div>
 		
 		
 		<?php
@@ -79,7 +96,7 @@
 																				AND username LIKE '%$creator%' 
 																				AND creator_id = person_id;");
 				while( $row = $query->fetch_assoc()){ //printing every playlist with that playlist name
-					echo( "<tr><td><a href='playlist.php?playlist_id=".$row['playlist_id']."'>".$row['playlist_name']."</a></td></tr><br/>");
+					echo( "<div align = \"center\"><tr><td><a href='view_playlist.php?playlist_id=".$row['playlist_id']."'>".$row['playlist_name']."</a></td></tr><br/></div>");
 				}
 			}
 			else if( $match == "contains"){
@@ -87,7 +104,7 @@
 																				AND username LIKE '%$creator%' 
 																				AND creator_id = person_id;");
 				while( $row = $query->fetch_assoc()){ //printing every playlist with that playlist name
-					echo( "<tr><td><a href='playlist.php?playlist_id=".$row['playlist_id']."'>".$row['playlist_name']."</a></td></tr><br/>");
+					echo( "<div align = \"center\"><tr><td><a href='view_playlist.php?playlist_id=".$row['playlist_id']."'>".$row['playlist_name']."</a></td></tr><br/></div>");
 				}
 			}
 			else if( $match == "starts_with"){
@@ -95,7 +112,7 @@
 																				AND username LIKE '%$creator%' 
 																				AND creator_id = person_id;");
 				while( $row = $query->fetch_assoc()){ //printing every playlist with that playlist name
-					echo( "<tr><td><a href='playlist.php?playlist_id=".$row['playlist_id']."'>".$row['playlist_name']."</a></td></tr><br/>");
+					echo( "<div align = \"center\"><tr><td><a href='view_playlist.php?playlist_id=".$row['playlist_id']."'>".$row['playlist_name']."</a></td></tr><br/></div>");
 				}
 			}
 			
