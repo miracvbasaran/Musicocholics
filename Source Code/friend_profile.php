@@ -102,9 +102,10 @@
 <div class="container" align="right" >
     <form method="post" action="">
 
-       <input id='Submit' name='sendmessage_button' type='Submit' class="btn btn-warning" value='Send Message'>
+<div align="right" class="container">
+ <a href=<?php echo "'view_others_playlists.php?other_id={$friend_id}'"; ?> class="btn btn-success" role="button">View Playlists</a>
 
-       <a href=<?php echo "'view_others_playlists.php?other_id={$friend_id}'"; ?> class="btn btn-success" role="button">View Playlists</a>
+       <input id='Submit' name='sendmessage_button' type='Submit' class="btn btn-warning" value='Send Message'>
        <br><br>
        <input id='Submit' name='block_button' type='Submit' class="btn btn-danger" value='Block'>
 
@@ -114,7 +115,6 @@
   </form>
 
 
-</div>
 </div>
 
 

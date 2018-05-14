@@ -1,7 +1,7 @@
 <?php
 	include("session.php");
     $uid = mysqli_real_escape_string($db, $_SESSION['login_id']);
-    $query1 = "SELECT * FROM person WHERE user_id = {$uid} ";
+    $query1 = "SELECT * FROM person WHERE person_id = {$uid} ";
     $result1 = mysqli_query($db, $query1);
     $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
 
@@ -10,7 +10,7 @@
     $result2 = mysqli_query($db, $query2);
     $playlist_array =  mysqli_fetch_array($result2, MYSQLI_ASSOC);
     $playlist_name = $playlist_array['playlist_name'];
-    $playlist_creator = $playlist_array['playlist_creator'];
+    $playlist_creator = $playlist_array['creator_id'];
 
     $query5 = "SELECT * FROM person WHERE person_id = {$playlist_creator}";
     $result5 = mysqli_query($db, $query5);
@@ -105,7 +105,7 @@
 	    		<th>Comment</th> 
 	  		</tr>
 	  		<?php
-	  			$query_comment = "SELECT P.person_id , P.username , C.comment , FROM person P , comments C WHERE P.person_id = C.person_id AND C.playlist_id = {$playlist_id}";
+	  			$query_comment = "SELECT P.person_id , P.username , C.comment FROM person P , comments C WHERE P.person_id = C.user_id AND C.playlist_id = {$playlist_id}";
 	  			$result_comment  = mysqli_query($db, $query_comment);
 	  			while ($row = mysqli_fetch_array($result_comment, MYSQLI_NUM)) {
       				$person_id = $row[0];
@@ -113,7 +113,13 @@
       				$result_friend = mysqli_query($db, $query_friend);
       				$friend_array = mysqli_fetch_array($result_friend, MYSQLI_ASSOC);
       				$cnt_friend = $friend_array['cntfriend'];
-      				if( $cnt_friend === 0 ) {
+      				if( $row[0] == $uid ) {
+      					echo "<tr onclick = \"document.location = 'own_profile.php' \">";
+	      				echo "<td>" . $row[1] . "</td>";
+	      				echo "<td>" . $row[2] . "</td>";
+	      				echo "</tr>" ;
+      				}
+      				else if( $cnt_friend == 0 ) {
       					echo "<tr onclick = \"document.location = 'nonfriend_profile.php?other_id={$person_id}' \">";
 	      				echo "<td>" . $row[1] . "</td>";
 	      				echo "<td>" . $row[2] . "</td>";
@@ -130,38 +136,23 @@
 		</table>
 	</div>
 
-<style>
-.footer {
-   position: fixed;
-   left: 0;
-   bottom: 0;
-   width: 100%;
-   text-align: center;
-}
-</style>
-<div class = "footer">
-
-  <?php
-  $query = "SELECT L1.track_id FROM listens L1 WHERE L1.user_id = '$uid' AND 
-  date = (SELECT max(L2.date) FROM listens L2 WHERE L2.user_id = '$uid') ";
-  $result = mysqli_query($db, $query);
-  $row = mysqli_fetch_array($result, MYSQLI_NUM);
-  $query2 = "SELECT track_name,duration FROM track WHERE track_id = '$row[0]' ";
-  $result2 = mysqli_query($db, $query2);
-  $track_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
-
-  $track_name = $track_array['track_name'];
-  $duration = $track_array['duration'];
-  ?>
-
-  <h4> <?php echo $track_name; ?> (<?php echo $duration; ?> ) </h4>
-  
-  <div class="progress">
-  <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="70"
-  aria-valuemin="0" aria-valuemax="100" style="width:70%">
-    <span class="sr-only"> </span> 
-  </div>
-</div>
+	<div>   
+		<footer>
+	  		<?php
+		  		$query0 = "SELECT L1.track_id FROM listens L1 WHERE L1.user_id = {$uid} AND 
+		  		date = (SELECT max(L2.date) FROM listens L2 WHERE L2.user_id = {$uid}) ";
+		  		$result0 = mysqli_query($db, $query0);
+		  		$row = mysqli_fetch_array($result0, MYSQLI_NUM);
+		  		$query9 = "SELECT track_name,duration FROM track WHERE track_id = {$row[0]} ";
+		  		$result9 = mysqli_query($db, $query9);
+		  		$track_array = mysqli_fetch_array($result9, MYSQLI_ASSOC);
+		  		$track_name = $track_array['track_name'];
+		  		$duration = $track_array['duration'];
+		  		echo $track_name;
+		  		echo $duration;
+	  		?>
+		</footer>
+	</div>
 
 </body>
 
