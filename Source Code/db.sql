@@ -307,6 +307,15 @@ CREATE TABLE IF NOT EXISTS `Gift` (
 	FOREIGN KEY(`track_id`) REFERENCES `Track`(`track_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+DELIMITER $$
+CREATE TRIGGER gift_to_buy
+AFTER INSERT ON Gift FOR EACH ROW 
+BEGIN
+	INSERT INTO Buys (user_id, track_id) 
+		VALUES(NEW.receiver_id, NEW.track_id);
+END
+$$
+DELIMITER ;
 
 INSERT INTO `Gift` (`giver_id`, `receiver_id`, `track_id`) VALUES
 (3, 4, 14),
@@ -590,13 +599,5 @@ BEGIN
 END
 $$
 
-
-CREATE TRIGGER gift_to_buy
-AFTER INSERT ON Gift FOR EACH ROW 
-BEGIN
-	INSERT INTO Buys (user_id, track_id) 
-		VALUES(NEW.receiver_id, NEW.track_id);
-END
-$$
 DELIMITER ;
 COMMIT;
