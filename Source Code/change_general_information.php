@@ -176,7 +176,7 @@
 
   
   <br><br>
-    <input  style="height:25px;font-size:12pt;" type="submit" class="btn btn-success" name="apply" value="APPLY" > 
+    <input  style="height:45px;font-size:12pt;" type="submit" class="btn btn-success" name="apply" value="APPLY" > 
 
     <div class="container" align="right" style="height:25px;font-size:12pt;">
     <br> <br>
