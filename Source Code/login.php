@@ -40,11 +40,9 @@ session_start();
 				
 				if( $username == "")
 					echo ' <script type="text/javascript"> alert("Fill in the username area"); </script>';
-				if( $password == "")
+				else if( $password == "")
 					echo ' <script type="text/javascript"> alert("Fill in the password area"); </script>';
-				
-				
-				if( mysqli_num_rows( mysqli_query( $db, "SELECT * FROM Person WHERE username = '$username';")) < 1){ //no matching username
+				else if( mysqli_num_rows( mysqli_query( $db, "SELECT * FROM Person WHERE username = '$username';")) < 1){ //no matching username
 					echo ' <script type="text/javascript"> alert("No such user exists"); </script>';
 				} 
 				else{ //if a user exists with that user name

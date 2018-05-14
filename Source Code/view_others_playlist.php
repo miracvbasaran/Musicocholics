@@ -10,12 +10,18 @@
     $result2 = mysqli_query($db, $query2);
     $playlist_array =  mysqli_fetch_array($result2, MYSQLI_ASSOC);
     $playlist_name = $playlist_array['playlist_name'];
+    $playlist_desc = $playlist_array['playlist_desc'];
     $playlist_creator = $playlist_array['creator_id'];
 
     $query5 = "SELECT * FROM person WHERE person_id = {$playlist_creator}";
     $result5 = mysqli_query($db, $query5);
     $creator_array =  mysqli_fetch_array($result5, MYSQLI_ASSOC);
     $username = $creator_array['username'];
+
+    $query_c = "SELECT COUNT(rate) as cnt_rate FROM rates WHERE playlist_id = {$playlist_id}";
+    $result_c = mysqli_query($db, $query_c);
+    $rates_array_c =  mysqli_fetch_array($result_c, MYSQLI_ASSOC);
+    $cnt_rate_c = $rates_array_c['cnt_rate'];
 
     $query3 = "SELECT AVG(rate) as avg_rate FROM rates WHERE playlist_id = {$playlist_id}";
     $result3 = mysqli_query($db, $query3);
@@ -98,7 +104,8 @@
 	<div class="container">
 		<h3> Playlist </h3> <br>
 		<h3> <?php echo $playlist_name;?> </h3> <p> by <?php echo $username?> </p> <br>
-		<h3> <p>Rate:</p> <?php echo $avg_rate;?> </h3> <br>
+		<p>  <?php echo $playlist_desc;?> </p> <br>
+		<h4> <p>Rate: <?php if($cnt_rate_c == 0) echo "N/A"; else echo $avg_rate;?> </h4> <br>
 	</div>
 
 	<div class="container" align="right">

@@ -11,18 +11,17 @@
     $result2 = mysqli_query($db, $query2);
     $playlist_array =  mysqli_fetch_array($result2, MYSQLI_ASSOC);
     $playlist_name = $playlist_array['playlist_name'];
+    $playlist_desc = $playlist_array['description'];
+
+    $query_c = "SELECT COUNT(rate) as cnt_rate FROM rates WHERE playlist_id = {$playlist_id}";
+    $result_c = mysqli_query($db, $query_c);
+    $rates_array_c =  mysqli_fetch_array($result_c, MYSQLI_ASSOC);
+    $cnt_rate_c = $rates_array_c['cnt_rate'];
 
     $query3 = "SELECT AVG(rate) as avg_rate FROM rates WHERE playlist_id = {$playlist_id}";
     $result3 = mysqli_query($db, $query3);
-    if($result3->num_rows === 1 ){
-    	$avg_rate = 0.0;
-    	
-    }
-    else{
-    	$rates_array =  mysqli_fetch_array($result3, MYSQLI_ASSOC);
-    	$avg_rate = $rates_array['avg_rate'];
-
-    }
+    $rates_array =  mysqli_fetch_array($result3, MYSQLI_ASSOC);
+    $avg_rate = $rates_array['avg_rate'];
     
 
     if(isset($_POST['delete_playlist'])) {
@@ -111,9 +110,10 @@
 </nav>
 
 	<div class="container">
-		<h1> <small> Playlist: </small> <?php echo $playlist_name;?> </h1> 
-		<h3>     by <?php echo $username?> </h3> <br>
-		<h4> <p>Rate: <?php echo $avg_rate;?> </h4> <br>
+		<h1> <small> Playlist: </small> <?php echo $playlist_name;?> </h1>
+		<h3> by <?php echo $username?> </h3> <br>
+		<p>  <?php echo $playlist_desc;?> </p> <br>
+		<h4> <p>Rate: <?php if($cnt_rate_c == 0) echo "N/A"; else echo $avg_rate;?> </h4> <br>
 	</div>
 
 	<div class="container" align="right">
