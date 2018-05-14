@@ -80,32 +80,53 @@ include("connection.php");
 				echo '<div class="alert alert-danger" role="alert">Error on uploading profile photo. </div>';
 		}
 		
-		if( $fullname == "" || $username == "" || $password == "" || $email == "" || 
-			$country == "" || $language == "" || $birthday == "" || $gender == "")
-				header( "Location: register.php");
+		if( $fullname == "")
+			echo ' <script type="text/javascript"> alert("Fill in the name area"); </script>';
+		if( $username == "")
+			echo ' <script type="text/javascript"> alert("Fill in the username area"); </script>';
+		if( $password == "")
+			echo ' <script type="text/javascript"> alert("Fill in the password area"); </script>';
+		if( $email == "")
+			echo ' <script type="text/javascript"> alert("Fill in the email area"); </script>';
+		if( $country == "")
+			echo ' <script type="text/javascript"> alert("Select your country"); </script>';
+		if( $language == "")
+			echo ' <script type="text/javascript"> alert("Select your language"); </script>';
+		if( $birthday == "")
+			echo ' <script type="text/javascript"> alert("Fill in the birthday area"); </script>';
+		if( $gender == "")
+			echo ' <script type="text/javascript"> alert("Select your gender"); </script>';
 		
 		
 		$uquery = mysqli_query( $db, "SELECT * FROM Person WHERE username = '$username';");
 		$equery = mysqli_query( $db, "SELECT * FROM Person WHERE email = '$email';");
 		
 		if( !$uquery)
-			echo "Error on uquery";
+			echo ' <script type="text/javascript"> alert("Database error for uquery"); </script>';
 		if( !$equery)
-			echo "Error on equery";
+			echo ' <script type="text/javascript"> alert("Database error for equery"); </script>';
 		
 		if( mysqli_num_rows( $uquery) > 0){ //username taken
-			header( "Location: register.php");
+			echo ' <script type="text/javascript"> alert("Username taken"); </script>';
 		}
 		else if( mysqli_num_rows( $equery) > 0){ //email taken
-			header( "Location: register.php");
+			echo ' <script type="text/javascript"> alert("E-mail taken"); </script>';
 		}
 		else{ //create new account --email and username is free to use
 			$presult = mysqli_query( $db, "INSERT INTO Person ( username, fullname, password, email)
 				VALUES ( '$username', '$fullname', '$password', '$email');") or die( mysqli_error( $db));
+			
+			if( !$presult){
+				echo ' <script type="text/javascript"> alert("Error: Could not insert into Person"); </script>';
+			}
 
 			$uresult = mysqli_query( $db, "INSERT INTO User ( user_id, country, language, date_of_registration, birthday, gender, budget) VALUES ( (SELECT MAX(person_id) FROM Person), '$country', '$language', '$date_of_registration', '$birthday', '$gender', '$budget');") or die( mysqli_error( $db));
 					
-			header( "Location: index.php");
+			if( !$uresult){
+				echo ' <script type="text/javascript"> alert("Error: Could not insert into User"); </script>';
+			}
+					
+			header( "Location: homepage.php");
 			
 		
 		}
