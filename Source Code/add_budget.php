@@ -17,27 +17,28 @@
     
     $budget = $user_array['budget'];
 
-    if(isset( ($_POST['submit']) ) ){
+    if(isset( ($_POST['apply']) ) ){
 
-      if(isset( ($_POST['amount']) ) &&  isset( ($_POST['cardno']) ) &&
-      isset( ($_POST['holdername']) ) && isset( ($_POST['securityno']) )  ){
+      if(!empty( ($_POST['amount']) ) &&  !empty( ($_POST['cardno']) ) &&
+      !empty( ($_POST['holdername']) ) && !empty( ($_POST['securityno']) )  ){
         
         $newbudget = $budget+($_POST['amount']);
 
-          $query = "UPDATE user SET budget = $newbudget WHERE user_id = '$uid' ";
+          $query = "UPDATE user SET budget = '$newbudget' WHERE user_id = '$uid' ";
           $result = mysqli_query($db, $query);
 
           echo ' <script type="text/javascript"> alert("Amount is added to budget succesfully."); </script>';
-          
-          header("location: change_general_information.php?");
+          header("location: change_general_information.php");
       }
       else{
-        echo ' <script type="text/javascript"> alert("You missed to enter some credit card information or the amount."); </script>';
+        echo ' <script type="text/javascript"> alert("missed to enter some credit card information or the amount."); </script>';
+          header("location: change_general_information.php");
+ 
       }
     
     }
-    else if( isset( ($_POST['cancel']) ) ){
-      header("location: change_general_information.php?");
+    if( isset( ($_POST['cancel']) ) ){
+      header("location: change_general_information.php");
     }
 
 
@@ -74,17 +75,18 @@
   </div>
 </nav>
 
-
+<div class="container" align="center">
 <form method="post" action="">
 
-  Amount: $ <input type="number" name="amount" autofocus> 
-  <br>
-  Cardholder's Name: <input type="text" name="holdername"  autofocus><br>
-
-  Credit Card Number:  <input type="number" name="cardno" autofocus><br>
+  Amount: $ <input style="height:25px;font-size:12pt;" type="number" name="amount" autofocus> 
+  <br><br><br>
+  Cardholder's Name: <input style="height:25px;font-size:12pt;" type="text" name="holdername"  autofocus>
+  <br><br><br>
+  Credit Card Number:  <input style="height:25px;font-size:12pt;" type="number" name="cardno" autofocus>
+  <br><br><br>
   
   Expires on: 
-  <select name="month">
+  <select name="month" style="height:25px;font-size:12pt;" >
     <option value=1 >1</option>
     <option value=2 >2</option>
     <option value=3 >3</option>
@@ -98,8 +100,8 @@
     <option value=11 >11</option>
     <option value=12 >12</option>
   </select> 
-
-  <select name="year">
+  <br><br><br>
+  <select name="year" style="height:25px;font-size:12pt;" >
     <option value=2018 selected>2018</option>
     <option value=2019 >2019</option>
     <option value=2020 >2020</option>
@@ -109,15 +111,16 @@
     <option value=2024 >2024</option>
     <option value=2025 >2025</option>
     <option value=2026 >2026</option>
-  </select> <br>
+  </select> 
+  <br><br><br>
 
-  Credit Cart Security Code:  <input type="number" name="securityno" autofocus><br>
-  
-  <input type="submit" name="apply" value="SUBMIT"  > 
-  <input type="reset" name=cancel value= "CANCEL">
-
+  Credit Cart Security Code:  <input style="height:25px;font-size:12pt;" type="number" name="securityno" autofocus><br>
+  <br><br><br>
+  <input style="height:35px;font-size:12pt;" class="btn btn-success" type="submit" name="apply" value="SUBMIT"  > 
+  <input style="height:35px;font-size:12pt;" class="btn btn-danger" type="submit" name="cancel" value= "CANCEL">
+  <br><br><br><br>
 </form> 
-
+</div>
 <style>
 .footer {
    position: fixed;

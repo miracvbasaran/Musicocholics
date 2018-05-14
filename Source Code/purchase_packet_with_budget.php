@@ -125,36 +125,35 @@
     </ul>
   </div>
 </nav>
+<div class="container" align="center" style="height:25px;font-size:12pt;" >
 
-<h> 
-UPGRADE TO PREMIUM
-</h>
-<h2>
-Premium membership fee: <?php echo $premium_fee; ?> <br>
+      Your budget: $ <?php echo $budget; ?> <br><br>
+      Your current membership type : <?php echo $membership_type; ?> <br><br><br><br>
 
-</h2>
-<form method="post" action="">
+      <h2> 
+      UPGRADE TO PREMIUM
+      </h2>
+      <h4>
+      Premium membership fee: <?php echo $premium_fee; ?> <br>
 
-  <input type="submit" name="up_premium" value="Upgrade To Premium"  > 
+      </h4>
+      <form method="post" action="">
 
-
-</form> 
-
-<h> 
-UPGRADE TO ARTIST
-</h>
-<h2>
-Artist membership fee: <?php echo $artist_fee; ?> <br>
-
-</h2>
-<form method="post" action="">
-  <input type="submit" name="up_artist" value="Upgrade To Artist"  > 
- 
-</form> 
-
-Your budget: $ <?php echo $budget; ?> <br>
-Your current membership type : <?php echo $membership_type; ?> <br>
-
+        <input type="submit" class="btn btn-warning" name="up_premium" value="Upgrade To Premium"  > 
+      </form> 
+      <br><br><br><br>
+      <h2> 
+      UPGRADE TO ARTIST
+      </h2>
+      <h4>
+      Artist membership fee: <?php echo $artist_fee; ?> <br>
+      </h4>
+      <form method="post" action="">
+        <input type="submit" class="btn btn-warning"  name="up_artist" value="Upgrade To Artist"  > 
+       
+      </form> 
+</div>
+      
 <style>
 .footer {
    position: fixed;
