@@ -94,11 +94,11 @@
   <div class="col-xs-3">Name: <input class = "form-control" type="text" name="publisher_name" value= <?php echo "'".$publisher_name."'"; ?>
   default= <?php echo "'".$publisher_name."'"; ?> autofocus><br></div>
   <div class="col-xs-3">Country: <select class = "form-control" name="country">
-    <option value="Turkey">Turkey</option>
-    <option value="USA">USA</option>
-    <option value="England">England</option>
-    <option value="Germany">Germany</option>
-    <option value="Ireland">Ireland</option>
+    <option <?php if(strcmp("Turkey", $country) === 0){ echo "selected = "."\"selected\"";} ?> value="Turkey">Turkey</option>
+    <option <?php if(strcmp("USA", $country) === 0){ echo "selected = "."\"selected\"";} ?> value="USA">USA</option>
+    <option <?php if(strcmp("England", $country) === 0){ echo "selected = "."\"selected\"";} ?> value="England">England</option>
+    <option <?php if(strcmp("Germany", $country) === 0){ echo "selected = "."\"selected\"";} ?> value="Germany">Germany</option>
+    <option <?php if(strcmp("Ireland", $country) === 0){ echo "selected = "."\"selected\"";} ?> value="Ireland">Ireland</option>
   </select> <br></div>
   <div class="col-xs-3">City:  <input class = "form-control" type="text" name="city" value= <?php echo $city ?> autofocus></div>
   

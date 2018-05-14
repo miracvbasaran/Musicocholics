@@ -149,8 +149,8 @@
   <div class="col-xs-3">Track Name: <input type="text" name="track_name" class = "form-control" default = <?php echo "'".$track_name."'"; ?> 
     value= <?php echo "'".$track_name."'"; ?> autofocus><br></div>
   <div class="col-xs-3">Recording Type: <select class = "form-control" name="recording_type">
-    <option value="Live">Live</option>
-    <option value="Studio">Studio</option>
+    <option <?php if(strcasecmp("Live", $recording_type) === 0){ echo "selected = "."\"selected\"";} ?> value="Live">Live</option>
+    <option <?php if(strcasecmp("Studio", $recording_type) === 0){ echo "selected = "."\"selected\"";} ?> value="Studio">Studio</option>
   </select> <br></div>
   <div class="col-xs-3">Duration: <input type="text" name="duration" class = "form-control" value= <?php echo "{$duration}"; ?> autofocus><br></div>
   <div class="col-xs-3">Danceability: <input type="text" name="danceability" class = "form-control" value= <?php echo "{$danceability}"; ?> autofocus><br></div>
@@ -162,9 +162,9 @@
   <div class="col-xs-3">Price: <input type="text" name="price" class = "form-control" value= <?php echo "{$price}"; ?> autofocus><br></div>
   <div class="col-xs-3">Date of Addition: <input type="date" name="date_of_addition" class = "form-control" value= <?php echo "{$date_of_addition}"; ?> autofocus><br></div>
   <div class="col-xs-3">Language: <select class = "form-control" name="language">
-    <option value="Turkish">Turkish</option>
-    <option value="English">English</option>
-    <option value="German">German</option>
+    <option <?php if(strcasecmp("Turkish", $album_type) === 0){ echo "selected = "."\"selected\"";} ?> value="Turkish">Turkish</option>
+    <option <?php if(strcasecmp("English", $album_type) === 0){ echo "selected = "."\"selected\"";} ?> value="English">English</option>
+    <option <?php if(strcasecmp("German", $album_type) === 0){ echo "selected = "."\"selected\"";} ?> value="German">German</option>
   </select> <br></div>
   
   <div class="container" align = "right"><input type="submit" name="apply" value="Apply" class = "btn btn-success"> </div>

@@ -162,8 +162,8 @@
   <div class="col-xs-3">Album Name: <input class = "form-control" type="text" name="new_album_name"  autofocus></div>
   <div class="col-xs-3">Album Publisher: <input class = "form-control" type = "text" name = "new_album_publisher"  autofocus></div>
    <div class="col-xs-3">Album Type: <select class = "form-control" name="new_album_type">
-    <option value="Album">Album</option>
-    <option value="Single">Single</option>
+    <option  value="Album">Album</option>
+    <option  value="Single">Single</option>
   </select></div>
   <div class="col-xs-3">Publish Date: <input type="date" class = "form-control" name="new_album_publish_date" autofocus></div>
   
