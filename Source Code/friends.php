@@ -50,22 +50,35 @@ error_reporting(0);
           <th>Fullname</th>
         </tr>
 		<?php
-		$query = mysqli_query( $db, "SELECT * FROM Person, User, Friendship WHERE user_id = person_id
-																			AND ((user1_id = '$uid' AND user2_id = user_id)
-																				OR (user1_id = user_id AND user2_id = '$uid'));");
-		while( $row = $query->fetch_assoc()){
-			if( $user2_id == $uid)
+		$query = mysqli_query( $db, "SELECT F.user2_id FROM Friendship F WHERE user1_id = '$uid'");
+    $query2 = mysqli_query($db, "SELECT F.user1_id FROM Friendship F WHERE user2_id = '$uid'");
+		
+   /* while( $row = $query->fetch_assoc()){
+			if( $user2_id === $uid)
 				$fid = $row[user1_id];
 			else 
-				$fid = $row[user2_id];
+				$fid = $row[user2_id];*/  
+      while($row = $query->fetch_assoc()){
 
-      $query_p = mysqli_query( $db, "SELECT fullname FROM Person WHERE '$fid' = person_id;");
-      $row_big = $query_p->fetch_assoc();
-			
-      echo "<tr onclick = \"document.location = 'friend_profile.php?other_id={$fid}' \">";
-                echo "<td>" . $row['username'] . "</td>";
-                echo "<td>" . $row_big['fullname'] . "</td>";
-      echo "</tr>" ;
+        $fid = $row['user2_id'];
+        $query_p = mysqli_query( $db, "SELECT username, fullname FROM Person WHERE '$fid' = person_id");
+        $row_big = $query_p->fetch_assoc();
+  			
+        echo "<tr onclick = \"document.location = 'friend_profile.php?other_id={$fid}' \">";
+                  echo "<td>" . $row_big['username'] . "</td>";
+                  echo "<td>" . $row_big['fullname'] . "</td>";
+        echo "</tr>" ;
+    }
+      while($row2 = $query2->fetch_assoc()){
+
+        $fid = $row2['user1_id'];
+        $query_p = mysqli_query( $db, "SELECT username, fullname FROM Person WHERE '$fid' = person_id");
+        $row_big = $query_p->fetch_assoc();
+        
+        echo "<tr onclick = \"document.location = 'friend_profile.php?other_id={$fid}' \">";
+                  echo "<td>" . $row_big['username'] . "</td>";
+                  echo "<td>" . $row_big['fullname'] . "</td>";
+        echo "</tr>" ;
 
 			//echo( "<tr><td><a href='friend_profile.php?other_id=".$fid."'>".$row['username']."</a></td></tr><br><br/>");
 			
