@@ -1,4 +1,5 @@
 <?php
+error_reporting(E_ALL & ~E_NOTICE);
 
 include("session.php");
 
@@ -97,6 +98,19 @@ $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
 				$fullname = mysqli_real_escape_string( $db, $_POST['fullname']);
 				$country = mysqli_real_escape_string( $db, $_POST['country']);
 				$relationship = mysqli_real_escape_string( $db, $_POST['relationship']);
+				
+				
+				if( $search_key == "")
+					echo ' <script type="text/javascript"> alert("Please type an album name"); </script>';
+				if( $match == "")
+					echo ' <script type="text/javascript"> alert("Select from Exactly matches, Contains, Starts with "); </script>';
+				if( $fullname == "")
+					echo ' <script type="text/javascript"> alert("Please type a name"); </script>';
+				if( $country == "")
+					echo ' <script type="text/javascript"> alert("Select a country "); </script>';
+				if( $relationship == "")
+					echo ' <script type="text/javascript"> alert("Please select if you want to search amongst your friends or all users"); </script>';
+				
 				
 				$id_list = new SplDoublyLinkedList;
 				

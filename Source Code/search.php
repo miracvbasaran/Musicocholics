@@ -1,4 +1,5 @@
 <?php
+	error_reporting(E_ALL & ~E_NOTICE);
 
 	include("session.php");
 
@@ -70,6 +71,9 @@
 				if( isset( $_POST['search'])){
 					$search_key = mysqli_real_escape_string( $db, $_POST['search_key']);
 					
+					if( $search_key == "")
+						echo ' <script type="text/javascript"> alert("Please type an album name"); </script>';
+					
 
 					//$filter = mysqli_real_escape_string( $db, $_POST['filter']);
 					//echo( "<tr> <td>".$search_key."</td> </tr><br/>");
@@ -96,7 +100,7 @@
 					if( isset( $_POST['filter_playlist'])){ //PLAYLIST
 						$query = mysqli_query( $db, "SELECT * FROM Playlist WHERE playlist_name LIKE '%$search_key%';");
 						while( $row = $query->fetch_assoc()){ //printing every playlist with that playlist name
-							$query2 = mysqli_query( $db, "SELECT * FROM Playlist WHERE playlist_id = {$row['playlist_id']} AND creator_id = {$uid};");
+							$query2 = mysqli_query( $db, "SELECT * FROM Playlist WHERE playlist_id = {$row['playlist_id']} AND creator_id = {$u_id};");
 							if($query2){
 								echo( "<tr><td><a href='view_own_playlist.php?playlist_id=".$row['playlist_id']."'>".$row['playlist_name']."</a></td></tr><br/>");
 							}

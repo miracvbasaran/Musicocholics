@@ -1,4 +1,5 @@
 <?php
+error_reporting(E_ALL & ~E_NOTICE);
 
 include("session.php");
 
@@ -41,7 +42,7 @@ $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
 		
 		
 		<div align = "center">
-			<form action = "#" method = "post" onsubmit = "return check()">
+			<form action = "#" method = "post" onsubmit = "">
 				<font color="white">
 					<br/><br/><br/><br/>MUSICHOLICS<br/><br/>Advanced User Search<br/><br/><br/><br/>
 					<font color="black">
@@ -65,23 +66,6 @@ $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
 		</div>
 		
 		
-		<script type = "text/javascript">
-			function check(){
-				var username = document.getElementById( "username").value;
-				var match = document.getElementById( "match").value;
-				var fullname = document.getElementById( "name").value;
-				var country = document.getElementById( "country").value;
-
-				if( username == "")
-					alert( "Please type an username");
-				if( match == "")
-					alert( "Please one of \"Exactly matches\", \"Exactly Contains\", \"Starts with\"" );
-				if( country == "")
-					alert( "Please select a country");
-				
-				location.href = "advanced_user_search.php";
-			}
-			</script>
 		
 		
 			<?php
@@ -91,6 +75,17 @@ $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
 				$match = mysqli_real_escape_string( $db, $_POST['match']);
 				$fullname = mysqli_real_escape_string( $db, $_POST['fullname']);
 				$country = mysqli_real_escape_string( $db, $_POST['country']);
+				
+				
+				if( $search_key == "")
+					echo ' <script type="text/javascript"> alert("Please type an album name"); </script>';
+				if( $match == "")
+					echo ' <script type="text/javascript"> alert("Select from Exactly matches, Contains, Starts with "); </script>';
+				if( $fullname == "")
+					echo ' <script type="text/javascript"> alert("Please type a name"); </script>';
+				if( $country == "")
+					echo ' <script type="text/javascript"> alert("Select a country "); </script>';
+				
 				
 				$id_list = new SplDoublyLinkedList;
 				

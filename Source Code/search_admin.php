@@ -61,7 +61,11 @@ include("session.php");
 					$search_key = mysqli_real_escape_string( $db, $_POST['search_key']);
 					//echo( "<tr> <td>".$search_key."</td> </tr><br/>");
 					//echo( "<tr> <td>".$filter."</td> </tr><br/>");
-		
+					
+					if( $search_key == "")
+						echo ' <script type="text/javascript"> alert("Please type an album name"); </script>';
+					
+					
 					if( isset( $_POST['filter_track'])){//TRACK
 						$query = mysqli_query( $db, "SELECT * FROM Track WHERE track_name LIKE '%$search_key%';");
 						while( $row = $query->fetch_assoc()){ //printing every track with that track name

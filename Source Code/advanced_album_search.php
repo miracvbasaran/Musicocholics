@@ -1,5 +1,6 @@
 <?php
-
+	error_reporting(E_ALL & ~E_NOTICE);
+	
 	include("session.php");
 
     $uid = mysqli_real_escape_string($db,$_SESSION['login_id']);
@@ -38,7 +39,7 @@
 		</div>
 		
 		<div align = "center">
-			<form action = "#" method = "post" onsubmit = "return check()">
+			<form action = "#" method = "post" onsubmit = "">
 				<font color="white">
 					<br/><br/><br/><br/>MUSICHOLICS<br/><br/>Advanced Album Search<br/><br/><br/><br/>
 					<font color="black">
@@ -54,6 +55,7 @@
 					</font>
 					<br/><br/>
 					<input type = "radio" name="type" value="Album"/> Album &nbsp; &nbsp;
+					<input type = "radio" name="type" value="Live"/> Live &nbsp; &nbsp;
 					<input type = "radio" name="type" value="Single"/> Single
 					<br/><br/>
 					<font color="black">
@@ -65,28 +67,6 @@
 		</div>
 		
 		
-		<script type = "text/javascript">
-			function check(){
-				var search_key = document.getElementById( "search_key").value;
-				var match = document.getElementById( "match").value;
-				var from_date = document.getElementById( "from_date").value;
-				var end_date = document.getElementById( "end_date").value;
-				var type = document.getElementById( "type").value;
-
-				if( search_key == "")
-					alert( "Please type an track name");
-				if( match = "")
-					alert( "Please one of \"Exactly matches\", \"Exactly Contains\", \"Starts with\"" );
-				if( from_date = "")
-					alert( "Please select a starting date");
-				if( end_date = "")
-					alert( "Please select a ending date");
-				if( type = "")
-					alert( "Please select album type");
-				
-				location.href = "advanced_album_search.php";
-			}
-			</script>
 		
 		
 		<?php
@@ -98,6 +78,16 @@
 			$end_date = mysqli_real_escape_string( $db, $_POST['end_date']);
 			$type = mysqli_real_escape_string( $db, $_POST['type']);
 			
+			if( $search_key == "")
+				echo ' <script type="text/javascript"> alert("Please type an album name"); </script>';
+			if( $match == "")
+				echo ' <script type="text/javascript"> alert("Select from Exactly matches, Contains, Starts with "); </script>';
+			if( $from_date == "")
+				echo ' <script type="text/javascript"> alert("Please type the starting date"); </script>';
+			if( $end_date == "")
+				echo ' <script type="text/javascript"> alert("Please type the ending date"); </script>';
+			if( $type == "")
+				echo ' <script type="text/javascript"> alert("Please select a type"); </script>';
 			
 			
 			if( $match == "matches"){
