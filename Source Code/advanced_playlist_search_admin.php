@@ -23,20 +23,22 @@
 <body>
 
 	<nav class="navbar navbar-inverse">
-		<div class="container-fluid">
-			<ul class="nav navbar-nav">
-				<li><a href="own_profile.php">Profile</a></li>
-				<li><a href="view_playlists.php">Playlist</a></li>
-				<li><a href="view_tracks.php">Tracks</a></li>
-				<li><a href="friends.php">Friends</a></li>
-				<li><a href="message_list.php">Messages</a></li>
-				<li class="active"><a href="search.php">Search</a></li>
-			</ul>
-		    <ul class="nav navbar-nav navbar-right">
-				<li><a href="change_general_information.php"><span class="glyphicon glyphicon-user"></span> Settings</a></li>
-				<li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-		    </ul>
-		</div>
+      <div class="container-fluid">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="admin.php">Home</a></li>
+          <li><a href="search_admin.php">Search</a></li>
+          <li><a href="add_track.php">Add Track</a></li>
+          <li><a href="add_album.php">Add Album</a></li>
+          <li><a href="add_artist.php">Add Artist</a></li>
+          <li><a href="add_publisher.php">Add Publisher</a></li>
+        </ul>
+        
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="change_password_admin.php"><span class="glyphicon glyphicon-user"></span> Change Password</a></li>
+          <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+        </ul>
+      </div>
+    </nav>
 		
 		
 		<div align = "center">
@@ -79,7 +81,7 @@
 																				AND username LIKE '%$creator%' 
 																				AND creator_id = person_id;");
 				while( $row = $query->fetch_assoc()){ //printing every playlist with that playlist name
-					echo( "<tr><td><a href='playlist.php?playlist_id=".$row['playlist_id']."'>".$row['playlist_name']."</a></td></tr><br/>");
+					echo( "<tr><td><a href='access_playlist.php?playlist_id=".$row['playlist_id']."'>".$row['playlist_name']."</a></td></tr><br/>");
 				}
 			}
 			else if( $match == "contains"){
@@ -87,7 +89,7 @@
 																				AND username LIKE '%$creator%' 
 																				AND creator_id = person_id;");
 				while( $row = $query->fetch_assoc()){ //printing every playlist with that playlist name
-					echo( "<tr><td><a href='playlist.php?playlist_id=".$row['playlist_id']."'>".$row['playlist_name']."</a></td></tr><br/>");
+					echo( "<tr><td><a href='access_playlist.php?playlist_id=".$row['playlist_id']."'>".$row['playlist_name']."</a></td></tr><br/>");
 				}
 			}
 			else if( $match == "starts_with"){
@@ -95,7 +97,7 @@
 																				AND username LIKE '%$creator%' 
 																				AND creator_id = person_id;");
 				while( $row = $query->fetch_assoc()){ //printing every playlist with that playlist name
-					echo( "<tr><td><a href='playlist.php?playlist_id=".$row['playlist_id']."'>".$row['playlist_name']."</a></td></tr><br/>");
+					echo( "<tr><td><a href='access_playlist.php?playlist_id=".$row['playlist_id']."'>".$row['playlist_name']."</a></td></tr><br/>");
 				}
 			}
 			
@@ -104,7 +106,7 @@
 		?>
 		
 		<div align = "center">
-			<tr><td><a href='search.php'>Go back to main search page</a></td></tr>
+			<tr><td><a href='search_admin.php'>Go back to main search page</a></td></tr>
 		</div>
 	
 		<br/><br/><br/>

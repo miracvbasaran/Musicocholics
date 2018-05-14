@@ -26,7 +26,7 @@ $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
     <nav class="navbar navbar-inverse">
       <div class="container-fluid">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="#">Home</a></li>
+          <li class="active"><a href="admin.php">Home</a></li>
           <li><a href="search_admin.php">Search</a></li>
           <li><a href="add_track.php">Add Track</a></li>
           <li><a href="add_album.php">Add Album</a></li>
@@ -35,10 +35,11 @@ $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
         </ul>
         
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="change_password.php"><span class="glyphicon glyphicon-user"></span> Change Password</a></li>
-          <li><a href="homepage.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+          <li><a href="change_password_admin.php"><span class="glyphicon glyphicon-user"></span> Change Password</a></li>
+          <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
         </ul>
       </div>
+    </nav>
 		
 		
 		<div align = "center">
@@ -123,7 +124,7 @@ $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
 			?>
 			
 			<div align = "center">
-				<tr><td><a href='search.php'>Go back to main search page</a></td></tr>
+				<tr><td><a href='search_admin.php'>Go back to main search page</a></td></tr>
 			</div>
 	
 				<br/><br/><br/>
