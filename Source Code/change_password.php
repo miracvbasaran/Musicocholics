@@ -84,17 +84,20 @@
   </div>
 </nav>
 
+<div class="container" align="center">
+<h3> Change Password </h3>
 <form method="post" action="">
-  Old password: <input type="psw" name="old_pass" value= "" autofocus>
+  Old password: <input style="height:25px;font-size:12pt;" type="password" name="old_pass" value= "" autofocus>
   <br><br><br>
-  New password: <input type="psw" name="new_pass_1" value="" autofocus>
+  New password: <input style="height:25px;font-size:12pt;" type="password" name="new_pass_1" value="" autofocus>
   <br><br><br>
-  Reenter new password  <input type="psw" name="new_pass_2" value=""  autofocus>
+  Retype new password:  <input style="height:25px;font-size:12pt;" type="password" name="new_pass_2" value=""  autofocus>
   <br><br><br>
 
-  <input type="submit" name="apply" value="APPLY" > 
+  <input style="height:35px;font-size:12pt;" class="btn btn-success" type="submit" name="apply" value="Apply" > 
 
 </form> 
+</div>
 
 <style>
 .footer {
