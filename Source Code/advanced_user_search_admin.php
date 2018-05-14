@@ -26,7 +26,7 @@ $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
 <nav class="navbar navbar-inverse">
       <div class="container-fluid">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="homepage.php">Home</a></li>
+          <li class="active"><a href="admin.php">Home</a></li>
           <li><a href="search_admin.php">Search</a></li>
           <li><a href="add_track.php">Add Track</a></li>
           <li><a href="add_album.php">Add Album</a></li>
