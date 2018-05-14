@@ -83,19 +83,19 @@ include("session.php");
 					if( isset( $_POST['filter_track'])){//TRACK
 						$query = mysqli_query( $db, "SELECT * FROM Track WHERE track_name LIKE '%$search_key%';");
 						while( $row = $query->fetch_assoc()){ //printing every track with that track name
-							echo( "<div align = \"center\"><tr> <td><a href='access_track.php?track_id=".$row['track_id']."'>".$row['track_name']."</a></td> </tr><br/></div>");
+							echo( "<div align = \"center\"><tr> <td><a href='modify_track.php?track_id=".$row['track_id']."'>".$row['track_name']."</a></td> </tr><br/></div>");
 						}
 					}
 					if( isset( $_POST['filter_album'])){ //ALBUM
 						$query = mysqli_query( $db, "SELECT * FROM Album WHERE album_name LIKE '%$search_key%';");
 						while( $row = $query->fetch_assoc()){ //printing every album with that album name
-							echo( "<div align = \"center\"><tr> <td><a href='access_album.php?album_id=".$row['album_id']."'>".$row['album_name']."</a></td> </tr><br/></div>");
+							echo( "<div align = \"center\"><tr> <td><a href='modify_album.php?album_id=".$row['album_id']."'>".$row['album_name']."</a></td> </tr><br/></div>");
 						}
 					}
 					if( isset( $_POST['filter_artist'])){ //ARTIST
 						$query = mysqli_query( $db, "SELECT * FROM Artist WHERE artist_name LIKE '%$search_key%';");
 						while( $row = $query->fetch_assoc()){ //printing every artist with that artist name
-							echo( "<div align = \"center\"><tr><td><a href='access_artist.php?artist_id=".$row['artist_id']."'>".$row['artist_name']."</a></td></tr><br/></div>");
+							echo( "<div align = \"center\"><tr><td><a href='modify_artist.php?artist_id=".$row['artist_id']."'>".$row['artist_name']."</a></td></tr><br/></div>");
 						}
 					}
 					// if( isset( $_POST['filter_playlist'])){ //PLAYLIST
