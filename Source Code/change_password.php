@@ -11,8 +11,10 @@
 	  $password = $person_array['password'];
 	  $email = $person_array['email'];
 
-
-    $set = 0;
+      if( isset($_POST['cancel'])){
+        header("location: change_general_information.php");
+        
+      }
     if(isset( ($_POST['apply']) ) ){
 
           $old_pass = $_POST['old_pass'];
@@ -47,7 +49,7 @@
 
           }  
 
- 
+
       
         
     }
@@ -95,6 +97,8 @@
   <br><br><br>
 
   <input style="height:35px;font-size:12pt;" class="btn btn-success" type="submit" name="apply" value="Apply" > 
+
+  <input style="height:35px;font-size:12pt;" class="btn btn-danger" type="submit" name="cancel" value="Cancel" > 
 
 </form> 
 </div>
