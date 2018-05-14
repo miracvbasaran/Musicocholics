@@ -39,7 +39,7 @@
 		
 		
 		<div align = "center">
-			<form action = "#" method = "post" onsubmit = "return check()">
+			<form action = "#" method = "post" onsubmit = "">
 				<font color="white">
 					<br/><br/><br/><br/>MUSICHOLICS<br/><br/>Advanced Playlist Search<br/><br/><br/><br/>
 					<font color="black">
@@ -60,21 +60,6 @@
 		</div>
 		
 		
-		<script type = "text/javascript">
-			function check(){
-				var search_key = document.getElementById( "search_key").value;
-				var match = document.getElementById( "description").value;
-
-				if( search_key == "")
-					alert( "Please type an playlist name");
-				if( match = "")
-					alert( "Please one of \"Exactly matches\", \"Exactly Contains\", \"Starts with\"" );
-				
-				location.href = "advanced_playlist_search.php";
-			}
-			</script>
-		
-		
 		<?php
 	
 		if( isset( $_POST['search'])){
@@ -82,6 +67,10 @@
 			$match = mysqli_real_escape_string( $db, $_POST['match']);
 			$creator = mysqli_real_escape_string( $db, $_POST['creator']);
 			
+			if( $search_key == "")
+				echo ' <script type="text/javascript"> alert("Please type an album name"); </script>';
+			if( $match == "")
+				echo ' <script type="text/javascript"> alert("Select from Exactly matches, Contains, Starts with "); </script>';
 			
 			
 			if( $match == "matches"){

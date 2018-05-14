@@ -38,7 +38,7 @@
 		</div>
 		
 		<div align = "center">
-			<form action = "#" method = "post" onsubmit = "return check()">
+			<form action = "#" method = "post" onsubmit = "">
 				<font color="white">
 					<br/><br/><br/><br/>MUSICHOLICS<br/><br/>Advanced Artist Search<br/><br/><br/><br/>
 					<font color="black">
@@ -58,30 +58,18 @@
 		</div>
 		
 		
-		<script type = "text/javascript">
-			function check(){
-				var search_key = document.getElementById( "search_key").value;
-				var match = document.getElementById( "match").value;
-				var description = document.getElementById( "description").value;
-
-				if( search_key == "")
-					alert( "Please type an artist name");
-				if( match = "")
-					alert( "Please one of \"Exactly matches\", \"Exactly Contains\", \"Starts with\"" );
-				if( description = "")
-					alert( "Please type an description");
-				
-				location.href = "advanced_album_search.php";
-			}
-			</script>
-		
-		
 		<?php
 	
 		if( isset( $_POST['search'])){
 			$search_key = mysqli_real_escape_string( $db, $_POST['search_key']);
 			$match = mysqli_real_escape_string( $db, $_POST['match']);
 			$description = mysqli_real_escape_string( $db, $_POST['description']);
+			
+			
+			if( $search_key == "")
+				echo ' <script type="text/javascript"> alert("Please type an album name"); </script>';
+			if( $match == "")
+				echo ' <script type="text/javascript"> alert("Select from Exactly matches, Contains, Starts with "); </script>';
 			
 	
 			if( $match == "matches"){
