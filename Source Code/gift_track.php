@@ -46,8 +46,8 @@
                   $query = "UPDATE user SET budget = '$newbudget' WHERE user_id = '$uid' ";
                   $result = mysqli_query($db, $query);
 
-                  $query = "INSERT INTO buys VALUES({$gifted_id}, {$track_id})";
-                  $result = mysqli_query($db, $query);
+                  //$query = "INSERT INTO buys VALUES({$gifted_id}, {$track_id})";
+                  //$result = mysqli_query($db, $query);
                   if($result){
                     echo ' <script type="text/javascript"> alert("You purchased the track as a gift successfully!"); </script>';
                   }

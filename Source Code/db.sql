@@ -312,6 +312,7 @@ INSERT INTO `Gift` (`giver_id`, `receiver_id`, `track_id`) VALUES
 (3, 4, 14),
 (4, 3, 12),
 (4, 7, 13),
+(4, 7, 15),
 (5, 3, 20),
 (6, 4, 18),
 (7, 5, 16);
@@ -589,7 +590,13 @@ BEGIN
 END
 $$
 
+
+CREATE TRIGGER gift_to_buy
+AFTER INSERT ON Gift FOR EACH ROW 
+BEGIN
+	INSERT INTO Buys (user_id, track_id) 
+		VALUES(NEW.receiver_id, NEW.track_id);
+END
+$$
 DELIMITER ;
-
-
 COMMIT;
