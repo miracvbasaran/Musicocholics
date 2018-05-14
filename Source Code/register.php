@@ -94,10 +94,10 @@ include("connection.php");
 			echo "Error on equery";
 		
 		if( mysqli_num_rows( $uquery) > 0){ //username taken
-			header( "Location: error.php");
+			header( "Location: register.php");
 		}
 		else if( mysqli_num_rows( $equery) > 0){ //email taken
-			header( "Location: error.php");
+			header( "Location: register.php");
 		}
 		else{ //create new account --email and username is free to use
 			$presult = mysqli_query( $db, "INSERT INTO Person ( username, fullname, password, email)
@@ -105,7 +105,7 @@ include("connection.php");
 
 			$uresult = mysqli_query( $db, "INSERT INTO User ( user_id, country, language, date_of_registration, birthday, gender, budget) VALUES ( (SELECT MAX(person_id) FROM Person), '$country', '$language', '$date_of_registration', '$birthday', '$gender', '$budget');") or die( mysqli_error( $db));
 					
-			header( "Location: homepage.php");
+			header( "Location: index.php");
 			
 		
 		}
