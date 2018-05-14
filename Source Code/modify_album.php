@@ -112,7 +112,7 @@
         
         <ul class="nav navbar-nav navbar-right">
           <li><a href="change_password_admin.php"><span class="glyphicon glyphicon-user"></span> Change Password</a></li>
-          <li><a href="homepage.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+          <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
         </ul>
       </div>
     </nav>
@@ -126,7 +126,7 @@
   <h3>
 <?php
       echo $album_name;
-      echo "<small>";
+      echo "<small> by ";
       for ($i=0; $i < count($artist_names); $i++) { 
         $art_id = $artist_ids[$i];
         echo "<a href = \"access_artist.php?artist_id={$art_id}\">" . $artist_names[$i] . "</a>";
@@ -141,10 +141,9 @@
 
 
 <form method="post" action="">
-  <div class = "container" align = "center"><div class = "col-xs-4" align = "center" ><input type="text" class = "form-control" name="album_name" 
-    default = <?php echo "'".$album_name."'"; ?> value= <?php echo "'".$album_name."'"; ?> autofocus> by 
-
-</div></div>
+<div class = "col-xs-4" ><input type="text" class = "form-control" name="album_name" 
+    default = <?php echo "'".$album_name."'"; ?> value= <?php echo "'".$album_name."'"; ?> autofocus> 
+</div>
   <br><div class = "container" align = "center">
   <div class="col-xs-3">Album Type: 
   <select class = "form-control" name="album_type">

@@ -53,7 +53,7 @@
       $insertion_date = date("Y-m-d H:i:s");
       if($membership_type === "Normal"){
         $flag = TRUE;
-        $query = "SELECT count(*) AS num_listens FROM Listens WHERE user_id = {$user_id} AND DATE(Listens.date) = " . date(Y-m-d);
+        $query = "SELECT count(*) AS num_listens FROM Listens WHERE user_id = {$user_id} AND DATE(Listens.date) = '" . date('Y-m-d') ."'";
         $result = mysqli_query($db, $query);
         $result_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
         $num_listens = $result_array['num_listens'];
