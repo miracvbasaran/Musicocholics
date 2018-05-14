@@ -14,9 +14,24 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<div class = "jumbotron" align = "center">
-		<tr><td><a href='login.php'>Sign In</a></td></tr>
-		<tr><td><a href='register.php'>Sign Up</a></td></tr>
-	</div>
+
+<div class="container" align="center" >
+
+<h1> <small>WELCOME TO </small> MUSICHOLICS!</h1>
+<h3> We are sincerely happy to see you here :) </h3>
+<br><br><br><br>
+
+    <form method="post" action="">
+
+       <h4> If you haven't joined the family, please sign up. </h4>
+       <a href="register.php" class="btn btn-danger" role="button">SIGN UP</a>  
+       
+        
+       <br><br>
+       <h4> If you already have beed in our family, you can sign in. </h4>
+       <a href="login.php" class="btn btn-success" role="button">SIGN IN</a>
+  
+  </form>
+
 </body>
 </html>
