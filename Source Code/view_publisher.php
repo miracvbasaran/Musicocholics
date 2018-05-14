@@ -71,6 +71,29 @@ else{
 				</div>
 
 			</div>
+		</div>
+		<div class = "container" align = "center"> 
+
+			<table class = "table table-hover" style="width:100%">
+			  <tr>
+			    <th>Album Name</th>
+			    <th>Album Type</th> 
+			    <th>Publish Date</th>
+			  </tr>
+			  <?php
+			  $query_album = "SELECT album_name, album_type, published_date, album_id FROM Album WHERE Album.publisher_id = {$publisher_id} ORDER BY published_date";
+			  $result = mysqli_query($db, $query_album);
+			  
+			  while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
+			      $a_id = $row[3];
+			      echo "<tr onclick = \"document.location = 'view_album.php?album_id={$a_id}' \">";
+			      echo "<td>" . $row[0] . "</td>";
+			      echo "<td>" . $row[1] . "</td>";
+			      echo "<td>" . $row[2] . "</td>";
+			      echo "</tr>";
+			  }
+			  ?>
+			</table>
 		</div>  
 
 
