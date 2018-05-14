@@ -148,7 +148,7 @@
 	  		<?php
 	  			$query_comment = "SELECT P.person_id , P.username , C.comment FROM person P , comments C WHERE P.person_id = C.user_id AND C.playlist_id = {$playlist_id}";
 	  			$result_comment  = mysqli_query($db, $query_comment);
-	  			if( $result_comment == TRUE ) {
+	  			
 		  			while ($row = mysqli_fetch_array($result_comment, MYSQLI_NUM)) {
 	      				$person_id = $row[0];
 	      				$query_friend = "SELECT COUNT(*) as cntfriend FROM friendship F WHERE (F.user1_id={$uid} AND F.user2_id={$person_id}) OR (F.user2_id={$uid} AND F.user1_id={$person_id})";
@@ -174,7 +174,7 @@
 		      				echo "</tr>" ;
 		      			}
 		  			}
-		  		}
+		  		
 	  		?>
 		</table>
 	</div>
