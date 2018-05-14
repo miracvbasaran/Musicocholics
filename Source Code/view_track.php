@@ -51,26 +51,33 @@
     if(isset($_POST['play_track_button']))
     {
       $insertion_date = date("Y-m-d H:i:s");
-      if($membership_type === "Normal"){
-        $flag = TRUE;
-        $query = "SELECT count(*) AS num_listens FROM Listens WHERE user_id = {$user_id} AND DATE(Listens.date) = '" . date('Y-m-d') ."'";
+      $flag = TRUE;
+      if($membership_type === "normal"){
+        $query = "SELECT count(*) AS num_listens FROM Listens WHERE track_id NOT IN (SELECT track_id FROM Buys WHERE user_id = {$uid}) AND user_id = {$uid} AND date_format(date, '%Y-%m-%d') = '" . date('Y-m-d') ."'";
         $result = mysqli_query($db, $query);
         $result_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
         $num_listens = $result_array['num_listens'];
+        $query = "SELECT count(*) FROM Buys WHERE user_id = {$uid} AND track_id = {$track_id};";
+        $result = mysqli_query($db, $query);
 
-        if($num_listens > 10){
+        if($result){
+          $flag = TRUE;
+        }
+        else if($num_listens > 5){
           $flag = FALSE;
-          
+        }
+        else{
+          $flag = TRUE;
         }
       }
-      if($flag === TRUE){
-        $query4 = "INSERT INTO Listens ($user_id, $track_id, $insertion_date)";
+      if($flag){
+        $query4 = "INSERT INTO Listens VALUES({$uid}, {$track_id}, '$insertion_date');";
+        echo $query4;
         $result4 = mysqli_query($db, $query4);
       }
       else{
-        echo " <script type=\"text/javascript\"> alert(\"Biz bu sorunun cevabını 15 Temmuz'da verdik!.\"); </script>";
+        echo " <script type=\"text/javascript\"> alert(\"PARA BİRİKTİR DE PREMIUM AL!.\"); </script>";
       }
-      header("Refresh:0");
   }
     
 ?>
