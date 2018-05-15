@@ -27,16 +27,16 @@
         <ul class="nav navbar-nav">
           <li><a href="admin.php">Home</a></li>
           <li class="active"><a href="search_admin.php">Search</a></li>
-          <li><a href="modify_track.php">Add Track</a></li>
-          <li><a href="modify_album.php">Add Album</a></li>
-          <li><a href="modify_artist.php">Add Artist</a></li>
-          <li><a href="modify_publisher.php">Add Publisher</a></li>
+          <li><a href="add_track.php">Add Track</a></li>
+          <li><a href="add_album.php">Add Album</a></li>
+          <li><a href="add_artist.php">Add Artist</a></li>
+          <li><a href="add_publisher.php">Add Publisher</a></li>
         </ul>
         
         
         <ul class="nav navbar-nav navbar-right">
           <li><a href="change_password_admin.php"><span class="glyphicon glyphicon-user"></span> Change Password</a></li>
-          <li><a href="homepage.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+          <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
         </ul>
       </div>
 	  
@@ -114,7 +114,7 @@
 
 										
 				while( $row = $query->fetch_assoc()){ 
-					echo( "<div align = \"center\"><tr> <td><a href='modify_track.php?track_id=".$row['track_id']."'>".$row['track_name']."</a></td> </tr><br/></div>");
+					echo( "<div align = \"center\"><tr> <td><a href='access_track.php?track_id=".$row['track_id']."'>".$row['track_name']."</a></td> </tr><br/></div>");
 				}
 			}
 			else if( $match == "contains"){
@@ -123,7 +123,7 @@
 																		AND date_of_addition >= '$from_date'
 																		AND date_of_addition <= '$end_date';");
 				while( $row = $query->fetch_assoc()){ 
-					echo( "<div align = \"center\"><tr> <td><a href='modify_track.php?track_id=".$row['track_id']."'>".$row['track_name']."</a></td> </tr><br/></div>");
+					echo( "<div align = \"center\"><tr> <td><a href='access_track.php?track_id=".$row['track_id']."'>".$row['track_name']."</a></td> </tr><br/></div>");
 				}
 			}
 			else if( $match == "starts_with"){
@@ -132,7 +132,7 @@
 																		AND date_of_addition >= '$from_date'
 																		AND date_of_addition <= '$end_date';");
 				while( $row = $query->fetch_assoc()){ 
-					echo( "<div align = \"center\"><tr> <td><a href='modify_track.php?track_id=".$row['track_id']."'>".$row['track_name']."</a></td> </tr><br/></div>");
+					echo( "<div align = \"center\"><tr> <td><a href='access_track.php?track_id=".$row['track_id']."'>".$row['track_name']."</a></td> </tr><br/></div>");
 				}
 			}
 			
