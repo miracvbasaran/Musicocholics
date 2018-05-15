@@ -56,7 +56,7 @@
 	  			$result_playlist = mysqli_query($db, $query_playlist);
 	  			while ($row = mysqli_fetch_array($result_playlist, MYSQLI_NUM)) {
       				$p_id = $row[0];
-      				echo "<tr onclick = \"document.location = 'view_others_playlist.php?playlist_id={$p_id}' \">";
+      				echo "<tr onclick = \"document.location = 'access_playlist.php?playlist_id={$p_id}' \">";
 	      			echo "<td>" . $row[1] . "</td>";
 	      			echo "<td>" . $row[2] . "</td>";
 	      			echo "</tr>" ;
