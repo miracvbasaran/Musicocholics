@@ -85,7 +85,7 @@
           $result_playlist = mysqli_query($db, $query_playlist);
           while ($row = mysqli_fetch_array($result_playlist, MYSQLI_NUM)) {
               $t_id = $row[0];
-            echo "<tr onclick = \"document.location = 'view_track.php?track_id={$t_id}' \">";
+            echo "<tr onclick = \"document.location = 'access_track.php?track_id={$t_id}' \">";
             echo "<td>" . $row[1] . "</td>";
             echo "<td>" . $row[2] . "</td>";
             echo "<td>" . $row[3] . "</td>";
@@ -117,13 +117,13 @@
                 echo "</tr>" ;
               }
               else if( $cnt_friend == 0 ) {
-                echo "<tr onclick = \"document.location = 'nonfriend_profile.php?other_id={$person_id}' \">";
+                echo "<tr onclick = \"document.location = 'complete_profile.php?other_id={$person_id}' \">";
                 echo "<td>" . $row[1] . "</td>";
                 echo "<td>" . $row[2] . "</td>";
                 echo "</tr>" ;
               }
               else {
-                echo "<tr onclick = \"document.location = 'friend_profile.php?other_id={$person_id}' \">";
+                echo "<tr onclick = \"document.location = 'complete_profile.php?other_id={$person_id}' \">";
                 echo "<td>" . $row[1] . "</td>";
                 echo "<td>" . $row[2] . "</td>";
                 echo "</tr>" ;

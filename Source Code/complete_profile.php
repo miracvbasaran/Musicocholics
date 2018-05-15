@@ -97,7 +97,7 @@
     <div class="container" align="right" >
 <form method="post" action="">
 
-    <a href=<?php echo "'view_others_playlists.php?other_id={$view_id}'"; ?> class="btn btn-success" role="button">View Playlists</a>
+    <a href=<?php echo "'access_playlists.php?other_id={$view_id}'"; ?> class="btn btn-success" role="button">View Playlists</a>
   
     <input id='Submit' class="btn btn-danger" name='ban_button' type='Submit' value='Ban User'>
 </form>
