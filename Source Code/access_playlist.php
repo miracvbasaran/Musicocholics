@@ -46,7 +46,7 @@
       $resultD6 = mysqli_query($db, $queryD6);
       $queryD1 = "DELETE FROM playlist WHERE playlist_id = {$playlist_id} ";
       $resultD1 = mysqli_query($db, $queryD1);
-      header("location: view_playlists.php");
+      header("location: access_playlists.php?other_id=".$playlist_creator);
     }
 
 ?>
