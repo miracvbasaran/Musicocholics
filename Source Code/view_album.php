@@ -11,10 +11,14 @@
     $result2 = mysqli_query($db, $query2);
     $album_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
     $album_name = $album_array['album_name'];
-    $picture = $album_array['picture'];
     $album_type = $album_array['album_type'];
     $published_date = $album_array['published_date'];
     $publisher_id =$album_array['publisher_id'];
+
+    if($album_array['picture'] == NULL)
+        $picture = "nophoto.png";
+    else
+        $picture = $album_array['picture'];
 
     $query = "SELECT artist_id FROM Album_Belongs_To_Artist WHERE album_id = {$album_id}";
     $result = mysqli_query($db, $query);
@@ -73,9 +77,12 @@
 
 <div class="container">
     
-  <div align="center" class="col-md-6 col-md-offset-3"><img class="img-circle img-responsive" src="assets/img/ <?php echo $picture; ?>" width="200" height="200"></div>
+
+ 
 
 <div class="container" align = "center">
+
+ <img class="img-circle img-responsive" src="images/<?php echo $picture; ?>" width="150" height="150"></div>
   <h2><?php echo $album_name;?> by <small> 
   <?php
       for ($i=0; $i < count($artist_names); $i++) { 
