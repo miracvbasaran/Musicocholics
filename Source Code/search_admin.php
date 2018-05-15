@@ -19,10 +19,10 @@ include("session.php");
         <ul class="nav navbar-nav">
           <li><a href="admin.php">Home</a></li>
           <li><a href="search_admin.php">Search</a></li>
-          <li><a href="modify_track.php">Add Track</a></li>
-          <li><a href="modify_album.php">Add Album</a></li>
-          <li><a href="modify_artist.php">Add Artist</a></li>
-          <li><a href="modify_publisher.php">Add Publisher</a></li>
+          <li><a href="add_track.php">Add Track</a></li>
+          <li><a href="add_album.php">Add Album</a></li>
+          <li><a href="add_artist.php">Add Artist</a></li>
+          <li><a href="add_publisher.php">Add Publisher</a></li>
         </ul>
         
         
