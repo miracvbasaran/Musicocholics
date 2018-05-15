@@ -7,17 +7,33 @@
 
     $playlist_id = $_GET['playlist_id'];
 
+    /*
+    if(isset($_POST['delete_albums']))
+    {
+    if(!empty($_POST['check_list'])){
+    foreach($_POST['check_list'] as $selected_album_id){
+    $selected_album_id = intval($selected_album_id);
+    $query = "CALL DeleteAlbumFromArtist({$selected_album_id}, {$artist_id})";
+    $result = mysqli_query($db, $query);
+    }
+    }
+    header("Refresh:0");
+    }
+    */
+
     if(isset($_POST['add_tracks'])) {
-      
-        foreach($_POST['check_list'] as $selected_track_id){
-            $selected_track_id = intval($selected_track_id);
-           	$date = date('Y-m-d G:i:s');
-           	$query3 = "INSERT INTO added(playlist_id, track_id, date) VALUES({$playlist_id}, {$selected_track_id}, '$date')";
-           	$result3 = mysqli_query($db, $query3);
+      if(!empty($_POST['check_list'])) {
+        foreach($_POST['check_list'] as $selected_track_id) {
+          $selected_track_id = intval($selected_track_id);
+         	$date = date('Y-m-d');
+         	$query3 = "INSERT INTO added(playlist_id, track_id, date) VALUES({$playlist_id}, {$selected_track_id}, '$date')";
+         	$result3 = mysqli_query($db, $query3);
         }
         header("location: view_own_playlist.php?playlist_id=".$playlist_id);
-      
-      
+      }
+      else {
+        echo ' <script type="text/javascript"> alert("No track is selected!"); </script>';
+      }
     }
 
 ?>
@@ -58,30 +74,22 @@
 		<h3> Tracks </h3> <br>
 	</div>
 
-	<div class="container" align="right">
-		<p>
-			<form method="post" action="">
-				<input id='Submit' name='add_tracks' type='Submit' value='Add Tracks' class="btn btn-success">
-			</form>
-		</p>
-	</div>
-
 	<div class="container">
     <form method="post" action="">
   		<table class = "table table-hover" style="width:100%">
   	  		<tr>
   	    		<th>Name</th>
-  	    		<th>Recording Type</th>
+  	    		<!--<th>Recording Type</th>-->
   	    		<th>Duration</th>
-  	    		<th>Danceability</th>
+  	    		<!--<th>Danceability</th>
   	    		<th>Acousticness</th>
   	    		<th>Instrumentalness</th>
   	    		<th>Speechness</th>
   	    		<th>Balance</th>
-  	    		<th>Loudness</th>
+  	    		<th>Loudness</th>-->
   	    		<th>Language</th>
   	    		<th>Price</th>
-  	    		<th>Date of Addition</th>
+  	    		<!--<th>Date of Addition</th>-->
   	    		<th></th>
   	  		</tr>
   	  		<?php
@@ -91,22 +99,26 @@
         				$t_id = $row[0];
         				echo "<tr>";
         				echo "<td><a href = \"view_track.php?track_id={$t_id}\">" . $row[1] . "</a></td>";
-  	      			echo "<td>" . $row[2] . "</td>";
+                //echo "<td>" . $row[2] . "</td>";
   	      			echo "<td>" . $row[3] . "</td>";
-  	      			echo "<td>" . $row[4] . "</td>";
+  	      			/*
+                echo "<td>" . $row[4] . "</td>";
   	      			echo "<td>" . $row[5] . "</td>";
   	      			echo "<td>" . $row[6] . "</td>";
   	      			echo "<td>" . $row[7] . "</td>";
   	      			echo "<td>" . $row[8] . "</td>";
   	      			echo "<td>" . $row[9] . "</td>";
+                */
   	      			echo "<td>" . $row[10] . "</td>";
   	      			echo "<td>" . $row[11] . "</td>";
-  	      			echo "<td>" . $row[12] . "</td>";
+  	      			// echo "<td>" . $row[12] . "</td>";
   	      			echo "<td> <input class = \"form-control\" type = \"checkbox\" name = \"check_list[]\" value = \"{$t_id}\"></td>";
   	      			echo "</tr>";
   	  			}
   	  		?>
   		</table>
+    <div class = "container" align = "right">
+    <input type="submit" name="add_tracks" value="Add Tracks" class = "btn btn-danger"></div>
     </form>
 	</div>
 <style>
