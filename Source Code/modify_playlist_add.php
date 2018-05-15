@@ -118,7 +118,7 @@
   	  		?>
   		</table>
     <div class = "container" align = "right">
-    <input type="submit" name="add_tracks" value="Add Tracks" class = "btn btn-danger"></div>
+    <input type="submit" name="add_tracks" value="Add Tracks" class = "btn btn-success"></div>
     </form>
 	</div>
 <style>

@@ -70,7 +70,7 @@
 
       Description: <textarea class="form-control" rows="2" name="playlist_description" autofocus></textarea><br>
 
-      <input type="submit" name="create_playlist" value="Create Playlist" class="btn btn-warning"> <br><br>
+      <input type="submit" name="create_playlist" value="Create Playlist" class="btn btn-success"> <br><br>
     </form>
   </div>
 

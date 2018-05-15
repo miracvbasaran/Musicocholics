@@ -50,8 +50,8 @@
 		<div align="right" class="container"></div>
 		<p>
 			<form method="post" action="">
-        <input id='Submit' name='in_box_button' type='Submit' value='Inbox' class="btn btn-warning"> <br><br>
-				<input id='Submit' name='send_optional_message' type='Submit' value='Send Message' class="btn btn-warning">
+        <input id='Submit' name='in_box_button' type='Submit' value='Inbox' class="btn btn-primary"> <br><br>
+				<input id='Submit' name='send_optional_message' type='Submit' value='Send Message' class="btn btn-success">
 			</form>
 		</p>
 	</div>

@@ -116,23 +116,23 @@
 	<div class="container" align="right">
 		<p>
 			<form method="post" action="">
-				<input id='Submit' name='collaborate_playlist' type='Submit' value='Collaborate Playlist' class="btn btn-default">
+				<input id='Submit' name='collaborate_playlist' type='Submit' value='Collaborate Playlist' class="btn btn-primary">
 			</form>
 		</p>
 	</div>
 
-	<form method="post" action="" align="center">
-		<div class="container" align ="center"><input type="submit" name="rate_button" value="Rate" class="btn btn-success"> </div>
-		<div class="col-xs-3"  align ="center">Rate:
-			<select class = "form-control" name="rate_choice" align="center">
-	    		<option value="1">1</option>
-	    		<option value="2">2</option>
-	    		<option value="3">3</option>
-	    		<option value="4">4</option>
-	    		<option value="5">5</option>
-	  		</select> <br>
-	  	</div>
-	</form>
+  <div align="center">
+    <form method="post" action="#" onsubmit="">
+    <input type="submit" name="rate_button" value="Rate" class="btn btn-danger"> <br>
+      <select class = "form-control" name="rate_choice" align="center">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+    </form>
+  </div>
 
 	<div class="container">
 		<table class = "table table-hover" style="width:100%">
@@ -197,7 +197,7 @@
   	<div class="container" align="center">
     	<form method="post" action="">
       		<input type="text" name="text_comment" value= "Comment" autofocus>
-      		<input type="submit" name="post_comment" value="Post Comment" > 
+          <input id='Submit' name='post_comment' type='Submit' value='Post Comment' class="btn btn-success">
     	</form>
   	</div>
 

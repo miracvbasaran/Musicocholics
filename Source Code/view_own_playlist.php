@@ -131,7 +131,7 @@
 	<div class="container" align="right">
 		<p>
 			<form method="post" action="">
-				<input id='Submit' name='listen_playlist' type='Submit' value='Listen Playlist' class="btn btn-success">
+				<input id='Submit' name='listen_playlist' type='Submit' value='Listen Playlist' class="btn btn-primary">
 				<input id='Submit' name='add_tracks' type='Submit' value='Add Tracks' class="btn btn-success">
 				<input id='Submit' name='delete_playlist' type='Submit' value='Delete Playlist' class="btn btn-danger">
 			</form>

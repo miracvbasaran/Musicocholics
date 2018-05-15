@@ -82,7 +82,7 @@
        <label for="comment">Message:</label>
       <textarea class="form-control" rows="5" name="text_message" autofocus></textarea>
       <br><br><br>
-      <input type="submit" class="btn btn-warning" name="send_message" value="Send Message" > <br><br><br>
+      <input type="submit" class="btn btn-success" name="send_message" value="Send Message" > <br><br><br>
     </form>
   </div>
 
