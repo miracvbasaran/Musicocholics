@@ -19,55 +19,59 @@ include("session.php");
         <ul class="nav navbar-nav">
           <li><a href="admin.php">Home</a></li>
           <li class="active"><a href="search_admin.php">Search</a></li>
-          <li><a href="add_track.php">Add Track</a></li>
-          <li><a href="add_album.php">Add Album</a></li>
-          <li><a href="add_artist.php">Add Artist</a></li>
-          <li><a href="add_publisher.php">Add Publisher</a></li>
+          <li><a href="modify_track.php">Add Track</a></li>
+          <li><a href="modify_album.php">Add Album</a></li>
+          <li><a href="modify_artist.php">Add Artist</a></li>
+          <li><a href="modify_publisher.php">Add Publisher</a></li>
         </ul>
         
         
         <ul class="nav navbar-nav navbar-right">
           <li><a href="change_password_admin.php"><span class="glyphicon glyphicon-user"></span> Change Password</a></li>
-          <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+          <li><a href="homepage.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
         </ul>
       </div>
-	  
+	</nav>  
 	  <div class = "container" align = "center"><h2>
-		<font color="white">
+
 			<br/><br/>
 			Search</h2>
 			<br/><br/>
-		</font>
+		
 		</div>
 	
 		<div align = "center">
 			<form action = "#" method = "post">
-				<font color="white">
-					<font color="black">
+			
 						<input type = "text" name = "search_key" placeholder = "Search.."> 
-						<input id = "" value = "Search" name = "search" type = "submit"> </button> <br/><br/>
-					</font>
-					<input type="checkbox" name="filter_track" value="track"/> Track &nbsp;&nbsp;
-					<tr><td><a href='advanced_track_search_admin.php'> Advanced Track Search</a></td></tr><br/>
-					<input type="checkbox" name="filter_album" value="album"/> Album &nbsp;&nbsp;
-					<tr><td><a href='advanced_album_search_admin.php'> Advanced Album Search</a></td></tr><br/>
-					<input type="checkbox" name="filter_artist" value="artist"/> Artist &nbsp;&nbsp; 
-					<tr><td><a href='advanced_artist_search_admin.php'> Advanced Artist Search</a></td></tr><br/>
+						<input id = "" value = "Search" name = "search" type = "submit" class="btn btn-warning"> </button> <br/><br/>
+					
+					<input type="checkbox" name="filter_track" value="track"/> Track 
+					
+					<input type="checkbox" name="filter_album" value="album"/> Album 
+					
+					<input type="checkbox" name="filter_artist" value="artist"/> Artist
+					
 					<!-- <input type="checkbox" name="filter_playlist" value="playlist"/> Playlist &nbsp;&nbsp;
 					<tr><td><a href='advanced_playlist_search_admin.php'> Advanced Playlist Search</a></td></tr><br/> -->
-					<input type="checkbox" name="filter_user" value="user"/> User &nbsp;&nbsp; 
-					<tr><td><a href='advanced_user_search_admin.php'> Advanced User Search</a></td></tr><br/><br/>
-				</font>
+					<input type="checkbox" name="filter_user" value="user"/> User 
+					<br><br>
+					<tr><td><a href='advanced_track_search_admin.php' class="btn btn-info"> Advanced Track Search</a></td></tr><br/><br>
+					<tr><td><a href='advanced_album_search_admin.php' class="btn btn-info" > Advanced Album Search</a></td></tr><br/><br>
+					<tr><td><a href='advanced_artist_search_admin.php' class="btn btn-info"> Advanced Artist Search</a></td></tr><br/><br>
+					<tr><td><a href='advanced_user_search_admin.php' class="btn btn-info"> Advanced User Search</a></td></tr><br/><br/><br>
+
+				
 			</form>
 		</div>
 		
 		
   	  <div class = "container" align = "center"><h4>
-  		<font color="white">
+  	
   			<br/><br/>
   			Results</h4>
   			<br/><br/>
-  		</font>
+  		
   		</div>
 
 				<?php
@@ -84,19 +88,19 @@ include("session.php");
 					if( isset( $_POST['filter_track'])){//TRACK
 						$query = mysqli_query( $db, "SELECT * FROM Track WHERE track_name LIKE '%$search_key%';");
 						while( $row = $query->fetch_assoc()){ //printing every track with that track name
-							echo( "<div align = \"center\"><tr> <td><a href='access_track.php?track_id=".$row['track_id']."'>".$row['track_name']."</a></td> </tr><br/></div>");
+							echo( "<div align = \"center\"><tr> <td><a href='modify_track.php?track_id=".$row['track_id']."'>".$row['track_name']."</a></td> </tr><br/></div>");
 						}
 					}
 					if( isset( $_POST['filter_album'])){ //ALBUM
 						$query = mysqli_query( $db, "SELECT * FROM Album WHERE album_name LIKE '%$search_key%';");
 						while( $row = $query->fetch_assoc()){ //printing every album with that album name
-							echo( "<div align = \"center\"><tr> <td><a href='access_album.php?album_id=".$row['album_id']."'>".$row['album_name']."</a></td> </tr><br/></div>");
+							echo( "<div align = \"center\"><tr> <td><a href='modify_album.php?album_id=".$row['album_id']."'>".$row['album_name']."</a></td> </tr><br/></div>");
 						}
 					}
 					if( isset( $_POST['filter_artist'])){ //ARTIST
 						$query = mysqli_query( $db, "SELECT * FROM Artist WHERE artist_name LIKE '%$search_key%';");
 						while( $row = $query->fetch_assoc()){ //printing every artist with that artist name
-							echo( "<div align = \"center\"><tr><td><a href='access_artist.php?artist_id=".$row['artist_id']."'>".$row['artist_name']."</a></td></tr><br/></div>");
+							echo( "<div align = \"center\"><tr><td><a href='modify_artist.php?artist_id=".$row['artist_id']."'>".$row['artist_name']."</a></td></tr><br/></div>");
 						}
 					}
 					// if( isset( $_POST['filter_playlist'])){ //PLAYLIST
@@ -116,6 +120,6 @@ include("session.php");
 				?>
 	
 		<br/><br/><br/>
-	</nav>
+	
 </body>
 </html>

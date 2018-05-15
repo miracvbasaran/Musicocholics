@@ -27,60 +27,60 @@
         <ul class="nav navbar-nav">
           <li><a href="admin.php">Home</a></li>
           <li class="active"><a href="search_admin.php">Search</a></li>
-          <li><a href="add_track.php">Add Track</a></li>
-          <li><a href="add_album.php">Add Album</a></li>
-          <li><a href="add_artist.php">Add Artist</a></li>
-          <li><a href="add_publisher.php">Add Publisher</a></li>
+          <li><a href="modify_track.php">Add Track</a></li>
+          <li><a href="modify_album.php">Add Album</a></li>
+          <li><a href="modify_artist.php">Add Artist</a></li>
+          <li><a href="modify_publisher.php">Add Publisher</a></li>
         </ul>
         
         
         <ul class="nav navbar-nav navbar-right">
           <li><a href="change_password_admin.php"><span class="glyphicon glyphicon-user"></span> Change Password</a></li>
-          <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+          <li><a href="homepage.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
         </ul>
       </div>
-	  
+	</nav>  
 	  <div class = "container" align = "center"><h2>
-		<font color="white">
+		
 			<br/><br/>
 			Advanced Track Search</h2>
 			<br/><br/>
-		</font>
+		
 		</div>
 	  
 		
 		<div align = "center">
 			<form action = "#" method = "post" onsubmit = "">
-				<font color="white">
-					<font color="black">
-						<input type = "text" name = "search_key" placeholder = "Track Name"> <br/><br/>
-					</font>
+				
+					Track Name:	<input type = "text" name = "search_key" placeholder = ""> <br/><br/>
+					
 					<input type = "radio" name="match" value="matches"/> Exactly matches &nbsp; &nbsp;
 					<input type = "radio" name="match" value="contains"/> Contains &nbsp; &nbsp;
 					<input type = "radio" name="match" value="starts_with"/> Starts with
 					<br/><br/>
-					<font color="black">
-						<input type = "date" name = "from_date" placeholder = "Starting date for addition" > 
-						<input type = "date" name = "end_date" placeholder = "End date for addition">
-					</font>
+					
+						Starting date for addition: <input type = "date" name = "from_date" placeholder = "Y-M-D" > 
+						<br><br>
+						End date for addition: <input type = "date" name = "end_date" placeholder = "Y-M-D">
+					
 					<br/><br/>
 					<input type = "radio" name="type" value="Studio"/> Studio &nbsp; &nbsp;
 					<input type = "radio" name="type" value="Live"/> Live
 					<br/><br/>
-					<font color="black">
-						<input id = "" value = "Search" name = "search" type = "submit"> </button> <br/><br/>
-					</font>
+					
+						<input id = "" value = "Search" name = "search" type = "submit" class="btn btn-warning"> </button> <br/><br/>
+					
 					<br/><br/>
-				</font>
+				
 			</form>
 		</div>
 		
 	  <div class = "container" align = "center"><h4>
-		<font color="white">
+		
 			<br/><br/>
 			Results</h4>
 			<br/><br/>
-		</font>
+		
 		</div>	
 		
 		
@@ -114,7 +114,7 @@
 
 										
 				while( $row = $query->fetch_assoc()){ 
-					echo( "<div align = \"center\"><tr> <td><a href='access_track.php?track_id=".$row['track_id']."'>".$row['track_name']."</a></td> </tr><br/></div>");
+					echo( "<div align = \"center\"><tr> <td><a href='modify_track.php?track_id=".$row['track_id']."'>".$row['track_name']."</a></td> </tr><br/></div>");
 				}
 			}
 			else if( $match == "contains"){
@@ -123,7 +123,7 @@
 																		AND date_of_addition >= '$from_date'
 																		AND date_of_addition <= '$end_date';");
 				while( $row = $query->fetch_assoc()){ 
-					echo( "<div align = \"center\"><tr> <td><a href='access_track.php?track_id=".$row['track_id']."'>".$row['track_name']."</a></td> </tr><br/></div>");
+					echo( "<div align = \"center\"><tr> <td><a href='modify_track.php?track_id=".$row['track_id']."'>".$row['track_name']."</a></td> </tr><br/></div>");
 				}
 			}
 			else if( $match == "starts_with"){
@@ -132,7 +132,7 @@
 																		AND date_of_addition >= '$from_date'
 																		AND date_of_addition <= '$end_date';");
 				while( $row = $query->fetch_assoc()){ 
-					echo( "<div align = \"center\"><tr> <td><a href='access_track.php?track_id=".$row['track_id']."'>".$row['track_name']."</a></td> </tr><br/></div>");
+					echo( "<div align = \"center\"><tr> <td><a href='modify_track.php?track_id=".$row['track_id']."'>".$row['track_name']."</a></td> </tr><br/></div>");
 				}
 			}
 			
@@ -141,10 +141,11 @@
 		?>
 		
 		<div align = "center">
+		<br/><br/>
 			<tr><td><a href='search_admin.php'>Go back to main search page</a></td></tr>
 		</div>
 	
-		<br/><br/><br/>
+		<br/><br/><br/><br/><br/><br/><br/>
 
 </body>
 </html>

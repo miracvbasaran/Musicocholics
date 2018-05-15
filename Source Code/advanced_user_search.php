@@ -38,49 +38,50 @@ $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
 				<li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
 			</ul>
 		</div>
-		
+</nav>		
 		
 	  <div class = "container" align = "center"><h2>
-		<font color="white">
+		
 			<br/><br/>
 			Advanced User Search</h2>
 			<br/><br/>
-		</font>
+		
 		</div>
 		
 		
 		<div align = "center">
 			<form action = "#" method = "post" onsubmit = "return check()">
-				<font color="white">
-					<font color="black">
-						<input type = "text" name = "username" placeholder = "Username"> <br/><br/>
-					</font>
+				
+					Username:	<input type = "text" name = "username" placeholder = ""> <br/><br/>
+					
 					<input type = "radio" name="match" value="matches"/> Exactly matches &nbsp; &nbsp;
 					<input type = "radio" name="match" value="contains"/> Contains &nbsp; &nbsp;
 					<input type = "radio" name="match" value="starts_with"/> Starts with <br/><br/><br/>
-					<font color="black">
-						<input type = "text" name = "fullname" placeholder = "Name"> <br/><br/>
-					</font>
+					
+					Name:	<input type = "text" name = "fullname" placeholder = ""> <br/><br/>
+					
 					<input type = "radio" name="country" value="Turkey"/> Turkey &nbsp; &nbsp;
 					<input type = "radio" name="country" value="Germany"/> Germany
+					<input type = "radio" name="country" value="Turkey"/> England
+					<input type = "radio" name="country" value="Turkey"/> USA
 					<br/><br/>
 					<input type = "radio" name="relationship" value="friend"/> Only friends &nbsp; &nbsp;
 					<input type = "radio" name="relationship" value="all"/> All people 
 					<br/><br/>
-					<font color="black">
-						<input id = "" value = "Search" name = "search" type = "submit"> </button> <br/><br/>
-					</font>
+					
+						<input id = "" value = "Search" name = "search" type = "submit" class="btn btn-warning"> </button> <br/><br/>
+					
 					<br/><br/>
-				</font>
+				
 			</form>
 		</div>
 		
   	  <div class = "container" align = "center"><h4>
-  		<font color="white">
+  		
   			<br/><br/>
   			Results</h4>
   			<br/><br/>
-  		</font>
+  		
   		</div>
 		
 		
@@ -290,10 +291,11 @@ $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
 			?>
 			
 			<div align = "center">
+			<br/><br/>
 				<tr><td><a href='search.php'>Go back to main search page</a></td></tr>
 			</div>
 	
-				<br/><br/><br/>
+				<br/><br/><br/><br/><br/><br/><br/>
 <style>
 .footer {
    position: fixed;

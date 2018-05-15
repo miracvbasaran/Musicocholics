@@ -41,44 +41,48 @@
 				<li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
 		    </ul>
 		</div>
-
+</nav>
 		  <div class = "container" align = "center"><h2>
-			<font color="white">
+			
 				<br/><br/>
 				Search</h2>
 				<br/><br/>
-			</font>
+			
 			</div>
 	
 		<div align = "center">
 			<form action = "#" method = "post">
-				<font color="white">
-					
-					<font color="black">
+			
 						<input type = "text" name = "search_key" placeholder = "Search.."> 
-						<input id = "" value = "Search" name = "search" type = "submit"> </button> <br/><br/>
-					</font>
+						<input id = "" value = "Search" name = "search" type = "submit" class="btn btn-warning" > </button> <br/><br/>
+					
 					<input type="checkbox" name="filter_track" value="track"/> Track 
-					<tr><td><a href='advanced_track_search.php'> Advanced Track Search</a></td></tr><br/>
+					
 					<input type="checkbox" name="filter_album" value="album"/> Album 
-					<tr><td><a href='advanced_album_search.php'> Advanced Album Search</a></td></tr><br/>
+					
 					<input type="checkbox" name="filter_artist" value="artist"/> Artist 
-					<tr><td><a href='advanced_artist_search.php'> Advanced Artist Search</a></td></tr><br/>
+					
 					<input type="checkbox" name="filter_playlist" value="playlist"/> Playlist 
-					<tr><td><a href='advanced_playlist_search.php'> Advanced Playlist Search</a></td></tr><br/>
+					
 					<input type="checkbox" name="filter_user" value="user"/> User 
-					<tr><td><a href='advanced_user_search.php'> Advanced User Search</a></td></tr><br/><br/>
-				</font>
+					 <br><br>
+					<tr><td><a href='advanced_track_search.php' class="btn btn-info" > Advanced Track Search</a></td></tr><br/><br>
+					<tr><td><a href='advanced_album_search.php' class="btn btn-info"> Advanced Album Search</a></td></tr><br/><br>
+					<tr><td><a href='advanced_artist_search.php' class="btn btn-info"> Advanced Artist Search</a></td></tr><br/><br>
+					<tr><td><a href='advanced_playlist_search.php' class="btn btn-info"> Advanced Playlist Search</a></td></tr><br/><br>
+					<tr><td><a href='advanced_user_search.php' class="btn btn-info" > Advanced User Search</a></td></tr><br/><br/><br>
+
+				
 			</form>
 		</div>
 		
 		
 	  <div class = "container" align = "center"><h4>
-		<font color="white">
+	
 			<br/><br/>
-			Results</h4>
+			RESULTS</h4>
 			<br/><br/>
-		</font>
+		
 		</div>
 
 				<?php
@@ -175,7 +179,7 @@
 		
 				?>
 	
-		<br/><br/><br/>
+		<br/><br/><br/><br/><br/><br/>
 <style>
 .footer {
    position: fixed;

@@ -37,48 +37,47 @@
 				<li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
 		    </ul>
 		</div>
-		
+</nav>		
 	  <div class = "container" align = "center"><h2>
-		<font color="white">
+	
 			<br/><br/>
 			Advanced Track Search</h2>
 			<br/><br/>
-		</font>
 		</div>
 		
 		
 		<div align = "center">
 			<form action = "#" method = "post" onsubmit = "">
-				<font color="white">
-					<font color="black">
-						<input type = "text" name = "search_key" placeholder = "Track Name"> <br/><br/>
-					</font>
+				
+					Track Name:	<input type = "text" name = "search_key" placeholder = ""> <br/><br/>
+					
 					<input type = "radio" name="match" value="matches"/> Exactly matches &nbsp; &nbsp;
 					<input type = "radio" name="match" value="contains"/> Contains &nbsp; &nbsp;
 					<input type = "radio" name="match" value="starts_with"/> Starts with
 					<br/><br/>
-					<font color="black">
-						<input type = "date" name = "from_date" placeholder = "Starting date for addition" > 
-						<input type = "date" name = "end_date" placeholder = "End date for addition">
-					</font>
+					
+						Starting date for addition: <input type = "date" name = "from_date" placeholder = "Y-M-D" >
+						<br><br> 
+						End date for addition: <input type = "date" name = "end_date" placeholder = "Y-M-D">
+					
 					<br/><br/>
 					<input type = "radio" name="type" value="Studio"/> Studio &nbsp; &nbsp;
 					<input type = "radio" name="type" value="Live"/> Live
 					<br/><br/>
-					<font color="black">
-						<input id = "" value = "Search" name = "search" type = "submit"> </button> <br/><br/>
-					</font>
+				
+						<input id = "" value = "Search" name = "search" type = "submit" class="btn btn-warning"> </button> <br/><br/>
+					
 					<br/><br/>
-				</font>
+			
 			</form>
 		</div>
 		
   	  <div class = "container" align = "center"><h4>
-  		<font color="white">
+  		
   			<br/><br/>
   			Results</h4>
   			<br/><br/>
-  		</font>
+  		
   		</div>
 		
 		
@@ -139,10 +138,11 @@
 		?>
 		
 		<div align = "center">
+		<br/><br/>
 			<tr><td><a href='search.php'>Go back to main search page</a></td></tr>
 		</div>
 	
-		<br/><br/><br/>
+		<br/><br/><br/><br/><br/><br/><br/>
 <style>
 .footer {
    position: fixed;
