@@ -1,5 +1,6 @@
 <?php
 	include("session.php");
+  $uploaddir = getcwd().'/images/';
     $uid = mysqli_real_escape_string($db,$_SESSION['login_id']);
     $query = "SELECT admin_id FROM admin WHERE user_id = '$uid' ";
     $result = mysqli_query($db, $query);
@@ -15,9 +16,12 @@
       $artist_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
       $artist_name = $artist_array['artist_name'];
       $description = $artist_array['description'];
-      $picture = $artist_array['picture']; 
+      if($artist_array['picture'] == NULL)
+        $picture = "nophoto.png";
+      else
+        $picture = $artist_array['picture']; 
     }
-    
+
 
     if(isset($_POST['apply']))
     {
@@ -30,6 +34,25 @@
           $description = $_POST['description'];
           $query = "UPDATE Artist SET description = '{$description}' WHERE artist_id = {$artist_id};";
           $result = mysqli_query($db, $query);
+
+          $name = $_FILES['userphoto']['name']; 
+          $ext = pathinfo($_FILES['userphoto']['name'], PATHINFO_EXTENSION);
+          $uploadfile = $uploaddir . $artist_id . 'art.' . $ext;
+          $filename = $artist_id . 'art.' . $ext;
+
+          $query = "UPDATE User SET picture = '$filename' WHERE user_id = $uid";
+          $result = mysqli_query($db, $query);
+          $picture = $filename;
+           if (move_uploaded_file($_FILES['userphoto']['tmp_name'], $uploadfile)) {
+                  
+           } else {
+                  echo '<div class="alert alert-danger" role="alert">Error on uploading profile photo. </div>';
+           }
+          
+          if($name == ""){
+            $picture = NULL;
+          }
+
       }
       header("location: access_artist.php?artist_id=".$artist_id);
     }
@@ -112,12 +135,18 @@
       </div>
     </nav>
 
-   <div align="center" class="container"><img class="img-circle img-responsive" src="assets/img/ <?php echo $picture_v; ?>" width="200" height="200"></div>
-<div class = "container" align = "center"><form action="" method="post" enctype="multipart/form-data">
-    <input class="btn btn-primary btn-sm" type="file" name="photo" id="photo" accept="image/*"> <button class="btn btn-success btn-sm" type="submit" name="uploadpic">Update</button>
- </form></div>
-
-
+  
+  <div class="container" align="center">
+    
+ 
+    <form action="" method="post" enctype="multipart/form-data">
+          <img class="img-circle img-responsive" src="images/<?php echo $picture; ?>" width="100" height="100">
+          <br><br>
+           <input class="btn btn-primary btn-sm" type="file" name="userphoto" id="userphoto" accept="image/*">
+           <br><br>
+         
+    </form>
+</div>
 
 <form method="post" action=""><div class="container" align = "center">
    <div class="form-group"><div class="col-xs-4"><input type="text" class = "form-control" name="artist_name" default = <?php echo "'".$artist_name."'"; ?> value= <?php echo "'".$artist_name."'"; ?> autofocus>

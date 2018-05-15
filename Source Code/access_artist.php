@@ -14,7 +14,12 @@
       $artist_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
       $artist_name = $artist_array['artist_name'];
       $description = $artist_array['description'];
-      $picture = $artist_array['picture']; 
+     
+
+      if($artist_array['picture'] == NULL)
+        $picture = "nophoto.png";
+      else
+        $picture = $artist_array['picture']; 
     }
 
     if(isset($_POST['modify_artist_button']))
@@ -72,7 +77,7 @@
 
 <div class = "container">
 <div class="container" align = "center">
-  <div class="col-md-6 col-md-offset-3"><img class="img-circle img-responsive" src="assets/img/ <?php echo $picture; ?>" width="200" height="200"></div>
+  <img class="img-circle img-responsive" src="images/<?php echo $picture; ?>" width="100" height="100"></div>
 
   <div class = "container" align = "center"><h2><?php echo $artist_name;?></h2></div>
   <div class = "well"><p><?php echo $description;?></p></div>
