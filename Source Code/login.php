@@ -21,16 +21,17 @@ session_start();
     <div class = "container" align = "center"><h2>
   	<font color="black">
   		<br/><br/>
-  		Login</h2>
+  		SIGN IN </h2>
   		<br/><br/>
   	</font>
   	</div>
 
 		<div align = "center">
 			<form action = "#" method = "post" onsubmit = "">
-				<input type = "text" name = "name" placeholder = "Username" >	<br/><br/>
-				<input type = "password" name = "pass" placeholder = "Password"> <br/><br/>
-				<input id = "" value = "Login" name = "login" type = "submit"> </button>
+				USERNAME: <input type = "text" name = "name" placeholder = "Username" >	<br/><br/>
+				PASSWORD: <input type = "password" name = "pass" placeholder = "Password"> <br/><br/>
+				<input id = "" class="btn btn-success" value = "SIGN IN" name = "login" type = "submit"> </button>
+				<input id = "" class="btn btn-danger" value = "CANCEL" name = "cancel" type = "submit"> </button>
 			</form>
 		</div>
 		
@@ -77,6 +78,9 @@ session_start();
 							echo ' <script type="text/javascript"> alert("ID is not related to a user or an admin profile."); </script>';
 					}
 				}
+			}
+			if ( isset($_POST ['cancel'])){
+				header( "Location: index.php");
 			}	
 			
 			?>

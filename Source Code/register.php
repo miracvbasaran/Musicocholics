@@ -1,5 +1,6 @@
 <?php
 include("connection.php");
+$uploaddir = getcwd().'/images/';;
 ?>
 
 <!DOCTYPE html>
@@ -18,43 +19,48 @@ include("connection.php");
   <div class = "container" align = "center"><h2>
 	<font color="black">
 		<br/><br/>
-		Register</h2>
+		SIGN UP</h2>
 		<br/><br/>
 	</font>
 	</div>
 
 	<div align = "center">
-		<form action = "#" method = "post" onsubmit = "">
-			<input type = "text" name = "name" placeholder = "Name"> <br/><br/>
-			<input type = "text" name = "username" placeholder = "Username"> <br/><br/>
-			<input type = "password" name = "pass" placeholder = "Password"> <br/><br/>
-			<input type = "text" name = "email" placeholder = "E-mail address"> <br/><br/>
-			<select name="country">
+		<form action = "#" method = "post" onsubmit = "" enctype="multipart/form-data">
+			FULLNAME: <input type = "text" name = "name" placeholder = "Fullname"> <br/><br/>
+			USERNAME: <input type = "text" name = "username" placeholder = "Username"> <br/><br/>
+			PASSWORD: <input type = "password" name = "pass" placeholder = "Password"> <br/><br/>
+			E-MAIL ADDRESS: <input type = "text" name = "email" placeholder = "E-mail address"> <br/><br/>
+
+	         <input class="btn btn-primary btn-sm" type="file" name="userphoto" id="userphoto" accept="image/*">
+	         <br>
+	         		   
+			COUNTRY: <select name="country">
 				<option value="Country">Country</option>
 				<option value="Turkey">Turkey</option>
 				<option value="Germany">Germany</option>
 				<option value="USA">USA</option>
 			</select>
 			<br/><br/>
-			<select name="language">
+			LANGUAGE: <select name="language">
 				<option value="Language">Language</option>
 				<option value="Turkish">Turkish</option>
 				<option value="English">English</option>
 				<option value="German">German</option>
 			</select>
 			<br/><br/>
-			<input type="date" name="birthday" placeholder="Birtdate (YYYY-MM-DD)"><br/><br/>
-			<select name="gender">
+			BIRTHDAY: <input type="date" name="birthday" placeholder="(YYYY-MM-DD)"><br/><br/>
+			
+			GENDER: <select name="gender">
 				<option value="Gender">Gender</option>
 				<option value="male">Male</option>
 				<option value="female">Female</option>
-				<option value="nonbinary">Non-binary</option>
 			</select>
 			<br/><br/>
 			
 			<br/><br/>
 			<br/><br/>
-			<input id = "" value = "Register" name = "register" type = "submit"> </button> 
+			<input id = ""  class="btn btn-success" value = "SUBMIT" name = "register" type = "submit"> </button> 
+			<input id = ""  class="btn btn-danger" value = "CANCEL" name = "cancel" type = "submit"> </button> 
 			<br/><br/><br/><br/>
 		</form>
 	</div>
@@ -73,19 +79,26 @@ include("connection.php");
 		$gender = mysqli_real_escape_string( $db, $_POST['gender']);
 		$budget = 0;
 		//picture_path
-		if(isset($_POST["uploadpic"])){
-			$name = $_FILES['photo']['name'];
-			$picture_path = pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION);
-			$uploadfile = $dir . $uid . '.' . $picture_path;
-			$filename = $login_id . '.' . $picture_path;
-			$query = "UPDATE User SET picture = '$filename' WHERE user_id = $uid";
-			$result = mysqli_query($db, $query);
+		
+		$result = mysqli_query($db, "SELECT MAX(person_id) FROM Person");
+		$row = mysqli_fetch_array($result, MYSQLI_NUM);
+		$uid = $row[0];
+	    $name = $_FILES['userphoto']['name']; 
+	    $ext = pathinfo($_FILES['userphoto']['name'], PATHINFO_EXTENSION);
+	    $uploadfile = $uploaddir . $uid . '.' . $ext;
+	    $filename = $uid . '.' . $ext;
 
-			if( move_uploaded_file($_FILES['photo']['tmp_name'], $uploadfile))
-				echo '<div class="alert alert-success" role="alert">Profile photo uploaded successfully. </div>';
-			else
-				echo '<div class="alert alert-danger" role="alert">Error on uploading profile photo. </div>';
-		}
+	    $picture = $filename;
+	     if (move_uploaded_file($_FILES['userphoto']['tmp_name'], $uploadfile)) {
+	            
+	     } else {
+	            echo '<div class="alert alert-danger" role="alert">Error on uploading profile photo. </div>';
+	     }
+    	
+    	if($name == ""){
+    		$picture = NULL;
+    	}
+
 		
 		if( $fullname == "")
 			echo ' <script type="text/javascript"> alert("Fill in the name area"); </script>';
@@ -127,7 +140,7 @@ include("connection.php");
 				echo ' <script type="text/javascript"> alert("Error: Could not insert into Person"); </script>';
 			}
 
-			$uresult = mysqli_query( $db, "INSERT INTO User ( user_id, country, language, date_of_registration, birthday, gender, budget, membership_type) VALUES ( (SELECT MAX(person_id) FROM Person), '$country', '$language', '$date_of_registration', '$birthday', '$gender', '$budget', 'normal');") or die( mysqli_error( $db));
+			$uresult = mysqli_query( $db, "INSERT INTO User ( user_id, country, language, date_of_registration, birthday, gender, budget, membership_type, picture) VALUES ( (SELECT MAX(person_id) FROM Person), '$country', '$language', '$date_of_registration', '$birthday', '$gender', '$budget', 'normal', '$picture');") or die( mysqli_error( $db));
 					
 			if( !$uresult){
 				echo ' <script type="text/javascript"> alert("Error: Could not insert into User"); </script>';
@@ -137,6 +150,10 @@ include("connection.php");
 			
 		
 		}
+	}
+
+	if( isset($_POST['cancel'])){
+		header("Location: index.php");
 	}
 				
 ?>
