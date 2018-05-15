@@ -139,7 +139,8 @@
 
   
 
-<form method="post" action="" enctype="multipart/form-data"><div class="container" align = "center">
+<form method="post" action="" enctype="multipart/form-data">
+<div class="container" align = "center">
 
  <img class="img-circle img-responsive" src="images/<?php echo $picture; ?>" width="100" height="100">
   

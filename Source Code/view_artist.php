@@ -17,7 +17,12 @@
       $artist_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
       $artist_name = $artist_array['artist_name'];
       $description = $artist_array['description'];
-      $picture = $artist_array['picture']; 
+      
+
+      if($artist_array['picture'] == NULL)
+        $picture = "nophoto.png";
+      else
+        $picture = $artist_array['picture']; 
     }
 ?>
 
@@ -57,7 +62,8 @@
 
 
 <div class="container">
-  <div class="col-md-6 col-md-offset-3" align = "center"><img class="img-circle img-responsive" src="assets/img/ <?php echo $picture; ?>" width="200" height="200"></div>
+<div class="container" align = "center">
+  <img class="img-circle img-responsive" src="images/<?php echo $picture; ?>" width="150" height="150"></div>
 
   <div class = "container" align = "center"><h2><?php echo $artist_name;?></h2></div>
   <div class = "well"><p><?php echo $description;?></p></div>

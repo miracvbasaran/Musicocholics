@@ -77,7 +77,7 @@
 
 <div class = "container">
 <div class="container" align = "center">
-  <img class="img-circle img-responsive" src="images/<?php echo $picture; ?>" width="100" height="100"></div>
+  <img class="img-circle img-responsive" src="images/<?php echo $picture; ?>" width="150" height="150"></div>
 
   <div class = "container" align = "center"><h2><?php echo $artist_name;?></h2></div>
   <div class = "well"><p><?php echo $description;?></p></div>

@@ -1,5 +1,6 @@
 <?php
 	include("session.php");
+  $uploaddir = getcwd().'/images/';
     $uid = mysqli_real_escape_string($db,$_SESSION['login_id']);
     $query = "SELECT admin_id FROM admin WHERE user_id = {$uid} ";
     $result = mysqli_query($db, $query);
@@ -9,11 +10,16 @@
     $result2 = mysqli_query($db, $query2);
     $album_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
     $album_name = $album_array['album_name'];
-    $picture = $album_array['picture'];
     $album_type = $album_array['album_type'];
     $published_date = $album_array['published_date'];
     $published_date = $album_array['published_date'];
     $publisher_id =$album_array['publisher_id'];
+
+      if($album_array['picture'] == NULL)
+        $picture = "nophoto.png";
+      else
+        $picture = $album_array['picture']; 
+
 
     $query = "SELECT artist_id FROM Album_Belongs_To_Artist WHERE album_id = {$album_id}";
     $result = mysqli_query($db, $query);
@@ -53,6 +59,27 @@
           $query = "UPDATE Album SET published_date = '{$published_date}' WHERE album_id = ${album_id};";
           $result = mysqli_query($db, $query);
       }
+
+        $name = $_FILES['userphoto']['name']; 
+        $ext = pathinfo($_FILES['userphoto']['name'], PATHINFO_EXTENSION);
+        $uploadfile = $uploaddir . "album" . $album_id . '.' . $ext;
+        $filename = "album" . $album_id . '.' . $ext;
+
+        $query1 = "UPDATE album SET picture = '$filename' WHERE album_id = '$album_id'";
+        $result1 = mysqli_query($db, $query1);
+
+        $picture = $filename;
+
+        if($name == ""){
+            $picture = NULL;
+          }
+      if (move_uploaded_file($_FILES['userphoto']['tmp_name'], $uploadfile)) {
+            echo '<div class="alert alert-success" role="alert">Photo uploaded successfully. </div>';
+            
+        } else {    
+          echo '<div class="alert alert-danger" role="alert">Error on uploading  photo. </div>';
+        }
+
       header("location: access_album.php?album_id=".$album_id);
     }
     if(isset($_POST['delete_tracks'])){
@@ -117,11 +144,7 @@
       </div>
     </nav>
 
-   <div align="center" class="col-md-6 col-md-offset-3"><img class="img-circle img-responsive" src="assets/img/ <?php echo $picture_v; ?>" width="200" height="200"></div>
-<div class = "container" align = "center">
-<form action="" method="post" enctype="multipart/form-data">
-    <input align = "center" class="btn btn-primary btn-sm" type="file" name="photo" id="photo" accept="image/*"> <button class="btn btn-success btn-sm" type="submit" name="uploadpic">Update</button>
- </form></div>
+   
 <div class = "container" align = "center">
   <h3>
 <?php
@@ -140,8 +163,14 @@
 </div>
 
 
-<form method="post" action="">
+<form method="post" action="" enctype="multipart/form-data">
   <div class = "container" align = "center">
+
+   <img class="img-circle img-responsive" src="images/<?php echo $picture; ?>" width="100" height="100">
+  
+  <input class="btn btn-primary btn-sm" type="file" name="userphoto" id="userphoto" accept="image/*"> 
+  <br>
+
 <div class = "col-xs-3" >Album Name: <input type="text" class = "form-control" name="album_name" 
     default = <?php echo "'".$album_name."'"; ?> value= <?php echo "'".$album_name."'"; ?> autofocus> 
 </div>
