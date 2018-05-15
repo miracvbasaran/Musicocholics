@@ -17,11 +17,10 @@ $uploaddir = getcwd().'/images/';;
 
 	
   <div class = "container" align = "center"><h2>
-	<font color="black">
+	
 		<br/><br/>
 		SIGN UP</h2>
-		<br/><br/>
-	</font>
+	
 	</div>
 
 	<div align = "center">

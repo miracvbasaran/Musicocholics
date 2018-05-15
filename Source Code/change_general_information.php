@@ -64,6 +64,7 @@
 
       }
       if(isset( ($_POST['birthday']) ) )  {
+          $birthday = $_POST['birthday'];
           $query = "UPDATE user SET birthday = '$birthday' WHERE user_id = '$uid' ";
           $result = mysqli_query($db, $query);
 
