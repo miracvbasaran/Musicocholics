@@ -23,9 +23,14 @@
     $gender = $user_array['gender'];
     $budget = $user_array['budget'];
 	  
-	  $picture = $user_array['picture'];
     $membership_type = $user_array['membership_type'];
-
+    if( $user_array['picture'] == NULL){
+        $picture = "nophoto.png";
+        
+    }
+    else{
+      $picture = $user_array['picture'];
+    }
 ?>
 
 <!DOCTYPE html>
@@ -58,16 +63,13 @@
     </ul>
   </div>
 </nav>
-
-
-   <div align="center" class="container">
-      <img class="img-circle img-responsive" src="assets/img/ <?php echo $picture; ?>" width="100" height="100">
-  </div>
-
 <div class="container" align="center" >
+<div class="container" align="center">
 
+  <div class="container" align="center"><img class="img-circle img-responsive" src="images/<?php echo $picture; ?>" width="200" height="200"></div>
   <h3> Hello, <?php echo $fullname; ?> </h3>  
 	<br>
+  
   	<p> Username: <?php echo $username;?> </p><br>
   	<p>	Fullname: <?php echo $fullname;?></p><br>
   	<p>	E-mail address: <?php echo $email;?></p><br>

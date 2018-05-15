@@ -23,11 +23,17 @@
     $language_v = $view_array['language'];
     $birthday_v = $view_array['birthday'];
     $gender_v = $view_array['gender'];
-    $picture_v = $view_array['picture'];
     $user_id_v = $view_array['user_id'];
     $date_of_registration_v = $view_array['date_of_registration'];
     $budget_v = $view_array['budget'];
     $membership_type_v = $view_array['membership_type'];
+
+    if( $view_array['picture'] == NULL){
+        $picture_v = "nophoto.png";      
+    }
+    else{
+         $picture_v = $view_array['picture'];
+    }
 
     if(isset($_POST['ban_button']))
     {
@@ -73,7 +79,7 @@
       </div>
     </nav>
 
-   <div align="center" class="container"><img class="img-circle img-responsive" src="assets/img/ <?php echo $picture_v; ?>" width="200" height="200"></div>
+   <div align="center" class="container"><img class="img-circle img-responsive" src="images/<?php echo $picture_v; ?>" width="200" height="200"></div> 
 
 <div class="container" align="center" >
   <h3>This is, </h3> <?php echo $fullname_v;?>

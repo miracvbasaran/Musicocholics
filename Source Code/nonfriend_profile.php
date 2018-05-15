@@ -18,9 +18,15 @@
     $result4 = mysqli_query($db, $query4);
     $nonfriend_array_u = mysqli_fetch_array($result4,MYSQLI_ASSOC);
     $country_non = $nonfriend_array_u['country'];
-    $picture_non = $nonfriend_array_u['picture'];
     $gender_non = $nonfriend_array_u['gender'];
 
+      if( $nonfriend_array_u['picture'] == NULL){
+        $picture_non = "nophoto.png";
+        
+    }
+    else{
+      $picture_non = $nonfriend_array_u['picture'];
+    }
     
 ?>
 
@@ -57,11 +63,9 @@
   
 <div class="container" align="center">
 
-  
+  <div class="container" align="center"><img class="img-circle img-responsive" src="images/<?php echo $picture_non; ?>" width="200" height="200"></div>  
   <h3>This is, <?php echo $username_non;?> </h3> 
   	<p> 
-
-    <div align="center" class="container"><img class="img-circle img-responsive" src="assets/img/ <?php echo $picture_non; ?>" width="200" height="200"></div>
       
     <p> Fullname: <?php echo $fullname_non;?></p><br>
     <p> Country: <?php echo $country_non;?></p><br>

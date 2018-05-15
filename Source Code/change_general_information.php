@@ -1,6 +1,9 @@
 <?php
 	  include("session.php");
-    $dir = getcwd().'/assets/img/';
+    $uploaddir = getcwd().'/images/';;
+    $desired_width = 100;
+    $desired_height = 100;
+
     $uid = mysqli_real_escape_string($db,$_SESSION['login_id']);
     $query = "SELECT * FROM user WHERE user_id = '$uid' ";
     $result = mysqli_query($db, $query);
@@ -23,8 +26,14 @@
     $birthday = $user_array['birthday'];
     $gender = $user_array['gender'];
     $budget = $user_array['budget'];
-    $picture = $user_array['picture'];
     $membership_type = $user_array['membership_type'];
+
+    if($user_array['picture'] == NULL){
+      $picture = "nophoto.png";
+    }
+    else{
+      $picture = $user_array['picture'];
+    }
 
     if( isset( $_POST["apply"] ) ) {
       if(isset( ($_POST["country"]) ))  {
@@ -75,23 +84,22 @@
   
       header("Refresh:0");
     }
+ 
 
-     if(isset($_POST["uploadpic"]))
+     if(isset($_POST["uploadphoto"]))
     {
-
-        $name = $_FILES['photo']['name']; 
-        $ext = pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION);
-        $uploadfile = $dir . $uid . '.' . $ext;
-        $filename = $login_id . '.' . $ext;
-        $query = "UPDATE User SET picture = '$filename' WHERE user_id = '$uid'";
+        $name = $_FILES['userphoto']['name']; 
+        $ext = pathinfo($_FILES['userphoto']['name'], PATHINFO_EXTENSION);
+        $uploadfile = $uploaddir . $uid . '.' . $ext;
+        $filename = $uid . '.' . $ext;
+        $query = "UPDATE User SET picture = '$filename' WHERE user_id = $uid";
         $result = mysqli_query($db, $query);
         
-        if (move_uploaded_file($_FILES['photo']['tmp_name'], $uploadfile) ) {
-          echo ' <script type="text/javascript"> alert("Profile photo uploaded successfully."); </script>';
-          
+        if (move_uploaded_file($_FILES['userphoto']['tmp_name'], $uploadfile)) {
+            echo '<div class="alert alert-success" role="alert">Profile photo uploaded successfully. </div>';
+            header("Refresh:0");
         } else {
-            echo ' <script type="text/javascript"> alert("Error on uploading profile photo."); </script>';
-           
+            echo '<div class="alert alert-danger" role="alert">Error on uploading profile photo. </div>';
         }
     }
 ?>
@@ -129,15 +137,20 @@
 
 <div class="container">
 
-<div align="center" class="container"><img class="img-circle img-responsive" src="assets/img/ <?php echo $picture; ?>" width="200" height="200"></div>
 
 <div class="container" align="center">
 
- <form method="POST" action="getdata.php" enctype="multipart/form-data">
- <input type="file" name="photo">
- <input type="submit" name="uploadpic" value="Upload">
-</form>
- <br><br><br><br>
+    <div class="container" align="center"><img class="img-circle img-responsive" src="images/<?php echo $picture; ?>" width="200" height="200"></div>
+    <br><br>
+ 
+    <form action="" method="post" enctype="multipart/form-data">
+
+         <input class="btn btn-primary btn-sm" type="file" name="userphoto" id="userphoto" accept="image/*">
+         <br>
+          <button class="btn btn-success btn-sm" type="submit" name="uploadphoto">Upload Photo</button>
+    </form>
+
+ <br><br>
 
 <form method="post" action="">
   Fullname: <input style="height:25px;font-size:12pt;" type="text" name="fullname" value= <?php echo "{$fullname}"; ?> autofocus>
@@ -193,7 +206,7 @@
       <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
 </div>
-    </div>
+</div>
 <br><br>
 
 </form>

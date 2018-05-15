@@ -17,9 +17,17 @@
     $query3 = "SELECT picture FROM user WHERE user_id = '$blocked_id' ";
     $result3 = mysqli_query($db, $query3);
     $pic_array = mysqli_fetch_array($result3,MYSQLI_ASSOC);
-    $picture_b =$pic_array['picture'];
+   
 
-?>
+
+    if( $nonfriend_array_u['picture'] == NULL){
+        $picture_b = "nophoto.png";      
+    }
+    else{
+       $picture_b =$pic_array['picture'];
+    }
+
+    ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -52,9 +60,10 @@
   </div>
 </nav>
   
-<div align="center" class="container"><img class="img-circle img-responsive" src="assets/img/ <?php echo $picture_b; ?>" width="200" height="200"></div> 
 
 <div class="container" align="center"> 
+
+<div align="center" class="container"><img class="img-circle img-responsive" src="images/<?php echo $picture_b; ?>" width="200" height="200"></div> 
   <h3>This is <?php echo $username_b;?> </h3> 
 
    <div class="container" align="center" >

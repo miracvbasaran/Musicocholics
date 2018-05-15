@@ -20,7 +20,13 @@
     $birthday_f = $friend_array['birthday'];
     $gender_f = $friend_array['gender'];
     
-    $picture_f = $friend_array['picture'];
+    if( $friend_array['picture'] == NULL){
+        $picture_f = "nophoto.png";      
+    }
+    else{
+      $picture_f = $friend_array['picture'];
+    }
+    
 
     if(isset($_POST['sendmessage_button']))
     {
@@ -89,7 +95,7 @@
   
 <div class="container">
   	
-  <div align="center" class="container"><img class="img-circle img-responsive" src="assets/img/ <?php echo $picture_f; ?>" width="200" height="200"></div>
+    <div class="container" align="center"><img class="img-circle img-responsive" src="images/<?php echo $picture_f; ?>" width="200" height="200"></div>
 
 <div class="container" align="center">
   <h3>This is <?php echo $username_f;?> </h3> 
