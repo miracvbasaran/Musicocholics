@@ -42,10 +42,7 @@
     </nav>
 
 	<div class="container">
-		<h3> Playlists </h3> <br>
-	</div>
-
-	<div class="container">
+		<h3> Creator </h3> <br>
 		<table class = "table table-hover" style="width:100%">
 	  		<tr>
 	    		<th>Name</th>
@@ -53,6 +50,48 @@
 	  		</tr>
 	  		<?php
 	  			$query_playlist = "SELECT P.playlist_id, P.playlist_name, P.description, P.date FROM Playlist P WHERE P.creator_id = {$other_user_id} ORDER BY P.date";
+	  			$result_playlist = mysqli_query($db, $query_playlist);
+	  			while ($row = mysqli_fetch_array($result_playlist, MYSQLI_NUM)) {
+      				$p_id = $row[0];
+      				echo "<tr onclick = \"document.location = 'access_playlist.php?playlist_id={$p_id}' \">";
+	      			echo "<td>" . $row[1] . "</td>";
+	      			echo "<td>" . $row[2] . "</td>";
+	      			echo "</tr>" ;
+	  			}
+	  		?>
+		</table>
+	</div>
+
+	<div class="container">
+		<h3> Collaborator </h3> <br>
+		<table class = "table table-hover" style="width:100%">
+	  		<tr>
+	    		<th>Name</th>
+	    		<th>Description</th> 
+	  		</tr>
+	  		<?php
+	  			$query_playlist = "SELECT P.playlist_id, P.playlist_name, P.description, P.date FROM Playlist P , Collaborates C WHERE C.user_id = {$other_user_id} AND P.playlist_id = C.playlist_id ORDER BY P.date";
+	  			$result_playlist = mysqli_query($db, $query_playlist);
+	  			while ($row = mysqli_fetch_array($result_playlist, MYSQLI_NUM)) {
+      				$p_id = $row[0];
+      				echo "<tr onclick = \"document.location = 'access_playlist.php?playlist_id={$p_id}' \">";
+	      			echo "<td>" . $row[1] . "</td>";
+	      			echo "<td>" . $row[2] . "</td>";
+	      			echo "</tr>" ;
+	  			}
+	  		?>
+		</table>
+	</div>
+
+	<div class="container">
+		<h3> Follower </h3> <br>
+		<table class = "table table-hover" style="width:100%">
+	  		<tr>
+	    		<th>Name</th>
+	    		<th>Description</th> 
+	  		</tr>
+	  		<?php
+	  			$query_playlist = "SELECT P.playlist_id, P.playlist_name, P.description, P.date FROM Playlist P , Follows F WHERE F.user_id = {$other_user_id} AND P.playlist_id = F.playlist_id ORDER BY P.date";
 	  			$result_playlist = mysqli_query($db, $query_playlist);
 	  			while ($row = mysqli_fetch_array($result_playlist, MYSQLI_NUM)) {
       				$p_id = $row[0];
