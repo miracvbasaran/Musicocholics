@@ -60,11 +60,12 @@
 
   <div class="container" align="center">
     <h3> Send Message </h3> <br>
-    <h3> <?php echo $receiver_username;?> </h3> <br>
+    <h3> <?php echo $receiver_username;?> </h3> <br><br>
     <form method="post" action="">
       <label for="comment">Message:</label>
       <textarea class="form-control" rows="5" name="text_message" autofocus></textarea>
-      <input type="submit" name="send_message" value="Send Message" > 
+      <br><br><br>
+      <input type="submit" class="btn btn-warning" name="send_message" value="Send Message" > <br><br><br>
     </form>
   </div>
 

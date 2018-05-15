@@ -69,9 +69,8 @@
   <div class="container" align="center">
     <h3> Send Message </h3> <br><br>
     <form method="post" action="">
-      Receiver Username: <input type="text" name="receiver_username" value="" autofocus> <br><br><br>
+       Username: <input type="text" name="receiver_username" value="" autofocus> <br><br><br>
        <label for="comment">Message:</label>
-
       <textarea class="form-control" rows="5" name="text_message" autofocus></textarea>
       <br><br><br>
       <input type="submit" class="btn btn-warning" name="send_message" value="Send Message" > <br><br><br>
