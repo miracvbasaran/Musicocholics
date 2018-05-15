@@ -5,8 +5,8 @@
     $result1 = mysqli_query($db, $query1);
     $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
     
-    if(isset($_POST['sent_box_button'])) {
-      header("location: sent_message_list.php");
+    if(isset($_POST['in_box_button'])) {
+      header("location: message_list.php");
     }
     if(isset($_POST['send_optional_message'])) {
     	header("location: send_optional_message.php");
@@ -46,11 +46,11 @@
 </nav>
 
 	<div class="container">
-		<h3> Inbox </h3> <br>
+		<h3> Sent Box </h3> <br>
 		<div align="right" class="container"></div>
 		<p>
 			<form method="post" action="">
-        <input id='Submit' name='sent_box_button' type='Submit' value='Sent Box' class="btn btn-warning"> <br><br>
+        <input id='Submit' name='in_box_button' type='Submit' value='Inbox' class="btn btn-warning"> <br><br>
 				<input id='Submit' name='send_optional_message' type='Submit' value='Send Message' class="btn btn-warning">
 			</form>
 		</p>
@@ -63,7 +63,7 @@
 	    		<th>Message</th> 
 	  		</tr>
 	  		<?php
-	  			$query_message = "SELECT P.person_id, P.fullname, M.message FROM sends_message M , person P WHERE P.person_id = M.sender_id AND M.receiver_id = {$uid} ORDER BY M.date";
+	  			$query_message = "SELECT P.person_id, P.fullname, M.message FROM sends_message M , person P WHERE P.person_id = M.receiver_id AND M.sender_id = {$uid} ORDER BY M.date";
 	  			$result_message = mysqli_query($db, $query_message);
 	  			while ($row = mysqli_fetch_array($result_message, MYSQLI_NUM)) {
       				$p_id = $row[0];

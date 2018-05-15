@@ -18,10 +18,19 @@
           }
           else {
             $receiver_id = $receiver_array['person_id'];
-            $date = date('Y-m-d G:i:s');
-            $query3 = "INSERT INTO sends_message(sender_id, receiver_id, date, message) VALUES({$uid}, {$receiver_id}, '$date', '$text_message')";
-            $result3 = mysqli_query($db, $query3);
-            header("location: message_list.php");
+            $query_friend_exists = "SELECT count(*) as no_of_friend FROM Friendship WHERE (user1_id = $uid AND user2_id = $receiver_id) OR (user2_id = $uid AND user1_id = $receiver_id)";
+            $result_friend_exists = mysqli_query($db, $query_friend_exists);
+            $friend_exists_array = mysqli_fetch_array($result_friend_exists, MYSQLI_ASSOC);
+            $no_of_friend = $friend_exists_array['no_of_friend'];
+            if($no_of_friend == 1) {
+              $date = date('Y-m-d G:i:s');
+              $query3 = "INSERT INTO sends_message(sender_id, receiver_id, date, message) VALUES({$uid}, {$receiver_id}, '$date', '$text_message')";
+              $result3 = mysqli_query($db, $query3);
+              header("location: message_list.php");
+            }
+            else {
+              echo ' <script type="text/javascript"> alert("The user is not your friend."); </script>';
+            }
           }
         }
         else {
