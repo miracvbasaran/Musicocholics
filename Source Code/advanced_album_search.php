@@ -30,7 +30,7 @@
 				<li><a href="view_tracks.php">Tracks</a></li>
 				<li><a href="friends.php">Friends</a></li>
 				<li><a href="message_list.php">Messages</a></li>
-				<li class="active"><a href="search.php">Search</a></li>
+				<li><a href="search.php">Search</a></li>
 			</ul>
 		    <ul class="nav navbar-nav navbar-right">
 				<li><a href="change_general_information.php"><span class="glyphicon glyphicon-user"></span> Settings</a></li>

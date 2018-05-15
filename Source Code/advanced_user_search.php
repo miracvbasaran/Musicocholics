@@ -31,7 +31,7 @@ $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
 				<li><a href="view_tracks.php">Tracks</a></li>
 				<li><a href="friends.php">Friends</a></li>
 				<li><a href="message_list.php">Messages</a></li>
-				<li class="active"><a href="#">Search</a></li>
+				<li><a href="#">Search</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="change_general_information.php"><span class="glyphicon glyphicon-user"></span> Settings</a></li>

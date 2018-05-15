@@ -18,7 +18,7 @@ include("session.php");
       <div class="container-fluid">
         <ul class="nav navbar-nav">
           <li><a href="admin.php">Home</a></li>
-          <li class="active"><a href="search_admin.php">Search</a></li>
+          <li><a href="search_admin.php">Search</a></li>
           <li><a href="modify_track.php">Add Track</a></li>
           <li><a href="modify_album.php">Add Album</a></li>
           <li><a href="modify_artist.php">Add Artist</a></li>
