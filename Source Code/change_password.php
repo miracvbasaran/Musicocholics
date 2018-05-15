@@ -49,14 +49,13 @@
 
           }     
     }
-    if($set === 1)
-     // header("location: change_general_information.php");
+
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Musicholics - My Profile</title>
+  <title>Musicholics -  Change Password</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">

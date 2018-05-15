@@ -39,7 +39,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Musicholics - My Profile</title>
+  <title>Musicholics - Blocked Profile</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -72,7 +72,7 @@
 
 <div align="center" class="container"><img class="img-circle img-responsive" src="images/<?php echo $picture_b; ?>" width="200" height="200"></div> 
   <h3>This is <?php echo $username_b;?> </h3> 
-
+<br><br>
    <div class="container" align="center" >
     <form method="post" action="">
       <input id='Submit' name='unblock_button' type='Submit' class="btn btn-danger" value='UNBLOCK'>

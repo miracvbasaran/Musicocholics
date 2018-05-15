@@ -112,7 +112,7 @@ include("session.php");
 					if( isset( $_POST['filter_user'])){ //USER
 						$query = mysqli_query( $db, "SELECT * FROM Person, User WHERE (username LIKE '%$search_key%') AND user_id = person_id;");
 						while( $row = $query->fetch_assoc()){ //printing every user with that user name
-							echo( "<div align = \"center\"><tr><td><a href='complete_profile.php?view_id=".$row['username']."'>".$row['username']."</a></td></tr><br/></div>");
+							echo( "<div align = \"center\"><tr><td><a href='complete_profile.php?other_id=".$row['user_id']."'>".$row['username']."</a></td></tr><br/></div>");
 						}
 					}
 				}

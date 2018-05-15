@@ -38,11 +38,11 @@
     if(isset($_POST['ban_button']))
     {
 
-      $query5 = "INSERT INTO bans VALUES( '$admin_id','$view_id' )";
+      $query5 = "INSERT INTO Bans VALUES ('$view_id','$uid')";
       $result5 = mysqli_query($db, $query5);
       echo ' <script type="text/javascript"> alert("The user is banned succesfully."); </script>';
 
-      header("location: admin.php");
+      //header("location: admin.php");
 
     }
 
@@ -51,7 +51,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Musicholics - My Profile</title>
+  <title>Musicholics - Admin View of User Profile</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -82,7 +82,7 @@
    <div align="center" class="container"><img class="img-circle img-responsive" src="images/<?php echo $picture_v; ?>" width="200" height="200"></div> 
 
 <div class="container" align="center" >
-  <h3>This is, </h3> <?php echo $fullname_v;?>
+  <h3>This is <?php echo $fullname_v;?> </h3> 
   	<p>Username: <?php echo $username_v;?> </p>
   	<p>	Fullname: <?php echo $fullname_v;?></p>
   	<p>	E-mail address: <?php echo $email_v;?></p>
@@ -95,11 +95,12 @@
   	<p>	Membership type: <?php echo $membership_type_v;?> </p>
    
     <div class="container" align="right" >
+<form method="post" action="">
 
     <a href=<?php echo "'view_others_playlists.php?other_id={$view_id}'"; ?> class="btn btn-success" role="button">View Playlists</a>
-
-    <input id='Submit' class="btn btn-danger" name='ban_button' type='button' value='Ban User'>
-
+  
+    <input id='Submit' class="btn btn-danger" name='ban_button' type='Submit' value='Ban User'>
+</form>
     </div>
 
 

@@ -34,7 +34,6 @@
      
     }
 
-
     if(isset($_POST['block_button']))
     {
       
@@ -65,7 +64,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Musicholics - My Profile</title>
+  <title>Musicholics - Friend Profile</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -115,9 +114,7 @@
        <br><br>
        <input id='Submit' name='block_button' type='Submit' class="btn btn-danger" value='Block'>
 
-       <input id='Submit' name='unfriend_button' type='Submit' class="btn btn-primary" value='Unfriend'>
-
-           
+       <input id='Submit' name='unfriend_button' type='Submit' class="btn btn-primary" value='Unfriend'>         
   </form>
 
 
