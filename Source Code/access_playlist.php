@@ -33,6 +33,22 @@
     $rates_array =  mysqli_fetch_array($result3, MYSQLI_ASSOC);
     $avg_rate = $rates_array['avg_rate'];
 
+    if(isset($_POST['delete_playlist'])) {
+      $queryD2 = "DELETE FROM added WHERE playlist_id = {$playlist_id} ";
+      $resultD2 = mysqli_query($db, $queryD2);
+      $queryD3 = "DELETE FROM follows WHERE playlist_id = {$playlist_id} ";
+      $resultD3 = mysqli_query($db, $queryD3);
+      $queryD4 = "DELETE FROM rates WHERE playlist_id = {$playlist_id} ";
+      $resultD4 = mysqli_query($db, $queryD4);
+      $queryD5 = "DELETE FROM comments WHERE playlist_id = {$playlist_id} ";
+      $resultD5 = mysqli_query($db, $queryD5);
+      $queryD6 = "DELETE FROM collaborates WHERE playlist_id = {$playlist_id} ";
+      $resultD6 = mysqli_query($db, $queryD6);
+      $queryD1 = "DELETE FROM playlist WHERE playlist_id = {$playlist_id} ";
+      $resultD1 = mysqli_query($db, $queryD1);
+      header("location: view_playlists.php");
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -72,6 +88,15 @@
     <h3> <?php echo $playlist_name;?> </h3> <p> by <?php echo $username?> </p> <br>
     <p>  <?php echo $playlist_desc;?> </p> <br>
   </div>
+
+  <div class="container" alight="left">
+    <p>
+      <form method="post" action="">
+        <input id='Submit' name='delete_playlist' type='Submit' value='Delete Playlist' class="btn btn-danger">
+      </form>
+    </p>
+  </div>
+  <br><br><br>
 
   <div class="container">
     <table class = "table table-hover" style="width:100%">
