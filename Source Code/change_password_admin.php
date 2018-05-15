@@ -36,7 +36,7 @@
                     $query1 = "UPDATE person SET password = '$newpass' WHERE person_id = '$uid'";
                     $result1 = mysqli_query($db, $query1);
                     echo ' <script type="text/javascript"> alert("Password has changed successfully."); </script>';
-                    header("Location: admin.php");
+                   // header("Location: admin.php");
                 }
                 else{
                   echo ' <script type="text/javascript"> alert("Passwords are not matched."); </script>';  
