@@ -31,7 +31,7 @@ $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
 				<li><a href="view_tracks.php">Tracks</a></li>
 				<li><a href="friends.php">Friends</a></li>
 				<li><a href="message_list.php">Messages</a></li>
-				<li><a href="#">Search</a></li>
+				<li class="active"><a href="#">Search</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="change_general_information.php"><span class="glyphicon glyphicon-user"></span> Settings</a></li>
@@ -151,11 +151,18 @@ $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
 								$id_list->push($id);
 							}
 							
-							
-							//not printing blocked profiles
-							$bquery = mysqli_query( $db, "SELECT * FROM Blocks WHERE (blocked_id = '$id' AND blocker_id = '$uid') OR (blocker_id = '$id' AND blocked_id = '$uid')");
+
+							//not printing blocker profiles
+							$bquery = mysqli_query( $db, "SELECT * FROM Blocks WHERE (blocker_id = '$id' AND blocked_id = '$uid');");
 							while( $brow = $bquery->fetch_assoc()){ //for each blocked/blocker
-									$id_list->push($id);
+								$id_list->push($id);
+							}
+							
+							//printing blocked profiles
+							$bquery = mysqli_query( $db, "SELECT * FROM Blocks WHERE (blocked_id = '$id' AND blocker_id = '$uid') AND (blocker_id != '$id' OR blocked_id != '$uid')");
+							while( $brow = $bquery->fetch_assoc()){ //for each blocked/blocker
+								echo( "<div align = \"center\"><tr><td><a href='blocked_profile.php?other_id=".$id."'>".$row['username']."</a></td></tr><br/></div>");
+								$id_list->push($id);
 							}
 							
 							
@@ -203,10 +210,17 @@ $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
 							}
 							
 							
-							//not printing blocked profiles
-							$bquery = mysqli_query( $db, "SELECT * FROM Blocks WHERE (blocked_id = '$id' AND blocker_id = '$uid') OR (blocker_id = '$id' AND blocked_id = '$uid')");
+							//not printing blocker profiles
+							$bquery = mysqli_query( $db, "SELECT * FROM Blocks WHERE (blocker_id = '$id' AND blocked_id = '$uid');");
 							while( $brow = $bquery->fetch_assoc()){ //for each blocked/blocker
-									$id_list->push($id);
+								$id_list->push($id);
+							}
+							
+							//printing blocked profiles
+							$bquery = mysqli_query( $db, "SELECT * FROM Blocks WHERE (blocked_id = '$id' AND blocker_id = '$uid') AND (blocker_id != '$id' OR blocked_id != '$uid')");
+							while( $brow = $bquery->fetch_assoc()){ //for each blocked/blocker
+								echo( "<div align = \"center\"><tr><td><a href='blocked_profile.php?other_id=".$id."'>".$row['username']."</a></td></tr><br/></div>");
+								$id_list->push($id);
 							}
 							
 							
@@ -253,14 +267,19 @@ $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
 								echo( "<div align = \"center\"><tr><td><a href='friend_profile.php?friend_id=".$id."'>".$row['username']."</a></td></tr><br/></div>");
 								$id_list->push($id);
 							}
-							
-							
-							//not printing blocked profiles
-							$bquery = mysqli_query( $db, "SELECT * FROM Blocks WHERE (blocked_id = '$id' AND blocker_id = '$uid') OR (blocker_id = '$id' AND blocked_id = '$uid')");
+
+							//not printing blocker profiles
+							$bquery = mysqli_query( $db, "SELECT * FROM Blocks WHERE (blocker_id = '$id' AND blocked_id = '$uid');");
 							while( $brow = $bquery->fetch_assoc()){ //for each blocked/blocker
-									$id_list->push($id);
+								$id_list->push($id);
 							}
 							
+							//printing blocked profiles
+							$bquery = mysqli_query( $db, "SELECT * FROM Blocks WHERE (blocked_id = '$id' AND blocker_id = '$uid') AND (blocker_id != '$id' OR blocked_id != '$uid')");
+							while( $brow = $bquery->fetch_assoc()){ //for each blocked/blocker
+								echo( "<div align = \"center\"><tr><td><a href='blocked_profile.php?other_id=".$id."'>".$row['username']."</a></td></tr><br/></div>");
+								$id_list->push($id);
+							}							
 							
 							//printing non-friends
 							$id_count = $id_list->count();
