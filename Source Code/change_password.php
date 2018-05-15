@@ -10,7 +10,7 @@
 	  $fullname = $person_array['fullname'];
 	  $password = $person_array['password'];
 	  $email = $person_array['email'];
-
+    $set =0;
       if( isset($_POST['cancel'])){
         header("location: change_general_information.php");
         
@@ -37,7 +37,7 @@
                       $query1 = "UPDATE person SET password = '$newpass' WHERE person_id = '$uid'";
                       $result1 = mysqli_query($db, $query1);
                       echo ' <script type="text/javascript"> alert("Password has changed successfully."); </script>';
-                      header("location: change_general_information.php");
+                      $set = 1;
                   }
                   else{
                     echo ' <script type="text/javascript"> alert("Passwords are not matched."); </script>';  
@@ -47,12 +47,10 @@
                 echo ' <script type="text/javascript"> alert("You need to enter new password again."); </script>';
               } 
 
-          }  
-
-
-      
-        
+          }     
     }
+    if($set === 1)
+     // header("location: change_general_information.php");
 ?>
 
 <!DOCTYPE html>

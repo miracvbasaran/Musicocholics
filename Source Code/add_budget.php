@@ -4,23 +4,13 @@
     $query = "SELECT budget FROM user WHERE user_id = '$uid' ";
     $result = mysqli_query($db, $query);
     $user_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
-
-   
-    $query2 = "SELECT * FROM person WHERE person_id = '$uid' ";
-    $result2 = mysqli_query($db, $query2);
-    $person_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
-
-    $username = $person_array['username'];
-  	$fullname = $person_array['fullname'];
-  	$email = $person_array['email'];
-    $user_id = $person_array['person_id'];
     
     $budget = $user_array['budget'];
 
     if(isset( ($_POST['apply']) ) ){
 
-      if(!empty( ($_POST['amount']) ) &&  !empty( ($_POST['cardno']) ) &&
-      !empty( ($_POST['holdername']) ) && !empty( ($_POST['securityno']) )  ){
+      if(( ($_POST['amount']) ) &&  ( ($_POST['cardno']) != "" ) &&
+      ( ($_POST['holdername']) != "" ) && ( ($_POST['securityno']) != "")  ){
         
         $newbudget = $budget+($_POST['amount']);
 
@@ -28,11 +18,10 @@
           $result = mysqli_query($db, $query);
 
           echo ' <script type="text/javascript"> alert("Amount is added to budget succesfully."); </script>';
-          header("location: change_general_information.php");
+          header("Refresh:0");
       }
       else{
         echo ' <script type="text/javascript"> alert("missed to enter some credit card information or the amount."); </script>';
-          header("location: change_general_information.php");
  
       }
     
@@ -77,12 +66,12 @@
 
 <div class="container" align="center">
 <form method="post" action="">
-
-  Amount: $ <input style="height:25px;font-size:12pt;" type="number" name="amount" autofocus> 
+<h4> Current Budget : <?php echo $budget ?> </h4>
+  Amount: $ <input style="height:25px;font-size:12pt;" type="text" name="amount" autofocus> 
   <br><br><br>
   Cardholder's Name: <input style="height:25px;font-size:12pt;" type="text" name="holdername"  autofocus>
   <br><br><br>
-  Credit Card Number:  <input style="height:25px;font-size:12pt;" type="number" name="cardno" autofocus>
+  Credit Card Number:  <input style="height:25px;font-size:12pt;" type="text" name="cardno" autofocus>
   <br><br><br>
   
   Expires on: 
@@ -114,7 +103,7 @@
   </select> 
   <br><br><br>
 
-  Credit Cart Security Code:  <input style="height:25px;font-size:12pt;" type="number" name="securityno" autofocus><br>
+  Credit Cart Security Code:  <input style="height:25px;font-size:12pt;" type="text" name="securityno" autofocus><br>
   <br><br><br>
   <input style="height:35px;font-size:12pt;" class="btn btn-success" type="submit" name="apply" value="SUBMIT"  > 
   <input style="height:35px;font-size:12pt;" class="btn btn-danger" type="submit" name="cancel" value= "CANCEL">
@@ -145,7 +134,7 @@
   $duration = $track_array['duration'];
   ?>
 
-  <h4> <?php echo $track_name; ?> (<?php echo $duration; ?> ) </h4>
+  <h4> <?php if($track_name != "") {echo $track_name; ?> <?php echo "(".$duration.")" ;} ?>  </h4>
   
   <div class="progress">
   <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="70"
