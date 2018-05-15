@@ -110,27 +110,26 @@
 		<h3> Playlist </h3> <br>
 		<h3> <?php echo $playlist_name;?> </h3> <p> by <?php echo $username?> </p> <br>
 		<p>  <?php echo $playlist_desc;?> </p> <br>
-		<h4> <p>Rate: <?php if($cnt_rate_c == 0) echo "N/A"; else echo $avg_rate;?> </h4> <br>
-	</div>
-
-	<div class="container" align="right">
-		<p>
-			<form method="post" action="">
-				<input id='Submit' name='collaborate_playlist' type='Submit' value='Collaborate Playlist' class="btn btn-primary">
-			</form>
-		</p>
 	</div>
 
   <div align="center">
     <form method="post" action="#" onsubmit="">
-    <input type="submit" name="rate_button" value="Rate" class="btn btn-danger"> <br>
-      <select class = "form-control" name="rate_choice" align="center">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-      </select>
+      <div class="container" align="left">
+        <h4> Rate: <?php if($cnt_rate_c == 0) echo "N/A"; else echo $avg_rate;?> </h4>
+        <input type="submit" name="rate_button" value="Rate" class="btn btn-danger">
+        <select name="rate_choice">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+        <br>
+      </div>
+      <div class="container" align="right">
+        <input id='Submit' name='collaborate_playlist' type='Submit' value='Collaborate Playlist' class="btn btn-primary">
+      </div>
+      <br/>
     </form>
   </div>
 
