@@ -38,12 +38,12 @@
     if(isset($_POST['block_button']))
     {
       
-      $query3 = "INSERT INTO blocks VALUES ($uid, $friend_id) ";
+      $query3 = "INSERT INTO blocks VALUES ('$uid', '$friend_id') ";
       $result3 = mysqli_query($db, $query3);
 
       $query4 = "DELETE FROM friendship WHERE 
-      ($uid = user1_id AND $friend_id = user2_id) OR 
-      ( $friend_id = user1_id AND $uid = user2_id) ";
+      ('$uid' = user1_id AND '$friend_id' = user2_id) OR 
+      ('$friend_id' = user1_id AND '$uid' = user2_id)";
       $result4 = mysqli_query($db, $query4);
       header("location: blocked_profile.php?other_id=".$friend_id);
   

@@ -20,12 +20,26 @@
     $country_non = $nonfriend_array_u['country'];
     $gender_non = $nonfriend_array_u['gender'];
 
-      if( $nonfriend_array_u['picture'] == NULL){
+    if( $nonfriend_array_u['picture'] == NULL){
         $picture_non = "nophoto.png";
         
     }
     else{
       $picture_non = $nonfriend_array_u['picture'];
+    }
+
+    if(isset($_POST['block_button']))
+    {
+      
+      $query3 = "INSERT INTO blocks VALUES ('$uid', '$nonfriend_id') ";
+      $result3 = mysqli_query($db, $query3);
+
+      $query4 = "DELETE FROM friendship WHERE 
+      ('$uid' = user1_id AND '$nonfriend_id' = user2_id) OR 
+      ( '$nonfriend_id' = user1_id AND '$uid' = user2_id) ";
+      $result4 = mysqli_query($db, $query4);
+      header("location: blocked_profile.php?other_id=".$nonfriend_id);
+  
     }
     
 ?>
@@ -64,7 +78,7 @@
 <div class="container" align="center">
 
   <div class="container" align="center"><img class="img-circle img-responsive" src="images/<?php echo $picture_non; ?>" width="200" height="200"></div>  
-  <h3>This is, <?php echo $username_non;?> </h3> 
+  <h3>This is <?php echo $username_non;?> </h3> 
   	<p> 
       
     <p> Fullname: <?php echo $fullname_non;?></p><br>
@@ -75,8 +89,12 @@
     
     <div> 
     
-      
-        <a href="add_friend.php?other_id=<?php echo $nonfriend_id; ?> " class="btn btn-success" role="button">ADD AS FRIEND</a>
+      <form method="post" action="">
+        <a href="add_friend.php?other_id=<?php echo $nonfriend_id; ?> " class="btn btn-success" role="button">ADD AS FRIEND
+        </a>
+        <br><br>
+       <input id='Submit' name='block_button' type='Submit' class="btn btn-danger" value='BLOCK'>
+       </form>
     </div>
     
 

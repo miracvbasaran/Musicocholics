@@ -6,7 +6,7 @@
     $user_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
 
-    $blocked_id = $_GET['other_id'];
+    $blocked_id = $_GET["other_id"];
     $query2 = "SELECT * FROM person WHERE person_id = '$blocked_id' ";
     $result2 = mysqli_query($db, $query2);
     $blocked_array = mysqli_fetch_array($result2,MYSQLI_ASSOC);
@@ -17,14 +17,21 @@
     $query3 = "SELECT picture FROM user WHERE user_id = '$blocked_id' ";
     $result3 = mysqli_query($db, $query3);
     $pic_array = mysqli_fetch_array($result3,MYSQLI_ASSOC);
-   
+    $picture_b = $pic_array['picture'];
 
 
-    if( $nonfriend_array_u['picture'] == NULL){
+    if( $picture_b == NULL){
         $picture_b = "nophoto.png";      
     }
     else{
        $picture_b =$pic_array['picture'];
+    }
+
+    if(isset($_POST['unblock_button']))
+    {
+          $query3 = "DELETE FROM blocks WHERE '$uid'=blocker_id AND '$blocked_id'=blocked_id";
+          $result3 = mysqli_query($db, $query3);
+          header("location: nonfriend_profile.php?other_id=".$blocked_id);
     }
 
     ?>
@@ -71,14 +78,7 @@
       <input id='Submit' name='unblock_button' type='Submit' class="btn btn-danger" value='UNBLOCK'>
     </form>
     </div>
-    <?php 
 
-      if(isset($_POST['unblock_button']))
-      {
-          $query3 = "DELETE FROM blocks WHERE ('$uid' = blocker_id AND '$blocked_id' = blocked_id ) ";
-          header("location: nonfriend_profile.php?other_id=".$blocked_id);
-      }
-    ?>
 </div>
 
 <style>
