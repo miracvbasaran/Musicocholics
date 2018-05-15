@@ -21,12 +21,12 @@
     }
     */
 
-    if(isset($_POST['add_tracks'])) {
+    if(isset($_POST['delete_tracks'])) {
       if(!empty($_POST['check_list'])) {
         foreach($_POST['check_list'] as $selected_track_id) {
           $selected_track_id = intval($selected_track_id);
          	$date = date('Y-m-d');
-         	$query3 = "INSERT INTO added(playlist_id, track_id, date) VALUES({$playlist_id}, {$selected_track_id}, '$date')";
+         	$query3 = "DELETE FROM added WHERE track_id = {$selected_track_id}";
          	$result3 = mysqli_query($db, $query3);
         }
         header("location: view_own_playlist.php?playlist_id=".$playlist_id);
@@ -93,8 +93,7 @@
   	    		<th></th>
   	  		</tr>
   	  		<?php
-  	  			$query_track = "SELECT T.track_id, T.track_name, T.recording_type, T.duration, T.danceability, T.Acousticness, T.Instrumentalness, T.Speechness, T.Balance, T.Loudness, T.Language, T.Price, T.date_of_addition FROM buys B, track T WHERE B.user_id = {$uid} AND B.track_id = T.track_id AND
-              T.track_id NOT IN (SELECT A.track_id FROM added A WHERE A.playlist_id = $playlist_id)";
+  	  			$query_track = "SELECT T.track_id, T.track_name, T.recording_type, T.duration, T.danceability, T.Acousticness, T.Instrumentalness, T.Speechness, T.Balance, T.Loudness, T.Language, T.Price, T.date_of_addition FROM added A, track T WHERE A.playlist_id = {$playlist_id} AND T.track_id = A.track_id";
   	  			$result_track = mysqli_query($db, $query_track);
   	  			while ($row = mysqli_fetch_array($result_track, MYSQLI_NUM)) {
         				$t_id = $row[0];
@@ -119,7 +118,7 @@
   	  		?>
   		</table>
     <div class = "container" align = "right">
-    <input type="submit" name="add_tracks" value="Add Tracks" class = "btn btn-success"></div>
+    <input type="submit" name="delete_tracks" value="Delete Tracks" class = "btn btn-danger"></div>
     </form>
 	</div>
 <style>

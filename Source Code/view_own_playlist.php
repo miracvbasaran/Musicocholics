@@ -37,6 +37,10 @@
     	header("location: modify_playlist_add.php?playlist_id=".$playlist_id);
     }
 
+    if(isset($_POST['delete_tracks'])) {
+    	header("location: modify_playlist_delete.php?playlist_id=".$playlist_id);
+    }
+
     if(isset($_POST['delete_playlist'])) {
     	$queryD2 = "DELETE FROM added WHERE playlist_id = {$playlist_id} ";
     	$resultD2 = mysqli_query($db, $queryD2);
@@ -128,15 +132,15 @@
 		<h4> <p>Rate: <?php if($cnt_rate_c == 0) echo "N/A"; else echo $avg_rate;?> </h4> <br>
 	</div>
 
-	<div class="container" align="right">
+	<div class="container" alight="left">
 		<p>
 			<form method="post" action="">
 				<input id='Submit' name='listen_playlist' type='Submit' value='Listen Playlist' class="btn btn-primary">
-				<input id='Submit' name='add_tracks' type='Submit' value='Add Tracks' class="btn btn-success">
 				<input id='Submit' name='delete_playlist' type='Submit' value='Delete Playlist' class="btn btn-danger">
 			</form>
 		</p>
 	</div>
+	<br><br><br>
 
 	<div class="container">
 		<table class = "table table-hover" style="width:100%">
@@ -159,7 +163,18 @@
 	  		?>
 		</table>
 	</div>
+
+	<div class="container" align="left">
+		<p>
+			<form method="post" action="">
+				<input id='Submit' name='add_tracks' type='Submit' value='Add Tracks' class="btn btn-success">
+				<input id='Submit' name='delete_tracks' type='Submit' value='Delete Tracks' class="btn btn-warning">
+			</form>
+		</p>
+	</div>
+
 	<br><br><br>
+	
 	<div class="container">
 		<table class = "table table-hover" style="width:100%">
 	  		<tr>
@@ -199,7 +214,9 @@
 	  		?>
 		</table>
 	</div>
+
 <br><br><br><br><br>
+
 <style>
 .footer {
    position: fixed;
