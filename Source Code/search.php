@@ -147,13 +147,18 @@
 									$id_list->push($id);
 								}
 								
-								
-								//not printing blocked profiles
-								$bquery = mysqli_query( $db, "SELECT * FROM Blocks WHERE (blocked_id = '$id' AND blocker_id = '$uid') OR (blocker_id = '$id' AND blocked_id = '$uid')");
+								//not printing blocker profiles
+								$bquery = mysqli_query( $db, "SELECT * FROM Blocks WHERE (blocker_id = '$id' AND blocked_id = '$uid');");
 								while( $brow = $bquery->fetch_assoc()){ //for each blocked/blocker
-										$id_list->push($id);
+									$id_list->push($id);
 								}
 								
+								//printing blocked profiles
+								$bquery = mysqli_query( $db, "SELECT * FROM Blocks WHERE (blocked_id = '$id' AND blocker_id = '$uid') AND (blocker_id != '$id' OR blocked_id != '$uid')");
+								while( $brow = $bquery->fetch_assoc()){ //for each blocked/blocker
+									echo( "<div align = \"center\"><tr><td><a href='blocked_profile.php?other_id=".$id."'>".$row['username']."</a></td></tr><br/></div>");
+									$id_list->push($id);
+								}
 								
 								//printing non-friends
 								$id_count = $id_list->count();
