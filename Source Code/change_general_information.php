@@ -44,21 +44,21 @@
       }
       if(isset( ($_POST['fullname']) ) )  {
           $fullname = $_POST['fullname'];
-          $query = "UPDATE user SET fullname = '$fullname' WHERE user_id = '$uid' ";
+          $query = "UPDATE person SET fullname = '$fullname' WHERE person_id = '$uid' ";
           $result = mysqli_query($db, $query);
           $resultP = mysqli_query($db,  "UPDATE person SET fullname = '$fullname' WHERE person_id = '$uid' ");
 
       }
       if(isset( ($_POST['username']) ) )  {
           $username = $_POST['username'];
-          $query = "UPDATE user SET username = '$username' WHERE user_id = '$uid' ";
+          $query = "UPDATE person SET username = '$username' WHERE person_id = '$uid' ";
           $result = mysqli_query($db, $query);
           $resultP = mysqli_query($db,  "UPDATE person SET username = '$username' WHERE person_id = '$uid' ");
 
       }
       if(isset( ($_POST['email']) ) )  {
           $email = $_POST['email'];
-          $query = "UPDATE user SET email = '$email' WHERE user_id = '$uid' ";
+          $query = "UPDATE person SET email = '$email' WHERE person_id = '$uid' ";
           $result = mysqli_query($db, $query);
           $resultP = mysqli_query($db,  "UPDATE person SET email = '$email' WHERE person_id = '$uid' ");
 
