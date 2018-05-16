@@ -13,6 +13,11 @@
     $playlist_desc = $playlist_array['description'];
     $playlist_creator = $playlist_array['creator_id'];
 
+    if($playlist_array['picture'] == NULL)
+        $picture = "nopl.png";
+     else
+        $picture = $playlist_array['picture']; 
+
     $query_sum = "SELECT SUM(T.duration) as sum_duration FROM Track T , Added A WHERE A.playlist_id = {$playlist_id} AND A.track_id = T.track_id";
     $result_sum = mysqli_query($db, $query_sum);
     $sum_array =  mysqli_fetch_array($result_sum, MYSQLI_ASSOC);
@@ -106,10 +111,12 @@
   </div>
 </nav>
 
-	<div class="container">
-		<h3> Playlist </h3> <br>
-		<h3> <?php echo $playlist_name;?> </h3> <p> by <?php echo $username?> </p> <br>
-		<p>  <?php echo $playlist_desc;?> </p> <br>
+	<div class="container" align="center">
+		<h3 align="center"> Playlist </h3> <br>
+    <img class="img-circle img-responsive" src="images/<?php echo $picture; ?>" width="150" height="150"></div>
+     <br>
+		<h3 align="center"> <?php echo $playlist_name;?> </h3> <p align="center"> by <?php echo $username?> </p> <br>
+		<p align="center">  <?php echo $playlist_desc;?> </p> <br>
 	</div>
 
   <div align="center">

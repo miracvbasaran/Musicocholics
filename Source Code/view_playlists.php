@@ -1,5 +1,6 @@
 <?php
 	include("session.php");
+   $uploaddir = getcwd().'/images/';
     $uid = mysqli_real_escape_string($db, $_SESSION['login_id']);
     $query1 = "SELECT * FROM user WHERE user_id = {$uid} ";
     $result1 = mysqli_query($db, $query1);
@@ -10,14 +11,38 @@
         if(isset($_POST['playlist_description'])) {
           $playlist_name = $_POST['playlist_name'];
           $playlist_description = $_POST['playlist_description'];
-          $empty_picture = '';
           $date = date('Y-m-d');
-          $query_insert = "INSERT INTO Playlist(playlist_name, description, picture, creator_id, date) VALUES('$playlist_name', '$playlist_description', '$empty_picture', {$uid}, '$date')";
+
+
+          $query_insert = "INSERT INTO Playlist(playlist_name, description, creator_id, date) VALUES('$playlist_name', '$playlist_description',  {$uid}, '$date')";
           $result_insert = mysqli_query($db, $query_insert);
           $query5 = "SELECT MAX(playlist_id) as new_id FROM Playlist";
           $result5 = mysqli_query($db, $query5);
           $index_array = mysqli_fetch_array($result5, MYSQLI_ASSOC);
           $new_id = $index_array['new_id'];
+
+          $name = $_FILES['userphoto']['name']; 
+          $ext = pathinfo($_FILES['userphoto']['name'], PATHINFO_EXTENSION);
+          $uploadfile = $uploaddir . "pl" . $new_id . '.' . $ext;
+          $filename = "pl" . $new_id . '.' . $ext;
+          $picture = $filename;
+          if($name == ""){
+              $picture = NULL;
+            }
+
+          $query1 = "UPDATE playlist SET picture = '$picture' WHERE playlist_id = '$new_id'";
+          $result1 = mysqli_query($db, $query1);
+          
+
+        if (move_uploaded_file($_FILES['userphoto']['tmp_name'], $uploadfile)) {
+            echo '<div class="alert alert-success" role="alert">Photo uploaded successfully. </div>';
+            
+        } else {    
+          echo '<div class="alert alert-danger" role="alert">Error on uploading  photo. </div>';
+        }
+      
+         
+
           header("location: modify_playlist_add.php?playlist_id=".$new_id);
         }
         else {
@@ -27,6 +52,7 @@
       else {
         echo ' <script type="text/javascript"> alert("Playlist name is not entered."); </script>';
       }
+
     }
     		
 ?>
@@ -65,7 +91,11 @@
 
   <div class="container" align="center">
     <h3> Playlists </h3> <br>
-    <form method="post" action="">
+    <form method="post" action="" enctype="multipart/form-data">
+
+      <input class="btn btn-primary btn-sm" type="file" name="userphoto" id="userphoto" accept="image/*"> 
+      <br>
+
       Playlist Name: <input type="text" name="playlist_name" value= "" autofocus> <br>
 
       Description: <textarea class="form-control" rows="2" name="playlist_description" autofocus></textarea><br>

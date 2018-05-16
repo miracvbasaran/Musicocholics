@@ -18,6 +18,11 @@
     $playlist_name = $playlist_array['playlist_name'];
     $playlist_desc = $playlist_array['description'];
 
+     if($playlist_array['picture'] == NULL)
+        $picture = "nopl.png";
+     else
+        $picture = $playlist_array['picture']; 
+
     $query_sum = "SELECT SUM(T.duration) as sum_duration FROM Track T , Added A WHERE A.playlist_id = {$playlist_id} AND A.track_id = T.track_id";
     $result_sum = mysqli_query($db, $query_sum);
     $sum_array =  mysqli_fetch_array($result_sum, MYSQLI_ASSOC);
@@ -125,11 +130,13 @@
   </div>
 </nav>
 
-	<div class="container">
-		<h1> <small> Playlist: </small> <?php echo $playlist_name;?> </h1>
-		<h3> by <?php echo $username?> </h3> <br>
-		<p>  <?php echo $playlist_desc;?> </p> <br>
-		<h4> <p>Rate: <?php if($cnt_rate_c == 0) echo "N/A"; else echo $avg_rate;?> </h4> <br>
+	<div class="container" align="center">
+		<img class="img-circle img-responsive" src="images/<?php echo $picture; ?>" width="150" height="150"></div>
+     <br>
+		<h1 align="center"> <small> Playlist: </small> <?php echo $playlist_name;?> </h1>
+		<h3 align="center"> by <?php echo $username?> </h3> <br>
+		<p align="center">  <?php echo $playlist_desc;?> </p> <br>
+		<h4 align="center"> <p>Rate: <?php if($cnt_rate_c == 0) echo "N/A"; else echo $avg_rate;?> </h4> <br>
 	</div>
 
 	<div class="container" alight="left">
