@@ -79,14 +79,16 @@
     		$result8 = mysqli_query($db, $query8);
     		$r_rates_array =  mysqli_fetch_array($result8, MYSQLI_ASSOC);
     		$cnt_rates = $r_rates_array['cnt_rate'];
-    		if( $cnt_rates == 0 ) {
-    			$query88 = "INSERT INTO Rates(user_id, playlist_id, rate) VALUES({$uid}, {$playlist_id}, {$my_rate})";
-          		$result88 = mysqli_query($db, $query88);
-				header("Refresh:0");
-    		}
-    		else {
-    			echo " <script type=\"text/javascript\"> alert(\"Already rated.\"); </script>";
-    		}
+        if( $cnt_rates == 0 ) {
+          $query88 = "INSERT INTO Rates(user_id, playlist_id, rate) VALUES({$uid}, {$playlist_id}, {$my_rate})";
+          $result88 = mysqli_query($db, $query88);
+          header("Refresh:0");
+        }
+        else {
+          $query99 = "UPDATE Rates SET rate = {$my_rate} WHERE user_id = {$uid} AND playlist_id = {$playlist_id}";
+          $result99 = mysqli_query($db, $query99);
+          header("Refresh:0");
+        }
     	}
     	else {
     		echo " <script type=\"text/javascript\"> alert(\"Rate is not entered.\"); </script>";

@@ -54,6 +54,15 @@
     $array_my_rate_value =  mysqli_fetch_array($result_my_rate_value, MYSQLI_ASSOC);
     $my_rate_value = $array_my_rate_value['my_rate_value'];
 
+    if(isset($_POST['modify_info'])) {
+    	if( $playlist_creator == $uid ) {
+    		header("location: modify_playlist_info.php?playlist_id=".$playlist_id);
+    	}
+    	else {
+    		echo ' <script type="text/javascript"> alert("You are a collaborator but not the creator of the playlist."); </script>';
+    	}
+    }
+
     if(isset($_POST['add_tracks'])) {
     	header("location: modify_playlist_add.php?playlist_id=".$playlist_id);
     }
@@ -125,17 +134,14 @@
     		$r_rates_array =  mysqli_fetch_array($result8, MYSQLI_ASSOC);
     		$cnt_rates = $r_rates_array['cnt_rate'];
     		if( $cnt_rates == 0 ) {
-    			if( $uid == $playlist_creator ) {
-    				echo '<script type="text/javascript"> alert("You are the creator of the playlist."); </script>';
-    			}
-    			else {
-	    			$query88 = "INSERT INTO Rates(user_id, playlist_id, rate) VALUES({$uid}, {$playlist_id}, {$my_rate})";
-	          		$result88 = mysqli_query($db, $query88);
-					header("Refresh:0");
-    			}
+    			$query88 = "INSERT INTO Rates(user_id, playlist_id, rate) VALUES({$uid}, {$playlist_id}, {$my_rate})";
+          		$result88 = mysqli_query($db, $query88);
+				header("Refresh:0");
     		}
     		else {
-    			echo " <script type=\"text/javascript\"> alert(\"Already rated.\"); </script>";
+    			$query99 = "UPDATE Rates SET rate = {$my_rate} WHERE user_id = {$uid} AND playlist_id = {$playlist_id}";
+    			$result99 = mysqli_query($db, $query99);
+    			header("Refresh:0");
     		}
     	}
     	else {
@@ -183,6 +189,14 @@
 		<h1 align="center"> <small> Playlist: </small> <?php echo $playlist_name;?> </h1>
 		<h3 align="center"> by <?php echo $creator_username?> </h3> <br>
 		<p align="center">  <?php echo $playlist_desc;?> </p> <br>
+	</div>
+
+	<div class="container" alight="left">
+		<p>
+			<form method="post" action="">
+				<input id='Submit' name='modify_info' type='Submit' value='Modify Info' class="btn btn-primary">
+			</form>
+		</p>
 	</div>
 
 	<div align="center">
