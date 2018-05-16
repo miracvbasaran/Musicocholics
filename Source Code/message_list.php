@@ -5,8 +5,18 @@
     $result1 = mysqli_query($db, $query1);
     $user_array = mysqli_fetch_array($result1, MYSQLI_ASSOC);
     
+    $query_sum = "SELECT sum(is_not_read) as no_of_new_messages FROM sends_message WHERE receiver_id = {$uid}";
+    $result_sum = mysqli_query($db, $query_sum);
+    $sum_array = mysqli_fetch_array($result_sum, MYSQLI_ASSOC);
+    $no_of_new_messages = $sum_array['no_of_new_messages'];
+
     if(isset($_POST['sent_box_button'])) {
       header("location: sent_message_list.php");
+    }
+    if(isset($_POST['mark_read_button'])) {
+      $query_update = "UPDATE sends_message SET is_not_read = 0 WHERE receiver_id = {$uid}";
+      $result_update = mysqli_query($db, $query_update);
+      header("Refresh:0");
     }
     if(isset($_POST['send_optional_message'])) {
     	header("location: send_optional_message.php");
@@ -47,11 +57,13 @@
 
 	<div class="container">
 		<h3> Inbox </h3> <br>
+    <h4> <?php echo $no_of_new_messages?> New Messages </h4> <br>
 		<div align="right" class="container"></div>
 		<p>
 			<form method="post" action="">
         <input id='Submit' name='sent_box_button' type='Submit' value='Sent Box' class="btn btn-primary"> <br><br>
-				<input id='Submit' name='send_optional_message' type='Submit' value='Send Message' class="btn btn-success">
+        <input id='Submit' name='mark_read_button' type='Submit' value='Mark as Read' class="btn btn-warning"> <br><br>
+				<input id='Submit' name='send_optional_message' type='Submit' value='Send Message' class="btn btn-success"> <br><br>
 			</form>
 		</p>
 	</div>
@@ -61,9 +73,10 @@
 	  		<tr>
 	    		<th>Name</th>
 	    		<th>Message</th> 
+          <th>Read Status</th>
 	  		</tr>
 	  		<?php
-	  			$query_message = "SELECT P.person_id, P.fullname, M.message FROM sends_message M , person P WHERE P.person_id = M.sender_id AND M.receiver_id = {$uid} ORDER BY M.date";
+	  			$query_message = "SELECT P.person_id, P.fullname, M.message, M.is_not_read FROM sends_message M , person P WHERE P.person_id = M.sender_id AND M.receiver_id = {$uid} ORDER BY M.date";
 	  			$result_message = mysqli_query($db, $query_message);
 	  			while ($row = mysqli_fetch_array($result_message, MYSQLI_NUM)) {
       				$p_id = $row[0];
@@ -75,12 +88,24 @@
       					echo "<tr onclick = \"document.location = 'nonfriend_profile.php?other_id={$p_id}' \">";
 	      				echo "<td>" . $row[1] . "</td>";
 	      				echo "<td>" . $row[2] . "</td>";
+                if( $row[3] == 1 ) {
+                  echo "<td>" . "You haven't read yet!" . "</td>";
+                }
+                else {
+                  echo "<td>" . "You have already read." . "</td>";
+                }
 	      				echo "</tr>" ;
 	      			}
 	      			else {
       					echo "<tr onclick = \"document.location = 'friend_profile.php?other_id={$p_id}' \">";
 	      				echo "<td>" . $row[1] . "</td>";
 	      				echo "<td>" . $row[2] . "</td>";
+                if( $row[3] == 1 ) {
+                  echo "<td>" . "You haven't read yet!" . "</td>";
+                }
+                else {
+                  echo "<td>" . "You have already read." . "</td>";
+                }
 	      				echo "</tr>" ;
 	      			}
 	  			}

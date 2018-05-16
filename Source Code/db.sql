@@ -486,16 +486,17 @@ CREATE TABLE IF NOT EXISTS `sends_message` (
 `receiver_id` INT NOT NULL,
 `date` TIMESTAMP NOT NULL,
 `message` VARCHAR(2048) NOT NULL,
+`is_not_read` INT NOT NULL,
 PRIMARY KEY(`message_id`) ,
 FOREIGN KEY(`sender_id`) REFERENCES `user`(`user_id`),
 FOREIGN KEY(`receiver_id`) REFERENCES `user`(`user_id`) ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-INSERT INTO `sends_message`(`sender_id`, `receiver_id`, `date`, `message`) VALUES 
-(3,4, '2017-03-14 12:11:01', 'Hi, how are you?'),
-(4,3, '2017-03-15 01:11:01', 'It is not you business.'),
-(5,4, '2015-03-15 01:22:01', 'Follow my lists.'),
-(4,5 , '2015-04-15 11:03:01', 'No you follow.');
+INSERT INTO `sends_message`(`sender_id`, `receiver_id`, `date`, `message`, `is_not_read`) VALUES 
+(3, 4, '2017-03-14 12:11:01', 'Hi, how are you?', 1),
+(4, 3, '2017-03-15 01:11:01', 'It is not you business.', 1),
+(5, 4, '2015-03-15 01:22:01', 'Follow my lists.', 1),
+(4, 5, '2015-04-15 11:03:01', 'No you follow.', 1);
 
 
 CREATE TABLE IF NOT EXISTS `posts` (
