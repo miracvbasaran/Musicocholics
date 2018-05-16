@@ -38,10 +38,26 @@
     $rates_array =  mysqli_fetch_array($result3, MYSQLI_ASSOC);
     $avg_rate = $rates_array['avg_rate'];
 
+    $query_my_rate_count = "SELECT count(*) as my_rate_count FROM rates WHERE user_id = {$uid} AND playlist_id = {$playlist_id}";
+    $result_my_rate_count = mysqli_query($db, $query_my_rate_count);
+    $array_my_rate_count =  mysqli_fetch_array($result_my_rate_count, MYSQLI_ASSOC);
+    $my_rate_count = $array_my_rate_count['my_rate_count'];
+
+    $query_my_rate_value = "SELECT rate as my_rate_value FROM rates WHERE user_id = {$uid} AND playlist_id = {$playlist_id}";
+    $result_my_rate_value = mysqli_query($db, $query_my_rate_value);
+    $array_my_rate_value =  mysqli_fetch_array($result_my_rate_value, MYSQLI_ASSOC);
+    $my_rate_value = $array_my_rate_value['my_rate_value'];
+
     if(isset($_POST['collaborate_playlist'])) {
-    	$query4 = "INSERT INTO Collaborates(user_id, playlist_id) VALUES({$uid} , {playlist_id})";
+    	$query4 = "INSERT INTO Collaborates(user_id, playlist_id) VALUES({$uid} , {$playlist_id})";
     	$result4 = mysqli_query($db, $query4);
-    	header("Refresh:0");
+    	header("location: view_own_playlist.php?playlist_id=".$playlist_id);
+    }
+
+    if(isset($_POST['follow_playlist'])) {
+      $query9 = "INSERT INTO Follows(user_id, playlist_id) VALUES({$uid} , {$playlist_id})";
+      $result9 = mysqli_query($db, $query9);
+      header("location: view_others_playlist.php?playlist_id=".$playlist_id);
     }
 
     if(isset($_POST['post_comment'])) {
@@ -122,7 +138,8 @@
   <div align="center">
     <form method="post" action="#" onsubmit="">
       <div class="container" align="left">
-        <h4> Rate: <?php if($cnt_rate_c == 0) echo "N/A"; else echo $avg_rate;?> </h4>
+        <h4> Your Rate: <?php if($my_rate_count == 0) echo "N/A"; else echo $my_rate_value;?> </h4>
+        <h4> Average Rate: <?php if($cnt_rate_c == 0) echo "N/A"; else echo $avg_rate;?> </h4>
         <input type="submit" name="rate_button" value="Rate" class="btn btn-danger">
         <select name="rate_choice">
           <option value="1">1</option>
@@ -135,6 +152,7 @@
       </div>
       <div class="container" align="right">
         <input id='Submit' name='collaborate_playlist' type='Submit' value='Collaborate Playlist' class="btn btn-primary">
+        <input id='Submit' name='follow_playlist' type='Submit' value='Follow Playlist' class="btn btn-primary">
       </div>
       <br/>
     </form>

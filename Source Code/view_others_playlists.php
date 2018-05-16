@@ -49,11 +49,21 @@
 	    		<th>Description</th> 
 	  		</tr>
 	  		<?php
-	  			$query_playlist = "SELECT P.playlist_id, P.playlist_name, P.description, P.date FROM Playlist P WHERE P.creator_id = {$other_user_id} ORDER BY P.date";
+	  			$query_playlist = "SELECT P.playlist_id, P.playlist_name, P.description, P.date, P.creator_id FROM Playlist P WHERE P.creator_id = {$other_user_id} ORDER BY P.date";
 	  			$result_playlist = mysqli_query($db, $query_playlist);
 	  			while ($row = mysqli_fetch_array($result_playlist, MYSQLI_NUM)) {
       				$p_id = $row[0];
-      				echo "<tr onclick = \"document.location = 'view_others_playlist.php?playlist_id={$p_id}' \">";
+      				$pc_id = $row[4];
+      				$query_check_collaborate = "SELECT count(*) check_collaborate FROM Collaborates C WHERE C.user_id = $uid AND C.playlist_id = $p_id";
+      				$result_check_collaborate = mysqli_query($db, $query_check_collaborate);
+      				$array_check_collaborate = mysqli_fetch_array($result_check_collaborate, MYSQLI_ASSOC);
+      				$check_collaborate = $array_check_collaborate['check_collaborate'];
+      				if( $check_collaborate > 0 OR $uid == $pc_id ) {
+      					echo "<tr onclick = \"document.location = 'view_own_playlist.php?playlist_id={$p_id}' \">";
+      				}
+      				else {
+      					echo "<tr onclick = \"document.location = 'view_others_playlist.php?playlist_id={$p_id}' \">";
+      				}
 	      			echo "<td>" . $row[1] . "</td>";
 	      			echo "<td>" . $row[2] . "</td>";
 	      			echo "</tr>" ;
@@ -70,11 +80,21 @@
 	    		<th>Description</th> 
 	  		</tr>
 	  		<?php
-	  			$query_playlist = "SELECT P.playlist_id, P.playlist_name, P.description, P.date FROM Playlist P , Collaborates C WHERE C.user_id = {$other_user_id} AND P.playlist_id = C.playlist_id ORDER BY P.date";
+	  			$query_playlist = "SELECT P.playlist_id, P.playlist_name, P.description, P.date, P.creator_id FROM Playlist P , Collaborates C WHERE C.user_id = {$other_user_id} AND P.playlist_id = C.playlist_id ORDER BY P.date";
 	  			$result_playlist = mysqli_query($db, $query_playlist);
 	  			while ($row = mysqli_fetch_array($result_playlist, MYSQLI_NUM)) {
       				$p_id = $row[0];
-      				echo "<tr onclick = \"document.location = 'view_others_playlist.php?playlist_id={$p_id}' \">";
+      				$pc_id = $row[4];
+      				$query_check_collaborate = "SELECT count(*) check_collaborate FROM Collaborates C WHERE C.user_id = $uid AND C.playlist_id = $p_id";
+      				$result_check_collaborate = mysqli_query($db, $query_check_collaborate);
+      				$array_check_collaborate = mysqli_fetch_array($result_check_collaborate, MYSQLI_ASSOC);
+      				$check_collaborate = $array_check_collaborate['check_collaborate'];
+      				if( $check_collaborate > 0 OR $uid == $pc_id ) {
+      					echo "<tr onclick = \"document.location = 'view_own_playlist.php?playlist_id={$p_id}' \">";
+      				}
+      				else {
+      					echo "<tr onclick = \"document.location = 'view_others_playlist.php?playlist_id={$p_id}' \">";
+      				}
 	      			echo "<td>" . $row[1] . "</td>";
 	      			echo "<td>" . $row[2] . "</td>";
 	      			echo "</tr>" ;
@@ -91,11 +111,21 @@
 	    		<th>Description</th> 
 	  		</tr>
 	  		<?php
-	  			$query_playlist = "SELECT P.playlist_id, P.playlist_name, P.description, P.date FROM Playlist P , Follows F WHERE F.user_id = {$other_user_id} AND P.playlist_id = F.playlist_id ORDER BY P.date";
+	  			$query_playlist = "SELECT P.playlist_id, P.playlist_name, P.description, P.date, P.creator_id FROM Playlist P , Follows F WHERE F.user_id = {$other_user_id} AND P.playlist_id = F.playlist_id ORDER BY P.date";
 	  			$result_playlist = mysqli_query($db, $query_playlist);
 	  			while ($row = mysqli_fetch_array($result_playlist, MYSQLI_NUM)) {
       				$p_id = $row[0];
-      				echo "<tr onclick = \"document.location = 'view_others_playlist.php?playlist_id={$p_id}' \">";
+      				$pc_id = $row[4];
+      				$query_check_collaborate = "SELECT count(*) check_collaborate FROM Collaborates C WHERE C.user_id = $uid AND C.playlist_id = $p_id";
+      				$result_check_collaborate = mysqli_query($db, $query_check_collaborate);
+      				$array_check_collaborate = mysqli_fetch_array($result_check_collaborate, MYSQLI_ASSOC);
+      				$check_collaborate = $array_check_collaborate['check_collaborate'];
+      				if( $check_collaborate > 0 OR $uid == $pc_id ) {
+      					echo "<tr onclick = \"document.location = 'view_own_playlist.php?playlist_id={$p_id}' \">";
+      				}
+      				else {
+      					echo "<tr onclick = \"document.location = 'view_others_playlist.php?playlist_id={$p_id}' \">";
+      				}
 	      			echo "<td>" . $row[1] . "</td>";
 	      			echo "<td>" . $row[2] . "</td>";
 	      			echo "</tr>" ;

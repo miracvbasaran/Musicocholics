@@ -17,10 +17,16 @@
     $playlist_array =  mysqli_fetch_array($result2, MYSQLI_ASSOC);
     $playlist_name = $playlist_array['playlist_name'];
     $playlist_desc = $playlist_array['description'];
+    $playlist_creator = $playlist_array['creator_id'];
 
-     if($playlist_array['picture'] == NULL)
-        $picture = "nopl.png";
-     else
+    $query_creator_username = "SELECT U.username as creator_username FROM person U, playlist P WHERE P.creator_id = U.person_id AND P.playlist_id = {$playlist_id}";
+    $result_creator_username = mysqli_query($db, $query_creator_username);
+    $array_creator_username = mysqli_fetch_array($result_creator_username, MYSQLI_ASSOC);
+    $creator_username = $array_creator_username['creator_username'];
+
+    if($playlist_array['picture'] == NULL)
+    	$picture = "nopl.png";
+    else
         $picture = $playlist_array['picture']; 
 
     $query_sum = "SELECT SUM(T.duration) as sum_duration FROM Track T , Added A WHERE A.playlist_id = {$playlist_id} AND A.track_id = T.track_id";
@@ -38,6 +44,16 @@
     $rates_array =  mysqli_fetch_array($result3, MYSQLI_ASSOC);
     $avg_rate = $rates_array['avg_rate'];
 
+    $query_my_rate_count = "SELECT count(*) as my_rate_count FROM rates WHERE user_id = {$uid} AND playlist_id = {$playlist_id}";
+    $result_my_rate_count = mysqli_query($db, $query_my_rate_count);
+    $array_my_rate_count =  mysqli_fetch_array($result_my_rate_count, MYSQLI_ASSOC);
+    $my_rate_count = $array_my_rate_count['my_rate_count'];
+
+    $query_my_rate_value = "SELECT rate as my_rate_value FROM rates WHERE user_id = {$uid} AND playlist_id = {$playlist_id}";
+    $result_my_rate_value = mysqli_query($db, $query_my_rate_value);
+    $array_my_rate_value =  mysqli_fetch_array($result_my_rate_value, MYSQLI_ASSOC);
+    $my_rate_value = $array_my_rate_value['my_rate_value'];
+
     if(isset($_POST['add_tracks'])) {
     	header("location: modify_playlist_add.php?playlist_id=".$playlist_id);
     }
@@ -47,19 +63,24 @@
     }
 
     if(isset($_POST['delete_playlist'])) {
-    	$queryD2 = "DELETE FROM added WHERE playlist_id = {$playlist_id} ";
-    	$resultD2 = mysqli_query($db, $queryD2);
-    	$queryD3 = "DELETE FROM follows WHERE playlist_id = {$playlist_id} ";
-    	$resultD3 = mysqli_query($db, $queryD3);
-    	$queryD4 = "DELETE FROM rates WHERE playlist_id = {$playlist_id} ";
-    	$resultD4 = mysqli_query($db, $queryD4);
-    	$queryD5 = "DELETE FROM comments WHERE playlist_id = {$playlist_id} ";
-    	$resultD5 = mysqli_query($db, $queryD5);
-    	$queryD6 = "DELETE FROM collaborates WHERE playlist_id = {$playlist_id} ";
-    	$resultD6 = mysqli_query($db, $queryD6);
-    	$queryD1 = "DELETE FROM playlist WHERE playlist_id = {$playlist_id} ";
-    	$resultD1 = mysqli_query($db, $queryD1);
-    	header("location: view_playlists.php");
+    	if( $playlist_creator == $uid ) {
+	    	$queryD2 = "DELETE FROM added WHERE playlist_id = {$playlist_id} ";
+	    	$resultD2 = mysqli_query($db, $queryD2);
+	    	$queryD3 = "DELETE FROM follows WHERE playlist_id = {$playlist_id} ";
+	    	$resultD3 = mysqli_query($db, $queryD3);
+	    	$queryD4 = "DELETE FROM rates WHERE playlist_id = {$playlist_id} ";
+	    	$resultD4 = mysqli_query($db, $queryD4);
+	    	$queryD5 = "DELETE FROM comments WHERE playlist_id = {$playlist_id} ";
+	    	$resultD5 = mysqli_query($db, $queryD5);
+	    	$queryD6 = "DELETE FROM collaborates WHERE playlist_id = {$playlist_id} ";
+	    	$resultD6 = mysqli_query($db, $queryD6);
+	    	$queryD1 = "DELETE FROM playlist WHERE playlist_id = {$playlist_id} ";
+	    	$resultD1 = mysqli_query($db, $queryD1);
+	    	header("location: view_playlists.php");
+    	}
+    	else {
+    		echo ' <script type="text/javascript"> alert("You are a collaborator but not the creator of the playlist."); </script>';
+    	}
     }
 
     if(isset($_POST['listen_playlist'])) {
@@ -94,6 +115,32 @@
 		        echo " <script type=\"text/javascript\"> alert(\"PARA BİRİKTİR DE PREMIUM AL!.\"); </script>";
 		    }
      	}
+    }
+
+    if(isset($_POST['rate_button'])) {
+    	if(isset($_POST['rate_choice'])) {
+    		$my_rate = $_POST['rate_choice'];
+    		$query8 = "SELECT COUNT(*) as cnt_rate FROM Rates WHERE user_id = {$uid} AND playlist_id = {$playlist_id}";
+    		$result8 = mysqli_query($db, $query8);
+    		$r_rates_array =  mysqli_fetch_array($result8, MYSQLI_ASSOC);
+    		$cnt_rates = $r_rates_array['cnt_rate'];
+    		if( $cnt_rates == 0 ) {
+    			if( $uid == $playlist_creator ) {
+    				echo '<script type="text/javascript"> alert("You are the creator of the playlist."); </script>';
+    			}
+    			else {
+	    			$query88 = "INSERT INTO Rates(user_id, playlist_id, rate) VALUES({$uid}, {$playlist_id}, {$my_rate})";
+	          		$result88 = mysqli_query($db, $query88);
+					header("Refresh:0");
+    			}
+    		}
+    		else {
+    			echo " <script type=\"text/javascript\"> alert(\"Already rated.\"); </script>";
+    		}
+    	}
+    	else {
+    		echo " <script type=\"text/javascript\"> alert(\"Rate is not entered.\"); </script>";
+    	}
     }
 
 ?>
@@ -134,10 +181,28 @@
 		<img class="img-circle img-responsive" src="images/<?php echo $picture; ?>" width="150" height="150"></div>
      <br>
 		<h1 align="center"> <small> Playlist: </small> <?php echo $playlist_name;?> </h1>
-		<h3 align="center"> by <?php echo $username?> </h3> <br>
+		<h3 align="center"> by <?php echo $creator_username?> </h3> <br>
 		<p align="center">  <?php echo $playlist_desc;?> </p> <br>
-		<h4 align="center"> <p>Rate: <?php if($cnt_rate_c == 0) echo "N/A"; else echo $avg_rate;?> </h4> <br>
 	</div>
+
+	<div align="center">
+		<form method="post" action="#" onsubmit="">
+			<div class="container" align="left">
+     			<h4> Your Rate: <?php if($my_rate_count == 0) echo "N/A"; else echo $my_rate_value;?> </h4>
+       			<h4> Average Rate: <?php if($cnt_rate_c == 0) echo "N/A"; else echo $avg_rate;?> </h4>
+				<input type="submit" name="rate_button" value="Rate" class="btn btn-danger">
+				<select name="rate_choice">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+				</select>
+				<br>
+			</div>
+		</form>
+	</div>
+	<br><br>
 
 	<div class="container" alight="left">
 		<p>
